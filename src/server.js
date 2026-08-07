@@ -137,63 +137,309 @@ function normalizePick(p, fallbackConfidence = 50) {
   };
 }
 
+const DECISION_CHECKLIST = `Make LOGICAL multi-factor decisions. Never use one indicator alone.
+Weigh ALL available factors TOGETHER:
+
+Technical:
+1) Trend (EMA20/50 stack) and EMA200 structure if present
+2) Momentum: RSI zone + 5-day momentum (avoid chasing extended moves blindly)
+3) MACD cross/histogram quality
+4) Volume vs 20d avg: confirmation vs thin liquidity vs climax risk
+5) Support/resistance distance, range position, breakout vs false-break
+6) Consolidation / accumulation exit
+7) ATR% volatility → realistic stops
+8) Entry / SL / T1 / T2 must be coherent; prefer R:R >= ~1.5; else hold or cut size via confidence
+
+Company & surroundings (when present in snapshot):
+9) Sector context and peer behavior (rsVsSector, sector leaders)
+10) Relative strength vs market median (rsVsMarket)
+11) Liquidity tier vs the EGX universe
+12) Currency (EGP vs USD listing / FX sensitivity)
+13) Company notes / sector-specific caution
+
+Logic rules (must follow):
+- Conflicting bullish+bearish → prefer HOLD and lower confidence
+- Buy into overbought + near resistance WITHOUT volume breakout → avoid buy
+- Thin liquidity → lower confidence; avoid aggressive buy
+- Action should not wildly disagree with score/actionHint unless you explain why in reasons
+- Levels must respect ATR and nearby S/R
+Educational only — not financial advice.`;
+
+function reconcileSuggestion(parsed, analysis) {
+  if (!parsed || !analysis) return parsed;
+  let action = parsed.action;
+  let confidence = Math.max(0, Math.min(100, Number(parsed.confidence) || analysis.score || 0));
+  const c = analysis.considerations || {};
+
+  if (action === "buy" && analysis.score < 45) {
+    action = "hold";
+    confidence = Math.min(confidence, 52);
+  }
+  if (action === "buy" && c.conflict) {
+    action = "hold";
+    confidence = Math.min(confidence, 50);
+  }
+  if (
+    action === "buy" &&
+    c.rsiZone === "overbought" &&
+    (c.location === "near_resistance" || c.location === "mid_range") &&
+    !analysis.signals?.includes("breakout_volume")
+  ) {
+    action = "hold";
+    confidence = Math.min(confidence, 48);
+  }
+  if (action === "buy" && (c.liquidity === "thin" || c.liquidityTier === "low")) {
+    confidence = Math.min(confidence, 55);
+  }
+  if (action === "sell" && analysis.score >= 65 && c.trend === "up" && !c.conflict) {
+    action = "hold";
+    confidence = Math.min(confidence, 55);
+  }
+  if (c.riskReward != null && c.riskReward < 1.2 && action === "buy") {
+    action = "hold";
+    confidence = Math.min(confidence, 50);
+  }
+
+  return { ...parsed, action, confidence };
+}
+
+const HORIZONS = ["scalp", "week", "month", "long"];
+
+function roundPx(n) {
+  if (n == null || !Number.isFinite(Number(n))) return null;
+  return Math.round(Number(n) * 100) / 100;
+}
+
+/** Local logical buy/sell table by horizon — fallback + merge with AI. */
+function buildHorizonPlans(analysis) {
+  if (!analysis) return [];
+  const price = analysis.price;
+  const atr = analysis.indicators?.atr || price * 0.02;
+  const support = analysis.indicators?.support;
+  const resistance = analysis.indicators?.resistance;
+  const ema50 = analysis.indicators?.ema50;
+  const trade = analysis.trade || {};
+  const scalp = analysis.scalp || {};
+  const score = analysis.score ?? 50;
+  const bias = analysis.actionHint || (score >= 60 ? "buy" : score <= 35 ? "sell" : "hold");
+
+  const scalpBuy = roundPx(scalp.buy ?? Math.max(price - atr * 0.15, support ? Math.min(price, support * 1.01) : price * 0.995));
+  const scalpSell = roundPx(
+    scalp.sell ??
+      (resistance && resistance > price ? Math.min(price + atr * 0.55, resistance * 0.995) : price + atr * 0.55)
+  );
+  const scalpStop = roundPx(scalp.stop ?? price - atr * 0.4);
+
+  const weekBuy = roundPx(Math.max(price - atr * 0.35, support != null ? Math.min(price, support * 1.02) : price * 0.99));
+  const weekSell = roundPx(
+    resistance != null && resistance > weekBuy
+      ? Math.min(price + atr * 1.1, resistance * 0.995)
+      : price + atr * 1.1
+  );
+  const weekStop = roundPx(Math.min(weekBuy - atr * 0.8, support != null ? support * 0.985 : weekBuy - atr));
+
+  const monthBuy = roundPx(trade.entry ?? price);
+  const monthSell = roundPx(trade.target1 ?? price + atr * 1.8);
+  const monthStop = roundPx(trade.stopLoss ?? price - atr * 1.2);
+  const monthSell2 = roundPx(trade.target2 ?? price + atr * 2.8);
+
+  const longBuy = roundPx(
+    ema50 != null && ema50 < price ? Math.max(ema50 * 1.01, support != null ? support * 1.02 : ema50) : support != null ? support * 1.03 : price * 0.97
+  );
+  const longSell = roundPx(
+    resistance != null && resistance > longBuy ? resistance * 1.08 : price + atr * 4
+  );
+  const longStop = roundPx(
+    Math.min(longBuy - atr * 1.5, support != null ? support * 0.96 : longBuy * 0.92)
+  );
+
+  const scalpAction = scalp.eligible ? "buy" : bias === "sell" ? "sell" : "hold";
+  const weekAction = score >= 55 && weekSell > weekBuy ? bias : "hold";
+  const monthAction = score >= 58 ? bias : score <= 35 ? "sell" : "hold";
+  const longAction =
+    analysis.considerations?.aboveEma200 || analysis.indicators?.trend === "up"
+      ? score >= 50
+        ? "buy"
+        : "hold"
+      : score <= 40
+        ? "sell"
+        : "hold";
+
+  return [
+    {
+      horizon: "scalp",
+      action: scalpAction,
+      buy: scalpBuy,
+      sell: scalpSell,
+      stop: scalpStop,
+      note: "نفس الجلسة — سيولة وتذبذب",
+    },
+    {
+      horizon: "week",
+      action: weekAction,
+      buy: weekBuy,
+      sell: weekSell,
+      stop: weekStop,
+      note: "أفق أسبوعي حول الدعم/المقاومة القريبة",
+    },
+    {
+      horizon: "month",
+      action: monthAction,
+      buy: monthBuy,
+      sell: monthSell,
+      sell2: monthSell2,
+      stop: monthStop,
+      note: "أفق شهري من ATR والعائد/المخاطرة",
+    },
+    {
+      horizon: "long",
+      action: longAction,
+      buy: longBuy,
+      sell: longSell,
+      stop: longStop,
+      note: "طويل المدى — قرب الدعم/EMA50 ومستهدف ممتد",
+    },
+  ];
+}
+
+function normalizePlan(raw, fallback) {
+  const horizon = HORIZONS.includes(raw?.horizon) ? raw.horizon : fallback?.horizon;
+  if (!horizon) return null;
+  const action = ["buy", "sell", "hold"].includes(raw?.action) ? raw.action : fallback?.action || "hold";
+  const buy = roundPx(raw?.buy ?? raw?.entry ?? fallback?.buy);
+  const sell = roundPx(raw?.sell ?? raw?.target ?? raw?.target1 ?? fallback?.sell);
+  const sell2 = roundPx(raw?.sell2 ?? raw?.target2 ?? fallback?.sell2);
+  const stop = roundPx(raw?.stop ?? raw?.stopLoss ?? fallback?.stop);
+  return {
+    horizon,
+    action,
+    buy,
+    sell,
+    sell2: sell2 ?? null,
+    stop,
+    note: String(raw?.note || fallback?.note || "").slice(0, 120),
+  };
+}
+
+function mergeHorizonPlans(parsedPlans, analysis) {
+  const local = buildHorizonPlans(analysis);
+  const byH = new Map(local.map((p) => [p.horizon, p]));
+  if (Array.isArray(parsedPlans)) {
+    for (const raw of parsedPlans) {
+      const horizon = HORIZONS.includes(raw?.horizon)
+        ? raw.horizon
+        : { scalp: "scalp", session: "scalp", مضاربة: "scalp", week: "week", أسبوع: "week", month: "month", شهر: "month", long: "long", "long_term": "long", طويل: "long" }[
+            String(raw?.horizon || raw?.type || "").toLowerCase()
+          ];
+      if (!horizon) continue;
+      const merged = normalizePlan({ ...raw, horizon }, byH.get(horizon));
+      if (merged) byH.set(horizon, merged);
+    }
+  }
+  return HORIZONS.map((h) => byH.get(h)).filter(Boolean);
+}
+
 async function buildSuggestion(quote, lang) {
-  const analysis = analyzeQuote(quote);
+  const market = await loadMarket();
+  const universe = analyzeUniverse(market.results);
+  const analysis =
+    universe.find((a) => a.ticker === quote.ticker) || analyzeQuote(quote);
   const langLabel = lang === "en" ? "English" : "Arabic";
+  const localPlans = buildHorizonPlans(analysis);
+  const peers = universe
+    .filter((a) => a.company?.sectorId && a.company.sectorId === analysis?.company?.sectorId)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 5)
+    .map((a) => compactForAi([a], 1)[0]);
 
-  const prompt = `You are a cautious multi-factor EGX technical analyst.
+  const prompt = `You are a cautious, LOGICAL multi-factor EGX analyst.
 Do NOT modify any files. Reply with JSON only.
-Educational analysis only — not financial advice.
+Decisions must be coherent with the full snapshot (technical + company surroundings).
 
-Use ALL of these factors when available: trend (EMA20/EMA50), volume vs average, RSI, MACD, support/resistance.
+${DECISION_CHECKLIST}
 
-Stock analysis snapshot:
+Also produce a plans table for FOUR horizons with buy & sell prices:
+- scalp: same-session speculation
+- week: ~1 week swing
+- month: ~1 month
+- long: longer-term investment style
+Prices must be logical vs ATR, support/resistance, and current price.
+If a horizon is not attractive, set action to "hold" but still give watch levels (buy/sell).
+
+Stock snapshot:
 ${JSON.stringify(analysis || { ticker: quote.ticker, price: quote.price }, null, 2)}
+
+Local draft plans (you may refine, keep all 4 horizons):
+${JSON.stringify(localPlans)}
+
+Sector peers (context):
+${JSON.stringify(peers)}
+
+Market median change: ${analysis?.market?.marketMedianChg ?? "n/a"}
 
 Respond ONLY with valid JSON:
 {
   "action": "buy" | "sell" | "hold",
   "confidence": 0-100,
-  "summary": "1-2 sentences in ${langLabel}",
-  "reasons": ["reason in ${langLabel}", "..."],
+  "summary": "1-2 sentences in ${langLabel} combining technical AND company/sector context",
+  "reasons": ["${langLabel} factor", "... up to 6"],
   "entry": number,
   "stopLoss": number,
   "target1": number,
   "target2": number,
-  "signals": ["trend","volume","rsi","macd",...]
+  "plans": [
+    {"horizon":"scalp","action":"buy|sell|hold","buy":0,"sell":0,"stop":0,"note":"in ${langLabel}"},
+    {"horizon":"week","action":"buy|sell|hold","buy":0,"sell":0,"stop":0,"note":"..."},
+    {"horizon":"month","action":"buy|sell|hold","buy":0,"sell":0,"sell2":0,"stop":0,"note":"..."},
+    {"horizon":"long","action":"buy|sell|hold","buy":0,"sell":0,"stop":0,"note":"..."}
+  ],
+  "signals": ["trend","volume","rsi","macd","sector","liquidity","risk",...]
 }`;
 
-  const text = await runAgent(prompt);
-  const parsed = extractJson(text);
-  if (!parsed || !["buy", "sell", "hold"].includes(parsed.action)) {
-    return {
-      action: analysis?.score >= 60 ? "buy" : analysis?.score <= 35 ? "sell" : "hold",
-      confidence: analysis?.score ?? 40,
-      summary: text.trim() || "تعذر تحليل الاستجابة.",
-      reasons: analysis?.reasons || [],
-      entry: analysis?.trade?.entry ?? null,
-      stopLoss: analysis?.trade?.stopLoss ?? null,
-      target1: analysis?.trade?.target1 ?? null,
-      target2: analysis?.trade?.target2 ?? null,
-      signals: analysis?.signals || [],
-      analysis,
-    };
-  }
-
-  return {
-    action: parsed.action,
-    confidence: Math.max(0, Math.min(100, Number(parsed.confidence) || analysis?.score || 0)),
-    summary: String(parsed.summary || "").slice(0, 400),
-    reasons: Array.isArray(parsed.reasons)
-      ? parsed.reasons.map((r) => String(r).slice(0, 160)).slice(0, 6)
-      : analysis?.reasons || [],
-    entry: parsed.entry ?? analysis?.trade?.entry ?? null,
-    stopLoss: parsed.stopLoss ?? analysis?.trade?.stopLoss ?? null,
-    target1: parsed.target1 ?? analysis?.trade?.target1 ?? null,
-    target2: parsed.target2 ?? analysis?.trade?.target2 ?? null,
-    signals: Array.isArray(parsed.signals) ? parsed.signals.map(String).slice(0, 8) : analysis?.signals || [],
+  const fallback = {
+    action: analysis?.actionHint || "hold",
+    confidence: analysis?.score ?? 40,
+    summary: lang === "en" ? "Multi-horizon levels from local analysis." : "مستويات متعددة الآفاق من التحليل المحلي.",
+    reasons: analysis?.reasons || [],
+    entry: analysis?.trade?.entry ?? null,
+    stopLoss: analysis?.trade?.stopLoss ?? null,
+    target1: analysis?.trade?.target1 ?? null,
+    target2: analysis?.trade?.target2 ?? null,
+    signals: analysis?.signals || [],
+    plans: localPlans,
     analysis,
   };
+
+  try {
+    const text = await runAgent(prompt);
+    const parsed = extractJson(text);
+    if (!parsed || !["buy", "sell", "hold"].includes(parsed.action)) {
+      return { ...fallback, summary: text.trim() || fallback.summary };
+    }
+
+    const safe = reconcileSuggestion(parsed, analysis);
+    const plans = mergeHorizonPlans(parsed.plans, analysis);
+    return {
+      action: safe.action,
+      confidence: safe.confidence,
+      summary: String(safe.summary || parsed.summary || "").slice(0, 420),
+      reasons: Array.isArray(safe.reasons || parsed.reasons)
+        ? (safe.reasons || parsed.reasons).map((r) => String(r).slice(0, 180)).slice(0, 6)
+        : analysis?.reasons || [],
+      entry: safe.entry ?? parsed.entry ?? analysis?.trade?.entry ?? null,
+      stopLoss: safe.stopLoss ?? parsed.stopLoss ?? analysis?.trade?.stopLoss ?? null,
+      target1: safe.target1 ?? parsed.target1 ?? analysis?.trade?.target1 ?? null,
+      target2: safe.target2 ?? parsed.target2 ?? analysis?.trade?.target2 ?? null,
+      plans,
+      signals: Array.isArray(parsed.signals)
+        ? parsed.signals.map(String).slice(0, 10)
+        : analysis?.signals || [],
+      analysis,
+    };
+  } catch (err) {
+    console.error("[suggest]", err.message);
+    return fallback;
+  }
 }
 
 function mentionTickers(question, analyses) {
@@ -270,8 +516,8 @@ function localAnswerFromScan(question, lang, analyses, screens) {
     const best = ranked[0].ticker.replace(/\.CA$/i, "");
     const answer =
       lang === "en"
-        ? `Compared on trend/volume/RSI/MACD/EMA and levels, ${best} ranks highest (${ranked[0].score}/100).`
-        : `بالمقارنة متعدد العوامل (الاتجاه/الحجم/RSI/MACD/EMA والمستويات)، الأعلى تقييمًا حاليًا: ${best} بـ ${ranked[0].score}/100.`;
+        ? `Compared on trend/EMAs/volume/RSI/MACD/S-R/ATR/R:R, ${best} ranks highest (${ranked[0].score}/100).`
+        : `بالمقارنة متعدد العوامل (الاتجاه/EMA/الحجم/RSI/MACD/المستويات/ATR والعائدـمخاطرة)، الأعلى تقييمًا حاليًا: ${best} بـ ${ranked[0].score}/100.`;
     return { answer, picks };
   }
 
@@ -362,8 +608,12 @@ async function answerQuestion(question, lang) {
       ? mentioned.slice(0, 6).map((a) => compactForAi([a], 1)[0])
       : [];
 
-  const prompt = `You are an EGX multi-factor technical assistant. Do NOT modify files. Educational only.
-Answer in ${langLabel}. Prefer confirming factors together (trend, volume, RSI, MACD, EMA20/50, support/resistance). Never rely on one indicator alone.
+  const prompt = `You are an EGX multi-factor assistant. Do NOT modify files.
+Answers and picks must be LOGICAL and use technical + company surroundings together.
+
+${DECISION_CHECKLIST}
+
+Answer in ${langLabel}. Mention sector/liquidity/RS when relevant. Prefer hold when mixed.
 
 Question: ${question}
 
@@ -373,8 +623,8 @@ Focus: ${JSON.stringify(focus)}
 Snapshot: ${JSON.stringify(universe)}
 
 Return ONLY JSON:
-{"answer":"...","picks":[{"ticker":"COMI","action":"buy|sell|hold","confidence":85,"entry":0,"stopLoss":0,"target1":0,"target2":0,"reason":"...","signals":["trend_up"]}],"disclaimer":"..."}
-picks max 8, from data only.`;
+{"answer":"...","picks":[{"ticker":"COMI","action":"buy|sell|hold","confidence":85,"entry":0,"stopLoss":0,"target1":0,"target2":0,"reason":"...tech + company/sector...","signals":["trend_up","high_volume"]}],"disclaimer":"..."}
+picks max 8, from data only. Lower confidence when considerations.conflict or thin liquidity.`;
 
   try {
     const text = await runAgent(prompt);
@@ -487,7 +737,8 @@ const server = http.createServer(async (req, res) => {
       const market = await loadMarket();
       const quote = findQuote(market.results, ticker);
       if (!quote) return sendJson(res, 404, { error: `Stock not found: ${ticker}` });
-      const analysis = analyzeQuote(quote);
+      const analyses = analyzeUniverse(market.results);
+      const analysis = analyses.find((a) => normalizeTicker(a.ticker) === ticker);
       if (!analysis) {
         return sendJson(res, 422, { error: "Not enough candle data for analysis" });
       }

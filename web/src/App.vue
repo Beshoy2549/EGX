@@ -1,9 +1,10 @@
 <script setup>
 import { computed, watch } from "vue";
-import { RouterView } from "vue-router";
+import { useRoute, RouterLink, RouterView } from "vue-router";
 import { useI18n } from "./composables/useI18n.js";
 
 const { lang, t, setLang } = useI18n();
+const route = useRoute();
 
 watch(
   lang,
@@ -25,13 +26,31 @@ const brandTo = computed(() => ({ name: "home" }));
         <RouterLink class="brand" :to="brandTo">EGX</RouterLink>
         <p class="lede">{{ t.lede }}</p>
       </header>
-      <div class="lang-toggle" role="group" aria-label="Language">
-        <button type="button" :class="{ active: lang === 'ar' }" @click="setLang('ar')">
-          عربي
-        </button>
-        <button type="button" :class="{ active: lang === 'en' }" @click="setLang('en')">
-          English
-        </button>
+      <div class="top-actions">
+        <nav class="main-nav" aria-label="Main">
+          <RouterLink
+            class="nav-link"
+            :class="{ active: route.name === 'home' }"
+            :to="{ name: 'home' }"
+          >
+            {{ t.navHome }}
+          </RouterLink>
+          <RouterLink
+            class="nav-link"
+            :class="{ active: route.name === 'scalp' }"
+            :to="{ name: 'scalp' }"
+          >
+            {{ t.navScalp }}
+          </RouterLink>
+        </nav>
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button type="button" :class="{ active: lang === 'ar' }" @click="setLang('ar')">
+            عربي
+          </button>
+          <button type="button" :class="{ active: lang === 'en' }" @click="setLang('en')">
+            English
+          </button>
+        </div>
       </div>
     </div>
 

@@ -236,12 +236,33 @@ async function askAi() {
               <dd>{{ fmt(ind?.macdHist, 4) }}</dd>
             </div>
             <div>
+              <dt>{{ t.indSector }}</dt>
+              <dd>{{ analysis.company?.sectorAr || analysis.company?.sectorEn || "—" }}</dd>
+            </div>
+            <div>
+              <dt>{{ t.indRsMarket }}</dt>
+              <dd>
+                <template v-if="analysis.market?.rsVsMarket != null">
+                  {{ analysis.market.rsVsMarket >= 0 ? "+" : "" }}{{ fmt(analysis.market.rsVsMarket, 1) }}%
+                </template>
+                <template v-else>—</template>
+              </dd>
+            </div>
+            <div>
+              <dt>{{ t.indLiquidity }}</dt>
+              <dd>{{ analysis.market?.liquidityTier || analysis.considerations?.liquidity || "—" }}</dd>
+            </div>
+            <div>
               <dt>EMA 20</dt>
               <dd>{{ fmt(ind?.ema20) }}</dd>
             </div>
             <div>
               <dt>EMA 50</dt>
               <dd>{{ fmt(ind?.ema50) }}</dd>
+            </div>
+            <div>
+              <dt>EMA 200</dt>
+              <dd>{{ fmt(ind?.ema200) }}</dd>
             </div>
             <div>
               <dt>{{ t.indVolume }}</dt>
@@ -256,8 +277,27 @@ async function askAi() {
               <dd>{{ fmt(ind?.resistance) }}</dd>
             </div>
             <div>
+              <dt>{{ t.indDistSup }}</dt>
+              <dd>{{ ind?.distToSupportPct != null ? `${fmt(ind.distToSupportPct, 1)}%` : "—" }}</dd>
+            </div>
+            <div>
+              <dt>{{ t.indDistRes }}</dt>
+              <dd>{{ ind?.distToResistancePct != null ? `${fmt(ind.distToResistancePct, 1)}%` : "—" }}</dd>
+            </div>
+            <div>
               <dt>ATR</dt>
-              <dd>{{ fmt(ind?.atr) }}</dd>
+              <dd>
+                {{ fmt(ind?.atr) }}
+                <template v-if="ind?.atrPct != null"> ({{ fmt(ind.atrPct, 1) }}%)</template>
+              </dd>
+            </div>
+            <div>
+              <dt>{{ t.indMom5 }}</dt>
+              <dd>{{ ind?.momentum5 != null ? `${fmt(ind.momentum5, 1)}%` : "—" }}</dd>
+            </div>
+            <div>
+              <dt>{{ t.indRR }}</dt>
+              <dd>{{ ind?.riskReward != null ? `${fmt(ind.riskReward, 2)}:1` : "—" }}</dd>
             </div>
             <div>
               <dt>{{ t.aiConfidence }}</dt>
@@ -308,7 +348,42 @@ async function askAi() {
             <span class="confidence">{{ t.aiConfidence }}: {{ suggestion.confidence }}/100</span>
           </div>
           <p class="ai-summary">{{ suggestion.summary }}</p>
-          <dl v-if="suggestion.entry != null" class="pick-levels detail-levels">
+
+          <div v-if="suggestion.plans?.length" class="plan-table-wrap">
+            <h3 class="plan-title">{{ t.aiPlansTitle }}</h3>
+            <table class="plan-table">
+              <thead>
+                <tr>
+                  <th>{{ t.aiPlanHorizon }}</th>
+                  <th>{{ t.aiPlanBias }}</th>
+                  <th>{{ t.aiPlanBuy }}</th>
+                  <th>{{ t.aiPlanSell }}</th>
+                  <th>{{ t.aiStop }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="plan in suggestion.plans" :key="plan.horizon" :class="plan.action">
+                  <td>
+                    <strong>{{ t.aiHorizon[plan.horizon] || plan.horizon }}</strong>
+                    <span v-if="plan.note" class="plan-note">{{ plan.note }}</span>
+                  </td>
+                  <td>
+                    <span class="badge plan-badge">{{ t.aiAction[plan.action] || plan.action }}</span>
+                  </td>
+                  <td class="num buy-px">{{ fmt(plan.buy) }}</td>
+                  <td class="num sell-px">
+                    {{ fmt(plan.sell) }}
+                    <template v-if="plan.sell2 != null">
+                      <span class="sell2"> / {{ fmt(plan.sell2) }}</span>
+                    </template>
+                  </td>
+                  <td class="num">{{ fmt(plan.stop) }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <dl v-else-if="suggestion.entry != null" class="pick-levels detail-levels">
             <div><dt>{{ t.aiEntry }}</dt><dd>{{ fmt(suggestion.entry) }}</dd></div>
             <div><dt>{{ t.aiStop }}</dt><dd>{{ fmt(suggestion.stopLoss) }}</dd></div>
             <div><dt>{{ t.aiT1 }}</dt><dd>{{ fmt(suggestion.target1) }}</dd></div>

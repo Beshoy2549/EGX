@@ -95,6 +95,10 @@ async function runScan(type, limit = 10) {
 }
 
 function onChip(chip) {
+  if (chip.id === "scalp") {
+    router.push({ name: "scalp" });
+    return;
+  }
   if (chip.kind === "ask") runAsk(chip.question);
   else runScan(chip.type, chip.limit || 10);
 }

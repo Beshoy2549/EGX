@@ -1,5 +1,7 @@
 /** Technical indicators + multi-factor EGX stock analysis (educational use only). */
 
+import { buildCompanyProfile } from "./companyContext.js";
+
 function last(arr) {
   return arr.length ? arr[arr.length - 1] : null;
 }
@@ -128,6 +130,7 @@ function isConsolidating(candles, window = 15, maxRangePct = 0.08) {
 
 /**
  * Analyze one quote with multi-factor technicals.
+ * Weighs trend, EMAs, RSI, MACD, volume, S/R, ATR risk, R:R, momentum, and conflicts.
  */
 export function analyzeQuote(quote) {
   const candles = quote.candles || [];
@@ -137,16 +140,20 @@ export function analyzeQuote(quote) {
   const volumes = candles.map((c) => (c.v == null ? 0 : c.v));
   const price = last(closes);
   const prev = closes[closes.length - 2];
+  const close5 = closes.length >= 6 ? closes[closes.length - 6] : null;
 
   const ema20Arr = emaSeries(closes, 20);
   const ema50Arr = emaSeries(closes, 50);
+  const ema200Arr = closes.length >= 200 ? emaSeries(closes, 200) : null;
   const rsiArr = rsiSeries(closes, 14);
   const { macdLine, signal, hist } = macdSeries(closes);
   const { support, resistance } = swingLevels(candles);
   const atr14 = atr(candles, 14);
+  const consolidating = isConsolidating(candles);
 
   const ema20 = last(ema20Arr);
   const ema50 = last(ema50Arr);
+  const ema200 = ema200Arr ? last(ema200Arr) : null;
   const rsi = last(rsiArr);
   const macd = last(macdLine);
   const macdSignal = last(signal);
@@ -166,6 +173,11 @@ export function analyzeQuote(quote) {
           : "sideways"
       : "unknown";
 
+  const emaStackBull =
+    ema20 != null && ema50 != null && (ema200 == null || ema20 > ema50) && price > ema20 && ema20 > ema50;
+  const aboveEma200 = ema200 != null && price > ema200;
+  const belowEma200 = ema200 != null && price < ema200;
+
   const macdBuy =
     macd != null &&
     macdSignal != null &&
@@ -184,6 +196,29 @@ export function analyzeQuote(quote) {
 
   const rsiOversold = rsi != null && rsi < 30;
   const rsiOverbought = rsi != null && rsi > 70;
+  const rsiNeutral = rsi != null && rsi >= 40 && rsi <= 60;
+
+  const distToSupportPct =
+    support != null && price ? round(((price - support) / price) * 100, 2) : null;
+  const distToResistancePct =
+    resistance != null && price ? round(((resistance - price) / price) * 100, 2) : null;
+  const rangeSpan =
+    support != null && resistance != null && resistance > support ? resistance - support : null;
+  const rangePosition =
+    rangeSpan && support != null ? round((price - support) / rangeSpan, 2) : null;
+
+  const atrPct = atr14 && price ? atr14 / price : 0;
+  const momentum5 =
+    close5 != null && close5 !== 0 ? round(((price - close5) / close5) * 100, 2) : null;
+  const chgPct = quote.changePercent ?? null;
+  const chgAbs = Math.abs(chgPct ?? 0);
+
+  const nearSupport =
+    distToSupportPct != null && distToSupportPct >= 0 && distToSupportPct <= 2.5;
+  const nearResistance =
+    distToResistancePct != null && distToResistancePct >= 0 && distToResistancePct <= 2.5;
+  const stretchedUp = rangePosition != null && rangePosition >= 0.85;
+  const roomToRun = distToResistancePct != null && distToResistancePct >= 3;
 
   const brokeResistance =
     resistance != null &&
@@ -193,12 +228,22 @@ export function analyzeQuote(quote) {
     volumeRatio != null &&
     volumeRatio >= 1.5;
 
+  const falseBreakRisk =
+    resistance != null &&
+    prev != null &&
+    price >= resistance &&
+    volumeRatio != null &&
+    volumeRatio < 1.1;
+
   const exitedAccumulation =
-    isConsolidating(candles) &&
+    consolidating &&
     resistance != null &&
     price > resistance &&
     volumeRatio != null &&
     volumeRatio >= 1.3;
+
+  const bounceSetup =
+    nearSupport && trend !== "down" && (rsiOversold || (rsi != null && rsi < 45));
 
   const signals = [];
   if (rsiOversold) signals.push("rsi_oversold");
@@ -206,83 +251,177 @@ export function analyzeQuote(quote) {
   if (macdBuy) signals.push("macd_buy");
   if (macdSell) signals.push("macd_sell");
   if (brokeResistance) signals.push("breakout_volume");
+  if (falseBreakRisk) signals.push("false_break_risk");
   if (exitedAccumulation) signals.push("exit_accumulation");
+  if (consolidating) signals.push("consolidation");
   if (trend === "up") signals.push("trend_up");
   if (trend === "down") signals.push("trend_down");
   if (volumeRatio != null && volumeRatio >= 2) signals.push("high_volume");
+  if (volumeRatio != null && volumeRatio < 0.6) signals.push("thin_volume");
+  if (aboveEma200) signals.push("above_ema200");
+  if (belowEma200) signals.push("below_ema200");
+  if (nearSupport) signals.push("near_support");
+  if (nearResistance) signals.push("near_resistance");
+  if (bounceSetup) signals.push("bounce_setup");
+  if (stretchedUp) signals.push("extended_up");
 
-  let score = 40;
-  if (trend === "up") score += 18;
-  if (trend === "down") score -= 12;
-  if (macdBuy) score += 16;
+  let score = 42;
+  // Trend / structure
+  if (trend === "up") score += 14;
+  if (trend === "down") score -= 14;
+  if (trend === "sideways") score -= 2;
+  if (emaStackBull) score += 8;
+  if (aboveEma200) score += 6;
+  if (belowEma200 && trend === "down") score -= 6;
+  if (ema20 != null && price > ema20) score += 4;
+  if (ema50 != null && price > ema50) score += 3;
+  // Momentum oscillators
+  if (macdBuy) score += 12;
   if (macdSell) score -= 10;
-  if (rsiOversold && trend !== "down") score += 14;
-  if (rsiOversold && trend === "down") score += 6;
-  if (rsiOverbought) score -= 8;
-  if (brokeResistance) score += 18;
-  if (exitedAccumulation) score += 14;
-  if (volumeRatio != null && volumeRatio >= 1.5) score += 8;
-  if (volumeRatio != null && volumeRatio < 0.6) score -= 4;
-  if (ema20 != null && price > ema20) score += 6;
-  if (ema50 != null && price > ema50) score += 4;
+  if (macdHist != null && macdHist > 0 && !macdSell) score += 3;
+  if (macdHist != null && macdHist < 0 && !macdBuy) score -= 3;
+  if (rsiOversold && trend !== "down") score += 12;
+  if (rsiOversold && trend === "down") score += 4;
+  if (rsiOverbought && !brokeResistance) score -= 10;
+  if (rsiOverbought && brokeResistance) score -= 3;
+  if (rsiNeutral && trend === "up") score += 2;
+  // Volume / breakout / accumulation
+  if (brokeResistance) score += 14;
+  if (falseBreakRisk) score -= 8;
+  if (exitedAccumulation) score += 12;
+  if (volumeRatio != null && volumeRatio >= 1.5) score += 7;
+  if (volumeRatio != null && volumeRatio >= 2.5) score += 4;
+  if (volumeRatio != null && volumeRatio < 0.6) score -= 6;
+  // Location vs S/R + risk
+  if (bounceSetup) score += 8;
+  if (nearResistance && !brokeResistance && rsiOverbought) score -= 8;
+  if (roomToRun && trend === "up") score += 4;
+  if (stretchedUp && !brokeResistance) score -= 5;
+  if (momentum5 != null && momentum5 >= 6 && !brokeResistance) score -= 4;
+  if (momentum5 != null && momentum5 <= -8 && rsiOversold) score += 3;
+  // Conflict penalty: bullish motif vs heavy sell signals
+  const bullHits = [macdBuy, brokeResistance, trend === "up", rsiOversold && trend !== "down"].filter(Boolean).length;
+  const bearHits = [macdSell, trend === "down", rsiOverbought && !brokeResistance, belowEma200].filter(Boolean).length;
+  if (bullHits >= 2 && bearHits >= 2) score -= 8;
+
   score = Math.max(0, Math.min(100, Math.round(score)));
 
   const risk = atr14 || (support != null ? Math.max(price - support, price * 0.02) : price * 0.03);
   const entry = round(price);
-  const stopLoss = round(
+  let stopLoss = round(
     Math.min(price - risk * 1.2, support != null ? support * 0.985 : price - risk)
   );
+  if (stopLoss >= entry) stopLoss = round(entry * 0.97);
   const riskPerShare = Math.max(entry - stopLoss, price * 0.015);
-  const target1 = round(entry + riskPerShare * 1.5);
-  const target2 = round(entry + riskPerShare * 2.5);
+  let target1 = round(entry + riskPerShare * 1.5);
+  let target2 = round(entry + riskPerShare * 2.5);
+  // Cap targets near resistance when not breaking out — only if room keeps usable R:R
+  if (resistance != null && !brokeResistance && target1 > resistance) {
+    const capped = round(resistance * 0.995);
+    if (capped > entry + riskPerShare * 1.05) target1 = capped;
+  }
+  if (resistance != null && !brokeResistance && target2 > resistance * 1.02) {
+    const capped2 = round(resistance * 1.02);
+    if (capped2 > target1) target2 = capped2;
+  }
+  const reward1 = target1 - entry;
+  let riskReward = riskPerShare > 0 ? round(reward1 / riskPerShare, 2) : null;
+  if (riskReward != null && riskReward < 1.2) score = Math.max(0, score - 10);
+  if (riskReward != null && riskReward >= 2) score = Math.min(100, score + 3);
+  if (nearResistance && !brokeResistance && (distToResistancePct == null || distToResistancePct < 2)) {
+    score = Math.max(0, score - 6);
+  }
+  score = Math.max(0, Math.min(100, Math.round(score)));
+
+  let actionHint = score >= 60 ? "buy" : score <= 35 ? "sell" : "hold";
+  if (actionHint === "buy" && riskReward != null && riskReward < 1.2) actionHint = "hold";
+  if (actionHint === "buy" && bullHits >= 2 && bearHits >= 2) actionHint = "hold";
+  if (
+    actionHint === "buy" &&
+    nearResistance &&
+    !brokeResistance &&
+    rsiOverbought
+  ) {
+    actionHint = "hold";
+  }
+  if (actionHint === "buy" && volumeRatio != null && volumeRatio < 0.6) actionHint = "hold";
 
   const reasons = [];
-  if (trend === "up") reasons.push("اتجاه صاعد فوق EMA20 وEMA50");
+  if (trend === "up") reasons.push("اتجاه صاعد (السعر فوق EMA20 وEMA50 مرتبة)");
+  if (trend === "down") reasons.push("اتجاه هابط تحت المتوسطات");
+  if (aboveEma200) reasons.push("فوق EMA200 (هيكل متوسط/طويل أقوى)");
+  if (belowEma200) reasons.push("تحت EMA200 — الاتجاه الأوسع ضعيف");
   if (macdBuy) reasons.push("MACD أعطى تقاطع شراء");
-  if (rsiOversold) reasons.push(`RSI منخفض (${round(rsi, 1)}) — فرصة ارتداد محتملة`);
+  if (macdSell) reasons.push("MACD أعطى تقاطع بيع");
+  if (rsiOversold) reasons.push(`RSI منخفض (${round(rsi, 1)}) — ارتداد محتمل مع تأكيد`);
+  if (rsiOverbought) reasons.push(`RSI مرتفع (${round(rsi, 1)}) — تشبع شرائي / حذر`);
   if (brokeResistance) reasons.push("كسر مقاومة بحجم تداول مرتفع");
-  if (exitedAccumulation) reasons.push("خروج من مرحلة تجميع مع حجم");
+  if (falseBreakRisk) reasons.push("قرب/كسر مقاومة بحجم ضعيف — خطر كسر كاذب");
+  if (exitedAccumulation) reasons.push("خروج من تجميع مع حجم");
+  if (bounceSetup) reasons.push("قرب دعم مع RSI مناسب لسيناريو ارتداد");
+  if (nearResistance && !brokeResistance) reasons.push(`قرب مقاومة (${distToResistancePct}%)`);
   if (volumeRatio != null && volumeRatio >= 1.5) {
     reasons.push(`حجم اليوم ${round(volumeRatio, 1)}× متوسط 20 يوم`);
   }
-  if (!reasons.length) reasons.push("إشارات مختلطة — راقب المستوى");
+  if (volumeRatio != null && volumeRatio < 0.6) reasons.push("سيولة ضعيفة اليوم — ثقة أقل");
+  if (atrPct >= 0.03) reasons.push(`تذبذب مرتفع (ATR ${(atrPct * 100).toFixed(1)}%) — مخاطرة أكبر`);
+  if (riskReward != null) reasons.push(`عائد/مخاطرة تقريبي للهدف1 ≈ ${riskReward}:1`);
+  if (bullHits >= 2 && bearHits >= 2) reasons.push("إشارات متعارضة — خفض الثقة");
+  if (!reasons.length) reasons.push("إشارات مختلطة — راقب المستوى والحجم");
 
-  // Same-session scalp (intraday-style levels from daily ATR/volume)
-  const atrPct = atr14 && price ? atr14 / price : 0;
+  // Same-session scalp — still multi-factor, prefers room + volume + ATR
   const volX = volumeRatio || 0;
-  const chgAbs = Math.abs(quote.changePercent ?? 0);
   let scalpScore = 0;
-  if (volX >= 1.4) scalpScore += 22;
-  if (volX >= 2) scalpScore += 12;
-  if (atrPct >= 0.015) scalpScore += 18;
-  if (atrPct >= 0.025) scalpScore += 8;
-  if (chgAbs >= 1.5) scalpScore += 10;
-  if (trend === "up") scalpScore += 12;
-  if (brokeResistance || exitedAccumulation) scalpScore += 14;
-  if (macdBuy) scalpScore += 8;
-  if (rsi != null && rsi > 78) scalpScore -= 12;
+  if (volX >= 1.4) scalpScore += 18;
+  if (volX >= 2) scalpScore += 10;
+  if (atrPct >= 0.015) scalpScore += 16;
+  if (atrPct >= 0.025) scalpScore += 6;
+  if (chgAbs >= 1.5) scalpScore += 8;
+  if (trend === "up") scalpScore += 10;
+  if (brokeResistance || exitedAccumulation) scalpScore += 12;
+  if (macdBuy) scalpScore += 6;
+  if (roomToRun) scalpScore += 8;
+  if (nearResistance && !brokeResistance) scalpScore -= 10;
+  if (rsi != null && rsi > 78) scalpScore -= 14;
   if (rsi != null && rsi < 35 && trend !== "down") scalpScore += 6;
-  if (volX < 1.2) scalpScore -= 20;
+  if (falseBreakRisk) scalpScore -= 10;
+  if (volX < 1.2) scalpScore -= 22;
+  if (belowEma200 && !brokeResistance) scalpScore -= 6;
   scalpScore = Math.max(0, Math.min(100, Math.round(scalpScore)));
 
   const scalpRange = atr14 || price * 0.02;
-  const scalpBuy = round(Math.max(price - scalpRange * 0.15, support != null ? Math.min(price, support * 1.01) : price * 0.995));
-  const scalpSell = round(price + scalpRange * 0.55);
+  const scalpBuy = round(
+    Math.max(
+      price - scalpRange * 0.15,
+      support != null ? Math.min(price, support * 1.01) : price * 0.995
+    )
+  );
+  let scalpSell = round(price + scalpRange * 0.55);
+  if (resistance != null && !brokeResistance) {
+    scalpSell = round(Math.min(scalpSell, resistance * 0.995));
+  }
   const scalpStop = round(price - scalpRange * 0.4);
   const isScalpCandidate =
     scalpScore >= 55 &&
     volX >= 1.35 &&
     atrPct >= 0.012 &&
-    (trend !== "down" || brokeResistance);
+    (trend !== "down" || brokeResistance) &&
+    scalpSell > scalpBuy;
 
   if (isScalpCandidate) signals.push("scalp_session");
 
+  const company = buildCompanyProfile(quote);
+
   const scalpReasons = [];
   if (volX >= 1.4) scalpReasons.push(`سيولة مرتفعة اليوم ${round(volX, 1)}× المتوسط`);
-  if (atrPct >= 0.015) scalpReasons.push(`تذبذب يكفي للمضاربة (ATR حوالي ${(atrPct * 100).toFixed(1)}%)`);
+  if (atrPct >= 0.015) {
+    scalpReasons.push(`تذبذب يكفي للمضاربة (ATR حوالي ${(atrPct * 100).toFixed(1)}%)`);
+  }
   if (brokeResistance) scalpReasons.push("كسر مقاومة يدعم ضربة سريعة");
+  if (roomToRun) scalpReasons.push("مسافة كافية قبل المقاومة");
+  if (nearResistance && !brokeResistance) scalpReasons.push("قرب مقاومة — مخاطرة انعكاس");
   if (trend === "up") scalpReasons.push("اتجاه عام صاعد");
-  if (chgAbs >= 1.5) scalpReasons.push(`نشاط سعري ${round(quote.changePercent, 1)}%`);
+  if (chgAbs >= 1.5) scalpReasons.push(`نشاط سعري ${round(chgPct, 1)}%`);
   if (!scalpReasons.length) scalpReasons.push("فرص مضاربة محدودة — راقب الحجم");
 
   return {
@@ -290,8 +429,9 @@ export function analyzeQuote(quote) {
     nameAr: quote.nameAr || quote.name || "",
     nameEn: quote.nameEn || quote.name || "",
     price: round(price),
-    changePercent: quote.changePercent ?? null,
+    changePercent: chgPct,
     currency: quote.currency || "EGP",
+    company,
     indicators: {
       rsi: round(rsi, 1),
       macd: round(macd, 4),
@@ -299,20 +439,64 @@ export function analyzeQuote(quote) {
       macdHist: round(macdHist, 4),
       ema20: round(ema20),
       ema50: round(ema50),
+      ema200: round(ema200),
       support,
       resistance,
       atr: round(atr14),
+      atrPct: round(atrPct * 100, 2),
       volumeRatio: round(volumeRatio, 2),
       trend,
+      distToSupportPct,
+      distToResistancePct,
+      rangePosition,
+      momentum5,
+      riskReward,
     },
     signals,
     score,
+    actionHint,
+    considerations: {
+      trend,
+      emaStackBull,
+      aboveEma200,
+      volumeConfirmed: volumeRatio != null && volumeRatio >= 1.5,
+      rsiZone: rsiOversold ? "oversold" : rsiOverbought ? "overbought" : "neutral",
+      macdState: macdBuy
+        ? "buy_cross"
+        : macdSell
+          ? "sell_cross"
+          : macdHist != null && macdHist > 0
+            ? "hist_pos"
+            : "hist_neg",
+      location: brokeResistance
+        ? "breakout"
+        : nearSupport
+          ? "near_support"
+          : nearResistance
+            ? "near_resistance"
+            : consolidating
+              ? "consolidation"
+              : "mid_range",
+      liquidity:
+        volumeRatio != null && volumeRatio < 0.6
+          ? "thin"
+          : volumeRatio != null && volumeRatio >= 2
+            ? "hot"
+            : "normal",
+      volatility: atrPct >= 0.03 ? "high" : atrPct >= 0.015 ? "medium" : "low",
+      conflict: bullHits >= 2 && bearHits >= 2,
+      riskReward,
+      sector: company.sectorId,
+      currency: company.currency,
+      usdListed: company.usdListed,
+    },
     trade: {
       entry,
       stopLoss,
       target1,
       target2,
       confidence: score,
+      riskReward,
     },
     scalp: {
       eligible: isScalpCandidate,
@@ -322,12 +506,147 @@ export function analyzeQuote(quote) {
       stop: scalpStop,
       reasons: scalpReasons,
     },
-    reasons,
+    reasons: [
+      ...reasons,
+      ...(company.notes || []).slice(0, 2),
+    ].slice(0, 8),
   };
 }
 
 export function analyzeUniverse(quotes) {
-  return (quotes || []).map(analyzeQuote).filter(Boolean);
+  const base = (quotes || []).map(analyzeQuote).filter(Boolean);
+  return enrichWithMarketContext(base, quotes || []);
+}
+
+function median(nums) {
+  const vals = nums.filter((n) => n != null && Number.isFinite(n)).sort((a, b) => a - b);
+  if (!vals.length) return null;
+  const mid = Math.floor(vals.length / 2);
+  return vals.length % 2 ? vals[mid] : (vals[mid - 1] + vals[mid]) / 2;
+}
+
+/**
+ * Add company + market surroundings: sector peers, RS vs market/sector, liquidity tier.
+ */
+export function enrichWithMarketContext(analyses, quotes) {
+  if (!analyses.length) return analyses;
+
+  const byTicker = new Map((quotes || []).map((q) => [q.ticker, q]));
+  const marketMedChg = median(analyses.map((a) => a.changePercent));
+  const volSorted = [...analyses]
+    .map((a) => a.indicators?.volumeRatio)
+    .filter((v) => v != null)
+    .sort((a, b) => a - b);
+
+  const sectorBuckets = new Map();
+  for (const a of analyses) {
+    const q = byTicker.get(a.ticker) || a;
+    const company = a.company || buildCompanyProfile(q);
+    a.company = company;
+    const sid = company.sectorId || "other";
+    if (!sectorBuckets.has(sid)) sectorBuckets.set(sid, []);
+    sectorBuckets.get(sid).push(a);
+  }
+
+  const sectorMed = new Map();
+  for (const [sid, list] of sectorBuckets) {
+    sectorMed.set(sid, median(list.map((a) => a.changePercent)));
+  }
+
+  for (const a of analyses) {
+    const company = a.company;
+    const peers = sectorBuckets.get(company.sectorId) || [a];
+    const peerMed = sectorMed.get(company.sectorId);
+    const rsMarket =
+      a.changePercent != null && marketMedChg != null
+        ? round(a.changePercent - marketMedChg, 2)
+        : null;
+    const rsSector =
+      a.changePercent != null && peerMed != null ? round(a.changePercent - peerMed, 2) : null;
+
+    let liquidityTier = "unknown";
+    const volX = a.indicators?.volumeRatio;
+    if (volX != null && volSorted.length) {
+      const rank = volSorted.filter((v) => v <= volX).length / volSorted.length;
+      liquidityTier = rank >= 0.75 ? "high" : rank <= 0.25 ? "low" : "mid";
+    }
+
+    const market = {
+      universeSize: analyses.length,
+      marketMedianChg: round(marketMedChg, 2),
+      sectorMedianChg: round(peerMed, 2),
+      rsVsMarket: rsMarket,
+      rsVsSector: rsSector,
+      sectorPeerCount: peers.length,
+      sectorLeaders: [...peers]
+        .sort((x, y) => (y.score || 0) - (x.score || 0))
+        .slice(0, 3)
+        .map((p) => p.ticker.replace(/\.CA$/i, "")),
+      liquidityTier,
+    };
+
+    a.market = market;
+    a.considerations = {
+      ...(a.considerations || {}),
+      sector: company.sectorId,
+      currency: company.currency,
+      usdListed: company.usdListed,
+      rsVsMarket: rsMarket,
+      rsVsSector: rsSector,
+      liquidityTier,
+      peerCount: peers.length,
+    };
+
+    // Surroundings score nudges (keep logical, small)
+    let adj = 0;
+    if (rsMarket != null && rsMarket >= 1.5 && a.considerations.volumeConfirmed) adj += 3;
+    if (rsMarket != null && rsMarket <= -2 && a.considerations.trend === "down") adj -= 3;
+    if (liquidityTier === "low") adj -= 4;
+    if (liquidityTier === "high" && a.considerations.volumeConfirmed) adj += 2;
+    if (company.usdListed && a.indicators?.atrPct >= 3) adj -= 2;
+    if (rsSector != null && rsSector >= 2 && a.signals.includes("breakout_volume")) adj += 2;
+    if (rsSector != null && rsSector < -1.5 && a.signals.includes("extended_up")) adj -= 3;
+
+    a.score = Math.max(0, Math.min(100, Math.round((a.score || 0) + adj)));
+    let actionHint = a.score >= 60 ? "buy" : a.score <= 35 ? "sell" : "hold";
+    const rr = a.indicators?.riskReward ?? a.considerations?.riskReward;
+    if (actionHint === "buy" && rr != null && rr < 1.2) actionHint = "hold";
+    if (actionHint === "buy" && a.considerations?.conflict) actionHint = "hold";
+    if (
+      actionHint === "buy" &&
+      a.considerations?.rsiZone === "overbought" &&
+      a.considerations?.location === "near_resistance" &&
+      !a.signals.includes("breakout_volume")
+    ) {
+      actionHint = "hold";
+    }
+    if (actionHint === "buy" && liquidityTier === "low") actionHint = "hold";
+    a.actionHint = actionHint;
+    a.trade = { ...a.trade, confidence: a.score };
+
+    if (company.notes?.length) {
+      for (const note of company.notes.slice(0, 2)) {
+        if (!a.reasons.includes(note)) a.reasons = [...a.reasons, note].slice(0, 8);
+      }
+    }
+    if (rsMarket != null) {
+      const note =
+        rsMarket >= 0
+          ? `أقوى من وسيط السوق بـ ${rsMarket}% تقريباً`
+          : `أضعف من وسيط السوق بـ ${Math.abs(rsMarket)}% تقريباً`;
+      if (!a.reasons.some((r) => r.includes("وسيط السوق"))) {
+        a.reasons = [...a.reasons, note].slice(0, 8);
+      }
+    }
+    if (peers.length >= 3) {
+      a.reasons = [
+        ...a.reasons,
+        `القطاع (${company.sectorAr}): ${peers.length} أقران في العينة`,
+      ].slice(0, 8);
+    }
+  }
+
+  return analyses;
 }
 
 const SCREENS = {
@@ -377,18 +696,34 @@ export function compactForAi(analyses, limit = 40) {
   return ranked.map((a) => ({
     ticker: a.ticker.replace(/\.CA$/i, ""),
     nameAr: a.nameAr,
+    nameEn: a.nameEn,
+    sector: a.company?.sectorAr || a.company?.sectorId,
+    currency: a.company?.currency || a.currency,
     price: a.price,
     chgPct: a.changePercent,
     score: a.score,
+    action: a.actionHint,
     rsi: a.indicators.rsi,
     trend: a.indicators.trend,
     ema20: a.indicators.ema20,
     ema50: a.indicators.ema50,
+    ema200: a.indicators.ema200,
     macdBuy: a.signals.includes("macd_buy"),
+    macdSell: a.signals.includes("macd_sell"),
     rsiOversold: a.signals.includes("rsi_oversold"),
+    rsiOverbought: a.signals.includes("rsi_overbought"),
     breakout: a.signals.includes("breakout_volume"),
+    falseBreakRisk: a.signals.includes("false_break_risk"),
     exitAccum: a.signals.includes("exit_accumulation"),
+    nearSupport: a.signals.includes("near_support"),
+    nearResistance: a.signals.includes("near_resistance"),
     volX: a.indicators.volumeRatio,
+    atrPct: a.indicators.atrPct,
+    distSup: a.indicators.distToSupportPct,
+    distRes: a.indicators.distToResistancePct,
+    rangePos: a.indicators.rangePosition,
+    mom5: a.indicators.momentum5,
+    rr: a.indicators.riskReward,
     support: a.indicators.support,
     resistance: a.indicators.resistance,
     entry: a.trade.entry,
@@ -398,7 +733,10 @@ export function compactForAi(analyses, limit = 40) {
     scalpBuy: a.scalp?.buy,
     scalpSell: a.scalp?.sell,
     scalpScore: a.scalp?.score,
-    reasons: a.reasons.slice(0, 3),
+    market: a.market,
+    considerations: a.considerations,
+    reasons: a.reasons.slice(0, 5),
+    signals: a.signals.slice(0, 10),
   }));
 }
 
