@@ -1,8 +1,7 @@
 import { computed, onMounted, onUnmounted, ref } from "vue";
 
-const POLL_MS = 5000;
-
-export function useMarketData() {
+/** Home polls latest.json to match the scrape script. Detail loads once. */
+export function useMarketData({ poll = false, pollMs = 20_000 } = {}) {
   const payload = ref({ results: [], errors: [], scrapedAt: null, range: null });
   const loading = ref(true);
   const error = ref(null);
@@ -29,14 +28,17 @@ export function useMarketData() {
     const without = withCa.replace(/\.CA$/, "");
     return (
       results.value.find(
-        (q) => q.ticker === withCa || q.ticker === without || q.ticker.replace(/\.CA$/, "") === without
+        (q) =>
+          q.ticker === withCa ||
+          q.ticker === without ||
+          q.ticker.replace(/\.CA$/, "") === without
       ) || null
     );
   }
 
   onMounted(() => {
     load();
-    timer = setInterval(load, POLL_MS);
+    if (poll) timer = setInterval(load, pollMs);
   });
 
   onUnmounted(() => {

@@ -6,7 +6,10 @@ import { useI18n } from "../composables/useI18n.js";
 import { useMarketData } from "../composables/useMarketData.js";
 
 const { lang, t, locale } = useI18n();
-const { payload, results, loading, error } = useMarketData();
+const { payload, results, loading, error } = useMarketData({
+  poll: true,
+  pollMs: 20_000,
+});
 
 function fmtDateTime(iso) {
   if (!iso) return "—";
@@ -26,7 +29,7 @@ function fmtDateTime(iso) {
       </span>
     </div>
 
-    <ScalpSession :locale="locale" :scraped-at="payload.scrapedAt" />
+    <ScalpSession :locale="locale" />
 
     <AiAssistant :locale="locale" />
 

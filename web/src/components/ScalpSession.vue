@@ -1,11 +1,10 @@
 <script setup>
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "../composables/useI18n.js";
 
 const props = defineProps({
   locale: { type: String, default: "ar-EG" },
-  scrapedAt: { type: String, default: null },
 });
 
 const { lang, t } = useI18n();
@@ -14,6 +13,7 @@ const router = useRouter();
 const items = ref([]);
 const loading = ref(false);
 const error = ref(null);
+const loadedOnce = ref(false);
 
 function fmt(n, d = 2) {
   if (n == null || Number.isNaN(Number(n))) return "—";
@@ -36,6 +36,7 @@ async function load() {
     items.value = [];
   } finally {
     loading.value = false;
+    loadedOnce.value = true;
   }
 }
 
@@ -46,7 +47,7 @@ function openStock(ticker) {
 }
 
 onMounted(load);
-watch(() => props.scrapedAt, load);
+
 </script>
 
 <template>
@@ -63,7 +64,9 @@ watch(() => props.scrapedAt, load);
 
     <p v-if="loading && !items.length" class="ai-status">{{ t.loading }}</p>
     <p v-else-if="error" class="ai-error">{{ t.aiError }}: {{ error }}</p>
-    <p v-else-if="!items.length" class="empty scalp-empty">{{ t.scalpEmpty }}</p>
+    <p v-else-if="!items.length" class="empty scalp-empty">
+      {{ loadedOnce ? t.scalpEmpty : t.scalpIdle }}
+    </p>
 
     <div v-else class="pick-grid scalp-grid">
       <article

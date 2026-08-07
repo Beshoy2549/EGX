@@ -11,7 +11,7 @@ const props = defineProps({
 
 const router = useRouter();
 const { lang, t, locale } = useI18n();
-const { payload, loading, error, findByTicker } = useMarketData();
+const { payload, loading, error, findByTicker } = useMarketData({ poll: false });
 
 const analysis = ref(null);
 const analysisError = ref(null);
@@ -56,18 +56,25 @@ const signalLabels = computed(() => {
   return (analysis.value?.signals || []).map((s) => map[s] || s);
 });
 
+function normalizeCa(ticker) {
+  const raw = String(ticker || "").trim().toUpperCase();
+  if (!raw) return "";
+  return raw.endsWith(".CA") ? raw : `${raw}.CA`;
+}
+
+// Analyze only when user opens a card (route ticker changes) — not on scrape refresh.
 watch(
-  () => [props.ticker, quote.value?.ticker, payload.value.scrapedAt],
-  () => {
+  () => props.ticker,
+  (ticker) => {
     suggestion.value = null;
     suggestError.value = null;
-    loadAnalysis();
+    loadAnalysis(ticker);
   },
   { immediate: true }
 );
 
-async function loadAnalysis() {
-  const ticker = quote.value?.ticker || props.ticker;
+async function loadAnalysis(tickerRaw = props.ticker) {
+  const ticker = normalizeCa(tickerRaw);
   if (!ticker) {
     analysis.value = null;
     return;

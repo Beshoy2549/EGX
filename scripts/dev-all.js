@@ -3,31 +3,53 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
+const children = [];
+let shuttingDown = false;
 
-function run(label, command, args) {
+function run(label, command, args, extraEnv = {}) {
   const child = spawn(command, args, {
     cwd: root,
     stdio: "inherit",
-    shell: true,
-    env: process.env,
+    env: { ...process.env, ...extraEnv },
   });
-  child.on("exit", (code) => {
+  child.on("error", (err) => {
+    console.error(`[${label}] failed to start:`, err.message);
+    shutdown(1);
+  });
+  child.on("exit", (code, signal) => {
+    if (shuttingDown) return;
     if (code && code !== 0) {
       console.error(`[${label}] exited with code ${code}`);
-      process.exit(code);
+      shutdown(code);
+      return;
+    }
+    if (signal) {
+      console.error(`[${label}] killed by ${signal}`);
+      shutdown(1);
     }
   });
+  children.push(child);
   return child;
 }
 
-const api = run("api", "node", ["src/server.js"]);
-const web = run("web", "npx", ["vite", "--config", "web/vite.config.js"]);
-
-function shutdown() {
-  api.kill("SIGTERM");
-  web.kill("SIGTERM");
-  process.exit(0);
+function shutdown(code = 0) {
+  if (shuttingDown) return;
+  shuttingDown = true;
+  for (const child of children) {
+    try {
+      child.kill("SIGTERM");
+    } catch {
+      /* ignore */
+    }
+  }
+  process.exit(code);
 }
 
-process.on("SIGINT", shutdown);
-process.on("SIGTERM", shutdown);
+console.log("EGX dev — api + vite + watch latest (20s)\n");
+
+run("api", "node", ["src/server.js"]);
+run("web", "npx", ["vite", "--config", "web/vite.config.js"]);
+run("watch", "node", ["src/watch.js"], { INTERVAL: "20" });
+
+process.on("SIGINT", () => shutdown(0));
+process.on("SIGTERM", () => shutdown(0));

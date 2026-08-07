@@ -1,7 +1,7 @@
 import { runScrape } from "./scrape.js";
 import { sleep } from "./lib/utils.js";
 
-const INTERVAL_SEC = Number(process.env.INTERVAL || 10);
+const INTERVAL_SEC = Number(process.env.INTERVAL || 20);
 
 async function main() {
   console.log(`Watch mode — كل ${INTERVAL_SEC} ثانية (Ctrl+C للإيقاف)\n`);

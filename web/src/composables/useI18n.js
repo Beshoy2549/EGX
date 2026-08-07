@@ -13,7 +13,7 @@ const messages = {
     loadError: "مش قادر أقرأ البيانات",
     hover: "حرّك الماوس على الشموع",
     asOf: "اعتبارًا من",
-    livePoll: "تحديث تلقائي كل 5ث",
+    livePoll: "latest كل 20ث (سكربت)",
     back: "← رجوع للأسهم",
     stockMissing: "السهم ده مش موجود في آخر سحب.",
     prevClose: "إغلاق سابق",
@@ -54,6 +54,7 @@ const messages = {
     scalpLede:
       "ترشيحات سريعة بناءً على الحجم والتذبذب والزخم — مع سعر شراء مقترح وسعر بيع لنفس الجلسة.",
     scalpRefresh: "تحديث",
+    scalpIdle: "اضغط تحديث عشان تشوف مرشحي المضاربة.",
     scalpEmpty: "مفيش مرشحين مضاربة واضحين دلوقتي.",
     scalpBadge: "مضاربة",
     scalpBuy: "اشتري عند",
@@ -110,7 +111,7 @@ const messages = {
     loadError: "Could not load data",
     hover: "Hover over candles",
     asOf: "as of",
-    livePoll: "auto-refresh every 5s",
+    livePoll: "latest every 20s (script)",
     back: "← Back to stocks",
     stockMissing: "This stock is not in the latest scrape.",
     prevClose: "Prev close",
@@ -152,6 +153,7 @@ const messages = {
     scalpLede:
       "Quick picks from volume, volatility and momentum — with suggested buy and sell for the same session.",
     scalpRefresh: "Refresh",
+    scalpIdle: "Press refresh to load scalp candidates.",
     scalpEmpty: "No clear scalp candidates right now.",
     scalpBadge: "Scalp",
     scalpBuy: "Buy at",
