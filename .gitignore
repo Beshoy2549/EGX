@@ -1,0 +1,8 @@
+node_modules/
+chromedriver/
+dist/
+output/
+web/public/latest.json
+.DS_Store
+*.log
+.env
