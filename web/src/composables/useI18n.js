@@ -73,6 +73,7 @@ const messages = {
     scalpBadge: "مضاربة",
     scalpBuy: "اشتري عند",
     scalpSell: "ابيع عند",
+    scalpAiCta: "مقترح AI للمضاربة",
     scalpDisclaimer:
       "مضاربة تعليمية فقط من بيانات يومية — مش نصيحة استثمارية. راقب السيولة والوقت قبل أي صفقة.",
     nowPrice: "السعر الآن",
@@ -202,6 +203,7 @@ const messages = {
     scalpBadge: "Scalp",
     scalpBuy: "Buy at",
     scalpSell: "Sell at",
+    scalpAiCta: "AI scalp suggestion",
     scalpDisclaimer:
       "Educational scalp levels from daily data — not investment advice. Check liquidity and timing first.",
     nowPrice: "Now",

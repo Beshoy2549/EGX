@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "../composables/useI18n.js";
 
@@ -14,6 +14,9 @@ const items = ref([]);
 const loading = ref(false);
 const error = ref(null);
 const loadedOnce = ref(false);
+const aiByTicker = reactive({});
+const aiLoading = reactive({});
+const aiError = reactive({});
 
 function fmt(n, d = 2) {
   if (n == null || Number.isNaN(Number(n))) return "—";
@@ -31,6 +34,8 @@ async function load() {
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
     items.value = data.items || [];
+    for (const key of Object.keys(aiByTicker)) delete aiByTicker[key];
+    for (const key of Object.keys(aiError)) delete aiError[key];
   } catch (err) {
     error.value = err.message;
     items.value = [];
@@ -46,8 +51,30 @@ function openStock(ticker) {
   router.push({ name: "stock", params: { ticker: code } });
 }
 
-onMounted(load);
+async function askScalpAi(item, e) {
+  e?.stopPropagation?.();
+  const ticker = item?.ticker;
+  if (!ticker || aiLoading[ticker]) return;
+  aiLoading[ticker] = true;
+  aiError[ticker] = null;
+  try {
+    const res = await fetch("/api/suggest-scalp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ticker, lang: lang.value }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    aiByTicker[ticker] = data.suggestion;
+  } catch (err) {
+    aiError[ticker] = err.message;
+    delete aiByTicker[ticker];
+  } finally {
+    aiLoading[ticker] = false;
+  }
+}
 
+onMounted(load);
 </script>
 
 <template>
@@ -114,6 +141,54 @@ onMounted(load);
             <dd>{{ fmt(item.indicators?.rsi, 1) }}</dd>
           </div>
         </dl>
+
+        <div class="scalp-ai" @click.stop>
+          <button
+            type="button"
+            class="ai-btn scalp-ai-btn"
+            :disabled="aiLoading[item.ticker]"
+            @click="askScalpAi(item, $event)"
+          >
+            {{ aiLoading[item.ticker] ? t.aiLoading : t.scalpAiCta }}
+          </button>
+
+          <p v-if="aiError[item.ticker]" class="ai-error">
+            {{ t.aiError }}: {{ aiError[item.ticker] }}
+          </p>
+
+          <div v-if="aiByTicker[item.ticker]" class="scalp-ai-result" :class="aiByTicker[item.ticker].action">
+            <div class="ai-action">
+              <span class="badge">{{ t.aiAction[aiByTicker[item.ticker].action] || aiByTicker[item.ticker].action }}</span>
+              <span class="confidence">
+                {{ t.aiConfidence }}: {{ aiByTicker[item.ticker].confidence }}/100
+              </span>
+            </div>
+            <p class="ai-summary">{{ aiByTicker[item.ticker].summary }}</p>
+            <div class="scalp-prices ai-prices">
+              <div class="scalp-buy">
+                <span>{{ t.scalpBuy }}</span>
+                <strong>{{ fmt(aiByTicker[item.ticker].buy) }}</strong>
+              </div>
+              <div class="scalp-sell">
+                <span>{{ t.scalpSell }}</span>
+                <strong>{{ fmt(aiByTicker[item.ticker].sell) }}</strong>
+              </div>
+            </div>
+            <dl class="pick-levels">
+              <div>
+                <dt>{{ t.aiStop }}</dt>
+                <dd>{{ fmt(aiByTicker[item.ticker].stop) }}</dd>
+              </div>
+              <div>
+                <dt>{{ t.nowPrice }}</dt>
+                <dd>{{ fmt(item.price) }}</dd>
+              </div>
+            </dl>
+            <ul v-if="aiByTicker[item.ticker].reasons?.length" class="scalp-ai-reasons">
+              <li v-for="(reason, i) in aiByTicker[item.ticker].reasons" :key="i">{{ reason }}</li>
+            </ul>
+          </div>
+        </div>
       </article>
     </div>
 

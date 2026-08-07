@@ -339,6 +339,112 @@ function mergeHorizonPlans(parsedPlans, analysis) {
   return HORIZONS.map((h) => byH.get(h)).filter(Boolean);
 }
 
+async function buildScalpSuggestion(quote, lang) {
+  const market = await loadMarket();
+  const universe = analyzeUniverse(market.results);
+  const analysis =
+    universe.find((a) => a.ticker === quote.ticker) || analyzeQuote(quote);
+  const langLabel = lang === "en" ? "English" : "Arabic";
+  const local = analysis?.scalp || {};
+  const draft = {
+    action: local.eligible ? "buy" : analysis?.actionHint === "sell" ? "sell" : "hold",
+    confidence: local.score ?? analysis?.score ?? 40,
+    buy: local.buy ?? analysis?.price,
+    sell: local.sell,
+    stop: local.stop,
+    reasons: local.reasons || analysis?.reasons || [],
+  };
+
+  const prompt = `You are a cautious EGX same-session SCALP analyst.
+Do NOT modify files. Reply JSON only. Educational only.
+
+Focus ONLY on same-session scalp (not long-term). Weigh volume, ATR%, RSI, near S/R, false-break risk, liquidity, sector context.
+
+Snapshot:
+${JSON.stringify(
+    {
+      ticker: analysis?.ticker,
+      price: analysis?.price,
+      company: analysis?.company,
+      market: analysis?.market,
+      indicators: analysis?.indicators,
+      signals: analysis?.signals,
+      considerations: analysis?.considerations,
+      scalp: analysis?.scalp,
+      score: analysis?.score,
+    },
+    null,
+    2
+  )}
+
+Local draft levels:
+${JSON.stringify(draft)}
+
+Return ONLY JSON:
+{
+  "action": "buy"|"sell"|"hold",
+  "confidence": 0-100,
+  "summary": "1-2 sentences in ${langLabel}",
+  "buy": number,
+  "sell": number,
+  "stop": number,
+  "reasons": ["in ${langLabel}", "... max 4"]
+}
+buy/sell/stop must be logical vs price, ATR and S/R. Prefer hold if thin volume or mid resistance with overbought RSI.`;
+
+  const fallback = {
+    action: draft.action,
+    confidence: draft.confidence,
+    summary:
+      lang === "en"
+        ? "Session scalp levels from local multi-factor scan."
+        : "مستويات مضاربة الجلسة من الفحص المحلي متعدد العوامل.",
+    buy: roundPx(draft.buy),
+    sell: roundPx(draft.sell),
+    stop: roundPx(draft.stop),
+    reasons: (draft.reasons || []).slice(0, 4),
+    analysis,
+  };
+
+  try {
+    const text = await runAgent(prompt);
+    const parsed = extractJson(text);
+    if (!parsed || !["buy", "sell", "hold"].includes(parsed.action)) {
+      return { ...fallback, summary: text.trim() || fallback.summary };
+    }
+    let action = parsed.action;
+    let confidence = Math.max(0, Math.min(100, Number(parsed.confidence) || draft.confidence));
+    if (action === "buy" && (analysis?.considerations?.liquidity === "thin" || analysis?.market?.liquidityTier === "low")) {
+      action = "hold";
+      confidence = Math.min(confidence, 50);
+    }
+    if (
+      action === "buy" &&
+      analysis?.considerations?.rsiZone === "overbought" &&
+      analysis?.considerations?.location === "near_resistance" &&
+      !analysis?.signals?.includes("breakout_volume")
+    ) {
+      action = "hold";
+      confidence = Math.min(confidence, 48);
+    }
+    return {
+      action,
+      confidence,
+      summary: String(parsed.summary || "").slice(0, 320) || fallback.summary,
+      buy: roundPx(parsed.buy ?? draft.buy),
+      sell: roundPx(parsed.sell ?? draft.sell),
+      stop: roundPx(parsed.stop ?? draft.stop),
+      reasons: Array.isArray(parsed.reasons)
+        ? parsed.reasons.map((r) => String(r).slice(0, 160)).slice(0, 4)
+        : fallback.reasons,
+      analysis,
+    };
+  } catch (err) {
+    console.error("[suggest-scalp]", err.message);
+    return fallback;
+  }
+}
+
 async function buildSuggestion(quote, lang) {
   const market = await loadMarket();
   const universe = analyzeUniverse(market.results);
@@ -783,6 +889,18 @@ const server = http.createServer(async (req, res) => {
       const quote = findQuote(market.results, ticker);
       if (!quote) return sendJson(res, 404, { error: `Stock not found: ${ticker}` });
       const suggestion = await buildSuggestion(quote, lang);
+      return sendJson(res, 200, { ticker: quote.ticker, suggestion });
+    }
+
+    if (req.method === "POST" && url.pathname === "/api/suggest-scalp") {
+      const body = await readBody(req);
+      const ticker = normalizeTicker(body.ticker);
+      if (!ticker) return sendJson(res, 400, { error: "ticker is required" });
+      const lang = body.lang === "en" ? "en" : "ar";
+      const market = await loadMarket();
+      const quote = findQuote(market.results, ticker);
+      if (!quote) return sendJson(res, 404, { error: `Stock not found: ${ticker}` });
+      const suggestion = await buildScalpSuggestion(quote, lang);
       return sendJson(res, 200, { ticker: quote.ticker, suggestion });
     }
 
