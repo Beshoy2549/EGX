@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "scrape": "node src/scrape.js",
+    "scrape:fundamentals": "node src/scrapeFundamentals.js",
     "watch": "INTERVAL=10 node src/watch.js",
     "api": "node src/server.js",
     "view": "vite --config web/vite.config.js",

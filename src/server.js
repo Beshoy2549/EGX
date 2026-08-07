@@ -10,6 +10,14 @@ import {
   compactForAi,
   scanAnalyses,
 } from "./lib/indicators.js";
+import {
+  analyzeIntelligence,
+  analyzeIntelligenceUniverse,
+  partitionRecommendations,
+  DEFAULT_WEIGHTS,
+  INVESTOR_PROFILES,
+} from "./lib/intelligence.js";
+import { loadFundamentalsCache, getSnapshot, isUsableFundamentalSnapshot } from "./lib/fundamentalsStore.js";
 
 dotenv.config({ path: path.join(path.dirname(fileURLToPath(import.meta.url)), "..", ".env") });
 
@@ -466,6 +474,21 @@ picks max 8, from data only.`;
   };
 }
 
+function parseWeights(url) {
+  const f = url.searchParams.get("wFund");
+  const t = url.searchParams.get("wTech");
+  if (f == null && t == null) return null;
+  return {
+    fundamental: f != null ? Number(f) : DEFAULT_WEIGHTS.fundamental,
+    technical: t != null ? Number(t) : DEFAULT_WEIGHTS.technical,
+  };
+}
+
+function parseProfile(raw) {
+  const p = String(raw || "balanced").toLowerCase();
+  return INVESTOR_PROFILES.includes(p) ? p : "balanced";
+}
+
 const server = http.createServer(async (req, res) => {
   if (req.method === "OPTIONS") {
     return sendJson(res, 204, {});
@@ -474,10 +497,80 @@ const server = http.createServer(async (req, res) => {
   const url = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`);
 
   try {
+    if (req.method === "GET" && url.pathname === "/api/intelligence") {
+      const ticker = normalizeTicker(url.searchParams.get("ticker"));
+      if (!ticker) return sendJson(res, 400, { error: "ticker is required" });
+      const profile = parseProfile(url.searchParams.get("profile"));
+      const weights = parseWeights(url);
+      const shariaOnly = url.searchParams.get("sharia") === "1";
+      const market = await loadMarket();
+      const quote = findQuote(market.results, ticker);
+      if (!quote) return sendJson(res, 404, { error: `Stock not found: ${ticker}` });
+      const fundCache = await loadFundamentalsCache();
+      const snapEntry = getSnapshot(fundCache, ticker);
+      const snap = isUsableFundamentalSnapshot(snapEntry) ? snapEntry : null;
+      const report = analyzeIntelligence(quote, snap, {
+        profile,
+        weights: weights || undefined,
+        shariaOnly,
+      });
+      return sendJson(res, 200, {
+        scrapedAt: market.scrapedAt,
+        fundamentalsUpdatedAt: fundCache.updatedAt,
+        report,
+      });
+    }
+
+    if (req.method === "GET" && url.pathname === "/api/intelligence/scan") {
+      const profile = parseProfile(url.searchParams.get("profile"));
+      const weights = parseWeights(url);
+      const shariaOnly = url.searchParams.get("sharia") === "1";
+      const limit = Math.max(1, Math.min(50, Number(url.searchParams.get("limit") || 20)));
+      const category = url.searchParams.get("category"); // buy_now|watch|avoid|all
+      const market = await loadMarket();
+      const fundCache = await loadFundamentalsCache();
+      const universe = analyzeIntelligenceUniverse(market.results, fundCache, {
+        profile,
+        weights: weights || undefined,
+        shariaOnly,
+      });
+      const parts = partitionRecommendations(universe);
+      const pick = (arr) => arr.slice(0, limit);
+      const payload = {
+        profile,
+        weights: weights || DEFAULT_WEIGHTS,
+        scrapedAt: market.scrapedAt,
+        fundamentalsUpdatedAt: fundCache.updatedAt,
+        counts: {
+          buy_now: parts.buy_now.length,
+          watch: parts.watch.length,
+          avoid: parts.avoid.length,
+          total: universe.length,
+        },
+        buy_now: pick(parts.buy_now),
+        watch: pick(parts.watch),
+        avoid: category === "avoid" || category === "all" ? pick(parts.avoid) : pick(parts.avoid).slice(0, 5),
+      };
+      if (category === "buy_now") {
+        return sendJson(res, 200, { ...payload, watch: [], avoid: [], items: payload.buy_now });
+      }
+      if (category === "watch") {
+        return sendJson(res, 200, { ...payload, buy_now: [], avoid: [], items: payload.watch });
+      }
+      if (category === "avoid") {
+        return sendJson(res, 200, { ...payload, buy_now: [], watch: [], items: payload.avoid });
+      }
+      return sendJson(res, 200, payload);
+    }
+
     if (req.method === "GET" && url.pathname === "/api/health") {
       return sendJson(res, 200, {
         ok: true,
         hasKey: Boolean(process.env.CURSOR_API_KEY?.trim()),
+        intelligence: {
+          weights: DEFAULT_WEIGHTS,
+          profiles: INVESTOR_PROFILES,
+        },
       });
     }
 

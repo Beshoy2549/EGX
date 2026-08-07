@@ -3,6 +3,7 @@ chromedriver/
 dist/
 output/
 web/public/latest.json
+web/public/fundamentals.json
 .DS_Store
 *.log
 .env

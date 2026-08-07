@@ -57,6 +57,18 @@ export async function runScrape(options = {}) {
     keepHistory: cfg.keepHistory,
   });
 
+  if (process.env.SCRAPE_FUNDAMENTALS === "1") {
+    try {
+      const { scrapeFundamentals } = await import("./scrapeFundamentals.js");
+      await scrapeFundamentals({
+        symbols: cfg.symbols,
+        limit: process.env.FUND_LIMIT ? Number(process.env.FUND_LIMIT) : undefined,
+      });
+    } catch (err) {
+      console.warn(`Fundamentals scrape skipped: ${err.message}`);
+    }
+  }
+
   const ms = Math.round(performance.now() - started);
   console.log(`\nSaved ${results.length} quotes in ${ms}ms → ${latestPath}`);
   console.log(`Vue data → ${webLatestPath}`);
