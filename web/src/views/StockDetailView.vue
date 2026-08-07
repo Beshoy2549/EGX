@@ -124,7 +124,6 @@ async function askAi() {
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
     suggestion.value = data.suggestion;
-    if (data.suggestion?.analysis) analysis.value = data.suggestion.analysis;
   } catch (err) {
     suggestError.value = err.message;
     suggestion.value = null;
@@ -349,6 +348,19 @@ async function askAi() {
           </div>
           <p class="ai-summary">{{ suggestion.summary }}</p>
 
+          <div v-if="suggestion.considerations" class="ai-considerations">
+            <h3 class="plan-title">{{ t.aiConsiderationsTitle }}</h3>
+            <dl class="considerations-grid">
+              <div
+                v-for="(text, key) in suggestion.considerations"
+                :key="key"
+              >
+                <dt>{{ t.aiConsideration[key] || key }}</dt>
+                <dd>{{ text }}</dd>
+              </div>
+            </dl>
+          </div>
+
           <div v-if="suggestion.plans?.length" class="plan-table-wrap">
             <h3 class="plan-title">{{ t.aiPlansTitle }}</h3>
             <table class="plan-table">
@@ -392,6 +404,12 @@ async function askAi() {
           <ul v-if="suggestion.reasons?.length">
             <li v-for="(reason, i) in suggestion.reasons" :key="i">{{ reason }}</li>
           </ul>
+          <div v-if="suggestion.signals?.length" class="ai-signals">
+            <h3 class="plan-title">{{ t.aiSignalsTitle }}</h3>
+            <div class="signal-row">
+              <span v-for="(sig, i) in suggestion.signals" :key="i" class="signal-chip">{{ sig }}</span>
+            </div>
+          </div>
           <p class="ai-disclaimer">{{ t.aiDisclaimer }}</p>
         </div>
       </section>

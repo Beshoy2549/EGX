@@ -1,10 +1,27 @@
-import { spawn } from "node:child_process";
+import { spawn, execSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const children = [];
 let shuttingDown = false;
+
+function freePort(port) {
+  try {
+    const out = execSync(`lsof -ti:${port}`, { encoding: "utf8" }).trim();
+    if (!out) return;
+    for (const pid of out.split(/\s+/).filter(Boolean)) {
+      try {
+        process.kill(Number(pid), "SIGKILL");
+        console.log(`[dev] freed :${port} (killed pid ${pid})`);
+      } catch {
+        /* ignore */
+      }
+    }
+  } catch {
+    /* nothing listening */
+  }
+}
 
 function run(label, command, args, extraEnv = {}) {
   const child = spawn(command, args, {
@@ -46,6 +63,10 @@ function shutdown(code = 0) {
 }
 
 console.log("EGX dev — api + vite + watch latest (20s)\n");
+
+freePort(8787);
+freePort(5173);
+freePort(5174);
 
 run("api", "node", ["src/server.js"]);
 run("web", "npx", ["vite", "--config", "web/vite.config.js"]);

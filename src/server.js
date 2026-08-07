@@ -10,6 +10,7 @@ import {
   compactForAi,
   scanAnalyses,
 } from "./lib/indicators.js";
+import { buildCompanyProfile } from "./lib/companyContext.js";
 
 dotenv.config({ path: path.join(path.dirname(fileURLToPath(import.meta.url)), "..", ".env") });
 
@@ -101,21 +102,44 @@ function extractJson(text) {
   }
 }
 
+/** Collect assistant text + any createPlan body (plan mode often parks JSON only in the plan). */
 async function runAgent(prompt) {
   const apiKey = requireApiKey();
-  const result = await Agent.prompt(prompt, {
+  await using agent = await Agent.create({
     apiKey,
     model: { id: "composer-2.5" },
-    mode: "plan",
     local: { cwd: ROOT, store: agentStore },
   });
+
+  const run = await agent.send(prompt);
+  let assistantText = "";
+  let planText = "";
+
+  for await (const event of run.stream()) {
+    if (event.type === "assistant") {
+      for (const block of event.message?.content || []) {
+        if (block.type === "text" && block.text) assistantText += block.text;
+      }
+      continue;
+    }
+    if (event.type === "tool_call" && event.name === "createPlan") {
+      const plan = event.args?.plan;
+      if (typeof plan === "string" && plan.length > planText.length) planText = plan;
+    }
+  }
+
+  const result = await run.wait();
   if (result.status !== "finished") {
     throw Object.assign(
       new Error(result.error?.message || `Agent status: ${result.status}`),
       { status: 502 }
     );
   }
-  return result.result || "";
+
+  // Prefer the chunk that actually contains JSON; plan-mode narrations are useless alone.
+  const candidates = [result.result || "", assistantText, planText].filter(Boolean);
+  const withJson = candidates.find((t) => extractJson(t)?.action);
+  return withJson || candidates.sort((a, b) => b.length - a.length)[0] || "";
 }
 
 function normalizePick(p, fallbackConfidence = 50) {
@@ -137,70 +161,94 @@ function normalizePick(p, fallbackConfidence = 50) {
   };
 }
 
-const DECISION_CHECKLIST = `Make LOGICAL multi-factor decisions. Never use one indicator alone.
-Weigh ALL available factors TOGETHER:
+/**
+ * Output criteria for the agent — methods are THEIRS; we only require full coverage.
+ * Every factor below must appear in `considerations` (honest "insufficient data" is OK).
+ */
+const SUGGEST_OUTPUT_CRITERIA = `Analyze the RAW market data yourself (your own methods).
+We do NOT provide a precomputed score or our internal formula — do not invent that we did.
 
-Technical:
-1) Trend (EMA20/50 stack) and EMA200 structure if present
-2) Momentum: RSI zone + 5-day momentum (avoid chasing extended moves blindly)
-3) MACD cross/histogram quality
-4) Volume vs 20d avg: confirmation vs thin liquidity vs climax risk
-5) Support/resistance distance, range position, breakout vs false-break
-6) Consolidation / accumulation exit
-7) ATR% volatility → realistic stops
-8) Entry / SL / T1 / T2 must be coherent; prefer R:R >= ~1.5; else hold or cut size via confidence
+You MUST weigh ALL of these considerations (cite numbers from the payload):
+1. Trend / structure — multi-bar direction, higher-highs/lows or range, moving-average style reads you choose
+2. Momentum — short vs medium thrust (e.g. 1d / ~5d / longer if candles allow)
+3. Volume & liquidity — vs recent average, dry-ups, climaxes; thin names = lower conviction
+4. Volatility — recent range / ATR-style size; stops and targets MUST fit it
+5. Support & resistance — swing levels, range edges, prior highs/lows from OHLCV
+6. Candle structure — latest bars: body/wicks, engulfing/pin/doji-style reads, consecutive thrust
+7. Gaps — open vs prior close where visible; filled vs open gap risk
+8. Breakout / fakeout — close through a level with/without volume confirmation
+9. Consolidation / compression — tight range then expansion risk or continuation
+10. Relative strength — stock day% vs peer day% and vs market tape median in payload
+11. Sector / peer cluster — are peers confirming or diverging?
+12. Currency listing — EGP vs USD names; FX-sensitivity caveat when USD-listed
+13. Risk/reward — entry, stop, targets with approximate R:R; reject poor R:R for buy
+14. Divergences — price vs momentum/volume when readable from the series
+15. Horizon fit — what works for same-session scalp vs week vs month vs long (may differ)
+16. Data limits — explicitly name what you CANNOT know from this payload only
+    (earnings/events calendar, order book/spreads, true free-float, fundamentals P/E, live FX series, EGX30 composition)
 
-Company & surroundings (when present in snapshot):
-9) Sector context and peer behavior (rsVsSector, sector leaders)
-10) Relative strength vs market median (rsVsMarket)
-11) Liquidity tier vs the EGX universe
-12) Currency (EGP vs USD listing / FX sensitivity)
-13) Company notes / sector-specific caution
+Then produce:
+- Stance: buy | sell | hold with honest confidence 0-100
+- Four horizons with buy & sell (& stop): scalp, week, month, long
+- Fill every key in the required \`considerations\` object (short sentences; use "غير متاح من البيانات" / "n/a from payload" when blocked)
 
-Logic rules (must follow):
-- Conflicting bullish+bearish → prefer HOLD and lower confidence
-- Buy into overbought + near resistance WITHOUT volume breakout → avoid buy
-- Thin liquidity → lower confidence; avoid aggressive buy
-- Action should not wildly disagree with score/actionHint unless you explain why in reasons
-- Levels must respect ATR and nearby S/R
-Educational only — not financial advice.`;
+Rules for the OUTPUT only:
+- Be concrete; cite prices, %, volumes, candle highs/lows from the payload
+- No fantasy prices far outside recent ranges without justification
+- Educational only — not financial advice
+- Do NOT call createPlan or write files
+- Your entire reply must be ONE JSON object (first char \`{\`, last char \`}\`) — no preamble`;
 
-function reconcileSuggestion(parsed, analysis) {
-  if (!parsed || !analysis) return parsed;
-  let action = parsed.action;
-  let confidence = Math.max(0, Math.min(100, Number(parsed.confidence) || analysis.score || 0));
-  const c = analysis.considerations || {};
+const CONSIDERATION_KEYS = [
+  "trend",
+  "momentum",
+  "volumeLiquidity",
+  "volatility",
+  "supportResistance",
+  "candleStructure",
+  "gaps",
+  "breakoutFakeout",
+  "consolidation",
+  "relativeStrength",
+  "sectorPeers",
+  "currencyListing",
+  "riskReward",
+  "divergences",
+  "horizonFit",
+  "dataLimits",
+];
 
-  if (action === "buy" && analysis.score < 45) {
-    action = "hold";
-    confidence = Math.min(confidence, 52);
+function sanitizeConsiderations(raw, lang) {
+  const fallback =
+    lang === "en" ? "Not assessed in this reply." : "لم يُقيَّم في هذا الرد.";
+  const out = {};
+  const src = raw && typeof raw === "object" ? raw : {};
+  for (const key of CONSIDERATION_KEYS) {
+    const v = src[key];
+    out[key] = String(v != null && String(v).trim() ? v : fallback).slice(0, 280);
   }
-  if (action === "buy" && c.conflict) {
-    action = "hold";
-    confidence = Math.min(confidence, 50);
-  }
-  if (
-    action === "buy" &&
-    c.rsiZone === "overbought" &&
-    (c.location === "near_resistance" || c.location === "mid_range") &&
-    !analysis.signals?.includes("breakout_volume")
-  ) {
-    action = "hold";
-    confidence = Math.min(confidence, 48);
-  }
-  if (action === "buy" && (c.liquidity === "thin" || c.liquidityTier === "low")) {
-    confidence = Math.min(confidence, 55);
-  }
-  if (action === "sell" && analysis.score >= 65 && c.trend === "up" && !c.conflict) {
-    action = "hold";
-    confidence = Math.min(confidence, 55);
-  }
-  if (c.riskReward != null && c.riskReward < 1.2 && action === "buy") {
-    action = "hold";
-    confidence = Math.min(confidence, 50);
-  }
+  return out;
+}
 
-  return { ...parsed, action, confidence };
+function marketTapeForAi(results) {
+  const pcts = (results || [])
+    .map((q) => q.changePercent)
+    .filter((n) => n != null && Number.isFinite(Number(n)))
+    .map(Number)
+    .sort((a, b) => a - b);
+  if (!pcts.length) {
+    return { universeSize: (results || []).length, medianDayChangePct: null, advancers: 0, decliners: 0 };
+  }
+  const mid = Math.floor(pcts.length / 2);
+  const median =
+    pcts.length % 2 ? pcts[mid] : Math.round(((pcts[mid - 1] + pcts[mid]) / 2) * 100) / 100;
+  return {
+    universeSize: (results || []).length,
+    medianDayChangePct: median,
+    advancers: pcts.filter((p) => p > 0).length,
+    decliners: pcts.filter((p) => p < 0).length,
+    usdListedCount: (results || []).filter((q) => String(q.currency || "").toUpperCase() === "USD").length,
+  };
 }
 
 const HORIZONS = ["scalp", "week", "month", "long"];
@@ -210,130 +258,97 @@ function roundPx(n) {
   return Math.round(Number(n) * 100) / 100;
 }
 
-/** Local logical buy/sell table by horizon — fallback + merge with AI. */
-function buildHorizonPlans(analysis) {
-  if (!analysis) return [];
-  const price = analysis.price;
-  const atr = analysis.indicators?.atr || price * 0.02;
-  const support = analysis.indicators?.support;
-  const resistance = analysis.indicators?.resistance;
-  const ema50 = analysis.indicators?.ema50;
-  const trade = analysis.trade || {};
-  const scalp = analysis.scalp || {};
-  const score = analysis.score ?? 50;
-  const bias = analysis.actionHint || (score >= 60 ? "buy" : score <= 35 ? "sell" : "hold");
-
-  const scalpBuy = roundPx(scalp.buy ?? Math.max(price - atr * 0.15, support ? Math.min(price, support * 1.01) : price * 0.995));
-  const scalpSell = roundPx(
-    scalp.sell ??
-      (resistance && resistance > price ? Math.min(price + atr * 0.55, resistance * 0.995) : price + atr * 0.55)
-  );
-  const scalpStop = roundPx(scalp.stop ?? price - atr * 0.4);
-
-  const weekBuy = roundPx(Math.max(price - atr * 0.35, support != null ? Math.min(price, support * 1.02) : price * 0.99));
-  const weekSell = roundPx(
-    resistance != null && resistance > weekBuy
-      ? Math.min(price + atr * 1.1, resistance * 0.995)
-      : price + atr * 1.1
-  );
-  const weekStop = roundPx(Math.min(weekBuy - atr * 0.8, support != null ? support * 0.985 : weekBuy - atr));
-
-  const monthBuy = roundPx(trade.entry ?? price);
-  const monthSell = roundPx(trade.target1 ?? price + atr * 1.8);
-  const monthStop = roundPx(trade.stopLoss ?? price - atr * 1.2);
-  const monthSell2 = roundPx(trade.target2 ?? price + atr * 2.8);
-
-  const longBuy = roundPx(
-    ema50 != null && ema50 < price ? Math.max(ema50 * 1.01, support != null ? support * 1.02 : ema50) : support != null ? support * 1.03 : price * 0.97
-  );
-  const longSell = roundPx(
-    resistance != null && resistance > longBuy ? resistance * 1.08 : price + atr * 4
-  );
-  const longStop = roundPx(
-    Math.min(longBuy - atr * 1.5, support != null ? support * 0.96 : longBuy * 0.92)
-  );
-
-  const scalpAction = scalp.eligible ? "buy" : bias === "sell" ? "sell" : "hold";
-  const weekAction = score >= 55 && weekSell > weekBuy ? bias : "hold";
-  const monthAction = score >= 58 ? bias : score <= 35 ? "sell" : "hold";
-  const longAction =
-    analysis.considerations?.aboveEma200 || analysis.indicators?.trend === "up"
-      ? score >= 50
-        ? "buy"
-        : "hold"
-      : score <= 40
-        ? "sell"
-        : "hold";
-
-  return [
-    {
-      horizon: "scalp",
-      action: scalpAction,
-      buy: scalpBuy,
-      sell: scalpSell,
-      stop: scalpStop,
-      note: "نفس الجلسة — سيولة وتذبذب",
-    },
-    {
-      horizon: "week",
-      action: weekAction,
-      buy: weekBuy,
-      sell: weekSell,
-      stop: weekStop,
-      note: "أفق أسبوعي حول الدعم/المقاومة القريبة",
-    },
-    {
-      horizon: "month",
-      action: monthAction,
-      buy: monthBuy,
-      sell: monthSell,
-      sell2: monthSell2,
-      stop: monthStop,
-      note: "أفق شهري من ATR والعائد/المخاطرة",
-    },
-    {
-      horizon: "long",
-      action: longAction,
-      buy: longBuy,
-      sell: longSell,
-      stop: longStop,
-      note: "طويل المدى — قرب الدعم/EMA50 ومستهدف ممتد",
-    },
-  ];
+function sanitizeSuggestion(parsed) {
+  if (!parsed) return parsed;
+  const action = ["buy", "sell", "hold"].includes(parsed.action) ? parsed.action : "hold";
+  const confidence = Math.max(0, Math.min(100, Number(parsed.confidence) || 50));
+  return { ...parsed, action, confidence };
 }
 
-function normalizePlan(raw, fallback) {
-  const horizon = HORIZONS.includes(raw?.horizon) ? raw.horizon : fallback?.horizon;
-  if (!horizon) return null;
-  const action = ["buy", "sell", "hold"].includes(raw?.action) ? raw.action : fallback?.action || "hold";
-  const buy = roundPx(raw?.buy ?? raw?.entry ?? fallback?.buy);
-  const sell = roundPx(raw?.sell ?? raw?.target ?? raw?.target1 ?? fallback?.sell);
-  const sell2 = roundPx(raw?.sell2 ?? raw?.target2 ?? fallback?.sell2);
-  const stop = roundPx(raw?.stop ?? raw?.stopLoss ?? fallback?.stop);
+/** Raw quote blob for the agent — no local scores/indicators/signals. */
+function rawQuoteForAi(quote, { candleLimit = 90 } = {}) {
+  if (!quote) return null;
+  const candles = Array.isArray(quote.candles) ? quote.candles.slice(-candleLimit) : [];
+  const company = buildCompanyProfile(quote);
   return {
-    horizon,
-    action,
-    buy,
-    sell,
-    sell2: sell2 ?? null,
-    stop,
-    note: String(raw?.note || fallback?.note || "").slice(0, 120),
+    ticker: quote.ticker,
+    nameAr: quote.nameAr || quote.name || "",
+    nameEn: quote.nameEn || quote.name || "",
+    price: quote.price,
+    previousClose: quote.previousClose ?? null,
+    change: quote.change ?? null,
+    changePercent: quote.changePercent ?? null,
+    currency: quote.currency || "EGP",
+    exchange: quote.exchange || "EGX",
+    asOf: quote.asOf || null,
+    sector: { id: company.sectorId, ar: company.sectorAr, en: company.sectorEn },
+    candles,
   };
 }
 
-function mergeHorizonPlans(parsedPlans, analysis) {
-  const local = buildHorizonPlans(analysis);
-  const byH = new Map(local.map((p) => [p.horizon, p]));
+function rawPeersForAi(results, quote, limit = 6) {
+  const company = buildCompanyProfile(quote);
+  const sid = company.sectorId;
+  const peers = (results || [])
+    .filter((q) => q.ticker !== quote.ticker && buildCompanyProfile(q).sectorId === sid)
+    .slice(0, limit)
+    .map((q) => ({
+      ticker: q.ticker,
+      nameAr: q.nameAr || q.name || "",
+      price: q.price,
+      changePercent: q.changePercent ?? null,
+      currency: q.currency || "EGP",
+    }));
+  if (peers.length) return peers;
+  return (results || [])
+    .filter((q) => q.ticker !== quote.ticker)
+    .slice(0, limit)
+    .map((q) => ({
+      ticker: q.ticker,
+      nameAr: q.nameAr || q.name || "",
+      price: q.price,
+      changePercent: q.changePercent ?? null,
+      currency: q.currency || "EGP",
+    }));
+}
+
+function normalizePlan(raw) {
+  const horizonMap = {
+    scalp: "scalp",
+    session: "scalp",
+    مضاربة: "scalp",
+    week: "week",
+    أسبوع: "week",
+    month: "month",
+    شهر: "month",
+    long: "long",
+    long_term: "long",
+    طويل: "long",
+  };
+  const horizon =
+    HORIZONS.includes(raw?.horizon)
+      ? raw.horizon
+      : horizonMap[String(raw?.horizon || raw?.type || "").toLowerCase()];
+  if (!horizon) return null;
+  const action = ["buy", "sell", "hold"].includes(raw?.action) ? raw.action : "hold";
+  return {
+    horizon,
+    action,
+    buy: roundPx(raw?.buy ?? raw?.entry),
+    sell: roundPx(raw?.sell ?? raw?.target ?? raw?.target1),
+    sell2: roundPx(raw?.sell2 ?? raw?.target2),
+    stop: roundPx(raw?.stop ?? raw?.stopLoss),
+    note: String(raw?.note || "").slice(0, 120),
+  };
+}
+
+/** Prefer AI plans only — no merge with our scoring engine. */
+function plansFromAi(parsedPlans) {
+  const byH = new Map();
   if (Array.isArray(parsedPlans)) {
     for (const raw of parsedPlans) {
-      const horizon = HORIZONS.includes(raw?.horizon)
-        ? raw.horizon
-        : { scalp: "scalp", session: "scalp", مضاربة: "scalp", week: "week", أسبوع: "week", month: "month", شهر: "month", long: "long", "long_term": "long", طويل: "long" }[
-            String(raw?.horizon || raw?.type || "").toLowerCase()
-          ];
-      if (!horizon) continue;
-      const merged = normalizePlan({ ...raw, horizon }, byH.get(horizon));
-      if (merged) byH.set(horizon, merged);
+      const plan = normalizePlan(raw);
+      if (plan) byH.set(plan.horizon, plan);
     }
   }
   return HORIZONS.map((h) => byH.get(h)).filter(Boolean);
@@ -341,154 +356,123 @@ function mergeHorizonPlans(parsedPlans, analysis) {
 
 async function buildScalpSuggestion(quote, lang) {
   const market = await loadMarket();
-  const universe = analyzeUniverse(market.results);
-  const analysis =
-    universe.find((a) => a.ticker === quote.ticker) || analyzeQuote(quote);
   const langLabel = lang === "en" ? "English" : "Arabic";
-  const local = analysis?.scalp || {};
-  const draft = {
-    action: local.eligible ? "buy" : analysis?.actionHint === "sell" ? "sell" : "hold",
-    confidence: local.score ?? analysis?.score ?? 40,
-    buy: local.buy ?? analysis?.price,
-    sell: local.sell,
-    stop: local.stop,
-    reasons: local.reasons || analysis?.reasons || [],
-  };
+  const raw = rawQuoteForAi(quote, { candleLimit: 60 });
+  const peers = rawPeersForAi(market.results, quote, 8);
+  const tape = marketTapeForAi(market.results);
 
-  const prompt = `You are a cautious EGX same-session SCALP analyst.
-Do NOT modify files. Reply JSON only. Educational only.
+  const prompt = `You are an independent EGX same-session SCALP analyst.
+Do NOT modify files. Do NOT call createPlan. Reply with a single JSON object only (no narration).
 
-Focus ONLY on same-session scalp (not long-term). Weigh volume, ATR%, RSI, near S/R, false-break risk, liquidity, sector context.
+You receive RAW session data (OHLCV candles + peers + market tape). Analyze with YOUR methods.
+Do not assume any precomputed score from us.
 
-Snapshot:
-${JSON.stringify(
-    {
-      ticker: analysis?.ticker,
-      price: analysis?.price,
-      company: analysis?.company,
-      market: analysis?.market,
-      indicators: analysis?.indicators,
-      signals: analysis?.signals,
-      considerations: analysis?.considerations,
-      scalp: analysis?.scalp,
-      score: analysis?.score,
-    },
-    null,
-    2
-  )}
+${SUGGEST_OUTPUT_CRITERIA}
 
-Local draft levels:
-${JSON.stringify(draft)}
+Focus LEVELS and action on SAME-SESSION scalp, but still fill EVERY considerations key.
+
+Raw stock:
+${JSON.stringify(raw, null, 2)}
+
+Raw sector/market peers (prices only):
+${JSON.stringify(peers)}
+
+Market tape (raw breadth — no scores):
+${JSON.stringify(tape)}
+
+Market scrapedAt: ${market.scrapedAt || "n/a"} · range: ${market.range || "n/a"}
 
 Return ONLY JSON:
 {
   "action": "buy"|"sell"|"hold",
   "confidence": 0-100,
-  "summary": "1-2 sentences in ${langLabel}",
+  "summary": "1-2 honest sentences in ${langLabel}",
   "buy": number,
   "sell": number,
   "stop": number,
-  "reasons": ["in ${langLabel}", "... max 4"]
-}
-buy/sell/stop must be logical vs price, ATR and S/R. Prefer hold if thin volume or mid resistance with overbought RSI.`;
-
-  const fallback = {
-    action: draft.action,
-    confidence: draft.confidence,
-    summary:
-      lang === "en"
-        ? "Session scalp levels from local multi-factor scan."
-        : "مستويات مضاربة الجلسة من الفحص المحلي متعدد العوامل.",
-    buy: roundPx(draft.buy),
-    sell: roundPx(draft.sell),
-    stop: roundPx(draft.stop),
-    reasons: (draft.reasons || []).slice(0, 4),
-    analysis,
-  };
+  "reasons": ["in ${langLabel}", "... up to 10 — each tied to a consideration"],
+  "considerations": {
+    "trend": "in ${langLabel}",
+    "momentum": "...",
+    "volumeLiquidity": "...",
+    "volatility": "...",
+    "supportResistance": "...",
+    "candleStructure": "...",
+    "gaps": "...",
+    "breakoutFakeout": "...",
+    "consolidation": "...",
+    "relativeStrength": "...",
+    "sectorPeers": "...",
+    "currencyListing": "...",
+    "riskReward": "...",
+    "divergences": "...",
+    "horizonFit": "scalp-session focus in ${langLabel}",
+    "dataLimits": "..."
+  },
+  "signals": ["label", "..."]
+}`;
 
   try {
     const text = await runAgent(prompt);
     const parsed = extractJson(text);
     if (!parsed || !["buy", "sell", "hold"].includes(parsed.action)) {
-      return { ...fallback, summary: text.trim() || fallback.summary };
+      throw Object.assign(new Error("AI scalp reply was not valid JSON with action buy|sell|hold"), {
+        status: 502,
+      });
     }
-    let action = parsed.action;
-    let confidence = Math.max(0, Math.min(100, Number(parsed.confidence) || draft.confidence));
-    if (action === "buy" && (analysis?.considerations?.liquidity === "thin" || analysis?.market?.liquidityTier === "low")) {
-      action = "hold";
-      confidence = Math.min(confidence, 50);
-    }
-    if (
-      action === "buy" &&
-      analysis?.considerations?.rsiZone === "overbought" &&
-      analysis?.considerations?.location === "near_resistance" &&
-      !analysis?.signals?.includes("breakout_volume")
-    ) {
-      action = "hold";
-      confidence = Math.min(confidence, 48);
-    }
+    const safe = sanitizeSuggestion(parsed);
     return {
-      action,
-      confidence,
-      summary: String(parsed.summary || "").slice(0, 320) || fallback.summary,
-      buy: roundPx(parsed.buy ?? draft.buy),
-      sell: roundPx(parsed.sell ?? draft.sell),
-      stop: roundPx(parsed.stop ?? draft.stop),
+      action: safe.action,
+      confidence: safe.confidence,
+      summary: String(parsed.summary || "").slice(0, 320),
+      buy: roundPx(parsed.buy),
+      sell: roundPx(parsed.sell),
+      stop: roundPx(parsed.stop),
       reasons: Array.isArray(parsed.reasons)
-        ? parsed.reasons.map((r) => String(r).slice(0, 160)).slice(0, 4)
-        : fallback.reasons,
-      analysis,
+        ? parsed.reasons.map((r) => String(r).slice(0, 180)).slice(0, 10)
+        : [],
+      considerations: sanitizeConsiderations(parsed.considerations, lang),
+      signals: Array.isArray(parsed.signals) ? parsed.signals.map(String).slice(0, 12) : [],
+      source: "agent",
     };
   } catch (err) {
     console.error("[suggest-scalp]", err.message);
-    return fallback;
+    throw err.status ? err : Object.assign(err, { status: 502 });
   }
 }
 
 async function buildSuggestion(quote, lang) {
   const market = await loadMarket();
-  const universe = analyzeUniverse(market.results);
-  const analysis =
-    universe.find((a) => a.ticker === quote.ticker) || analyzeQuote(quote);
   const langLabel = lang === "en" ? "English" : "Arabic";
-  const localPlans = buildHorizonPlans(analysis);
-  const peers = universe
-    .filter((a) => a.company?.sectorId && a.company.sectorId === analysis?.company?.sectorId)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 5)
-    .map((a) => compactForAi([a], 1)[0]);
+  const raw = rawQuoteForAi(quote, { candleLimit: 90 });
+  const peers = rawPeersForAi(market.results, quote, 8);
+  const tape = marketTapeForAi(market.results);
 
-  const prompt = `You are a cautious, LOGICAL multi-factor EGX analyst.
-Do NOT modify any files. Reply with JSON only.
-Decisions must be coherent with the full snapshot (technical + company surroundings).
+  const prompt = `You are an independent multi-factor EGX analyst.
+Do NOT modify any files. Do NOT call createPlan. Reply with a single JSON object only (no narration).
 
-${DECISION_CHECKLIST}
+You receive RAW market data only (quotes + daily OHLCV + peer tape). Analyze with YOUR own methods.
+We are NOT sending our internal scoring formula, signals, or action hints.
 
-Also produce a plans table for FOUR horizons with buy & sell prices:
-- scalp: same-session speculation
-- week: ~1 week swing
-- month: ~1 month
-- long: longer-term investment style
-Prices must be logical vs ATR, support/resistance, and current price.
-If a horizon is not attractive, set action to "hold" but still give watch levels (buy/sell).
+${SUGGEST_OUTPUT_CRITERIA}
 
-Stock snapshot:
-${JSON.stringify(analysis || { ticker: quote.ticker, price: quote.price }, null, 2)}
+Raw stock:
+${JSON.stringify(raw, null, 2)}
 
-Local draft plans (you may refine, keep all 4 horizons):
-${JSON.stringify(localPlans)}
-
-Sector peers (context):
+Raw peers (no scores — prices/moves only):
 ${JSON.stringify(peers)}
 
-Market median change: ${analysis?.market?.marketMedianChg ?? "n/a"}
+Market tape (raw breadth — no scores):
+${JSON.stringify(tape)}
+
+Market scrapedAt: ${market.scrapedAt || "n/a"} · range: ${market.range || "n/a"}
 
 Respond ONLY with valid JSON:
 {
   "action": "buy" | "sell" | "hold",
   "confidence": 0-100,
-  "summary": "1-2 sentences in ${langLabel} combining technical AND company/sector context",
-  "reasons": ["${langLabel} factor", "... up to 6"],
+  "summary": "2-3 honest sentences in ${langLabel} that weave the main considerations",
+  "reasons": ["in ${langLabel}", "... up to 12 — cover distinct factors"],
   "entry": number,
   "stopLoss": number,
   "target1": number,
@@ -499,52 +483,57 @@ Respond ONLY with valid JSON:
     {"horizon":"month","action":"buy|sell|hold","buy":0,"sell":0,"sell2":0,"stop":0,"note":"..."},
     {"horizon":"long","action":"buy|sell|hold","buy":0,"sell":0,"stop":0,"note":"..."}
   ],
-  "signals": ["trend","volume","rsi","macd","sector","liquidity","risk",...]
+  "considerations": {
+    "trend": "in ${langLabel}",
+    "momentum": "...",
+    "volumeLiquidity": "...",
+    "volatility": "...",
+    "supportResistance": "...",
+    "candleStructure": "...",
+    "gaps": "...",
+    "breakoutFakeout": "...",
+    "consolidation": "...",
+    "relativeStrength": "...",
+    "sectorPeers": "...",
+    "currencyListing": "...",
+    "riskReward": "...",
+    "divergences": "...",
+    "horizonFit": "...",
+    "dataLimits": "..."
+  },
+  "signals": ["your labels", "..."]
 }`;
-
-  const fallback = {
-    action: analysis?.actionHint || "hold",
-    confidence: analysis?.score ?? 40,
-    summary: lang === "en" ? "Multi-horizon levels from local analysis." : "مستويات متعددة الآفاق من التحليل المحلي.",
-    reasons: analysis?.reasons || [],
-    entry: analysis?.trade?.entry ?? null,
-    stopLoss: analysis?.trade?.stopLoss ?? null,
-    target1: analysis?.trade?.target1 ?? null,
-    target2: analysis?.trade?.target2 ?? null,
-    signals: analysis?.signals || [],
-    plans: localPlans,
-    analysis,
-  };
 
   try {
     const text = await runAgent(prompt);
     const parsed = extractJson(text);
     if (!parsed || !["buy", "sell", "hold"].includes(parsed.action)) {
-      return { ...fallback, summary: text.trim() || fallback.summary };
+      throw Object.assign(new Error("AI suggestion reply was not valid JSON with action buy|sell|hold"), {
+        status: 502,
+      });
     }
 
-    const safe = reconcileSuggestion(parsed, analysis);
-    const plans = mergeHorizonPlans(parsed.plans, analysis);
+    const safe = sanitizeSuggestion(parsed);
+    const plans = plansFromAi(parsed.plans);
     return {
       action: safe.action,
       confidence: safe.confidence,
-      summary: String(safe.summary || parsed.summary || "").slice(0, 420),
-      reasons: Array.isArray(safe.reasons || parsed.reasons)
-        ? (safe.reasons || parsed.reasons).map((r) => String(r).slice(0, 180)).slice(0, 6)
-        : analysis?.reasons || [],
-      entry: safe.entry ?? parsed.entry ?? analysis?.trade?.entry ?? null,
-      stopLoss: safe.stopLoss ?? parsed.stopLoss ?? analysis?.trade?.stopLoss ?? null,
-      target1: safe.target1 ?? parsed.target1 ?? analysis?.trade?.target1 ?? null,
-      target2: safe.target2 ?? parsed.target2 ?? analysis?.trade?.target2 ?? null,
+      summary: String(parsed.summary || "").slice(0, 520),
+      reasons: Array.isArray(parsed.reasons)
+        ? parsed.reasons.map((r) => String(r).slice(0, 200)).slice(0, 12)
+        : [],
+      entry: roundPx(parsed.entry),
+      stopLoss: roundPx(parsed.stopLoss),
+      target1: roundPx(parsed.target1),
+      target2: roundPx(parsed.target2),
       plans,
-      signals: Array.isArray(parsed.signals)
-        ? parsed.signals.map(String).slice(0, 10)
-        : analysis?.signals || [],
-      analysis,
+      considerations: sanitizeConsiderations(parsed.considerations, lang),
+      signals: Array.isArray(parsed.signals) ? parsed.signals.map(String).slice(0, 12) : [],
+      source: "agent",
     };
   } catch (err) {
     console.error("[suggest]", err.message);
-    return fallback;
+    throw err.status ? err : Object.assign(err, { status: 502 });
   }
 }
 
@@ -918,4 +907,13 @@ const server = http.createServer(async (req, res) => {
 server.listen(PORT, () => {
   console.log(`EGX API listening on http://localhost:${PORT}`);
   console.log(`CURSOR_API_KEY ${process.env.CURSOR_API_KEY?.trim() ? "loaded" : "MISSING"}`);
+});
+
+server.on("error", (err) => {
+  if (err.code === "EADDRINUSE") {
+    console.error(`[api] port ${PORT} already in use — stop the other process or run: lsof -ti:${PORT} | xargs kill -9`);
+    process.exit(1);
+  }
+  console.error("[api]", err);
+  process.exit(1);
 });

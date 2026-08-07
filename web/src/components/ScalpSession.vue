@@ -187,6 +187,18 @@ onMounted(load);
             <ul v-if="aiByTicker[item.ticker].reasons?.length" class="scalp-ai-reasons">
               <li v-for="(reason, i) in aiByTicker[item.ticker].reasons" :key="i">{{ reason }}</li>
             </ul>
+            <dl
+              v-if="aiByTicker[item.ticker].considerations"
+              class="considerations-grid scalp-considerations"
+            >
+              <div
+                v-for="(text, key) in aiByTicker[item.ticker].considerations"
+                :key="key"
+              >
+                <dt>{{ t.aiConsideration[key] || key }}</dt>
+                <dd>{{ text }}</dd>
+              </div>
+            </dl>
           </div>
         </div>
       </article>
