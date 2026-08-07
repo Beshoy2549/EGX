@@ -13,6 +13,10 @@ const router = useRouter();
 const { lang, t, locale } = useI18n();
 const { payload, loading, error, findByTicker } = useMarketData();
 
+const analysis = ref(null);
+const analysisError = ref(null);
+const analysisLoading = ref(false);
+
 const suggesting = ref(false);
 const suggestError = ref(null);
 const suggestion = ref(null);
@@ -28,19 +32,60 @@ const name = computed(() => {
 
 const up = computed(() => (quote.value?.changePercent ?? 0) >= 0);
 
-const actionLabel = computed(() => {
-  const action = suggestion.value?.action;
-  if (!action) return "";
-  return t.value.aiAction[action] || action;
+const ind = computed(() => analysis.value?.indicators || null);
+const trade = computed(() => analysis.value?.trade || null);
+
+const scoreAction = computed(() => {
+  const score = analysis.value?.score;
+  if (score == null) return "hold";
+  if (score >= 60) return "buy";
+  if (score <= 35) return "sell";
+  return "hold";
+});
+
+const scoreActionLabel = computed(() => t.value.aiAction[scoreAction.value] || scoreAction.value);
+
+const trendLabel = computed(() => {
+  const trend = ind.value?.trend;
+  if (!trend) return "—";
+  return t.value.trend[trend] || trend;
+});
+
+const signalLabels = computed(() => {
+  const map = t.value.signal || {};
+  return (analysis.value?.signals || []).map((s) => map[s] || s);
 });
 
 watch(
-  () => props.ticker,
+  () => [props.ticker, quote.value?.ticker, payload.value.scrapedAt],
   () => {
     suggestion.value = null;
     suggestError.value = null;
-  }
+    loadAnalysis();
+  },
+  { immediate: true }
 );
+
+async function loadAnalysis() {
+  const ticker = quote.value?.ticker || props.ticker;
+  if (!ticker) {
+    analysis.value = null;
+    return;
+  }
+  analysisLoading.value = true;
+  analysisError.value = null;
+  try {
+    const res = await fetch(`/api/analyze?ticker=${encodeURIComponent(ticker)}`);
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    analysis.value = data.analysis;
+  } catch (err) {
+    analysisError.value = err.message;
+    analysis.value = null;
+  } finally {
+    analysisLoading.value = false;
+  }
+}
 
 function fmt(n, d = 2) {
   if (n == null || Number.isNaN(Number(n))) return "—";
@@ -72,6 +117,7 @@ async function askAi() {
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
     suggestion.value = data.suggestion;
+    if (data.suggestion?.analysis) analysis.value = data.suggestion.analysis;
   } catch (err) {
     suggestError.value = err.message;
     suggestion.value = null;
@@ -126,6 +172,107 @@ async function askAi() {
         </div>
       </section>
 
+      <section class="analysis-panel" :class="scoreAction">
+        <div class="analysis-head">
+          <div>
+            <h2>{{ t.analysisTitle }}</h2>
+            <p>{{ t.analysisLede }}</p>
+          </div>
+          <div class="score-box" v-if="analysis">
+            <span class="score-num">{{ analysis.score }}/100</span>
+            <span class="badge">{{ scoreActionLabel }}</span>
+          </div>
+        </div>
+
+        <p v-if="analysisLoading" class="ai-status">{{ t.loading }}</p>
+        <p v-else-if="analysisError" class="ai-error">{{ t.aiError }}: {{ analysisError }}</p>
+
+        <template v-else-if="analysis">
+          <dl class="pick-levels detail-levels analysis-trade">
+            <div>
+              <dt>{{ t.aiEntry }}</dt>
+              <dd>{{ fmt(trade?.entry) }}</dd>
+            </div>
+            <div>
+              <dt>{{ t.aiStop }}</dt>
+              <dd>{{ fmt(trade?.stopLoss) }}</dd>
+            </div>
+            <div>
+              <dt>{{ t.aiT1 }}</dt>
+              <dd>{{ fmt(trade?.target1) }}</dd>
+            </div>
+            <div>
+              <dt>{{ t.aiT2 }}</dt>
+              <dd>{{ fmt(trade?.target2) }}</dd>
+            </div>
+          </dl>
+
+          <dl class="indicator-grid">
+            <div>
+              <dt>{{ t.indTrend }}</dt>
+              <dd>{{ trendLabel }}</dd>
+            </div>
+            <div>
+              <dt>RSI</dt>
+              <dd>{{ fmt(ind?.rsi, 1) }}</dd>
+            </div>
+            <div>
+              <dt>MACD</dt>
+              <dd>{{ fmt(ind?.macd, 4) }}</dd>
+            </div>
+            <div>
+              <dt>{{ t.indMacdSignal }}</dt>
+              <dd>{{ fmt(ind?.macdSignal, 4) }}</dd>
+            </div>
+            <div>
+              <dt>{{ t.indMacdHist }}</dt>
+              <dd>{{ fmt(ind?.macdHist, 4) }}</dd>
+            </div>
+            <div>
+              <dt>EMA 20</dt>
+              <dd>{{ fmt(ind?.ema20) }}</dd>
+            </div>
+            <div>
+              <dt>EMA 50</dt>
+              <dd>{{ fmt(ind?.ema50) }}</dd>
+            </div>
+            <div>
+              <dt>{{ t.indVolume }}</dt>
+              <dd>{{ ind?.volumeRatio != null ? `${fmt(ind.volumeRatio, 1)}×` : "—" }}</dd>
+            </div>
+            <div>
+              <dt>{{ t.indSupport }}</dt>
+              <dd>{{ fmt(ind?.support) }}</dd>
+            </div>
+            <div>
+              <dt>{{ t.indResistance }}</dt>
+              <dd>{{ fmt(ind?.resistance) }}</dd>
+            </div>
+            <div>
+              <dt>ATR</dt>
+              <dd>{{ fmt(ind?.atr) }}</dd>
+            </div>
+            <div>
+              <dt>{{ t.aiConfidence }}</dt>
+              <dd>{{ analysis.score }}/100</dd>
+            </div>
+          </dl>
+
+          <div v-if="signalLabels.length" class="signal-row">
+            <span v-for="(label, i) in signalLabels" :key="i" class="signal-chip">{{ label }}</span>
+          </div>
+
+          <div class="reasons-block">
+            <h3>{{ t.indReasons }}</h3>
+            <ul>
+              <li v-for="(reason, i) in analysis.reasons" :key="i">{{ reason }}</li>
+            </ul>
+          </div>
+
+          <p class="ai-disclaimer">{{ t.aiDisclaimer }}</p>
+        </template>
+      </section>
+
       <section class="ai-panel">
         <div class="ai-head">
           <div>
@@ -150,10 +297,16 @@ async function askAi() {
           :class="suggestion.action"
         >
           <div class="ai-action">
-            <span class="badge">{{ actionLabel }}</span>
-            <span class="confidence">{{ t.aiConfidence }}: {{ suggestion.confidence }}%</span>
+            <span class="badge">{{ t.aiAction[suggestion.action] || suggestion.action }}</span>
+            <span class="confidence">{{ t.aiConfidence }}: {{ suggestion.confidence }}/100</span>
           </div>
           <p class="ai-summary">{{ suggestion.summary }}</p>
+          <dl v-if="suggestion.entry != null" class="pick-levels detail-levels">
+            <div><dt>{{ t.aiEntry }}</dt><dd>{{ fmt(suggestion.entry) }}</dd></div>
+            <div><dt>{{ t.aiStop }}</dt><dd>{{ fmt(suggestion.stopLoss) }}</dd></div>
+            <div><dt>{{ t.aiT1 }}</dt><dd>{{ fmt(suggestion.target1) }}</dd></div>
+            <div><dt>{{ t.aiT2 }}</dt><dd>{{ fmt(suggestion.target2) }}</dd></div>
+          </dl>
           <ul v-if="suggestion.reasons?.length">
             <li v-for="(reason, i) in suggestion.reasons" :key="i">{{ reason }}</li>
           </ul>

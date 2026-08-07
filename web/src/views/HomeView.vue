@@ -1,4 +1,6 @@
 <script setup>
+import AiAssistant from "../components/AiAssistant.vue";
+import ScalpSession from "../components/ScalpSession.vue";
 import StockCard from "../components/StockCard.vue";
 import { useI18n } from "../composables/useI18n.js";
 import { useMarketData } from "../composables/useMarketData.js";
@@ -23,6 +25,10 @@ function fmtDateTime(iso) {
         {{ t.failed }}: {{ payload.errors.length }}
       </span>
     </div>
+
+    <ScalpSession :locale="locale" :scraped-at="payload.scrapedAt" />
+
+    <AiAssistant :locale="locale" />
 
     <p v-if="loading" class="empty">{{ t.loading }}</p>
     <p v-else-if="error" class="empty">{{ t.loadError }}: {{ error }}</p>
