@@ -168,7 +168,21 @@ function normalizePick(p, fallbackConfidence = 50) {
 const SUGGEST_OUTPUT_CRITERIA = `Analyze the RAW market data yourself (your own methods).
 We do NOT provide a precomputed score or our internal formula — do not invent that we did.
 
-You MUST weigh ALL of these considerations (cite numbers from the payload):
+PRIORITY FUNDAMENTAL LENS (must address even when numbers are missing — never invent ratios):
+A. Valuation (highest priority) — is the stock cheap or expensive vs economic value?
+   Address: P/E, PEG, EV/EBITDA, Price/Book; vs sector average; vs the company's own history.
+   If none of these appear in the payload: say so clearly and DO NOT invent PE/PEG/EV/EBITDA/P/B.
+   Effect on stance: a strong chart does NOT justify a buy if valuation would likely be stretched —
+   reduce confidence / prefer hold until valuation data exists.
+B. Earnings quality — not all profits are equal.
+   Separate sustainable operating earnings from one-offs (asset sales, FX gains, revaluations, accounting items).
+   If income-statement detail is absent from the payload: state that and avoid high-confidence buys
+   that assume durable earnings.
+C. Capital allocation — how does management use cash/profits?
+   Expansion / capex, dividends, buybacks, M&A / acquisitions — and what that implies for long-term quality.
+   If cash-flow / dividend / buyback data is absent: say so; still note what you can infer only if present.
+
+You MUST also weigh ALL of these technical/market considerations (cite numbers from the payload):
 1. Trend / structure — multi-bar direction, higher-highs/lows or range, moving-average style reads you choose
 2. Momentum — short vs medium thrust (e.g. 1d / ~5d / longer if candles allow)
 3. Volume & liquidity — vs recent average, dry-ups, climaxes; thin names = lower conviction
@@ -183,23 +197,29 @@ You MUST weigh ALL of these considerations (cite numbers from the payload):
 12. Currency listing — EGP vs USD names; FX-sensitivity caveat when USD-listed
 13. Risk/reward — entry, stop, targets with approximate R:R; reject poor R:R for buy
 14. Divergences — price vs momentum/volume when readable from the series
-15. Horizon fit — what works for same-session scalp vs week vs month vs long (may differ)
-16. Data limits — explicitly name what you CANNOT know from this payload only
-    (earnings/events calendar, order book/spreads, true free-float, fundamentals P/E, live FX series, EGX30 composition)
+15. Horizon fit — what works for same-session scalp vs week vs month vs long (may differ);
+    valuation + earnings quality + capital allocation matter most for month/long; scalp may still note them as context
+16. Data limits — explicitly name gaps (order book, earnings calendar, free float, live FX, EGX30 membership,
+    and any missing fundamentals: P/E, PEG, EV/EBITDA, P/B, sector/historical multiples, income quality, FCF/dividends/buybacks)
 
 Then produce:
 - Stance: buy | sell | hold with honest confidence 0-100
+  (do NOT give high confidence buy when A/B are unknown or clearly adverse)
 - Four horizons with buy & sell (& stop): scalp, week, month, long
 - Fill every key in the required \`considerations\` object (short sentences; use "غير متاح من البيانات" / "n/a from payload" when blocked)
 
 Rules for the OUTPUT only:
-- Be concrete; cite prices, %, volumes, candle highs/lows from the payload
+- Be concrete; cite prices, %, volumes, candle highs/lows — and any fundamental metrics ONLY if present in the payload
+- Never fabricate valuation ratios or earnings-quality claims
 - No fantasy prices far outside recent ranges without justification
 - Educational only — not financial advice
 - Do NOT call createPlan or write files
 - Your entire reply must be ONE JSON object (first char \`{\`, last char \`}\`) — no preamble`;
 
 const CONSIDERATION_KEYS = [
+  "valuation",
+  "earningsQuality",
+  "capitalAllocation",
   "trend",
   "momentum",
   "volumeLiquidity",
@@ -225,7 +245,8 @@ function sanitizeConsiderations(raw, lang) {
   const src = raw && typeof raw === "object" ? raw : {};
   for (const key of CONSIDERATION_KEYS) {
     const v = src[key];
-    out[key] = String(v != null && String(v).trim() ? v : fallback).slice(0, 280);
+    const max = key === "valuation" || key === "earningsQuality" || key === "capitalAllocation" ? 420 : 280;
+    out[key] = String(v != null && String(v).trim() ? v : fallback).slice(0, max);
   }
   return out;
 }
@@ -392,6 +413,9 @@ Return ONLY JSON:
   "stop": number,
   "reasons": ["in ${langLabel}", "... up to 10 — each tied to a consideration"],
   "considerations": {
+    "valuation": "P/E PEG EV/EBITDA P/B vs sector & history — or n/a from payload; in ${langLabel}",
+    "earningsQuality": "operating vs one-off earnings — or n/a; in ${langLabel}",
+    "capitalAllocation": "expand / dividend / buyback / M&A — or n/a; in ${langLabel}",
     "trend": "in ${langLabel}",
     "momentum": "...",
     "volumeLiquidity": "...",
@@ -484,6 +508,9 @@ Respond ONLY with valid JSON:
     {"horizon":"long","action":"buy|sell|hold","buy":0,"sell":0,"stop":0,"note":"..."}
   ],
   "considerations": {
+    "valuation": "P/E PEG EV/EBITDA P/B vs sector & history — or n/a from payload; in ${langLabel}",
+    "earningsQuality": "operating vs one-off earnings — or n/a; in ${langLabel}",
+    "capitalAllocation": "expand / dividend / buyback / M&A — or n/a; in ${langLabel}",
     "trend": "in ${langLabel}",
     "momentum": "...",
     "volumeLiquidity": "...",

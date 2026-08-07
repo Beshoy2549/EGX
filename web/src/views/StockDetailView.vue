@@ -354,6 +354,7 @@ async function askAi() {
               <div
                 v-for="(text, key) in suggestion.considerations"
                 :key="key"
+                :class="{ priority: ['valuation', 'earningsQuality', 'capitalAllocation'].includes(key) }"
               >
                 <dt>{{ t.aiConsideration[key] || key }}</dt>
                 <dd>{{ text }}</dd>

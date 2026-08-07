@@ -21,7 +21,7 @@ const messages = {
     prevClose: "إغلاق سابق",
     aiTitle: "مقترح الذكاء الاصطناعي",
     aiLede:
-      "الـ AI بياخد الأسعار والشموع والقطاع خام، ويمشي على كل الاعتبارات (اتجاه، زخم، سيولة، تذبذب، دعم/مقاومة، شموع، فجوات، قوة نسبية، عملة، مخاطرة…) قبل جدول الشراء/البيع.",
+      "الـ AI بيمشي أولًا على التقييم (P/E, PEG, EV/EBITDA, P/B)، جودة الأرباح، وتوزيع رأس المال — مع كل الاعتبارات الفنية — ولو الرقم مش في البيانات يقول غير متاح ومبيختلقش.",
     aiCta: "اطلب رأي AI",
     aiLoading: "جارِ التحليل…",
     aiError: "فشل المقترح",
@@ -31,6 +31,9 @@ const messages = {
     aiConsiderationsTitle: "كل الاعتبارات",
     aiSignalsTitle: "إشارات لخّصها الـ AI",
     aiConsideration: {
+      valuation: "التقييم (أولوية)",
+      earningsQuality: "جودة الأرباح",
+      capitalAllocation: "توزيع رأس المال",
       trend: "الاتجاه / الهيكل",
       momentum: "الزخم",
       volumeLiquidity: "الحجم والسيولة",
@@ -170,7 +173,7 @@ const messages = {
     prevClose: "Prev close",
     aiTitle: "AI suggestion",
     aiLede:
-      "AI gets raw prices, candles, sector peers and market tape, then walks every consideration (trend, momentum, liquidity, volatility, S/R, candles, gaps, RS, currency, risk…) before the buy/sell table.",
+      "AI prioritizes valuation (P/E, PEG, EV/EBITDA, P/B), earnings quality, and capital allocation — plus full technicals — and says n/a when metrics are not in the payload (no invention).",
     aiCta: "Ask AI opinion",
     aiLoading: "Analyzing…",
     aiError: "Suggestion failed",
@@ -180,6 +183,9 @@ const messages = {
     aiConsiderationsTitle: "All considerations",
     aiSignalsTitle: "AI signal labels",
     aiConsideration: {
+      valuation: "Valuation (priority)",
+      earningsQuality: "Earnings quality",
+      capitalAllocation: "Capital allocation",
       trend: "Trend / structure",
       momentum: "Momentum",
       volumeLiquidity: "Volume & liquidity",

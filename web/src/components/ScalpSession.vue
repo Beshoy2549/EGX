@@ -194,6 +194,7 @@ onMounted(load);
               <div
                 v-for="(text, key) in aiByTicker[item.ticker].considerations"
                 :key="key"
+                :class="{ priority: ['valuation', 'earningsQuality', 'capitalAllocation'].includes(key) }"
               >
                 <dt>{{ t.aiConsideration[key] || key }}</dt>
                 <dd>{{ text }}</dd>
