@@ -6,15 +6,19 @@
   "scripts": {
     "scrape": "node src/scrape.js",
     "watch": "INTERVAL=10 node src/watch.js",
+    "api": "node src/server.js",
     "view": "vite --config web/vite.config.js",
-    "dev": "vite --config web/vite.config.js",
+    "dev": "node scripts/dev-all.js",
     "build": "vite build --config web/vite.config.js"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=22.13"
   },
   "dependencies": {
-    "vue": "^3.5.13"
+    "@cursor/sdk": "^1.0.27",
+    "dotenv": "^17.4.2",
+    "vue": "^3.5.13",
+    "vue-router": "^4.6.4"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.1",

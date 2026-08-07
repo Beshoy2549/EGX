@@ -1,9 +1,10 @@
 import { round4 } from "./utils.js";
 
 export async function fetchQuote(symbol, range) {
-  const { ticker, nameAr, nameEn, name } = symbol;
+  const { ticker, nameAr, nameEn, name, yahoo } = symbol;
+  const fetchTicker = yahoo || ticker;
   const url =
-    `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}` +
+    `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(fetchTicker)}` +
     `?interval=1d&range=${encodeURIComponent(range)}&includePrePost=false`;
 
   const res = await fetch(url, {
@@ -58,7 +59,7 @@ export async function fetchQuote(symbol, range) {
   const resolvedAr = nameAr || resolvedEn;
 
   return {
-    ticker: meta.symbol || ticker,
+    ticker,
     name: resolvedAr,
     nameAr: resolvedAr,
     nameEn: resolvedEn,

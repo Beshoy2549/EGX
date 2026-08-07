@@ -6,3 +6,4 @@ web/public/latest.json
 .DS_Store
 *.log
 .env
+.cursor-agents/

@@ -1,14 +1,14 @@
 <script setup>
 import { computed } from "vue";
+import { useRouter } from "vue-router";
 
 const props = defineProps({
   quote: { type: Object, required: true },
-  active: Boolean,
   lang: { type: String, default: "ar" },
   locale: { type: String, default: "ar-EG" },
 });
 
-defineEmits(["select"]);
+const router = useRouter();
 
 const name = computed(() =>
   props.lang === "ar"
@@ -18,22 +18,23 @@ const name = computed(() =>
 
 const up = computed(() => (props.quote.changePercent ?? 0) >= 0);
 
+const shortTicker = computed(() => props.quote.ticker.replace(/\.CA$/i, ""));
+
 function fmt(n, d = 2) {
   return Number(n).toLocaleString(props.locale, {
     minimumFractionDigits: d,
     maximumFractionDigits: d,
   });
 }
+
+function openDetails() {
+  router.push({ name: "stock", params: { ticker: shortTicker.value } });
+}
 </script>
 
 <template>
-  <button
-    type="button"
-    class="stock"
-    :class="{ active }"
-    @click="$emit('select')"
-  >
-    <div class="sym">{{ quote.ticker.replace(".CA", "") }}</div>
+  <button type="button" class="stock" @click="openDetails">
+    <div class="sym">{{ shortTicker }}</div>
     <div class="name">{{ name }}</div>
     <div class="price">{{ fmt(quote.price) }} {{ quote.currency || "EGP" }}</div>
     <div class="chg" :class="up ? 'up' : 'down'">

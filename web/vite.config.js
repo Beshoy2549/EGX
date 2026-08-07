@@ -13,5 +13,11 @@ export default defineConfig({
     port: 5173,
     open: true,
     fs: { allow: [path.join(root, "..")] },
+    proxy: {
+      "/api": {
+        target: "http://localhost:8787",
+        changeOrigin: true,
+      },
+    },
   },
 });

@@ -3,15 +3,29 @@ import { fetchQuote } from "./lib/yahoo.js";
 import { saveResults } from "./lib/storage.js";
 import { isMain } from "./lib/utils.js";
 
+const BATCH_SIZE = Number(process.env.BATCH_SIZE) || 12;
+
+async function mapSettledInBatches(items, batchSize, fn) {
+  const settled = [];
+  for (let i = 0; i < items.length; i += batchSize) {
+    const batch = items.slice(i, i + batchSize);
+    const part = await Promise.allSettled(batch.map(fn));
+    settled.push(...part);
+  }
+  return settled;
+}
+
 export async function runScrape(options = {}) {
   const cfg = getConfig();
   const watchIntervalSec = options.watchIntervalSec ?? cfg.intervalSec;
   const started = performance.now();
 
-  console.log(`EGX scrape — ${cfg.symbols.length} symbols · range=${cfg.range} · parallel fetch`);
+  console.log(
+    `EGX scrape — ${cfg.symbols.length} symbols · range=${cfg.range} · batch=${BATCH_SIZE}`
+  );
 
-  const settled = await Promise.allSettled(
-    cfg.symbols.map((symbol) => fetchQuote(symbol, cfg.range))
+  const settled = await mapSettledInBatches(cfg.symbols, BATCH_SIZE, (symbol) =>
+    fetchQuote(symbol, cfg.range)
   );
 
   const results = [];
