@@ -2,6 +2,7 @@
 import { computed, watch } from "vue";
 import { useRoute, RouterLink, RouterView } from "vue-router";
 import { useI18n } from "./composables/useI18n.js";
+import AiSettings from "./components/AiSettings.vue";
 
 const { lang, t, setLang } = useI18n();
 const route = useRoute();
@@ -27,22 +28,6 @@ const brandTo = computed(() => ({ name: "home" }));
         <p class="lede">{{ t.lede }}</p>
       </header>
       <div class="top-actions">
-        <nav class="main-nav" aria-label="Main">
-          <RouterLink
-            class="nav-link"
-            :class="{ active: route.name === 'home' }"
-            :to="{ name: 'home' }"
-          >
-            {{ t.navHome }}
-          </RouterLink>
-          <RouterLink
-            class="nav-link"
-            :class="{ active: route.name === 'scalp' }"
-            :to="{ name: 'scalp' }"
-          >
-            {{ t.navScalp }}
-          </RouterLink>
-        </nav>
         <div class="lang-toggle" role="group" aria-label="Language">
           <button type="button" :class="{ active: lang === 'ar' }" @click="setLang('ar')">
             عربي
@@ -51,8 +36,26 @@ const brandTo = computed(() => ({ name: "home" }));
             English
           </button>
         </div>
+        <AiSettings />
       </div>
     </div>
+
+    <nav class="main-nav" aria-label="Main">
+      <RouterLink
+        class="nav-link"
+        :class="{ active: route.name === 'home' }"
+        :to="{ name: 'home' }"
+      >
+        {{ t.navHome }}
+      </RouterLink>
+      <RouterLink
+        class="nav-link"
+        :class="{ active: route.name === 'scalp' }"
+        :to="{ name: 'scalp' }"
+      >
+        {{ t.navScalp }}
+      </RouterLink>
+    </nav>
 
     <RouterView />
   </div>

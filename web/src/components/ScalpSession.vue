@@ -2,12 +2,14 @@
 import { onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "../composables/useI18n.js";
+import { useAiSettings } from "../composables/useAiSettings.js";
 
 const props = defineProps({
   locale: { type: String, default: "ar-EG" },
 });
 
 const { lang, t } = useI18n();
+const { aiHeaders } = useAiSettings();
 const router = useRouter();
 
 const items = ref([]);
@@ -60,7 +62,7 @@ async function askScalpAi(item, e) {
   try {
     const res = await fetch("/api/suggest-scalp", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...aiHeaders() },
       body: JSON.stringify({ ticker, lang: lang.value }),
     });
     const data = await res.json().catch(() => ({}));

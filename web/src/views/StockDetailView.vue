@@ -4,6 +4,7 @@ import { useRouter } from "vue-router";
 import CandleChart from "../components/CandleChart.vue";
 import { useI18n } from "../composables/useI18n.js";
 import { useMarketData } from "../composables/useMarketData.js";
+import { useAiSettings } from "../composables/useAiSettings.js";
 
 const props = defineProps({
   ticker: { type: String, required: true },
@@ -12,6 +13,7 @@ const props = defineProps({
 const router = useRouter();
 const { lang, t, locale } = useI18n();
 const { payload, loading, error, findByTicker } = useMarketData({ poll: false });
+const { aiHeaders } = useAiSettings();
 
 const analysis = ref(null);
 const analysisError = ref(null);
@@ -118,7 +120,7 @@ async function askAi() {
   try {
     const res = await fetch("/api/suggest", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", ...aiHeaders() },
       body: JSON.stringify({ ticker: quote.value.ticker, lang: lang.value }),
     });
     const data = await res.json().catch(() => ({}));
@@ -181,8 +183,12 @@ async function askAi() {
       <section class="analysis-panel" :class="scoreAction">
         <div class="analysis-head">
           <div>
-            <h2>{{ t.analysisTitle }}</h2>
+            <h2>
+              {{ t.analysisTitle }}
+              <span class="calc-badge">{{ t.analysisCalcBadge }}</span>
+            </h2>
             <p>{{ t.analysisLede }}</p>
+            <p class="calc-note">{{ t.analysisCalcNote }}</p>
           </div>
           <div class="score-box" v-if="analysis">
             <span class="score-num">{{ analysis.score }}/100</span>

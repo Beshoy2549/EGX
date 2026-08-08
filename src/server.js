@@ -27,7 +27,7 @@ function sendJson(res, status, body) {
     "Content-Type": "application/json; charset=utf-8",
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-    "Access-Control-Allow-Headers": "Content-Type",
+    "Access-Control-Allow-Headers": "Content-Type, x-ai-provider, x-ai-key, x-ai-model",
   });
   res.end(payload);
 }
@@ -57,12 +57,29 @@ function normalizeTicker(raw) {
   return t ? `${t}.CA` : "";
 }
 
-function requireApiKey() {
-  const apiKey = process.env.CURSOR_API_KEY?.trim();
-  if (!apiKey) {
-    throw Object.assign(new Error("CURSOR_API_KEY is missing in .env"), { status: 500 });
-  }
-  return apiKey;
+/** Normalize a provider string to one of the supported ids. */
+function normalizeProvider(raw) {
+  const p = String(raw || process.env.AI_PROVIDER || "cursor")
+    .trim()
+    .toLowerCase();
+  if (p === "openai" || p === "chatgpt" || p === "gpt") return "openai";
+  return "cursor";
+}
+
+/**
+ * Extract the AI provider config from a request. The frontend sends the
+ * user-configured provider/key/model via headers (preferred) or JSON body,
+ * so the key never has to live in the server .env.
+ */
+function aiConfigFromReq(req, body = {}) {
+  const provider = req.headers["x-ai-provider"] || body.provider;
+  const apiKey = req.headers["x-ai-key"] || body.apiKey;
+  const model = req.headers["x-ai-model"] || body.model;
+  return {
+    provider: provider ? String(provider) : undefined,
+    apiKey: apiKey ? String(apiKey) : undefined,
+    model: model ? String(model) : undefined,
+  };
 }
 
 async function loadMarket() {
@@ -102,12 +119,82 @@ function extractJson(text) {
   }
 }
 
+/**
+ * Provider dispatch. Runs the prompt through the user-selected AI provider:
+ *  - "cursor" (default) → Cursor Agent SDK (composer models)
+ *  - "openai"           → ChatGPT via the OpenAI Chat Completions API
+ * Returns the raw text reply (expected to contain a single JSON object).
+ */
+async function runAgent(prompt, ai = {}) {
+  const provider = normalizeProvider(ai.provider);
+  if (provider === "openai") return runOpenAiChat(prompt, ai);
+  return runCursorAgent(prompt, ai);
+}
+
+/** OpenAI ChatGPT completion — asks for a single JSON object back. */
+async function runOpenAiChat(prompt, ai = {}) {
+  const apiKey = ai.apiKey?.trim() || process.env.OPENAI_API_KEY?.trim();
+  if (!apiKey) {
+    throw Object.assign(new Error("OpenAI API key is missing (set it in Settings)"), {
+      status: 400,
+    });
+  }
+  const model = ai.model?.trim() || process.env.OPENAI_MODEL?.trim() || "gpt-4o-mini";
+
+  let res;
+  try {
+    res = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model,
+        temperature: 0.3,
+        response_format: { type: "json_object" },
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are a rigorous Egyptian Exchange (EGX) market analyst. Follow the user's instructions exactly and reply with a SINGLE JSON object only — no markdown, no code fences, no preamble.",
+          },
+          { role: "user", content: prompt },
+        ],
+      }),
+    });
+  } catch (err) {
+    throw Object.assign(new Error(`OpenAI request failed: ${err.message}`), { status: 502 });
+  }
+
+  if (!res.ok) {
+    const detail = await res.text().catch(() => "");
+    if (res.status === 401) {
+      throw Object.assign(new Error("OpenAI rejected the API key (401). Check the key in Settings."), {
+        status: 400,
+      });
+    }
+    throw Object.assign(new Error(`OpenAI HTTP ${res.status}: ${detail.slice(0, 200)}`), {
+      status: 502,
+    });
+  }
+
+  const data = await res.json().catch(() => ({}));
+  return data.choices?.[0]?.message?.content || "";
+}
+
 /** Collect assistant text + any createPlan body (plan mode often parks JSON only in the plan). */
-async function runAgent(prompt) {
-  const apiKey = requireApiKey();
+async function runCursorAgent(prompt, ai = {}) {
+  const apiKey = ai.apiKey?.trim() || process.env.CURSOR_API_KEY?.trim();
+  if (!apiKey) {
+    throw Object.assign(
+      new Error("Cursor API key is missing (set it in Settings or the server .env)"),
+      { status: 400 }
+    );
+  }
   await using agent = await Agent.create({
     apiKey,
-    model: { id: "composer-2.5" },
+    model: { id: ai.model?.trim() || "composer-2.5" },
     local: { cwd: ROOT, store: agentStore },
   });
 
@@ -215,6 +302,15 @@ Rules for the OUTPUT only:
 - Educational only — not financial advice
 - Do NOT call createPlan or write files
 - Your entire reply must be ONE JSON object (first char \`{\`, last char \`}\`) — no preamble`;
+
+/** Compact decision guide for the free-form Q&A agent path. */
+const DECISION_CHECKLIST = `Decision checklist (weigh together — never rely on one signal alone):
+- Combine technicals (trend, EMAs, RSI, MACD, volume, support/resistance, ATR/volatility, R:R)
+  with company/sector context (liquidity tier, relative strength vs market, peers, listing currency).
+- Prefer HOLD when signals conflict, liquidity is thin, or key data is missing — say so honestly.
+- Never invent fundamentals (P/E, PEG, EV/EBITDA, P/B) that are absent from the payload.
+- Every pick must be logical, cite concrete numbers, and stay within realistic recent ranges.
+- Educational only — not financial advice.`;
 
 const CONSIDERATION_KEYS = [
   "valuation",
@@ -375,7 +471,7 @@ function plansFromAi(parsedPlans) {
   return HORIZONS.map((h) => byH.get(h)).filter(Boolean);
 }
 
-async function buildScalpSuggestion(quote, lang) {
+async function buildScalpSuggestion(quote, lang, ai = {}) {
   const market = await loadMarket();
   const langLabel = lang === "en" ? "English" : "Arabic";
   const raw = rawQuoteForAi(quote, { candleLimit: 60 });
@@ -437,7 +533,7 @@ Return ONLY JSON:
 }`;
 
   try {
-    const text = await runAgent(prompt);
+    const text = await runAgent(prompt, ai);
     const parsed = extractJson(text);
     if (!parsed || !["buy", "sell", "hold"].includes(parsed.action)) {
       throw Object.assign(new Error("AI scalp reply was not valid JSON with action buy|sell|hold"), {
@@ -465,7 +561,7 @@ Return ONLY JSON:
   }
 }
 
-async function buildSuggestion(quote, lang) {
+async function buildSuggestion(quote, lang, ai = {}) {
   const market = await loadMarket();
   const langLabel = lang === "en" ? "English" : "Arabic";
   const raw = rawQuoteForAi(quote, { candleLimit: 90 });
@@ -532,7 +628,7 @@ Respond ONLY with valid JSON:
 }`;
 
   try {
-    const text = await runAgent(prompt);
+    const text = await runAgent(prompt, ai);
     const parsed = extractJson(text);
     if (!parsed || !["buy", "sell", "hold"].includes(parsed.action)) {
       throw Object.assign(new Error("AI suggestion reply was not valid JSON with action buy|sell|hold"), {
@@ -688,7 +784,7 @@ function localAnswerFromScan(question, lang, analyses, screens) {
   return null;
 }
 
-async function answerQuestion(question, lang) {
+async function answerQuestion(question, lang, ai = {}) {
   const market = await loadMarket();
   const analyses = analyzeUniverse(market.results);
   const langLabel = lang === "en" ? "English" : "Arabic";
@@ -749,7 +845,7 @@ Return ONLY JSON:
 picks max 8, from data only. Lower confidence when considerations.conflict or thin liquidity.`;
 
   try {
-    const text = await runAgent(prompt);
+    const text = await runAgent(prompt, ai);
     const parsed = extractJson(text);
     const picks = Array.isArray(parsed?.picks)
       ? parsed.picks.map((p) => normalizePick(p)).filter(Boolean).slice(0, 10)
@@ -850,6 +946,11 @@ const server = http.createServer(async (req, res) => {
       return sendJson(res, 200, {
         ok: true,
         hasKey: Boolean(process.env.CURSOR_API_KEY?.trim()),
+        providers: {
+          cursor: { serverKey: Boolean(process.env.CURSOR_API_KEY?.trim()) },
+          openai: { serverKey: Boolean(process.env.OPENAI_API_KEY?.trim()) },
+        },
+        defaultProvider: normalizeProvider(),
       });
     }
 
@@ -892,7 +993,8 @@ const server = http.createServer(async (req, res) => {
       if (!question) return sendJson(res, 400, { error: "question is required" });
       if (question.length > 800) return sendJson(res, 400, { error: "question too long" });
       const lang = body.lang === "en" ? "en" : "ar";
-      const result = await answerQuestion(question, lang);
+      const ai = aiConfigFromReq(req, body);
+      const result = await answerQuestion(question, lang, ai);
       return sendJson(res, 200, result);
     }
 
@@ -904,7 +1006,8 @@ const server = http.createServer(async (req, res) => {
       const market = await loadMarket();
       const quote = findQuote(market.results, ticker);
       if (!quote) return sendJson(res, 404, { error: `Stock not found: ${ticker}` });
-      const suggestion = await buildSuggestion(quote, lang);
+      const ai = aiConfigFromReq(req, body);
+      const suggestion = await buildSuggestion(quote, lang, ai);
       return sendJson(res, 200, { ticker: quote.ticker, suggestion });
     }
 
@@ -916,7 +1019,8 @@ const server = http.createServer(async (req, res) => {
       const market = await loadMarket();
       const quote = findQuote(market.results, ticker);
       if (!quote) return sendJson(res, 404, { error: `Stock not found: ${ticker}` });
-      const suggestion = await buildScalpSuggestion(quote, lang);
+      const ai = aiConfigFromReq(req, body);
+      const suggestion = await buildScalpSuggestion(quote, lang, ai);
       return sendJson(res, 200, { ticker: quote.ticker, suggestion });
     }
 
