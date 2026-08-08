@@ -1,12 +1,16 @@
 <script setup>
 import { computed } from "vue";
 import { useRouter } from "vue-router";
+import { useI18n } from "../composables/useI18n.js";
 
 const props = defineProps({
   quote: { type: Object, required: true },
   lang: { type: String, default: "ar" },
   locale: { type: String, default: "ar-EG" },
+  fundamentals: { type: Object, default: null },
 });
+
+const { t } = useI18n();
 
 const router = useRouter();
 
@@ -27,6 +31,23 @@ function fmt(n, d = 2) {
   });
 }
 
+function fmtBig(n) {
+  if (n == null || Number.isNaN(Number(n))) return "—";
+  const abs = Math.abs(Number(n));
+  const suffix = props.lang === "ar"
+    ? { b: " مليار", m: " مليون", k: " ألف" }
+    : { b: "B", m: "M", k: "K" };
+  if (abs >= 1e9) return `${fmt(Number(n) / 1e9, 2)}${suffix.b}`;
+  if (abs >= 1e6) return `${fmt(Number(n) / 1e6, 2)}${suffix.m}`;
+  if (abs >= 1e3) return `${fmt(Number(n) / 1e3, 1)}${suffix.k}`;
+  return fmt(Number(n), 0);
+}
+
+const f = computed(() => props.fundamentals?.fundamentals || null);
+const hasFundamentals = computed(
+  () => f.value && (f.value.pe != null || f.value.eps != null || f.value.marketCap != null)
+);
+
 function openDetails() {
   router.push({ name: "stock", params: { ticker: shortTicker.value } });
 }
@@ -44,6 +65,20 @@ function openDetails() {
         ·
         {{ quote.changePercent >= 0 ? "+" : "" }}{{ fmt(quote.changePercent) }}%
       </template>
+    </div>
+    <div v-if="hasFundamentals" class="fund">
+      <span class="fund-item">
+        <span class="fund-k">{{ t.fPe }}</span>
+        <span class="fund-v">{{ f.pe != null ? fmt(f.pe) : "—" }}</span>
+      </span>
+      <span class="fund-item">
+        <span class="fund-k">{{ t.fEps }}</span>
+        <span class="fund-v">{{ f.eps != null ? fmt(f.eps) : "—" }}</span>
+      </span>
+      <span class="fund-item">
+        <span class="fund-k">{{ t.fMarketCap }}</span>
+        <span class="fund-v">{{ fmtBig(f.marketCap) }}</span>
+      </span>
     </div>
   </button>
 </template>

@@ -4,12 +4,21 @@ import AiAssistant from "../components/AiAssistant.vue";
 import StockCard from "../components/StockCard.vue";
 import { useI18n } from "../composables/useI18n.js";
 import { useMarketData } from "../composables/useMarketData.js";
+import { useFundamentals } from "../composables/useFundamentals.js";
 
 const { lang, t, locale } = useI18n();
 const { payload, results, loading, error } = useMarketData({
   poll: true,
   pollMs: 20_000,
 });
+const { get: getFundamentals, payload: fundPayload } = useFundamentals({
+  poll: true,
+  pollMs: 30_000,
+});
+
+// Only surface the AI assistant once the scraped fundamentals are available,
+// so its recommendations can factor in the scraped data.
+const fundReady = computed(() => (fundPayload.value.results || []).length > 0);
 
 const query = ref("");
 
@@ -47,7 +56,8 @@ function fmtDateTime(iso) {
       </span>
     </div>
 
-    <AiAssistant :locale="locale" />
+    <AiAssistant v-if="fundReady" :locale="locale" />
+    <p v-else class="ai-home-wait">{{ t.aiWaitingData }}</p>
 
     <div v-if="results.length" class="stock-search">
       <input
@@ -75,6 +85,7 @@ function fmtDateTime(iso) {
         :quote="q"
         :lang="lang"
         :locale="locale"
+        :fundamentals="getFundamentals(q.ticker)"
         :style="{ animationDelay: `${Math.min(i, 20) * 0.04}s` }"
       />
     </div>

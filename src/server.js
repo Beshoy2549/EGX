@@ -145,6 +145,56 @@ async function loadMarket() {
   };
 }
 
+const FUNDAMENTALS_PATH = path.join(ROOT, "web", "public", "fundamentals.json");
+const FUNDAMENTALS_TTL_MS = 5 * 60 * 1000;
+let fundamentalsCache = { ts: 0, map: null };
+
+/** Load the bulk Mubasher fundamentals (from scrape:fundamentals) as a code→metrics map. */
+async function loadFundamentalsMap() {
+  if (fundamentalsCache.map && Date.now() - fundamentalsCache.ts < FUNDAMENTALS_TTL_MS) {
+    return fundamentalsCache.map;
+  }
+  const map = new Map();
+  try {
+    const raw = await fs.readFile(FUNDAMENTALS_PATH, "utf8");
+    const data = JSON.parse(raw);
+    for (const row of data.results || []) {
+      const code = String(row.code || row.ticker || "")
+        .replace(/\.CA$/i, "")
+        .toUpperCase();
+      if (!code) continue;
+      const f = row.fundamentals || {};
+      map.set(code, {
+        marketCap: f.marketCap ?? null,
+        pe: f.pe ?? null,
+        eps: f.eps ?? null,
+        bookValue: f.bookValue ?? null,
+        pb: f.pb ?? null,
+        capital: f.capital ?? null,
+        shares: f.shares ?? null,
+        currency: f.currency ?? null,
+      });
+    }
+  } catch {
+    /* fundamentals.json may not exist yet — degrade to technicals only */
+  }
+  fundamentalsCache = { ts: Date.now(), map };
+  return map;
+}
+
+/** Attach scraped fundamentals onto a list of items keyed by ticker/code. */
+function attachFundamentals(list, fundMap) {
+  if (!fundMap || !fundMap.size) return list;
+  return (list || []).map((item) => {
+    if (!item) return item;
+    const code = String(item.ticker || "")
+      .replace(/\.CA$/i, "")
+      .toUpperCase();
+    const f = fundMap.get(code);
+    return f ? { ...item, fundamentals: f } : item;
+  });
+}
+
 function findQuote(results, ticker) {
   const needle = normalizeTicker(ticker);
   return (results || []).find(
@@ -853,11 +903,22 @@ async function answerQuestion(question, lang, ai = {}) {
     scalp: scanAnalyses(analyses, "scalp", 8),
   };
 
+  // Is a usable AI provider configured (user key via headers, or server .env)?
+  const provider = normalizeProvider(ai.provider);
+  const aiReady =
+    provider === "openai"
+      ? Boolean(ai.apiKey?.trim() || process.env.OPENAI_API_KEY?.trim())
+      : Boolean(ai.apiKey?.trim() || process.env.CURSOR_API_KEY?.trim());
+
+  const fundMap = await loadFundamentalsMap();
+
   const local = localAnswerFromScan(question, lang, analyses, screens);
-  // Fast path for common Arabic/English scan intents
-  if (local && detectIntent(question)) {
+  // Fast path for common scan intents — only when NO AI is configured, so
+  // that when a key is set the recommendations go through AI + fundamentals.
+  if (local && detectIntent(question) && !aiReady) {
     return {
       ...local,
+      picks: attachFundamentals(local.picks, fundMap),
       disclaimer:
         lang === "en"
           ? "Educational analysis only — not investment advice."
@@ -875,18 +936,29 @@ async function answerQuestion(question, lang, ai = {}) {
   }
 
   const mentioned = mentionTickers(question, analyses);
-  const universe = compactForAi(analyses, 25);
+  const universe = attachFundamentals(compactForAi(analyses, 25), fundMap);
   const focus =
     mentioned.length > 0
-      ? mentioned.slice(0, 6).map((a) => compactForAi([a], 1)[0])
+      ? attachFundamentals(
+          mentioned.slice(0, 6).map((a) => compactForAi([a], 1)[0]),
+          fundMap
+        )
       : [];
 
   const prompt = `You are an EGX multi-factor assistant. Do NOT modify files.
-Answers and picks must be LOGICAL and use technical + company surroundings together.
+Answers and picks must be LOGICAL and combine technicals WITH company fundamentals.
 
 ${DECISION_CHECKLIST}
 
 Answer in ${langLabel}. Mention sector/liquidity/RS when relevant. Prefer hold when mixed.
+
+Each snapshot/focus item may include a "fundamentals" object scraped from Mubasher:
+{ marketCap, pe (P/E), eps (EPS), bookValue, pb (P/B), capital, shares, currency }.
+USE these real numbers in your reasoning and cite them:
+- Reward reasonable/low P/E with positive EPS and healthy technicals.
+- Treat negative EPS, negative book value, or an extreme/negative P/E as a valuation RISK and lower confidence (or prefer hold/sell).
+- Favor higher market-cap (more liquid) names when signals are otherwise similar.
+Only say a metric is "غير متاح"/"n/a" if it is missing from that item's fundamentals.
 
 Question: ${question}
 
@@ -896,8 +968,8 @@ Focus: ${JSON.stringify(focus)}
 Snapshot: ${JSON.stringify(universe)}
 
 Return ONLY JSON:
-{"answer":"...","picks":[{"ticker":"COMI","action":"buy|sell|hold","confidence":85,"entry":0,"stopLoss":0,"target1":0,"target2":0,"reason":"...tech + company/sector...","signals":["trend_up","high_volume"]}],"disclaimer":"..."}
-picks max 8, from data only. Lower confidence when considerations.conflict or thin liquidity.`;
+{"answer":"...","picks":[{"ticker":"COMI","action":"buy|sell|hold","confidence":85,"entry":0,"stopLoss":0,"target1":0,"target2":0,"reason":"...tech + fundamentals (cite P/E, EPS) + sector...","signals":["trend_up","high_volume"]}],"disclaimer":"..."}
+picks max 8, from data only. Lower confidence when considerations.conflict, thin liquidity, or weak fundamentals.`;
 
   try {
     const text = await runAgent(prompt, ai);
@@ -909,7 +981,7 @@ picks max 8, from data only. Lower confidence when considerations.conflict or th
     if (parsed?.answer || picks.length) {
       return {
         answer: String(parsed?.answer || "").slice(0, 2000) || (local?.answer ?? ""),
-        picks: picks.length ? picks : local?.picks || [],
+        picks: attachFundamentals(picks.length ? picks : local?.picks || [], fundMap),
         disclaimer:
           String(parsed?.disclaimer || "").slice(0, 240) ||
           (lang === "en"
@@ -933,6 +1005,7 @@ picks max 8, from data only. Lower confidence when considerations.conflict or th
   if (local) {
     return {
       ...local,
+      picks: attachFundamentals(local.picks, fundMap),
       disclaimer:
         lang === "en"
           ? "Educational analysis only — not investment advice."
@@ -960,18 +1033,21 @@ picks max 8, from data only. Lower confidence when considerations.conflict or th
             .slice(0, 5)
             .map((a) => a.ticker.replace(/\.CA$/i, ""))
             .join("، ")}`,
-    picks: screens.top.slice(0, 5).map((a) =>
-      normalizePick({
-        ticker: a.ticker,
-        action: a.score >= 60 ? "buy" : "hold",
-        confidence: a.score,
-        entry: a.trade.entry,
-        stopLoss: a.trade.stopLoss,
-        target1: a.trade.target1,
-        target2: a.trade.target2,
-        reason: a.reasons.join(" · "),
-        signals: a.signals,
-      })
+    picks: attachFundamentals(
+      screens.top.slice(0, 5).map((a) =>
+        normalizePick({
+          ticker: a.ticker,
+          action: a.score >= 60 ? "buy" : "hold",
+          confidence: a.score,
+          entry: a.trade.entry,
+          stopLoss: a.trade.stopLoss,
+          target1: a.trade.target1,
+          target2: a.trade.target2,
+          reason: a.reasons.join(" · "),
+          signals: a.signals,
+        })
+      ),
+      fundMap
     ),
     disclaimer:
       lang === "en"
@@ -1045,7 +1121,8 @@ const server = http.createServer(async (req, res) => {
       const limit = Number(url.searchParams.get("limit") || 10);
       const market = await loadMarket();
       const analyses = analyzeUniverse(market.results);
-      const items = scanAnalyses(analyses, type, limit);
+      const fundMap = await loadFundamentalsMap();
+      const items = attachFundamentals(scanAnalyses(analyses, type, limit), fundMap);
       return sendJson(res, 200, {
         type: ["top", "rsi", "macd", "breakout", "accumulation", "scalp"].includes(type) ? type : "top",
         scrapedAt: market.scrapedAt,

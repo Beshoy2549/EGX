@@ -49,6 +49,21 @@ function run(label, command, args, extraEnv = {}) {
   return child;
 }
 
+// Fire-and-forget background task: never kills the dev stack if it fails.
+function runOnce(label, command, args, extraEnv = {}) {
+  const child = spawn(command, args, {
+    cwd: root,
+    stdio: "inherit",
+    env: { ...process.env, ...extraEnv },
+  });
+  child.on("error", (err) => console.error(`[${label}] failed to start:`, err.message));
+  child.on("exit", (code) => {
+    if (code && code !== 0) console.error(`[${label}] exited with code ${code}`);
+    else console.log(`[${label}] done`);
+  });
+  return child;
+}
+
 function shutdown(code = 0) {
   if (shuttingDown) return;
   shuttingDown = true;
@@ -62,7 +77,7 @@ function shutdown(code = 0) {
   process.exit(code);
 }
 
-console.log("EGX dev — api + vite + watch latest (20s)\n");
+console.log("EGX dev — api + vite + watch latest (20s) + fundamentals on start\n");
 
 freePort(8787);
 freePort(5173);
@@ -71,6 +86,12 @@ freePort(5174);
 run("api", "node", ["src/server.js"]);
 run("web", "npx", ["vite", "--config", "web/vite.config.js"]);
 run("watch", "node", ["src/watch.js"], { INTERVAL: "20" });
+
+// Refresh Mubasher fundamentals in the background on startup (writes
+// web/public/fundamentals.json). The frontend polls that file, so cards
+// fill in with P/E, EPS and market cap once this finishes (~35s).
+console.log("[fundamentals] refreshing on start (background)…");
+runOnce("fundamentals", "node", ["src/scrape-fundamentals.js"]);
 
 process.on("SIGINT", () => shutdown(0));
 process.on("SIGTERM", () => shutdown(0));
