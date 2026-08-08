@@ -20,6 +20,7 @@ const answer = ref(null);
 const scanItems = ref([]);
 const activeScan = ref(null);
 const messagesEl = ref(null);
+const open = ref(true);
 
 const chips = computed(() => [
   { id: "ask5", kind: "ask", label: t.value.aiChipAsk5, question: t.value.aiQAsk5 },
@@ -105,11 +106,6 @@ function onChip(chip) {
   else runScan(chip.type, chip.limit || 10);
 }
 
-function onSubmit(e) {
-  e.preventDefault();
-  runAsk(question.value);
-}
-
 function openStock(ticker) {
   const code = String(ticker || "").replace(/\.CA$/i, "");
   if (!code) return;
@@ -118,46 +114,39 @@ function openStock(ticker) {
 </script>
 
 <template>
-  <section class="ai-home">
-    <div class="ai-home-head">
+  <section class="ai-home" :class="{ collapsed: !open }">
+    <button
+      type="button"
+      class="ai-home-head"
+      :aria-expanded="open"
+      @click="open = !open"
+    >
       <div>
         <h2>{{ t.aiAssistTitle }}</h2>
         <p>{{ t.aiAssistLede }}</p>
       </div>
-    </div>
+      <span class="ai-home-chevron" :class="{ open }" aria-hidden="true">▾</span>
+    </button>
 
-    <div class="ai-chips" role="group">
-      <button
-        v-for="chip in chips"
-        :key="chip.id"
-        type="button"
-        class="chip"
-        :class="{ active: activeScan === chip.type }"
-        :disabled="asking || scanning"
-        @click="onChip(chip)"
-      >
-        {{ chip.label }}
-      </button>
-    </div>
+    <div v-show="open" class="ai-home-body">
+      <div class="ai-chips" role="group">
+        <button
+          v-for="chip in chips"
+          :key="chip.id"
+          type="button"
+          class="chip"
+          :class="{ active: activeScan === chip.type }"
+          :disabled="asking || scanning"
+          @click="onChip(chip)"
+        >
+          {{ chip.label }}
+        </button>
+      </div>
 
-    <form class="ai-ask-form" @submit="onSubmit">
-      <input
-        v-model="question"
-        type="text"
-        :placeholder="t.aiPlaceholder"
-        :disabled="asking"
-        maxlength="800"
-        autocomplete="off"
-      />
-      <button type="submit" class="ai-btn" :disabled="asking || !question.trim()">
-        {{ asking ? t.aiLoading : t.aiSend }}
-      </button>
-    </form>
+      <p v-if="error" class="ai-error">{{ t.aiError }}: {{ error }}</p>
+      <p v-else-if="asking || scanning" class="ai-status">{{ t.aiLoading }}</p>
 
-    <p v-if="error" class="ai-error">{{ t.aiError }}: {{ error }}</p>
-    <p v-else-if="asking || scanning" class="ai-status">{{ t.aiLoading }}</p>
-
-    <div ref="messagesEl" class="ai-results">
+      <div ref="messagesEl" class="ai-results">
       <template v-if="answer">
         <p class="ai-answer">{{ answer.answer }}</p>
         <div v-if="answer.picks?.length" class="pick-grid">
@@ -236,6 +225,7 @@ function openStock(ticker) {
         </div>
         <p class="ai-disclaimer">{{ t.aiDisclaimer }}</p>
       </template>
+      </div>
     </div>
   </section>
 </template>

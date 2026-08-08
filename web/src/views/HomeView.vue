@@ -1,4 +1,5 @@
 <script setup>
+import { computed, ref } from "vue";
 import AiAssistant from "../components/AiAssistant.vue";
 import StockCard from "../components/StockCard.vue";
 import { useI18n } from "../composables/useI18n.js";
@@ -8,6 +9,24 @@ const { lang, t, locale } = useI18n();
 const { payload, results, loading, error } = useMarketData({
   poll: true,
   pollMs: 20_000,
+});
+
+const query = ref("");
+
+const filtered = computed(() => {
+  const q = query.value.trim().toLowerCase();
+  if (!q) return results.value;
+  return results.value.filter((s) => {
+    const ticker = String(s.ticker || "").toLowerCase();
+    const code = ticker.replace(/\.ca$/, "");
+    return (
+      ticker.includes(q) ||
+      code.includes(q) ||
+      String(s.nameAr || "").toLowerCase().includes(q) ||
+      String(s.nameEn || "").toLowerCase().includes(q) ||
+      String(s.name || "").toLowerCase().includes(q)
+    );
+  });
 });
 
 function fmtDateTime(iso) {
@@ -30,18 +49,33 @@ function fmtDateTime(iso) {
 
     <AiAssistant :locale="locale" />
 
+    <div v-if="results.length" class="stock-search">
+      <input
+        v-model="query"
+        type="search"
+        class="stock-search-input"
+        :placeholder="t.searchPlaceholder"
+        autocomplete="off"
+      />
+      <button v-if="query" type="button" class="stock-search-clear" @click="query = ''">
+        {{ t.searchClear }}
+      </button>
+      <span class="stock-search-count">{{ filtered.length }} / {{ results.length }}</span>
+    </div>
+
     <p v-if="loading" class="empty">{{ t.loading }}</p>
     <p v-else-if="error" class="empty">{{ t.loadError }}: {{ error }}</p>
     <p v-else-if="!results.length" class="empty">{{ t.empty }}</p>
+    <p v-else-if="!filtered.length" class="empty">{{ t.searchNoResults }}</p>
 
     <div v-else class="grid">
       <StockCard
-        v-for="(q, i) in results"
+        v-for="(q, i) in filtered"
         :key="q.ticker"
         :quote="q"
         :lang="lang"
         :locale="locale"
-        :style="{ animationDelay: `${i * 0.04}s` }"
+        :style="{ animationDelay: `${Math.min(i, 20) * 0.04}s` }"
       />
     </div>
   </div>
