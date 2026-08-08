@@ -23,6 +23,10 @@ const suggesting = ref(false);
 const suggestError = ref(null);
 const suggestion = ref(null);
 
+const company = ref(null);
+const companyLoading = ref(false);
+const companyError = ref(null);
+
 const quote = computed(() => findByTicker(props.ticker));
 
 const name = computed(() => {
@@ -70,10 +74,34 @@ watch(
   (ticker) => {
     suggestion.value = null;
     suggestError.value = null;
+    company.value = null;
+    companyError.value = null;
     loadAnalysis(ticker);
+    loadCompany(ticker);
   },
   { immediate: true }
 );
+
+async function loadCompany(tickerRaw = props.ticker) {
+  const ticker = normalizeCa(tickerRaw);
+  if (!ticker) {
+    company.value = null;
+    return;
+  }
+  companyLoading.value = true;
+  companyError.value = null;
+  try {
+    const res = await fetch(`/api/company?ticker=${encodeURIComponent(ticker)}`);
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+    company.value = data;
+  } catch (err) {
+    companyError.value = err.message;
+    company.value = null;
+  } finally {
+    companyLoading.value = false;
+  }
+}
 
 async function loadAnalysis(tickerRaw = props.ticker) {
   const ticker = normalizeCa(tickerRaw);
@@ -102,6 +130,12 @@ function fmt(n, d = 2) {
     minimumFractionDigits: d,
     maximumFractionDigits: d,
   });
+}
+
+// Large integers (market cap, shares, capital, volume, turnover) — grouped, no decimals.
+function fmtBig(n) {
+  if (n == null || Number.isNaN(Number(n))) return "—";
+  return Number(n).toLocaleString(locale.value, { maximumFractionDigits: 0 });
 }
 
 function fmtDateTime(iso) {
@@ -178,6 +212,78 @@ async function askAi() {
             </div>
           </dl>
         </div>
+      </section>
+
+      <section class="company-panel">
+        <div class="analysis-head">
+          <div>
+            <h2>
+              {{ t.companyTitle }}
+              <a
+                v-if="company?.url"
+                class="company-source"
+                :href="company.url"
+                target="_blank"
+                rel="noopener noreferrer"
+              >{{ t.companySource }}</a>
+            </h2>
+            <p>{{ t.companyLede }}</p>
+            <p class="company-delayed">{{ t.companyDelayed }}</p>
+          </div>
+          <button type="button" class="chip" :disabled="companyLoading" @click="loadCompany()">
+            {{ companyLoading ? t.loading : t.companyRefresh }}
+          </button>
+        </div>
+
+        <p v-if="companyLoading && !company" class="ai-status">{{ t.companyLoading }}</p>
+        <p v-else-if="companyError" class="ai-error">{{ t.companyError }}: {{ companyError }}</p>
+
+        <template v-else-if="company">
+          <h3 class="plan-title">{{ t.companyFundamentals }}</h3>
+          <dl class="indicator-grid company-grid">
+            <div><dt>{{ t.fMarketCap }}</dt><dd>{{ fmtBig(company.fundamentals?.marketCap) }}</dd></div>
+            <div><dt>{{ t.fPe }}</dt><dd>{{ fmt(company.fundamentals?.pe) }}</dd></div>
+            <div><dt>{{ t.fEps }}</dt><dd>{{ fmt(company.fundamentals?.eps) }}</dd></div>
+            <div><dt>{{ t.fBookValue }}</dt><dd>{{ fmt(company.fundamentals?.bookValue) }}</dd></div>
+            <div><dt>{{ t.fPb }}</dt><dd>{{ fmt(company.fundamentals?.pb) }}</dd></div>
+            <div><dt>{{ t.fParValue }}</dt><dd>{{ fmt(company.fundamentals?.parValue) }}</dd></div>
+            <div><dt>{{ t.fShares }}</dt><dd>{{ fmtBig(company.fundamentals?.shares) }}</dd></div>
+            <div><dt>{{ t.fCapital }}</dt><dd>{{ fmtBig(company.fundamentals?.capital) }}</dd></div>
+            <div><dt>{{ t.fCurrency }}</dt><dd>{{ company.fundamentals?.currency || "—" }}</dd></div>
+          </dl>
+
+          <h3 class="plan-title">{{ t.companyDayStats }}</h3>
+          <dl class="indicator-grid company-grid">
+            <div><dt>{{ t.fOpen }}</dt><dd>{{ fmt(company.summary?.open) }}</dd></div>
+            <div><dt>{{ t.fPrevClose }}</dt><dd>{{ fmt(company.summary?.prevClose) }}</dd></div>
+            <div><dt>{{ t.fHigh }}</dt><dd>{{ fmt(company.summary?.high) }}</dd></div>
+            <div><dt>{{ t.fLow }}</dt><dd>{{ fmt(company.summary?.low) }}</dd></div>
+            <div><dt>{{ t.fVolume }}</dt><dd>{{ fmtBig(company.summary?.volume) }}</dd></div>
+            <div><dt>{{ t.fTurnover }}</dt><dd>{{ fmtBig(company.summary?.turnover) }}</dd></div>
+          </dl>
+
+          <div v-if="company.news?.length" class="company-news">
+            <h3 class="plan-title">{{ t.companyNewsTitle }}</h3>
+            <ul>
+              <li v-for="(item, i) in company.news" :key="'n' + i">
+                <a :href="item.href" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
+                <span v-if="item.category" class="company-tag">{{ item.category }}</span>
+              </li>
+            </ul>
+          </div>
+
+          <div v-if="company.announcements?.length" class="company-news">
+            <h3 class="plan-title">{{ t.companyAnnouncementsTitle }}</h3>
+            <ul>
+              <li v-for="(item, i) in company.announcements" :key="'a' + i">
+                <a :href="item.href" target="_blank" rel="noopener noreferrer">{{ item.title }}</a>
+                <span v-if="item.date" class="company-date">{{ item.date }}</span>
+              </li>
+            </ul>
+          </div>
+
+          <p class="ai-disclaimer">{{ t.companyDisclaimer }}</p>
+        </template>
       </section>
 
       <section class="analysis-panel" :class="scoreAction">

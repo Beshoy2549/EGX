@@ -11,6 +11,7 @@ import {
   scanAnalyses,
 } from "./lib/indicators.js";
 import { buildCompanyProfile } from "./lib/companyContext.js";
+import { fetchMubasherStock } from "./lib/mubasher.js";
 
 dotenv.config({ path: path.join(path.dirname(fileURLToPath(import.meta.url)), "..", ".env") });
 
@@ -20,6 +21,10 @@ const LATEST_PATH = path.join(ROOT, "web", "public", "latest.json");
 const AGENT_STORE_PATH = path.join(ROOT, ".cursor-agents");
 const PORT = Number(process.env.API_PORT) || 8787;
 const agentStore = new JsonlLocalAgentStore(AGENT_STORE_PATH);
+
+// Mubasher scrape cache: code -> { ts, data }. 10-minute TTL.
+const mubasherCache = new Map();
+const MUBASHER_TTL_MS = 10 * 60_000;
 
 function sendJson(res, status, body) {
   const payload = JSON.stringify(body);
@@ -80,6 +85,54 @@ function aiConfigFromReq(req, body = {}) {
     apiKey: apiKey ? String(apiKey) : undefined,
     model: model ? String(model) : undefined,
   };
+}
+
+/** Get Mubasher data via the shared cache; never throws so AI still works if it fails. */
+async function getMubasherCached(ticker) {
+  const code = normalizeTicker(ticker).replace(/\.CA$/i, "");
+  if (!code) return null;
+  const hit = mubasherCache.get(code);
+  if (hit && Date.now() - hit.ts < MUBASHER_TTL_MS) return hit.data;
+  try {
+    const data = await fetchMubasherStock(ticker);
+    mubasherCache.set(code, { ts: Date.now(), data });
+    return data;
+  } catch {
+    return null;
+  }
+}
+
+/** Compact real fundamentals (from Mubasher) to feed the AI prompt. */
+function fundamentalsForAi(mub) {
+  if (!mub) return null;
+  const f = mub.fundamentals || {};
+  const has = ["marketCap", "pe", "eps", "bookValue", "pb", "capital"].some((k) => f[k] != null);
+  if (!has) return null;
+  return {
+    source: "mubasher.info (delayed ~15m)",
+    marketCap: f.marketCap ?? null,
+    pe: f.pe ?? null,
+    eps: f.eps ?? null,
+    bookValue: f.bookValue ?? null,
+    pb: f.pb ?? null,
+    parValue: f.parValue ?? null,
+    shares: f.shares ?? null,
+    capital: f.capital ?? null,
+    currency: f.currency ?? null,
+    latestNews: (mub.news || []).slice(0, 5).map((n) => n.title),
+    latestAnnouncements: (mub.announcements || [])
+      .slice(0, 5)
+      .map((a) => ({ date: a.date, title: a.title })),
+  };
+}
+
+/** Prompt block that surfaces real fundamentals when available (else empty). */
+function fundamentalsBlock(fundamentals) {
+  if (!fundamentals) return "";
+  return (
+    `\nReal fundamentals from Mubasher (USE THESE — cite the numbers; only say "غير متاح"/"n/a" for metrics NOT listed here):\n` +
+    `${JSON.stringify(fundamentals, null, 2)}\n`
+  );
 }
 
 async function loadMarket() {
@@ -477,6 +530,7 @@ async function buildScalpSuggestion(quote, lang, ai = {}) {
   const raw = rawQuoteForAi(quote, { candleLimit: 60 });
   const peers = rawPeersForAi(market.results, quote, 8);
   const tape = marketTapeForAi(market.results);
+  const fundamentals = fundamentalsForAi(await getMubasherCached(quote.ticker));
 
   const prompt = `You are an independent EGX same-session SCALP analyst.
 Do NOT modify files. Do NOT call createPlan. Reply with a single JSON object only (no narration).
@@ -490,7 +544,7 @@ Focus LEVELS and action on SAME-SESSION scalp, but still fill EVERY consideratio
 
 Raw stock:
 ${JSON.stringify(raw, null, 2)}
-
+${fundamentalsBlock(fundamentals)}
 Raw sector/market peers (prices only):
 ${JSON.stringify(peers)}
 
@@ -567,6 +621,7 @@ async function buildSuggestion(quote, lang, ai = {}) {
   const raw = rawQuoteForAi(quote, { candleLimit: 90 });
   const peers = rawPeersForAi(market.results, quote, 8);
   const tape = marketTapeForAi(market.results);
+  const fundamentals = fundamentalsForAi(await getMubasherCached(quote.ticker));
 
   const prompt = `You are an independent multi-factor EGX analyst.
 Do NOT modify any files. Do NOT call createPlan. Reply with a single JSON object only (no narration).
@@ -578,7 +633,7 @@ ${SUGGEST_OUTPUT_CRITERIA}
 
 Raw stock:
 ${JSON.stringify(raw, null, 2)}
-
+${fundamentalsBlock(fundamentals)}
 Raw peers (no scores — prices/moves only):
 ${JSON.stringify(peers)}
 
@@ -970,6 +1025,19 @@ const server = http.createServer(async (req, res) => {
         range: market.range,
         analysis,
       });
+    }
+
+    if (req.method === "GET" && url.pathname === "/api/company") {
+      const ticker = normalizeTicker(url.searchParams.get("ticker"));
+      if (!ticker) return sendJson(res, 400, { error: "ticker is required" });
+      const code = ticker.replace(/\.CA$/i, "");
+      const hit = mubasherCache.get(code);
+      if (hit && Date.now() - hit.ts < MUBASHER_TTL_MS) {
+        return sendJson(res, 200, { ...hit.data, cached: true });
+      }
+      const data = await fetchMubasherStock(ticker);
+      mubasherCache.set(code, { ts: Date.now(), data });
+      return sendJson(res, 200, { ...data, cached: false });
     }
 
     if (req.method === "GET" && url.pathname === "/api/scan") {

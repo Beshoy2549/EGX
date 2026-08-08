@@ -1190,3 +1190,75 @@ canvas { width: 100%; height: 360px; display: block; }
   font-size: 0.82rem;
   line-height: 1.6;
 }
+
+/* ---- Company (Mubasher) panel ---- */
+.company-panel {
+  margin-bottom: 18px;
+  padding: 18px 18px 16px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  animation: rise 0.45s ease both;
+}
+
+.company-source {
+  margin-inline-start: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.company-source:hover { text-decoration: underline; }
+
+.company-delayed {
+  margin: 6px 0 0 !important;
+  font-size: 0.78rem !important;
+  color: var(--muted);
+}
+
+.company-grid { margin-bottom: 16px; }
+
+.company-news { margin-top: 6px; }
+
+.company-news ul {
+  list-style: none;
+  margin: 0 0 14px;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.company-news li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.company-news a {
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.92rem;
+  line-height: 1.5;
+  flex: 1;
+  min-width: 60%;
+}
+
+.company-news a:hover { color: var(--accent); text-decoration: underline; }
+
+.company-tag,
+.company-date {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--muted);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px 8px;
+  white-space: nowrap;
+}
