@@ -8,6 +8,7 @@
     "scrape:fundamentals": "node src/scrape-fundamentals.js",
     "watch": "INTERVAL=20 node src/watch.js",
     "api": "node src/server.js",
+    "start": "node src/server.js",
     "view": "vite --config web/vite.config.js",
     "dev": "node scripts/dev-all.js",
     "build": "vite build --config web/vite.config.js"

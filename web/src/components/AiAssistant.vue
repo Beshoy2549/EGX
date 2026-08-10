@@ -3,6 +3,7 @@ import { computed, nextTick, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "../composables/useI18n.js";
 import { useAiSettings } from "../composables/useAiSettings.js";
+import { apiUrl } from "../lib/api.js";
 
 const props = defineProps({
   locale: { type: String, default: "ar-EG" },
@@ -88,7 +89,7 @@ async function runAsk(q) {
       "Content-Type": "application/json",
       ...(isLocal.value ? {} : aiHeaders()),
     };
-    const res = await fetch("/api/ask", {
+    const res = await fetch(apiUrl("/api/ask"), {
       method: "POST",
       headers,
       body: JSON.stringify({

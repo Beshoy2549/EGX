@@ -19,7 +19,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
 const LATEST_PATH = path.join(ROOT, "web", "public", "latest.json");
 const AGENT_STORE_PATH = path.join(ROOT, ".cursor-agents");
-const PORT = Number(process.env.API_PORT) || 8787;
+// Render/Railway set PORT; local/dev uses API_PORT (default 8787).
+const PORT = Number(process.env.PORT || process.env.API_PORT) || 8787;
 const agentStore = new JsonlLocalAgentStore(AGENT_STORE_PATH);
 
 // Mubasher scrape cache: code -> { ts, data }. 10-minute TTL.
@@ -1253,8 +1254,8 @@ const server = http.createServer(async (req, res) => {
   }
 });
 
-server.listen(PORT, () => {
-  console.log(`EGX API listening on http://localhost:${PORT}`);
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(`EGX API listening on http://0.0.0.0:${PORT}`);
   console.log(`CURSOR_API_KEY ${process.env.CURSOR_API_KEY?.trim() ? "loaded" : "MISSING"}`);
 });
 

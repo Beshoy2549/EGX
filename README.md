@@ -23,12 +23,27 @@ web/                # Vue dashboard
 
 الواجهة تعمل poll لـ `latest.json` كل 5 ثواني.
 
-## Deploy (GitHub Pages)
+## Deploy (GitHub Pages + Render API)
 
-Push to `main` runs `.github/workflows/deploy-pages.yml` and publishes the Vue build.
+### 1) API on Render (free)
 
-1. Repo **Settings → Pages → Build and deployment → Source: GitHub Actions**
-2. After the workflow succeeds, open: `https://<user>.github.io/EGX/`
-3. Dev bypass: `https://<user>.github.io/EGX/?devbypass=1`
+1. Open [Render Blueprints](https://dashboard.render.com/blueprints) → **New Blueprint Instance**
+2. Connect the `Beshoy2549/EGX` repo (uses `render.yaml`)
+3. Fill secrets when prompted:
+   - `OPENAI_API_KEY` (recommended for free tier)
+   - or `CURSOR_API_KEY`
+4. Deploy → copy the service URL, e.g. `https://egx-api.onrender.com`
+5. Check health: `https://egx-api.onrender.com/api/health`
 
-**Note:** GitHub Pages serves the static frontend only (`latest.json` / `fundamentals.json`). AI `/api/*` needs a separate Node host (`npm run api`).
+Free Render services sleep after idle; the first request can take ~30–60s.
+
+### 2) Frontend on GitHub Pages
+
+1. Repo **Settings → Pages → Source: GitHub Actions**
+2. Repo **Settings → Secrets and variables → Actions → Variables**
+   - Add `VITE_API_BASE` = your Render URL (no trailing slash)
+3. Push to `main` (or re-run **Deploy GitHub Pages**)
+4. Site: `https://beshoy2549.github.io/EGX/`
+5. Dev bypass: `https://beshoy2549.github.io/EGX/?devbypass=1`
+
+Locally, leave `VITE_API_BASE` unset — Vite still proxies `/api` to `localhost:8787`.
