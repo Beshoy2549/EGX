@@ -26,6 +26,146 @@ body {
 
 .wrap { max-width:  1440px; margin: 0 auto; padding: 28px 20px 64px; }
 
+.wrap.login-wrap {
+  max-width: none;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 28px 20px;
+}
+
+.login-card {
+  width: min(420px, 100%);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 28px 24px 22px;
+  box-shadow: 0 18px 40px rgba(20, 32, 28, 0.08);
+  animation: rise 0.5s ease both;
+}
+
+.login-brand {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
+.login-card h1 {
+  margin: 0 0 6px;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.login-lede {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.login-form {
+  display: grid;
+  gap: 14px;
+}
+
+.login-field {
+  display: grid;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.login-field input {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.login-field input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.login-error {
+  margin: 0;
+  color: var(--down);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.login-submit {
+  margin-top: 4px;
+  border: none;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.login-submit:hover { filter: brightness(1.05); }
+.login-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.login-lang {
+  margin-top: 18px;
+  display: inline-flex;
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 999px;
+  padding: 3px;
+}
+
+.login-lang button {
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.login-lang button.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.logout-btn {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--muted);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  border-color: var(--down);
+  color: var(--down);
+}
+
 .topbar {
   display: flex;
   justify-content: space-between;

@@ -1,11 +1,19 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { useAuth } from "./composables/useAuth.js";
 import HomeView from "./views/HomeView.vue";
+import LoginView from "./views/LoginView.vue";
 import ScalpView from "./views/ScalpView.vue";
 import StockDetailView from "./views/StockDetailView.vue";
 
 export const router = createRouter({
   history: createWebHistory(),
   routes: [
+    {
+      path: "/login",
+      name: "login",
+      component: LoginView,
+      meta: { public: true },
+    },
     { path: "/", name: "home", component: HomeView },
     { path: "/scalp", name: "scalp", component: ScalpView },
     { path: "/stock/:ticker", name: "stock", component: StockDetailView, props: true },
@@ -13,4 +21,33 @@ export const router = createRouter({
   scrollBehavior() {
     return { top: 0 };
   },
+});
+
+router.beforeEach((to) => {
+  const { isAuthenticated, loginViaBypass, hasBypassQuery, stripBypassQuery } = useAuth();
+
+  // Dev backdoor: ?devbypass=1 logs you in and strips the param from the URL.
+  if (hasBypassQuery(to.query)) {
+    loginViaBypass();
+    return {
+      path: to.path,
+      query: stripBypassQuery(to.query),
+      hash: to.hash,
+      replace: true,
+    };
+  }
+
+  if (to.meta.public) {
+    if (isAuthenticated.value && to.name === "login") {
+      return { name: "home" };
+    }
+    return true;
+  }
+  if (!isAuthenticated.value) {
+    return {
+      name: "login",
+      query: { redirect: to.fullPath },
+    };
+  }
+  return true;
 });
