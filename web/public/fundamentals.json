@@ -1,8 +1,188 @@
 {
-  "scrapedAt": "2026-08-10T08:59:15.368Z",
+  "scrapedAt": "2026-08-10T11:58:52.973Z",
   "source": "mubasher.info",
-  "count": 215,
+  "count": 221,
   "results": [
+    {
+      "ticker": "AALR.CA",
+      "code": "AALR",
+      "nameAr": "العامة لاستصلاح الأراضي",
+      "nameEn": "General Co. for Land Reclamation Development & Reconstruction",
+      "url": "https://www.mubasher.info/markets/EGX/stocks/AALR",
+      "fundamentals": {
+        "parValue": 10,
+        "marketCap": 1895126100,
+        "bookValue": -75.52,
+        "pb": -2.03,
+        "eps": 19.48,
+        "pe": -13.26,
+        "currency": "جنيه مصري",
+        "shares": 6510000,
+        "capital": 65100000
+      },
+      "summary": {
+        "lastPrice": 291.11,
+        "change": 1.15,
+        "changePercent": 0.4,
+        "open": 289.96,
+        "prevClose": 289.96,
+        "high": 306.88,
+        "low": 288,
+        "volume": 111136,
+        "turnover": 32853082
+      },
+      "scrapedAt": "2026-08-10T11:58:21.558Z"
+    },
+    {
+      "ticker": "ABUK.CA",
+      "code": "ABUK",
+      "nameAr": "ابوقير للاسمدة",
+      "nameEn": "Abou Kir Fertilizers & Chemical Industries Co.",
+      "url": "https://www.mubasher.info/markets/EGX/stocks/ABUK",
+      "fundamentals": {
+        "parValue": 1.5,
+        "marketCap": 92937146778,
+        "bookValue": 18.93,
+        "pb": 4.32,
+        "eps": 4.15,
+        "pe": 19.7,
+        "currency": "جنيه مصري",
+        "shares": 1261875720,
+        "capital": 1892813580
+      },
+      "summary": {
+        "lastPrice": 73.66,
+        "change": -0.54,
+        "changePercent": -0.73,
+        "open": 74.19,
+        "prevClose": 74.19,
+        "high": 74.2,
+        "low": 73.52,
+        "volume": 570343,
+        "turnover": 42075124
+      },
+      "scrapedAt": "2026-08-10T11:58:21.523Z"
+    },
+    {
+      "ticker": "ACAMD.CA",
+      "code": "ACAMD",
+      "nameAr": "العربية لإدارة وتطوير الأصول",
+      "nameEn": "Arab Co. for Asset Management & Development",
+      "url": "https://www.mubasher.info/markets/EGX/stocks/ACAMD",
+      "fundamentals": {
+        "parValue": 0.1,
+        "marketCap": 3018901043.4,
+        "bookValue": 0.09,
+        "pb": 20.2,
+        "eps": -0.03,
+        "pe": 201.88,
+        "currency": "جنيه مصري",
+        "shares": 1324079405,
+        "capital": 132407940.5
+      },
+      "summary": {
+        "lastPrice": 2.28,
+        "change": -0.12,
+        "changePercent": -5,
+        "open": 2.4,
+        "prevClose": 2.4,
+        "high": 2.35,
+        "low": 2.26,
+        "volume": 39900350,
+        "turnover": 91769720
+      },
+      "scrapedAt": "2026-08-10T11:58:21.584Z"
+    },
+    {
+      "ticker": "ACAP.CA",
+      "code": "ACAP",
+      "nameAr": "إيه كابيتال القابضة",
+      "nameEn": "A Capital Holding",
+      "url": "https://www.mubasher.info/markets/EGX/stocks/ACAP",
+      "fundamentals": {
+        "parValue": 0.3,
+        "marketCap": 6698339502.36,
+        "bookValue": 1.36,
+        "pb": 2.83,
+        "eps": 1.91,
+        "pe": 16.14,
+        "currency": "جنيه مصري",
+        "shares": 731259771,
+        "capital": 219377931.3
+      },
+      "summary": {
+        "lastPrice": 9.16,
+        "change": -0.2,
+        "changePercent": -2.14,
+        "open": 9.36,
+        "prevClose": 9.36,
+        "high": 9.36,
+        "low": 9.1,
+        "volume": 613405,
+        "turnover": 5637152.5
+      },
+      "scrapedAt": "2026-08-10T11:58:21.541Z"
+    },
+    {
+      "ticker": "ACGC.CA",
+      "code": "ACGC",
+      "nameAr": "العربية لحليج الأقطان",
+      "nameEn": "Arab Cotton Ginning Co.",
+      "url": "https://www.mubasher.info/markets/EGX/stocks/ACGC",
+      "fundamentals": {
+        "parValue": 4.5,
+        "marketCap": 2984474978.87,
+        "bookValue": 9,
+        "pb": 0.87,
+        "eps": -0.67,
+        "pe": 11.25,
+        "currency": "جنيه مصري",
+        "shares": 264815881,
+        "capital": 1191671464.5
+      },
+      "summary": {
+        "lastPrice": 11.27,
+        "change": -0.24,
+        "changePercent": -2.09,
+        "open": 11.51,
+        "prevClose": 11.51,
+        "high": 11.65,
+        "low": 11.17,
+        "volume": 1197871,
+        "turnover": 13622193
+      },
+      "scrapedAt": "2026-08-10T11:58:21.507Z"
+    },
+    {
+      "ticker": "ACTF.CA",
+      "code": "ACTF",
+      "nameAr": "آكت المالية",
+      "nameEn": "Act Financial",
+      "url": "https://www.mubasher.info/markets/EGX/stocks/ACTF",
+      "fundamentals": {
+        "parValue": 0.25,
+        "marketCap": 3118150197.84,
+        "bookValue": 1.83,
+        "pb": 1.63,
+        "eps": -0.74,
+        "pe": 2.08,
+        "currency": "جنيه مصري",
+        "shares": 1125685992,
+        "capital": 281421498
+      },
+      "summary": {
+        "lastPrice": 2.75,
+        "change": 0,
+        "changePercent": 0,
+        "open": 2.77,
+        "prevClose": 2.77,
+        "high": 2.78,
+        "low": 2.75,
+        "volume": 7448679,
+        "turnover": 20585554
+      },
+      "scrapedAt": "2026-08-10T11:58:21.491Z"
+    },
     {
       "ticker": "ADCI.CA",
       "code": "ADCI",
@@ -11,7 +191,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ADCI",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 3756000000,
+        "marketCap": 4092960000,
         "bookValue": 57.43,
         "pb": 2.83,
         "eps": 20.61,
@@ -21,17 +201,17 @@
         "capital": 120000000
       },
       "summary": {
-        "lastPrice": 314.76,
-        "change": 24.12,
-        "changePercent": 8.3,
+        "lastPrice": 341.08,
+        "change": 50.44,
+        "changePercent": 17.35,
         "open": 290.64,
         "prevClose": 290.64,
-        "high": 319,
+        "high": 344,
         "low": 291,
-        "volume": 58579,
-        "turnover": 18104164
+        "volume": 198131,
+        "turnover": 63884408
       },
-      "scrapedAt": "2026-08-10T08:58:24.840Z"
+      "scrapedAt": "2026-08-10T11:58:22.555Z"
     },
     {
       "ticker": "ADIB.CA",
@@ -41,7 +221,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ADIB",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 64692000000,
+        "marketCap": 64452000000,
         "bookValue": 26.09,
         "pb": 0.92,
         "eps": 10.69,
@@ -51,17 +231,17 @@
         "capital": 12000000000
       },
       "summary": {
-        "lastPrice": 53.96,
-        "change": -0.44,
-        "changePercent": -0.81,
+        "lastPrice": 53.79,
+        "change": -0.69,
+        "changePercent": -1.27,
         "open": 54.4,
         "prevClose": 54.4,
         "high": 54.45,
-        "low": 53.79,
-        "volume": 305186,
-        "turnover": 16487680
+        "low": 53.71,
+        "volume": 840259,
+        "turnover": 45318388
       },
-      "scrapedAt": "2026-08-10T08:58:25.156Z"
+      "scrapedAt": "2026-08-10T11:58:22.616Z"
     },
     {
       "ticker": "ADPC.CA",
@@ -71,7 +251,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ADPC",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 2235000000,
+        "marketCap": 2245000000,
         "bookValue": 1.89,
         "pb": 2.71,
         "eps": -0.27,
@@ -81,17 +261,17 @@
         "capital": 500000000
       },
       "summary": {
-        "lastPrice": 4.46,
-        "change": -0.02,
-        "changePercent": -0.45,
+        "lastPrice": 4.48,
+        "change": 0.01,
+        "changePercent": 0.22,
         "open": 4.48,
         "prevClose": 4.48,
-        "high": 4.63,
+        "high": 4.66,
         "low": 4.4,
-        "volume": 9484800,
-        "turnover": 42727208
+        "volume": 23083861,
+        "turnover": 104882784
       },
-      "scrapedAt": "2026-08-10T08:58:25.900Z"
+      "scrapedAt": "2026-08-10T11:58:22.664Z"
     },
     {
       "ticker": "AFDI.CA",
@@ -101,7 +281,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/AFDI",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 1091700000,
+        "marketCap": 1168200000,
         "bookValue": 16.83,
         "pb": 1.54,
         "eps": 0.55,
@@ -111,17 +291,17 @@
         "capital": 180000000
       },
       "summary": {
-        "lastPrice": 60.76,
-        "change": -1.14,
-        "changePercent": -1.84,
+        "lastPrice": 64.95,
+        "change": 3,
+        "changePercent": 4.85,
         "open": 61.9,
         "prevClose": 61.9,
-        "high": 62.48,
+        "high": 65,
         "low": 60,
-        "volume": 38407,
-        "turnover": 2345900.25
+        "volume": 361772,
+        "turnover": 23051598
       },
-      "scrapedAt": "2026-08-10T08:58:24.777Z"
+      "scrapedAt": "2026-08-10T11:58:22.584Z"
     },
     {
       "ticker": "AFMC.CA",
@@ -131,7 +311,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/AFMC",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 7334866494,
+        "marketCap": 7361179916.4,
         "bookValue": 8.48,
         "pb": 6.45,
         "eps": 4.77,
@@ -141,17 +321,17 @@
         "capital": 164458890
       },
       "summary": {
-        "lastPrice": 222.45,
-        "change": -7.55,
-        "changePercent": -3.28,
+        "lastPrice": 220.95,
+        "change": -6.2,
+        "changePercent": -2.7,
         "open": 230,
         "prevClose": 230,
         "high": 233,
         "low": 220,
-        "volume": 156021,
-        "turnover": 34993412
+        "volume": 337497,
+        "turnover": 75557592
       },
-      "scrapedAt": "2026-08-10T08:58:24.857Z"
+      "scrapedAt": "2026-08-10T11:58:22.655Z"
     },
     {
       "ticker": "AIDC.CA",
@@ -161,7 +341,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/AIDC",
       "fundamentals": {
         "parValue": 0.11,
-        "marketCap": 1109387632.98,
+        "marketCap": 1106271375.58,
         "currency": "جنيه مصري",
         "shares": 1558128698,
         "capital": 171394156.78
@@ -169,15 +349,15 @@
       "summary": {
         "lastPrice": 0.71,
         "change": 0,
-        "changePercent": 0.42,
+        "changePercent": 0.28,
         "open": 0.71,
         "prevClose": 0.71,
         "high": 0.71,
-        "low": 0.71,
-        "volume": 2602947,
-        "turnover": 1847324.62
+        "low": 0.7,
+        "volume": 12082890,
+        "turnover": 8547671
       },
-      "scrapedAt": "2026-08-10T08:58:24.795Z"
+      "scrapedAt": "2026-08-10T11:58:22.631Z"
     },
     {
       "ticker": "AIHC.CA",
@@ -199,15 +379,15 @@
       "summary": {
         "lastPrice": 0.51,
         "change": -0.01,
-        "changePercent": -1.94,
+        "changePercent": -1.55,
         "open": 0.52,
         "prevClose": 0.52,
         "high": 0.52,
-        "low": 0.51,
-        "volume": 13069201,
-        "turnover": 6693351.5
+        "low": 0.5,
+        "volume": 33075124,
+        "turnover": 16822618
       },
-      "scrapedAt": "2026-08-10T08:58:30.424Z"
+      "scrapedAt": "2026-08-10T11:58:23.770Z"
     },
     {
       "ticker": "AJWA.CA",
@@ -217,7 +397,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/AJWA",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 3777916400,
+        "marketCap": 3739534377,
         "bookValue": 66.81,
         "pb": 1.03,
         "eps": 4.7,
@@ -227,17 +407,17 @@
         "capital": 200953000
       },
       "summary": {
-        "lastPrice": 188.25,
-        "change": 0.32,
-        "changePercent": 0.17,
+        "lastPrice": 186.09,
+        "change": -1.84,
+        "changePercent": -0.98,
         "open": 187.93,
         "prevClose": 187.93,
         "high": 189.98,
-        "low": 186.22,
-        "volume": 23891,
-        "turnover": 4506572.5
+        "low": 186.01,
+        "volume": 68868,
+        "turnover": 12939987
       },
-      "scrapedAt": "2026-08-10T08:58:28.642Z"
+      "scrapedAt": "2026-08-10T11:58:23.737Z"
     },
     {
       "ticker": "ALCN.CA",
@@ -247,7 +427,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ALCN",
       "fundamentals": {
         "parValue": 0.5,
-        "marketCap": 92066760120,
+        "marketCap": 91470858760,
         "bookValue": 2.58,
         "pb": 7.76,
         "eps": 2.02,
@@ -257,17 +437,17 @@
         "capital": 1489753400
       },
       "summary": {
-        "lastPrice": 30.94,
-        "change": -0.21,
-        "changePercent": -0.67,
+        "lastPrice": 30.74,
+        "change": -0.45,
+        "changePercent": -1.44,
         "open": 31.15,
         "prevClose": 31.15,
         "high": 31.22,
-        "low": 30.9,
-        "volume": 225944,
-        "turnover": 7023636.5
+        "low": 30.7,
+        "volume": 607240,
+        "turnover": 18768488
       },
-      "scrapedAt": "2026-08-10T08:58:29.795Z"
+      "scrapedAt": "2026-08-10T11:58:23.790Z"
     },
     {
       "ticker": "ALUM.CA",
@@ -277,7 +457,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ALUM",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 1082648262,
+        "marketCap": 1070355075,
         "bookValue": 2.66,
         "pb": 5.05,
         "eps": 0.02,
@@ -287,17 +467,17 @@
         "capital": 42390300
       },
       "summary": {
-        "lastPrice": 25.53,
-        "change": -0.37,
-        "changePercent": -1.43,
+        "lastPrice": 25.25,
+        "change": -0.65,
+        "changePercent": -2.51,
         "open": 25.9,
         "prevClose": 25.9,
         "high": 26.24,
-        "low": 25.3,
-        "volume": 441039,
-        "turnover": 11297370
+        "low": 25.17,
+        "volume": 875117,
+        "turnover": 22311354
       },
-      "scrapedAt": "2026-08-10T08:58:30.351Z"
+      "scrapedAt": "2026-08-10T11:58:23.816Z"
     },
     {
       "ticker": "AMER.CA",
@@ -307,7 +487,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/AMER",
       "fundamentals": {
         "parValue": 0.7,
-        "marketCap": 5723687585.6,
+        "marketCap": 5850078163.2,
         "bookValue": 2.15,
         "pb": 0.88,
         "eps": 0.26,
@@ -317,17 +497,17 @@
         "capital": 631952888
       },
       "summary": {
-        "lastPrice": 6.32,
-        "change": 0.17,
-        "changePercent": 2.76,
+        "lastPrice": 6.47,
+        "change": 0.33,
+        "changePercent": 5.37,
         "open": 6.15,
         "prevClose": 6.15,
-        "high": 6.43,
+        "high": 6.48,
         "low": 6.15,
-        "volume": 6486753,
-        "turnover": 41027076
+        "volume": 11911025,
+        "turnover": 75758120
       },
-      "scrapedAt": "2026-08-10T08:58:30.236Z"
+      "scrapedAt": "2026-08-10T11:58:23.750Z"
     },
     {
       "ticker": "AMES.CA",
@@ -337,7 +517,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/AMES",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 15136664400,
+        "marketCap": 15115485528,
         "bookValue": 2.29,
         "pb": 20.25,
         "eps": 0.32,
@@ -347,17 +527,17 @@
         "capital": 124581600
       },
       "summary": {
-        "lastPrice": 121.49,
-        "change": -1.31,
-        "changePercent": -1.07,
+        "lastPrice": 121.33,
+        "change": -1.47,
+        "changePercent": -1.2,
         "open": 122.8,
         "prevClose": 122.8,
         "high": 125,
-        "low": 121,
-        "volume": 95511,
-        "turnover": 11680812
+        "low": 120.05,
+        "volume": 198461,
+        "turnover": 24239588
       },
-      "scrapedAt": "2026-08-10T08:58:32.172Z"
+      "scrapedAt": "2026-08-10T11:58:24.754Z"
     },
     {
       "ticker": "AMIA.CA",
@@ -367,7 +547,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/AMIA",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 6586360236.9,
+        "marketCap": 6504668947.14,
         "bookValue": 2.56,
         "pb": 2,
         "eps": 0.92,
@@ -377,17 +557,17 @@
         "capital": 510570561
       },
       "summary": {
-        "lastPrice": 12.9,
-        "change": -0.27,
-        "changePercent": -2.05,
+        "lastPrice": 12.74,
+        "change": -0.43,
+        "changePercent": -3.26,
         "open": 13.17,
         "prevClose": 13.17,
         "high": 13.2,
         "low": 12.6,
-        "volume": 720819,
-        "turnover": 9299046
+        "volume": 1462727,
+        "turnover": 18811254
       },
-      "scrapedAt": "2026-08-10T08:58:32.398Z"
+      "scrapedAt": "2026-08-10T11:58:24.655Z"
     },
     {
       "ticker": "AMOC.CA",
@@ -397,7 +577,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/AMOC",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 11778480000,
+        "marketCap": 11855970000,
         "bookValue": 3.43,
         "pb": 1.67,
         "eps": 0.46,
@@ -407,17 +587,17 @@
         "capital": 1291500000
       },
       "summary": {
-        "lastPrice": 9.11,
-        "change": -0.01,
-        "changePercent": -0.11,
+        "lastPrice": 9.15,
+        "change": 0.06,
+        "changePercent": 0.66,
         "open": 9.12,
         "prevClose": 9.12,
         "high": 9.18,
-        "low": 9.1,
-        "volume": 1189863,
-        "turnover": 10883423
+        "low": 9.08,
+        "volume": 3648012,
+        "turnover": 33305198
       },
-      "scrapedAt": "2026-08-10T08:58:32.215Z"
+      "scrapedAt": "2026-08-10T11:58:24.689Z"
     },
     {
       "ticker": "APSW.CA",
@@ -427,7 +607,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/APSW",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 826315459.2,
+        "marketCap": 816946803.2,
         "bookValue": 0.59,
         "pb": 8.68,
         "eps": -0.41,
@@ -437,17 +617,17 @@
         "capital": 468432800
       },
       "summary": {
-        "lastPrice": 0,
-        "change": 0.02,
-        "changePercent": 0.23,
+        "lastPrice": 8.74,
+        "change": -0.06,
+        "changePercent": -0.68,
         "open": 8.8,
         "prevClose": 8.8,
         "high": 8.89,
-        "low": 8.8,
-        "volume": 25844,
-        "turnover": 228413.22
+        "low": 8.7,
+        "volume": 109389,
+        "turnover": 960635.5
       },
-      "scrapedAt": "2026-08-10T08:58:32.417Z"
+      "scrapedAt": "2026-08-10T11:58:24.631Z"
     },
     {
       "ticker": "ARAB.CA",
@@ -457,7 +637,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ARAB",
       "fundamentals": {
         "parValue": 0.1,
-        "marketCap": 3461837884.11,
+        "marketCap": 3406226030.55,
         "bookValue": 0.18,
         "pb": 1.05,
         "eps": 0.03,
@@ -467,17 +647,17 @@
         "capital": 1390296339
       },
       "summary": {
-        "lastPrice": 0.25,
+        "lastPrice": 0.24,
         "change": 0,
-        "changePercent": 0,
+        "changePercent": -1.61,
         "open": 0.25,
         "prevClose": 0.25,
         "high": 0.25,
-        "low": 0.25,
-        "volume": 213685283,
-        "turnover": 53649708
+        "low": 0.24,
+        "volume": 355612881,
+        "turnover": 88758360
       },
-      "scrapedAt": "2026-08-10T08:58:32.374Z"
+      "scrapedAt": "2026-08-10T11:58:24.674Z"
     },
     {
       "ticker": "ARCC.CA",
@@ -487,7 +667,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ARCC",
       "fundamentals": {
         "parValue": 2,
-        "marketCap": 24201466830,
+        "marketCap": 24125718890,
         "bookValue": 9.75,
         "pb": 4.12,
         "eps": 8.61,
@@ -497,17 +677,17 @@
         "capital": 757479400
       },
       "summary": {
-        "lastPrice": 63.79,
-        "change": 0.29,
-        "changePercent": 0.46,
+        "lastPrice": 63.72,
+        "change": 0.2,
+        "changePercent": 0.31,
         "open": 63.5,
         "prevClose": 63.5,
         "high": 64.9,
-        "low": 63.5,
-        "volume": 422032,
-        "turnover": 27037922
+        "low": 62.62,
+        "volume": 773676,
+        "turnover": 49388840
       },
-      "scrapedAt": "2026-08-10T08:58:32.225Z"
+      "scrapedAt": "2026-08-10T11:58:24.665Z"
     },
     {
       "ticker": "AREH.CA",
@@ -527,17 +707,17 @@
         "capital": 80000000
       },
       "summary": {
-        "lastPrice": 1.53,
+        "lastPrice": 1.52,
         "change": 0,
         "changePercent": 0,
         "open": 1.53,
         "prevClose": 1.53,
         "high": 1.56,
-        "low": 1.52,
-        "volume": 6583717,
-        "turnover": 10109573
+        "low": 1.51,
+        "volume": 13247510,
+        "turnover": 20265786
       },
-      "scrapedAt": "2026-08-10T08:58:33.504Z"
+      "scrapedAt": "2026-08-10T11:58:25.585Z"
     },
     {
       "ticker": "ASCM.CA",
@@ -547,7 +727,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ASCM",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 3335000000,
+        "marketCap": 3399500000,
         "bookValue": 52.85,
         "pb": 0.92,
         "eps": 13.47,
@@ -557,17 +737,17 @@
         "capital": 500000000
       },
       "summary": {
-        "lastPrice": 66.81,
-        "change": 1.33,
-        "changePercent": 2.03,
+        "lastPrice": 68,
+        "change": 2.51,
+        "changePercent": 3.83,
         "open": 65.48,
         "prevClose": 65.48,
         "high": 68.98,
         "low": 65.02,
-        "volume": 532241,
-        "turnover": 36027708
+        "volume": 982988,
+        "turnover": 66446972
       },
-      "scrapedAt": "2026-08-10T08:58:33.813Z"
+      "scrapedAt": "2026-08-10T11:58:25.614Z"
     },
     {
       "ticker": "ASPI.CA",
@@ -577,7 +757,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ASPI",
       "fundamentals": {
         "parValue": 0.2,
-        "marketCap": 1010000000,
+        "marketCap": 1002000000,
         "bookValue": 0.32,
         "pb": 1.03,
         "eps": 0.04,
@@ -589,15 +769,15 @@
       "summary": {
         "lastPrice": 0.5,
         "change": -0.02,
-        "changePercent": -3.08,
+        "changePercent": -3.65,
         "open": 0.52,
         "prevClose": 0.52,
         "high": 0.53,
         "low": 0.49,
-        "volume": 41120075,
-        "turnover": 20800450
+        "volume": 100969527,
+        "turnover": 50793424
       },
-      "scrapedAt": "2026-08-10T08:58:33.843Z"
+      "scrapedAt": "2026-08-10T11:58:25.623Z"
     },
     {
       "ticker": "ATLC.CA",
@@ -607,7 +787,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ATLC",
       "fundamentals": {
         "parValue": 2.5,
-        "marketCap": 2180000000,
+        "marketCap": 2192000000,
         "bookValue": 3.23,
         "pb": 1.3,
         "eps": 0.42,
@@ -617,17 +797,17 @@
         "capital": 1000000000
       },
       "summary": {
-        "lastPrice": 5.48,
+        "lastPrice": 5.47,
         "change": 0.1,
         "changePercent": 1.86,
         "open": 5.38,
         "prevClose": 5.38,
         "high": 5.5,
         "low": 5.38,
-        "volume": 2414508,
-        "turnover": 13138998
+        "volume": 4024908,
+        "turnover": 21913642
       },
-      "scrapedAt": "2026-08-10T08:58:33.934Z"
+      "scrapedAt": "2026-08-10T11:58:25.605Z"
     },
     {
       "ticker": "ATQA.CA",
@@ -637,7 +817,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ATQA",
       "fundamentals": {
         "parValue": 0.5,
-        "marketCap": 12804000000,
+        "marketCap": 12840000000,
         "bookValue": 1.99,
         "pb": 4.17,
         "eps": 0.04,
@@ -647,17 +827,17 @@
         "capital": 600000000
       },
       "summary": {
-        "lastPrice": 10.66,
-        "change": 0.53,
-        "changePercent": 5.23,
+        "lastPrice": 10.7,
+        "change": 0.57,
+        "changePercent": 5.63,
         "open": 10.13,
         "prevClose": 10.13,
-        "high": 10.78,
+        "high": 10.84,
         "low": 10.09,
-        "volume": 16844065,
-        "turnover": 177255696
+        "volume": 23547724,
+        "turnover": 248954096
       },
-      "scrapedAt": "2026-08-10T08:58:33.908Z"
+      "scrapedAt": "2026-08-10T11:58:25.733Z"
     },
     {
       "ticker": "AXPH.CA",
@@ -667,7 +847,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/AXPH",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 6524750000,
+        "marketCap": 6704550000,
         "bookValue": 217.12,
         "pb": 4.2,
         "eps": 132,
@@ -677,17 +857,17 @@
         "capital": 50000000
       },
       "summary": {
-        "lastPrice": 1293.88,
-        "change": 10.32,
-        "changePercent": 0.8,
+        "lastPrice": 1340.91,
+        "change": 57.35,
+        "changePercent": 4.47,
         "open": 1283.56,
         "prevClose": 1283.56,
-        "high": 1305.99,
+        "high": 1346,
         "low": 1281.35,
-        "volume": 2333,
-        "turnover": 3023041.5
+        "volume": 7458,
+        "turnover": 9809763
       },
-      "scrapedAt": "2026-08-10T08:58:34.698Z"
+      "scrapedAt": "2026-08-10T11:58:26.427Z"
     },
     {
       "ticker": "BINV.CA",
@@ -697,7 +877,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/BINV",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 10758734466.22,
+        "marketCap": 10667022096.1,
         "bookValue": 28.23,
         "pb": 1.48,
         "eps": 5.57,
@@ -707,17 +887,17 @@
         "capital": 1091813930
       },
       "summary": {
-        "lastPrice": 49.02,
-        "change": -0.07,
-        "changePercent": -0.14,
+        "lastPrice": 48.85,
+        "change": -0.24,
+        "changePercent": -0.49,
         "open": 49.09,
         "prevClose": 49.09,
         "high": 49.44,
-        "low": 49,
-        "volume": 26421,
-        "turnover": 1295946.38
+        "low": 48.5,
+        "volume": 71718,
+        "turnover": 3507572.75
       },
-      "scrapedAt": "2026-08-10T08:58:34.927Z"
+      "scrapedAt": "2026-08-10T11:58:26.602Z"
     },
     {
       "ticker": "BIOC.CA",
@@ -727,7 +907,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/BIOC",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 46265196516,
+        "marketCap": 43427384000,
         "bookValue": 23.89,
         "pb": 1.56,
         "eps": 3.26,
@@ -737,17 +917,17 @@
         "capital": 835142000
       },
       "summary": {
-        "lastPrice": 553.24,
-        "change": 75.98,
-        "changePercent": 15.92,
+        "lastPrice": 521.68,
+        "change": 42.74,
+        "changePercent": 8.96,
         "open": 477.26,
         "prevClose": 477.26,
         "high": 563,
         "low": 402,
-        "volume": 752488,
-        "turnover": 391627840
+        "volume": 1201635,
+        "turnover": 636810880
       },
-      "scrapedAt": "2026-08-10T08:58:34.659Z"
+      "scrapedAt": "2026-08-10T11:58:26.642Z"
     },
     {
       "ticker": "BONY.CA",
@@ -757,7 +937,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/BONY",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 7806166775.08,
+        "marketCap": 7703902581.52,
         "bookValue": 7.54,
         "pb": 0.58,
         "eps": 1.39,
@@ -767,17 +947,17 @@
         "capital": 1704403226
       },
       "summary": {
-        "lastPrice": 4.56,
-        "change": -0.03,
-        "changePercent": -0.65,
+        "lastPrice": 4.53,
+        "change": -0.07,
+        "changePercent": -1.53,
         "open": 4.59,
         "prevClose": 4.59,
         "high": 4.62,
-        "low": 4.54,
-        "volume": 2537368,
-        "turnover": 11579769
+        "low": 4.52,
+        "volume": 6983330,
+        "turnover": 31769588
       },
-      "scrapedAt": "2026-08-10T08:58:35.017Z"
+      "scrapedAt": "2026-08-10T11:58:26.620Z"
     },
     {
       "ticker": "BTFH.CA",
@@ -787,7 +967,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/BTFH",
       "fundamentals": {
         "parValue": 2,
-        "marketCap": 33654855804.16,
+        "marketCap": 33118950456.96,
         "bookValue": 2.24,
         "pb": 1.3,
         "eps": 0.26,
@@ -797,17 +977,17 @@
         "capital": 21436213888
       },
       "summary": {
-        "lastPrice": 3.15,
-        "change": -0.01,
-        "changePercent": -0.32,
+        "lastPrice": 3.09,
+        "change": -0.07,
+        "changePercent": -2.22,
         "open": 3.16,
         "prevClose": 3.16,
         "high": 3.18,
-        "low": 3.14,
-        "volume": 11433262,
-        "turnover": 36110664
+        "low": 3.08,
+        "volume": 128763720,
+        "turnover": 400787936
       },
-      "scrapedAt": "2026-08-10T08:58:34.847Z"
+      "scrapedAt": "2026-08-10T11:58:26.612Z"
     },
     {
       "ticker": "CAED.CA",
@@ -817,7 +997,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/CAED",
       "fundamentals": {
         "parValue": 4,
-        "marketCap": 1446000000,
+        "marketCap": 1444560000,
         "bookValue": 7.37,
         "pb": 7.02,
         "eps": 2.93,
@@ -827,17 +1007,17 @@
         "capital": 48000000
       },
       "summary": {
-        "lastPrice": 120.54,
-        "change": -0.95,
-        "changePercent": -0.78,
+        "lastPrice": 120.38,
+        "change": -1.11,
+        "changePercent": -0.91,
         "open": 121.49,
         "prevClose": 121.49,
         "high": 122.19,
-        "low": 120.3,
-        "volume": 39920,
-        "turnover": 4835833
+        "low": 120,
+        "volume": 71272,
+        "turnover": 8617524
       },
-      "scrapedAt": "2026-08-10T08:58:34.686Z"
+      "scrapedAt": "2026-08-10T11:58:26.515Z"
     },
     {
       "ticker": "CANA.CA",
@@ -847,7 +1027,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/CANA",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 26780000000,
+        "marketCap": 26487500000,
         "bookValue": 29.11,
         "pb": 1.31,
         "eps": 8.44,
@@ -857,17 +1037,17 @@
         "capital": 6500000000
       },
       "summary": {
-        "lastPrice": 41.28,
-        "change": 0.34,
-        "changePercent": 0.83,
+        "lastPrice": 40.75,
+        "change": -0.19,
+        "changePercent": -0.46,
         "open": 40.94,
         "prevClose": 40.94,
         "high": 41.99,
         "low": 40.67,
-        "volume": 354863,
-        "turnover": 14593611
+        "volume": 514594,
+        "turnover": 21147704
       },
-      "scrapedAt": "2026-08-10T08:58:36.475Z"
+      "scrapedAt": "2026-08-10T11:58:27.468Z"
     },
     {
       "ticker": "CCAP.CA",
@@ -877,7 +1057,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/CCAP",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 16725658461.2,
+        "marketCap": 16629164277.77,
         "bookValue": -9.69,
         "pb": -0.26,
         "eps": 1.17,
@@ -887,17 +1067,17 @@
         "capital": 16082363905
       },
       "summary": {
-        "lastPrice": 5.2,
-        "change": -0.05,
-        "changePercent": -0.95,
+        "lastPrice": 5.16,
+        "change": -0.08,
+        "changePercent": -1.52,
         "open": 5.25,
         "prevClose": 5.25,
         "high": 5.28,
-        "low": 5.2,
-        "volume": 14730177,
-        "turnover": 77103336
+        "low": 5.13,
+        "volume": 54516938,
+        "turnover": 282977696
       },
-      "scrapedAt": "2026-08-10T08:58:36.672Z"
+      "scrapedAt": "2026-08-10T11:58:27.522Z"
     },
     {
       "ticker": "CCRS.CA",
@@ -907,7 +1087,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/CCRS",
       "fundamentals": {
         "parValue": 0.5,
-        "marketCap": 514500000,
+        "marketCap": 518700000,
         "bookValue": 0.51,
         "pb": 2.89,
         "eps": 0.04,
@@ -917,17 +1097,17 @@
         "capital": 105000000
       },
       "summary": {
-        "lastPrice": 2.45,
-        "change": 0.03,
-        "changePercent": 1.24,
+        "lastPrice": 2.46,
+        "change": 0.05,
+        "changePercent": 2.07,
         "open": 2.42,
         "prevClose": 2.42,
-        "high": 2.47,
+        "high": 2.52,
         "low": 2.42,
-        "volume": 1269118,
-        "turnover": 3110206.5
+        "volume": 4023495,
+        "turnover": 9933193
       },
-      "scrapedAt": "2026-08-10T08:58:36.585Z"
+      "scrapedAt": "2026-08-10T11:58:27.383Z"
     },
     {
       "ticker": "CEFM.CA",
@@ -937,7 +1117,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/CEFM",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 1994957692.5,
+        "marketCap": 1984798867.35,
         "bookValue": 30.66,
         "pb": 2.93,
         "eps": 7.42,
@@ -947,17 +1127,17 @@
         "capital": 147229350
       },
       "summary": {
-        "lastPrice": 135.76,
-        "change": -0.65,
-        "changePercent": -0.48,
+        "lastPrice": 134.81,
+        "change": -1.6,
+        "changePercent": -1.17,
         "open": 136.41,
         "prevClose": 136.41,
         "high": 138,
-        "low": 135.1,
-        "volume": 17055,
-        "turnover": 2327751
+        "low": 134,
+        "volume": 41737,
+        "turnover": 5667985.5
       },
-      "scrapedAt": "2026-08-10T08:58:36.625Z"
+      "scrapedAt": "2026-08-10T11:58:27.477Z"
     },
     {
       "ticker": "CERA.CA",
@@ -967,7 +1147,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/CERA",
       "fundamentals": {
         "parValue": 0.25,
-        "marketCap": 1433906250,
+        "marketCap": 1423125000,
         "bookValue": 0.43,
         "pb": 2.37,
         "eps": 0.02,
@@ -977,17 +1157,17 @@
         "capital": 269531250
       },
       "summary": {
-        "lastPrice": 1.33,
-        "change": -0.02,
-        "changePercent": -1.48,
+        "lastPrice": 1.32,
+        "change": -0.03,
+        "changePercent": -2.22,
         "open": 1.35,
         "prevClose": 1.35,
         "high": 1.36,
-        "low": 1.33,
-        "volume": 2431489,
-        "turnover": 3247018.5
+        "low": 1.31,
+        "volume": 8626203,
+        "turnover": 11441920
       },
-      "scrapedAt": "2026-08-10T08:58:36.566Z"
+      "scrapedAt": "2026-08-10T11:58:27.455Z"
     },
     {
       "ticker": "CFGH.CA",
@@ -1014,10 +1194,10 @@
         "prevClose": 0.1,
         "high": 0.1,
         "low": 0.1,
-        "volume": 20000,
-        "turnover": 2080
+        "volume": 42000,
+        "turnover": 4373.43
       },
-      "scrapedAt": "2026-08-10T08:58:36.607Z"
+      "scrapedAt": "2026-08-10T11:58:27.394Z"
     },
     {
       "ticker": "CICH.CA",
@@ -1027,7 +1207,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/CICH",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 12650000000,
+        "marketCap": 12480000000,
         "bookValue": 8.19,
         "pb": 1.32,
         "eps": 1.76,
@@ -1037,17 +1217,17 @@
         "capital": 1000000000
       },
       "summary": {
-        "lastPrice": 12.64,
-        "change": -0.26,
-        "changePercent": -2.02,
+        "lastPrice": 12.48,
+        "change": -0.42,
+        "changePercent": -3.26,
         "open": 12.9,
         "prevClose": 12.9,
         "high": 12.94,
-        "low": 12.6,
-        "volume": 207878,
-        "turnover": 2649642.25
+        "low": 12.45,
+        "volume": 525752,
+        "turnover": 6638076
       },
-      "scrapedAt": "2026-08-10T08:58:38.037Z"
+      "scrapedAt": "2026-08-10T11:58:28.791Z"
     },
     {
       "ticker": "CIEB.CA",
@@ -1057,7 +1237,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/CIEB",
       "fundamentals": {
         "parValue": 4,
-        "marketCap": 30475000000,
+        "marketCap": 30625000000,
         "bookValue": 16.34,
         "pb": 1.27,
         "eps": 5.71,
@@ -1067,17 +1247,17 @@
         "capital": 5000000000
       },
       "summary": {
-        "lastPrice": 24.46,
-        "change": -0.04,
-        "changePercent": -0.16,
+        "lastPrice": 24.49,
+        "change": -0.01,
+        "changePercent": -0.04,
         "open": 24.5,
         "prevClose": 24.5,
-        "high": 24.49,
-        "low": 24.38,
-        "volume": 85680,
-        "turnover": 2095240.5
+        "high": 24.5,
+        "low": 24.25,
+        "volume": 224448,
+        "turnover": 5486500
       },
-      "scrapedAt": "2026-08-10T08:58:38.741Z"
+      "scrapedAt": "2026-08-10T11:58:28.822Z"
     },
     {
       "ticker": "CIRA.CA",
@@ -1087,7 +1267,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/CIRA",
       "fundamentals": {
         "parValue": 0.4,
-        "marketCap": 22816241223.75,
+        "marketCap": 22437427512.5,
         "bookValue": 2.97,
         "pb": 4.82,
         "eps": 1.29,
@@ -1097,17 +1277,17 @@
         "capital": 233116130
       },
       "summary": {
-        "lastPrice": 39.16,
-        "change": 0.63,
-        "changePercent": 1.64,
+        "lastPrice": 38.5,
+        "change": -0.03,
+        "changePercent": -0.08,
         "open": 38.53,
         "prevClose": 38.53,
         "high": 39.65,
         "low": 38.25,
-        "volume": 738499,
-        "turnover": 28921510
+        "volume": 1295648,
+        "turnover": 50551776
       },
-      "scrapedAt": "2026-08-10T08:58:38.192Z"
+      "scrapedAt": "2026-08-10T11:58:28.903Z"
     },
     {
       "ticker": "CLHO.CA",
@@ -1117,7 +1297,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/CLHO",
       "fundamentals": {
         "parValue": 0.5,
-        "marketCap": 26003361311.97,
+        "marketCap": 25887726575.73,
         "bookValue": 2.59,
         "pb": 4.83,
         "eps": 0.33,
@@ -1127,17 +1307,17 @@
         "capital": 722717101.5
       },
       "summary": {
-        "lastPrice": 17.96,
-        "change": -0.07,
-        "changePercent": -0.39,
+        "lastPrice": 18,
+        "change": -0.12,
+        "changePercent": -0.67,
         "open": 18.03,
         "prevClose": 18.03,
         "high": 18.73,
         "low": 17.85,
-        "volume": 1402010,
-        "turnover": 25509510
+        "volume": 5102857,
+        "turnover": 91939648
       },
-      "scrapedAt": "2026-08-10T08:58:38.104Z"
+      "scrapedAt": "2026-08-10T11:58:28.911Z"
     },
     {
       "ticker": "CNFN.CA",
@@ -1147,7 +1327,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/CNFN",
       "fundamentals": {
         "parValue": 0.16,
-        "marketCap": 5948960780,
+        "marketCap": 5936991040,
         "bookValue": 3.17,
         "pb": 1.41,
         "eps": 0,
@@ -1157,17 +1337,17 @@
         "capital": 191515840
       },
       "summary": {
-        "lastPrice": 4.99,
-        "change": 0,
-        "changePercent": 0,
+        "lastPrice": 4.96,
+        "change": -0.03,
+        "changePercent": -0.6,
         "open": 4.99,
         "prevClose": 4.99,
         "high": 5.03,
-        "low": 4.97,
-        "volume": 2473533,
-        "turnover": 12362428
+        "low": 4.93,
+        "volume": 9320950,
+        "turnover": 46335324
       },
-      "scrapedAt": "2026-08-10T08:58:38.622Z"
+      "scrapedAt": "2026-08-10T11:58:28.847Z"
     },
     {
       "ticker": "COMI.CA",
@@ -1177,7 +1357,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/COMI",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 430226225100,
+        "marketCap": 429919140000,
         "bookValue": 57.67,
         "pb": 1.77,
         "eps": 21.77,
@@ -1187,17 +1367,17 @@
         "capital": 30708510000
       },
       "summary": {
-        "lastPrice": 140.01,
-        "change": -0.49,
-        "changePercent": -0.35,
+        "lastPrice": 140,
+        "change": -0.5,
+        "changePercent": -0.36,
         "open": 140.5,
         "prevClose": 140.5,
         "high": 140.5,
         "low": 139.2,
-        "volume": 537282,
-        "turnover": 75093664
+        "volume": 1672358,
+        "turnover": 234007872
       },
-      "scrapedAt": "2026-08-10T08:58:38.317Z"
+      "scrapedAt": "2026-08-10T11:58:28.839Z"
     },
     {
       "ticker": "COPR.CA",
@@ -1207,7 +1387,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/COPR",
       "fundamentals": {
         "parValue": 0.15,
-        "marketCap": 217576640.16,
+        "marketCap": 214423355.52,
         "bookValue": 0.15,
         "pb": 5.69,
         "eps": 0,
@@ -1219,15 +1399,15 @@
       "summary": {
         "lastPrice": 0.41,
         "change": 0,
-        "changePercent": 0,
+        "changePercent": -0.49,
         "open": 0.41,
         "prevClose": 0.41,
         "high": 0.42,
-        "low": 0.41,
-        "volume": 19016279,
-        "turnover": 7875899.5
+        "low": 0.4,
+        "volume": 72306356,
+        "turnover": 29685572
       },
-      "scrapedAt": "2026-08-10T08:58:40.532Z"
+      "scrapedAt": "2026-08-10T11:58:29.720Z"
     },
     {
       "ticker": "COSG.CA",
@@ -1247,17 +1427,17 @@
         "capital": 312000000
       },
       "summary": {
-        "lastPrice": 1.71,
+        "lastPrice": 1.7,
         "change": 0.01,
         "changePercent": 0.59,
         "open": 1.7,
         "prevClose": 1.7,
         "high": 1.73,
         "low": 1.7,
-        "volume": 5232637,
-        "turnover": 8985142
+        "volume": 15994139,
+        "turnover": 27344396
       },
-      "scrapedAt": "2026-08-10T08:58:40.724Z"
+      "scrapedAt": "2026-08-10T11:58:29.729Z"
     },
     {
       "ticker": "CPCI.CA",
@@ -1267,7 +1447,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/CPCI",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 7347861843.75,
+        "marketCap": 8573526000,
         "bookValue": 77.77,
         "pb": 3.67,
         "eps": 38.53,
@@ -1277,17 +1457,17 @@
         "capital": 149343750
       },
       "summary": {
-        "lastPrice": 495.03,
-        "change": 9.34,
-        "changePercent": 1.92,
+        "lastPrice": 574.08,
+        "change": 88.39,
+        "changePercent": 18.2,
         "open": 485.69,
         "prevClose": 485.69,
-        "high": 500,
+        "high": 579,
         "low": 484.2,
-        "volume": 17629,
-        "turnover": 8668068
+        "volume": 92896,
+        "turnover": 49205584
       },
-      "scrapedAt": "2026-08-10T08:58:40.737Z"
+      "scrapedAt": "2026-08-10T11:58:29.744Z"
     },
     {
       "ticker": "CPME.CA",
@@ -1297,7 +1477,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/CPME",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 752000000,
+        "marketCap": 794300000,
         "bookValue": 10.21,
         "pb": 0.13,
         "eps": 0.57,
@@ -1307,17 +1487,17 @@
         "capital": 235000000
       },
       "summary": {
-        "lastPrice": 31.97,
-        "change": -0.1,
-        "changePercent": -0.31,
+        "lastPrice": 33.3,
+        "change": 1.23,
+        "changePercent": 3.84,
         "open": 32.07,
         "prevClose": 32.07,
-        "high": 33.79,
-        "low": 31.5,
-        "volume": 202291,
-        "turnover": 6444369
+        "high": 33.8,
+        "low": 30.5,
+        "volume": 248184,
+        "turnover": 7895193
       },
-      "scrapedAt": "2026-08-10T08:58:41.106Z"
+      "scrapedAt": "2026-08-10T11:58:29.675Z"
     },
     {
       "ticker": "CRST.CA",
@@ -1327,7 +1507,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/CRST",
       "fundamentals": {
         "parValue": 0.16,
-        "marketCap": 1279663096.32,
+        "marketCap": 1302113326.08,
         "bookValue": 0.26,
         "pb": 0.79,
         "eps": 0.16,
@@ -1337,17 +1517,17 @@
         "capital": 89800919.04
       },
       "summary": {
-        "lastPrice": 2.28,
-        "change": 0.07,
-        "changePercent": 3.17,
+        "lastPrice": 2.31,
+        "change": 0.11,
+        "changePercent": 4.98,
         "open": 2.21,
         "prevClose": 2.21,
-        "high": 2.28,
+        "high": 2.34,
         "low": 2.21,
-        "volume": 25488743,
-        "turnover": 57138892
+        "volume": 98729937,
+        "turnover": 225872736
       },
-      "scrapedAt": "2026-08-10T08:58:41.142Z"
+      "scrapedAt": "2026-08-10T11:58:29.607Z"
     },
     {
       "ticker": "CSAG.CA",
@@ -1357,7 +1537,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/CSAG",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 11505000000,
+        "marketCap": 11820000000,
         "bookValue": 5.17,
         "pb": 6.43,
         "eps": 11.56,
@@ -1367,17 +1547,17 @@
         "capital": 300000000
       },
       "summary": {
-        "lastPrice": 38.39,
-        "change": -0.41,
-        "changePercent": -1.06,
+        "lastPrice": 39,
+        "change": 0.6,
+        "changePercent": 1.55,
         "open": 38.8,
         "prevClose": 38.8,
-        "high": 39.24,
-        "low": 38.35,
-        "volume": 494459,
-        "turnover": 19261670
+        "high": 39.4,
+        "low": 38,
+        "volume": 1101218,
+        "turnover": 42720700
       },
-      "scrapedAt": "2026-08-10T08:58:40.883Z"
+      "scrapedAt": "2026-08-10T11:58:29.686Z"
     },
     {
       "ticker": "DAPH.CA",
@@ -1404,10 +1584,10 @@
         "prevClose": 107.45,
         "high": 128.94,
         "low": 108,
-        "volume": 849637,
-        "turnover": 103778032
+        "volume": 921151,
+        "turnover": 112999048
       },
-      "scrapedAt": "2026-08-10T08:58:42.056Z"
+      "scrapedAt": "2026-08-10T11:58:30.561Z"
     },
     {
       "ticker": "DCCC.CA",
@@ -1436,7 +1616,7 @@
         "volume": 98,
         "turnover": 916.3
       },
-      "scrapedAt": "2026-08-10T08:58:42.280Z"
+      "scrapedAt": "2026-08-10T11:58:30.518Z"
     },
     {
       "ticker": "DEIN.CA",
@@ -1466,7 +1646,7 @@
         "volume": 3,
         "turnover": 40.95
       },
-      "scrapedAt": "2026-08-10T08:58:42.290Z"
+      "scrapedAt": "2026-08-10T11:58:30.588Z"
     },
     {
       "ticker": "DGTZ.CA",
@@ -1493,10 +1673,10 @@
         "prevClose": 2.65,
         "high": 2.66,
         "low": 2.61,
-        "volume": 633751,
-        "turnover": 1665378.13
+        "volume": 1626004,
+        "turnover": 4274838
       },
-      "scrapedAt": "2026-08-10T08:58:42.351Z"
+      "scrapedAt": "2026-08-10T11:58:30.546Z"
     },
     {
       "ticker": "DOMT.CA",
@@ -1506,7 +1686,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/DOMT",
       "fundamentals": {
         "parValue": 0.2,
-        "marketCap": 8173043459.4,
+        "marketCap": 8119347807.35,
         "bookValue": 5.72,
         "pb": 5.1,
         "eps": 1.32,
@@ -1516,17 +1696,17 @@
         "capital": 56521739
       },
       "summary": {
-        "lastPrice": 28.92,
-        "change": -0.09,
-        "changePercent": -0.31,
+        "lastPrice": 28.73,
+        "change": -0.28,
+        "changePercent": -0.97,
         "open": 29.01,
         "prevClose": 29.01,
         "high": 29.5,
-        "low": 28.91,
-        "volume": 167689,
-        "turnover": 4873826.5
+        "low": 28.35,
+        "volume": 396121,
+        "turnover": 11421562
       },
-      "scrapedAt": "2026-08-10T08:58:42.458Z"
+      "scrapedAt": "2026-08-10T11:58:30.581Z"
     },
     {
       "ticker": "DSCW.CA",
@@ -1536,7 +1716,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/DSCW",
       "fundamentals": {
         "parValue": 0.2,
-        "marketCap": 5627931059.1,
+        "marketCap": 5735129745.94,
         "bookValue": 0.54,
         "pb": 2.05,
         "eps": -0.24,
@@ -1546,17 +1726,17 @@
         "capital": 535993434.2
       },
       "summary": {
-        "lastPrice": 2.09,
-        "change": -0.04,
-        "changePercent": -1.88,
+        "lastPrice": 2.14,
+        "change": 0.01,
+        "changePercent": 0.47,
         "open": 2.13,
         "prevClose": 2.13,
         "high": 2.15,
         "low": 2.05,
-        "volume": 20891380,
-        "turnover": 43699096
+        "volume": 47317172,
+        "turnover": 99045184
       },
-      "scrapedAt": "2026-08-10T08:58:42.245Z"
+      "scrapedAt": "2026-08-10T11:58:30.537Z"
     },
     {
       "ticker": "DTPP.CA",
@@ -1566,7 +1746,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/DTPP",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 1596000000,
+        "marketCap": 1607200000,
         "bookValue": 44.11,
         "pb": 2.6,
         "eps": 17.79,
@@ -1576,17 +1756,17 @@
         "capital": 28000000
       },
       "summary": {
-        "lastPrice": 285.47,
-        "change": -5.34,
-        "changePercent": -1.84,
+        "lastPrice": 284.44,
+        "change": -3.81,
+        "changePercent": -1.31,
         "open": 290.81,
         "prevClose": 290.81,
         "high": 292.5,
         "low": 280.01,
-        "volume": 161623,
-        "turnover": 46081068
+        "volume": 278621,
+        "turnover": 79315416
       },
-      "scrapedAt": "2026-08-10T08:58:43.470Z"
+      "scrapedAt": "2026-08-10T11:58:31.453Z"
     },
     {
       "ticker": "EALR.CA",
@@ -1596,7 +1776,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/EALR",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 2028000000,
+        "marketCap": 1997996000,
         "bookValue": 13.86,
         "pb": 22.49,
         "eps": 1.2,
@@ -1606,17 +1786,17 @@
         "capital": 26000000
       },
       "summary": {
-        "lastPrice": 389.97,
-        "change": 14.95,
-        "changePercent": 3.99,
+        "lastPrice": 384.23,
+        "change": 9.21,
+        "changePercent": 2.46,
         "open": 375.02,
         "prevClose": 375.02,
-        "high": 390.99,
+        "high": 392,
         "low": 375.05,
-        "volume": 18435,
-        "turnover": 7068373
+        "volume": 58258,
+        "turnover": 22422866
       },
-      "scrapedAt": "2026-08-10T08:58:43.567Z"
+      "scrapedAt": "2026-08-10T11:58:31.371Z"
     },
     {
       "ticker": "EASB.CA",
@@ -1626,7 +1806,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/EASB",
       "fundamentals": {
         "parValue": 0.8,
-        "marketCap": 652500000,
+        "marketCap": 649800000,
         "bookValue": 1.29,
         "pb": 2.53,
         "eps": 0.1,
@@ -1636,17 +1816,17 @@
         "capital": 72000000
       },
       "summary": {
-        "lastPrice": 7.3,
-        "change": 0.09,
-        "changePercent": 1.25,
+        "lastPrice": 7.22,
+        "change": 0.01,
+        "changePercent": 0.14,
         "open": 7.21,
         "prevClose": 7.21,
         "high": 7.37,
-        "low": 7.21,
-        "volume": 231347,
-        "turnover": 1689774.75
+        "low": 7.2,
+        "volume": 507328,
+        "turnover": 3681430
       },
-      "scrapedAt": "2026-08-10T08:58:43.638Z"
+      "scrapedAt": "2026-08-10T11:58:31.408Z"
     },
     {
       "ticker": "EAST.CA",
@@ -1656,7 +1836,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/EAST",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 109650000000,
+        "marketCap": 109320000000,
         "bookValue": 4.67,
         "pb": 6.66,
         "eps": 2.17,
@@ -1666,17 +1846,17 @@
         "capital": 3000000000
       },
       "summary": {
-        "lastPrice": 36.55,
-        "change": -0.51,
-        "changePercent": -1.38,
+        "lastPrice": 36.4,
+        "change": -0.62,
+        "changePercent": -1.67,
         "open": 37.06,
         "prevClose": 37.06,
         "high": 37.2,
-        "low": 36.55,
-        "volume": 604281,
-        "turnover": 22292876
+        "low": 36.4,
+        "volume": 1063342,
+        "turnover": 39079488
       },
-      "scrapedAt": "2026-08-10T08:58:43.490Z"
+      "scrapedAt": "2026-08-10T11:58:31.435Z"
     },
     {
       "ticker": "EBSC.CA",
@@ -1686,7 +1866,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/EBSC",
       "fundamentals": {
         "parValue": 0.1,
-        "marketCap": 1019193922.5,
+        "marketCap": 1013967287,
         "bookValue": 0.39,
         "pb": 4.14,
         "eps": 0.03,
@@ -1696,17 +1876,17 @@
         "capital": 52266355
       },
       "summary": {
-        "lastPrice": 1.95,
-        "change": -0.02,
-        "changePercent": -1.02,
+        "lastPrice": 1.94,
+        "change": -0.03,
+        "changePercent": -1.52,
         "open": 1.97,
         "prevClose": 1.97,
         "high": 2,
-        "low": 1.94,
-        "volume": 984143,
-        "turnover": 1924271.5
+        "low": 1.93,
+        "volume": 1791426,
+        "turnover": 3493759.75
       },
-      "scrapedAt": "2026-08-10T08:58:43.676Z"
+      "scrapedAt": "2026-08-10T11:58:31.445Z"
     },
     {
       "ticker": "ECAP.CA",
@@ -1716,7 +1896,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ECAP",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 1826981070.25,
+        "marketCap": 2016346991.4,
         "bookValue": 8.97,
         "pb": 2.27,
         "eps": -6.38,
@@ -1726,17 +1906,17 @@
         "capital": 266712565
       },
       "summary": {
-        "lastPrice": 34.06,
-        "change": -0.44,
-        "changePercent": -1.28,
+        "lastPrice": 37.68,
+        "change": 3.3,
+        "changePercent": 9.57,
         "open": 34.5,
         "prevClose": 34.5,
-        "high": 34.51,
+        "high": 37.89,
         "low": 34,
-        "volume": 34091,
-        "turnover": 1166394.5
+        "volume": 1319746,
+        "turnover": 48132044
       },
-      "scrapedAt": "2026-08-10T08:58:43.500Z"
+      "scrapedAt": "2026-08-10T11:58:31.393Z"
     },
     {
       "ticker": "EDFM.CA",
@@ -1746,7 +1926,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/EDFM",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 2400000000,
+        "marketCap": 2370000000,
         "bookValue": 69.69,
         "pb": 3.36,
         "eps": 28.84,
@@ -1756,17 +1936,17 @@
         "capital": 60000000
       },
       "summary": {
-        "lastPrice": 397.41,
-        "change": 3.29,
-        "changePercent": 0.83,
+        "lastPrice": 395.32,
+        "change": 1.2,
+        "changePercent": 0.3,
         "open": 394.12,
         "prevClose": 394.12,
-        "high": 400,
+        "high": 401,
         "low": 392,
-        "volume": 1076,
-        "turnover": 426561.41
+        "volume": 2790,
+        "turnover": 1103545.38
       },
-      "scrapedAt": "2026-08-10T08:58:44.957Z"
+      "scrapedAt": "2026-08-10T11:58:32.214Z"
     },
     {
       "ticker": "EEII.CA",
@@ -1776,7 +1956,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/EEII",
       "fundamentals": {
         "parValue": 0.38,
-        "marketCap": 657459452.8,
+        "marketCap": 664122893.2,
         "bookValue": 0.82,
         "pb": 2.29,
         "eps": 0.04,
@@ -1786,17 +1966,17 @@
         "capital": 84403578.4
       },
       "summary": {
-        "lastPrice": 2.96,
-        "change": 0.28,
-        "changePercent": 10.45,
+        "lastPrice": 3,
+        "change": 0.31,
+        "changePercent": 11.57,
         "open": 2.68,
         "prevClose": 2.68,
-        "high": 2.96,
+        "high": 3.06,
         "low": 2.68,
-        "volume": 15383499,
-        "turnover": 43828264
+        "volume": 36318648,
+        "turnover": 105745672
       },
-      "scrapedAt": "2026-08-10T08:58:45.645Z"
+      "scrapedAt": "2026-08-10T11:58:32.248Z"
     },
     {
       "ticker": "EFIC.CA",
@@ -1806,7 +1986,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/EFIC",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 20801000000,
+        "marketCap": 21131000000,
         "bookValue": 30.62,
         "pb": 7.3,
         "eps": 28.36,
@@ -1816,17 +1996,17 @@
         "capital": 1000000000
       },
       "summary": {
-        "lastPrice": 208.5,
-        "change": 3.41,
-        "changePercent": 1.66,
+        "lastPrice": 211.31,
+        "change": 6.22,
+        "changePercent": 3.03,
         "open": 205.09,
         "prevClose": 205.09,
-        "high": 209.8,
+        "high": 214.99,
         "low": 205.51,
-        "volume": 34195,
-        "turnover": 7115352.5
+        "volume": 101101,
+        "turnover": 21226020
       },
-      "scrapedAt": "2026-08-10T08:58:45.007Z"
+      "scrapedAt": "2026-08-10T11:58:32.262Z"
     },
     {
       "ticker": "EFID.CA",
@@ -1836,7 +2016,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/EFID",
       "fundamentals": {
         "parValue": 0.2,
-        "marketCap": 43512848856.96,
+        "marketCap": 44506868248.48,
         "bookValue": 4.62,
         "pb": 6.21,
         "eps": 2.5,
@@ -1846,17 +2026,17 @@
         "capital": 280005462.4
       },
       "summary": {
-        "lastPrice": 31.01,
-        "change": -0.79,
-        "changePercent": -2.48,
+        "lastPrice": 31.59,
+        "change": -0.01,
+        "changePercent": -0.03,
         "open": 31.8,
         "prevClose": 31.8,
         "high": 31.89,
-        "low": 30.81,
-        "volume": 1520749,
-        "turnover": 47283032
+        "low": 30.6,
+        "volume": 3323791,
+        "turnover": 103373256
       },
-      "scrapedAt": "2026-08-10T08:58:45.150Z"
+      "scrapedAt": "2026-08-10T11:58:32.240Z"
     },
     {
       "ticker": "EFIH.CA",
@@ -1866,7 +2046,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/EFIH",
       "fundamentals": {
         "parValue": 0.5,
-        "marketCap": 82853333341.3,
+        "marketCap": 83200000008,
         "bookValue": 2.55,
         "pb": 7.23,
         "eps": 0.99,
@@ -1876,17 +2056,17 @@
         "capital": 1733333333.5
       },
       "summary": {
-        "lastPrice": 23.9,
-        "change": -0.6,
-        "changePercent": -2.45,
+        "lastPrice": 24.06,
+        "change": -0.5,
+        "changePercent": -2.04,
         "open": 24.5,
         "prevClose": 24.5,
         "high": 24.51,
         "low": 23.78,
-        "volume": 1496824,
-        "turnover": 35950332
+        "volume": 3080964,
+        "turnover": 73993048
       },
-      "scrapedAt": "2026-08-10T08:58:45.532Z"
+      "scrapedAt": "2026-08-10T11:58:32.176Z"
     },
     {
       "ticker": "EGAL.CA",
@@ -1896,7 +2076,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/EGAL",
       "fundamentals": {
         "parValue": 4,
-        "marketCap": 126390000000,
+        "marketCap": 124987500000,
         "bookValue": 37.74,
         "pb": 3.3,
         "eps": 39.73,
@@ -1906,17 +2086,17 @@
         "capital": 1650000000
       },
       "summary": {
-        "lastPrice": 306.77,
-        "change": 3.22,
-        "changePercent": 1.06,
+        "lastPrice": 302.02,
+        "change": -0.55,
+        "changePercent": -0.18,
         "open": 303.55,
         "prevClose": 303.55,
         "high": 309,
-        "low": 304.21,
-        "volume": 127063,
-        "turnover": 38935656
+        "low": 302,
+        "volume": 234900,
+        "turnover": 71772520
       },
-      "scrapedAt": "2026-08-10T08:58:45.383Z"
+      "scrapedAt": "2026-08-10T11:58:32.224Z"
     },
     {
       "ticker": "EGAS.CA",
@@ -1926,7 +2106,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/EGAS",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 8559596057.05,
+        "marketCap": 8537962705.6,
         "bookValue": 31.12,
         "pb": 1.37,
         "eps": 3.06,
@@ -1936,17 +2116,17 @@
         "capital": 1442223430
       },
       "summary": {
-        "lastPrice": 59.21,
-        "change": 0.52,
-        "changePercent": 0.89,
+        "lastPrice": 59.2,
+        "change": 0.51,
+        "changePercent": 0.87,
         "open": 58.69,
         "prevClose": 58.69,
-        "high": 59.84,
-        "low": 59.1,
-        "volume": 39217,
-        "turnover": 2330999.5
+        "high": 60.75,
+        "low": 59,
+        "volume": 288185,
+        "turnover": 17214608
       },
-      "scrapedAt": "2026-08-10T08:58:46.534Z"
+      "scrapedAt": "2026-08-10T11:58:33.367Z"
     },
     {
       "ticker": "EGBE.CA",
@@ -1956,7 +2136,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/EGBE",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 285659396.96,
+        "marketCap": 288720033.36,
         "bookValue": 18.52,
         "pb": 0.61,
         "eps": 5,
@@ -1968,15 +2148,15 @@
       "summary": {
         "lastPrice": 0.56,
         "change": -0.01,
-        "changePercent": -2.6,
+        "changePercent": -1.91,
         "open": 0.58,
         "prevClose": 0.58,
         "high": 0.58,
         "low": 0.56,
-        "volume": 189364,
-        "turnover": 107719.38
+        "volume": 293590,
+        "turnover": 166615.3
       },
-      "scrapedAt": "2026-08-10T08:58:46.837Z"
+      "scrapedAt": "2026-08-10T11:58:33.423Z"
     },
     {
       "ticker": "EGCH.CA",
@@ -1986,7 +2166,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/EGCH",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 28507408635.65,
+        "marketCap": 28010763885.9,
         "bookValue": 7.49,
         "pb": 0.97,
         "eps": 1.55,
@@ -1996,17 +2176,17 @@
         "capital": 9932894995
       },
       "summary": {
-        "lastPrice": 14.34,
-        "change": 0.14,
-        "changePercent": 0.99,
+        "lastPrice": 14.18,
+        "change": -0.1,
+        "changePercent": -0.7,
         "open": 14.2,
         "prevClose": 14.2,
         "high": 14.45,
-        "low": 14.19,
-        "volume": 6451388,
-        "turnover": 92637808
+        "low": 14.06,
+        "volume": 14842215,
+        "turnover": 211316784
       },
-      "scrapedAt": "2026-08-10T08:58:46.669Z"
+      "scrapedAt": "2026-08-10T11:58:33.356Z"
     },
     {
       "ticker": "EGSA.CA",
@@ -2016,7 +2196,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/EGSA",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 325473860.48,
+        "marketCap": 324727360.8,
         "bookValue": 17.99,
         "pb": 0.42,
         "eps": 0.9,
@@ -2026,17 +2206,17 @@
         "capital": 186624920
       },
       "summary": {
-        "lastPrice": 8.74,
-        "change": -0.05,
-        "changePercent": -0.57,
+        "lastPrice": 8.69,
+        "change": -0.1,
+        "changePercent": -1.14,
         "open": 8.79,
         "prevClose": 8.79,
-        "high": 8.8,
-        "low": 8.72,
-        "volume": 900,
-        "turnover": 7872.25
+        "high": 8.85,
+        "low": 8.66,
+        "volume": 3439,
+        "turnover": 29978.24
       },
-      "scrapedAt": "2026-08-10T08:58:47.073Z"
+      "scrapedAt": "2026-08-10T11:58:33.391Z"
     },
     {
       "ticker": "EGTS.CA",
@@ -2046,7 +2226,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/EGTS",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 19425000000,
+        "marketCap": 19110000000,
         "bookValue": 0.58,
         "pb": -22.08,
         "eps": 3.52,
@@ -2056,17 +2236,17 @@
         "capital": 1050000000
       },
       "summary": {
-        "lastPrice": 18.48,
-        "change": 0.28,
-        "changePercent": 1.54,
+        "lastPrice": 18.27,
+        "change": 0,
+        "changePercent": 0,
         "open": 18.2,
         "prevClose": 18.2,
         "high": 18.7,
         "low": 18.03,
-        "volume": 1215000,
-        "turnover": 22468864
+        "volume": 2594815,
+        "turnover": 47701036
       },
-      "scrapedAt": "2026-08-10T08:58:46.967Z"
+      "scrapedAt": "2026-08-10T11:58:33.342Z"
     },
     {
       "ticker": "EHDR.CA",
@@ -2086,17 +2266,17 @@
         "capital": 336000000
       },
       "summary": {
-        "lastPrice": 2.92,
-        "change": 0,
-        "changePercent": 0,
+        "lastPrice": 2.93,
+        "change": 0.01,
+        "changePercent": 0.34,
         "open": 2.92,
         "prevClose": 2.92,
         "high": 2.97,
-        "low": 2.91,
-        "volume": 4927727,
-        "turnover": 14491376
+        "low": 2.9,
+        "volume": 11465087,
+        "turnover": 33595576
       },
-      "scrapedAt": "2026-08-10T08:58:46.703Z"
+      "scrapedAt": "2026-08-10T11:58:33.405Z"
     },
     {
       "ticker": "ELEC.CA",
@@ -2106,7 +2286,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ELEC",
       "fundamentals": {
         "parValue": 0.2,
-        "marketCap": 7322924224.33,
+        "marketCap": 7289788820.6,
         "bookValue": 1.15,
         "pb": 2.67,
         "eps": 0.04,
@@ -2116,17 +2296,17 @@
         "capital": 662708074.6
       },
       "summary": {
-        "lastPrice": 2.21,
-        "change": -0.01,
-        "changePercent": -0.45,
+        "lastPrice": 2.19,
+        "change": -0.02,
+        "changePercent": -0.9,
         "open": 2.22,
         "prevClose": 2.22,
         "high": 2.25,
-        "low": 2.2,
-        "volume": 21362202,
-        "turnover": 47583764
+        "low": 2.18,
+        "volume": 42649135,
+        "turnover": 94343448
       },
-      "scrapedAt": "2026-08-10T08:58:48.196Z"
+      "scrapedAt": "2026-08-10T11:58:34.123Z"
     },
     {
       "ticker": "ELKA.CA",
@@ -2136,7 +2316,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ELKA",
       "fundamentals": {
         "parValue": 0.5,
-        "marketCap": 3212202681.88,
+        "marketCap": 3137932099.64,
         "bookValue": 5.82,
         "pb": 0.42,
         "eps": 0.06,
@@ -2146,17 +2326,17 @@
         "capital": 928382278
       },
       "summary": {
-        "lastPrice": 1.73,
-        "change": 0,
-        "changePercent": 0,
+        "lastPrice": 1.69,
+        "change": -0.04,
+        "changePercent": -2.31,
         "open": 1.73,
         "prevClose": 1.73,
         "high": 1.75,
-        "low": 1.72,
-        "volume": 7970347,
-        "turnover": 13785748
+        "low": 1.68,
+        "volume": 40307514,
+        "turnover": 68862232
       },
-      "scrapedAt": "2026-08-10T08:58:48.332Z"
+      "scrapedAt": "2026-08-10T11:58:34.139Z"
     },
     {
       "ticker": "ELNA.CA",
@@ -2166,7 +2346,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ELNA",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 298886264,
+        "marketCap": 297942412.64,
         "bookValue": 3.41,
         "pb": 8.05,
         "eps": 0.25,
@@ -2176,17 +2356,17 @@
         "capital": 78654280
       },
       "summary": {
-        "lastPrice": 0,
-        "change": 0.56,
-        "changePercent": 1.5,
+        "lastPrice": 37.88,
+        "change": 0.44,
+        "changePercent": 1.18,
         "open": 37.44,
         "prevClose": 37.44,
         "high": 38.2,
         "low": 37.62,
-        "volume": 5196,
-        "turnover": 196480.39
+        "volume": 10212,
+        "turnover": 386503.59
       },
-      "scrapedAt": "2026-08-10T08:58:48.247Z"
+      "scrapedAt": "2026-08-10T11:58:34.093Z"
     },
     {
       "ticker": "ELSH.CA",
@@ -2196,7 +2376,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ELSH",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 3201206250,
+        "marketCap": 3189862500,
         "bookValue": 4.44,
         "pb": 1.89,
         "eps": 0.14,
@@ -2206,17 +2386,17 @@
         "capital": 226875000
       },
       "summary": {
-        "lastPrice": 14.05,
-        "change": -0.14,
-        "changePercent": -0.99,
+        "lastPrice": 14.11,
+        "change": -0.13,
+        "changePercent": -0.92,
         "open": 14.19,
         "prevClose": 14.19,
-        "high": 14.25,
+        "high": 14.34,
         "low": 14.03,
-        "volume": 761000,
-        "turnover": 10728537
+        "volume": 3248232,
+        "turnover": 45998612
       },
-      "scrapedAt": "2026-08-10T08:58:48.372Z"
+      "scrapedAt": "2026-08-10T11:58:34.148Z"
     },
     {
       "ticker": "ELWA.CA",
@@ -2226,7 +2406,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ELWA",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 311220000,
+        "marketCap": 322140000,
         "bookValue": 1.84,
         "pb": 0.73,
         "eps": 0.03,
@@ -2236,17 +2416,17 @@
         "capital": 182000000
       },
       "summary": {
-        "lastPrice": 1.71,
-        "change": 0.02,
-        "changePercent": 1.18,
+        "lastPrice": 1.77,
+        "change": 0.08,
+        "changePercent": 4.73,
         "open": 1.69,
         "prevClose": 1.69,
-        "high": 1.74,
+        "high": 1.77,
         "low": 1.7,
-        "volume": 263432,
-        "turnover": 451766.81
+        "volume": 1059757,
+        "turnover": 1852097.12
       },
-      "scrapedAt": "2026-08-10T08:58:48.422Z"
+      "scrapedAt": "2026-08-10T11:58:34.162Z"
     },
     {
       "ticker": "EMFD.CA",
@@ -2256,7 +2436,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/EMFD",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 64164828143.52,
+        "marketCap": 64273766731.2,
         "bookValue": 11.87,
         "pb": 0.79,
         "eps": 0.43,
@@ -2273,10 +2453,10 @@
         "prevClose": 11.8,
         "high": 11.98,
         "low": 11.7,
-        "volume": 2433930,
-        "turnover": 28721706
+        "volume": 5322080,
+        "turnover": 62722740
       },
-      "scrapedAt": "2026-08-10T08:58:48.012Z"
+      "scrapedAt": "2026-08-10T11:58:34.202Z"
     },
     {
       "ticker": "ENGC.CA",
@@ -2286,7 +2466,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ENGC",
       "fundamentals": {
         "parValue": 4,
-        "marketCap": 6953445000,
+        "marketCap": 6707550000,
         "bookValue": 16.97,
         "pb": 1.65,
         "eps": 0.99,
@@ -2296,17 +2476,17 @@
         "capital": 582000000
       },
       "summary": {
-        "lastPrice": 47.56,
-        "change": 0.48,
-        "changePercent": 1.02,
+        "lastPrice": 46.22,
+        "change": -0.98,
+        "changePercent": -2.08,
         "open": 47.08,
         "prevClose": 47.08,
         "high": 47.81,
-        "low": 46.55,
-        "volume": 151314,
-        "turnover": 7162163.5
+        "low": 45.81,
+        "volume": 456678,
+        "turnover": 21413898
       },
-      "scrapedAt": "2026-08-10T08:58:49.887Z"
+      "scrapedAt": "2026-08-10T11:58:34.898Z"
     },
     {
       "ticker": "EOSB.CA",
@@ -2327,16 +2507,16 @@
       },
       "summary": {
         "lastPrice": 0,
-        "change": 0.07,
-        "changePercent": 4.52,
+        "change": 0,
+        "changePercent": 0,
         "open": 1.55,
         "prevClose": 1.55,
         "high": 1.62,
         "low": 1.62,
-        "volume": 6296,
-        "turnover": 10199.52
+        "volume": 6343,
+        "turnover": 10275.66
       },
-      "scrapedAt": "2026-08-10T08:58:49.795Z"
+      "scrapedAt": "2026-08-10T11:58:34.889Z"
     },
     {
       "ticker": "EPCO.CA",
@@ -2346,7 +2526,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/EPCO",
       "fundamentals": {
         "parValue": 2,
-        "marketCap": 555964200,
+        "marketCap": 532125000,
         "bookValue": 1.19,
         "pb": 4.35,
         "eps": -0.24,
@@ -2356,17 +2536,17 @@
         "capital": 85140000
       },
       "summary": {
-        "lastPrice": 13.12,
-        "change": 1.36,
-        "changePercent": 11.56,
+        "lastPrice": 12.49,
+        "change": 0.74,
+        "changePercent": 6.29,
         "open": 11.76,
         "prevClose": 11.76,
         "high": 13.65,
         "low": 11.92,
-        "volume": 4422976,
-        "turnover": 56906888
+        "volume": 6080920,
+        "turnover": 78048208
       },
-      "scrapedAt": "2026-08-10T08:58:49.759Z"
+      "scrapedAt": "2026-08-10T11:58:34.907Z"
     },
     {
       "ticker": "EPPK.CA",
@@ -2376,7 +2556,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/EPPK",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 112320000,
+        "marketCap": 112486400,
         "bookValue": 10.61,
         "pb": -5.14,
         "eps": -42.39,
@@ -2386,17 +2566,17 @@
         "capital": 41600000
       },
       "summary": {
-        "lastPrice": 13.85,
-        "change": 0.61,
-        "changePercent": 4.61,
+        "lastPrice": 13.73,
+        "change": 0.49,
+        "changePercent": 3.7,
         "open": 13.24,
         "prevClose": 13.24,
         "high": 13.9,
         "low": 13.24,
-        "volume": 60211,
-        "turnover": 824892.63
+        "volume": 72411,
+        "turnover": 990766
       },
-      "scrapedAt": "2026-08-10T08:58:50.050Z"
+      "scrapedAt": "2026-08-10T11:58:34.946Z"
     },
     {
       "ticker": "ETEL.CA",
@@ -2406,7 +2586,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ETEL",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 188033936740,
+        "marketCap": 187658380988,
         "bookValue": 36.77,
         "pb": 2.11,
         "eps": 8.37,
@@ -2416,17 +2596,17 @@
         "capital": 17070716000
       },
       "summary": {
-        "lastPrice": 110.39,
-        "change": 0.49,
-        "changePercent": 0.45,
+        "lastPrice": 108.6,
+        "change": 0.03,
+        "changePercent": 0.03,
         "open": 109.9,
         "prevClose": 109.9,
         "high": 112,
-        "low": 109.9,
-        "volume": 310807,
-        "turnover": 34467932
+        "low": 108.01,
+        "volume": 638861,
+        "turnover": 70446600
       },
-      "scrapedAt": "2026-08-10T08:58:49.682Z"
+      "scrapedAt": "2026-08-10T11:58:34.937Z"
     },
     {
       "ticker": "ETRS.CA",
@@ -2436,7 +2616,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ETRS",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 1668308125,
+        "marketCap": 1669868750,
         "bookValue": 5.35,
         "pb": 1.08,
         "eps": 1.25,
@@ -2446,17 +2626,17 @@
         "capital": 156062500
       },
       "summary": {
-        "lastPrice": 10.68,
-        "change": -0.02,
-        "changePercent": -0.19,
+        "lastPrice": 10.7,
+        "change": 0,
+        "changePercent": 0,
         "open": 10.7,
         "prevClose": 10.7,
         "high": 10.79,
-        "low": 10.67,
-        "volume": 994630,
-        "turnover": 10648982
+        "low": 10.58,
+        "volume": 2289314,
+        "turnover": 24432260
       },
-      "scrapedAt": "2026-08-10T08:58:49.696Z"
+      "scrapedAt": "2026-08-10T11:58:34.876Z"
     },
     {
       "ticker": "EXPA.CA",
@@ -2466,7 +2646,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/EXPA",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 27907200000,
+        "marketCap": 28043200000,
         "bookValue": 19.46,
         "pb": 0.89,
         "eps": 8.4,
@@ -2476,17 +2656,17 @@
         "capital": 13600000000
       },
       "summary": {
-        "lastPrice": 20.52,
-        "change": -0.23,
-        "changePercent": -1.11,
+        "lastPrice": 20.63,
+        "change": -0.13,
+        "changePercent": -0.63,
         "open": 20.75,
         "prevClose": 20.75,
         "high": 20.8,
         "low": 20.5,
-        "volume": 156362,
-        "turnover": 3218069
+        "volume": 652788,
+        "turnover": 13431565
       },
-      "scrapedAt": "2026-08-10T08:58:51.109Z"
+      "scrapedAt": "2026-08-10T11:58:35.716Z"
     },
     {
       "ticker": "FAIT.CA",
@@ -2496,7 +2676,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/FAIT",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 8878298684.4,
+        "marketCap": 8905407993.36,
         "bookValue": 183.11,
         "pb": 0.15,
         "eps": 21.86,
@@ -2506,17 +2686,17 @@
         "capital": 225910908
       },
       "summary": {
-        "lastPrice": 39.19,
-        "change": -0.23,
-        "changePercent": -0.58,
+        "lastPrice": 39.42,
+        "change": 0,
+        "changePercent": 0,
         "open": 39.42,
         "prevClose": 39.42,
-        "high": 39.48,
+        "high": 39.49,
         "low": 38.2,
-        "volume": 36837,
-        "turnover": 1436585.25
+        "volume": 86469,
+        "turnover": 3380292.5
       },
-      "scrapedAt": "2026-08-10T08:58:51.135Z"
+      "scrapedAt": "2026-08-10T11:58:35.671Z"
     },
     {
       "ticker": "FAITA.CA",
@@ -2526,7 +2706,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/FAITA",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 404519300.93,
+        "marketCap": 403695432.7,
         "bookValue": 183.11,
         "pb": 0.26,
         "eps": 21.86,
@@ -2538,15 +2718,15 @@
       "summary": {
         "lastPrice": 0.98,
         "change": -0.01,
-        "changePercent": -0.81,
+        "changePercent": -1.11,
         "open": 0.99,
         "prevClose": 0.99,
         "high": 0.99,
         "low": 0.98,
-        "volume": 19009,
-        "turnover": 18720.68
+        "volume": 107499,
+        "turnover": 105498.45
       },
-      "scrapedAt": "2026-08-10T08:58:51.083Z"
+      "scrapedAt": "2026-08-10T11:58:35.683Z"
     },
     {
       "ticker": "FERC.CA",
@@ -2556,7 +2736,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/FERC",
       "fundamentals": {
         "parValue": 2,
-        "marketCap": 34212000000,
+        "marketCap": 34024000000,
         "bookValue": 10.16,
         "pb": 8.07,
         "eps": 2.18,
@@ -2566,17 +2746,17 @@
         "capital": 800000000
       },
       "summary": {
-        "lastPrice": 85.55,
-        "change": 3.25,
-        "changePercent": 3.95,
+        "lastPrice": 85.06,
+        "change": 2.76,
+        "changePercent": 3.35,
         "open": 82.3,
         "prevClose": 82.3,
         "high": 87.97,
         "low": 83.1,
-        "volume": 1049142,
-        "turnover": 90098992
+        "volume": 1320458,
+        "turnover": 113240704
       },
-      "scrapedAt": "2026-08-10T08:58:51.122Z"
+      "scrapedAt": "2026-08-10T11:58:35.733Z"
     },
     {
       "ticker": "FWRY.CA",
@@ -2586,7 +2766,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/FWRY",
       "fundamentals": {
         "parValue": 0.5,
-        "marketCap": 65200854890.16,
+        "marketCap": 65405246284.8,
         "bookValue": 1.45,
         "pb": 6.59,
         "eps": 0.59,
@@ -2596,17 +2776,17 @@
         "capital": 1703261622
       },
       "summary": {
-        "lastPrice": 19.14,
-        "change": -0.24,
-        "changePercent": -1.24,
+        "lastPrice": 19.28,
+        "change": -0.18,
+        "changePercent": -0.93,
         "open": 19.38,
         "prevClose": 19.38,
         "high": 19.44,
-        "low": 19.12,
-        "volume": 2233567,
-        "turnover": 42914624
+        "low": 19.08,
+        "volume": 6084480,
+        "turnover": 116867320
       },
-      "scrapedAt": "2026-08-10T08:58:51.156Z"
+      "scrapedAt": "2026-08-10T11:58:35.726Z"
     },
     {
       "ticker": "GBCO.CA",
@@ -2616,7 +2796,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/GBCO",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 34410350000,
+        "marketCap": 34529755000,
         "bookValue": 27.57,
         "pb": 0.91,
         "eps": 1.61,
@@ -2626,17 +2806,17 @@
         "capital": 1085500000
       },
       "summary": {
-        "lastPrice": 31.7,
-        "change": 0.01,
-        "changePercent": 0.03,
+        "lastPrice": 31.75,
+        "change": 0.12,
+        "changePercent": 0.38,
         "open": 31.69,
         "prevClose": 31.69,
-        "high": 32,
+        "high": 32.14,
         "low": 31.5,
-        "volume": 348928,
-        "turnover": 11054487
+        "volume": 1295409,
+        "turnover": 41242080
       },
-      "scrapedAt": "2026-08-10T08:58:51.098Z"
+      "scrapedAt": "2026-08-10T11:58:35.700Z"
     },
     {
       "ticker": "GDWA.CA",
@@ -2646,7 +2826,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/GDWA",
       "fundamentals": {
         "parValue": 1.9,
-        "marketCap": 848129203.64,
+        "marketCap": 839864850.86,
         "bookValue": 3.36,
         "pb": 2.35,
         "eps": 0.13,
@@ -2656,17 +2836,17 @@
         "capital": 1962783784.3
       },
       "summary": {
-        "lastPrice": 0.82,
-        "change": 0,
-        "changePercent": 0,
+        "lastPrice": 0.81,
+        "change": -0.01,
+        "changePercent": -0.85,
         "open": 0.82,
         "prevClose": 0.82,
         "high": 0.82,
-        "low": 0.82,
-        "volume": 21375924,
-        "turnover": 17578248
+        "low": 0.81,
+        "volume": 50662936,
+        "turnover": 41469648
       },
-      "scrapedAt": "2026-08-10T08:58:52.127Z"
+      "scrapedAt": "2026-08-10T11:58:36.573Z"
     },
     {
       "ticker": "GGCC.CA",
@@ -2676,7 +2856,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/GGCC",
       "fundamentals": {
         "parValue": 0.2,
-        "marketCap": 2661806100,
+        "marketCap": 2596884000,
         "bookValue": 0.47,
         "pb": 1.17,
         "eps": 0.06,
@@ -2686,17 +2866,17 @@
         "capital": 432814000
       },
       "summary": {
-        "lastPrice": 1.24,
-        "change": 0.05,
-        "changePercent": 4.2,
+        "lastPrice": 1.2,
+        "change": 0.01,
+        "changePercent": 0.84,
         "open": 1.19,
         "prevClose": 1.19,
         "high": 1.31,
         "low": 1.16,
-        "volume": 24302228,
-        "turnover": 30352456
+        "volume": 36869092,
+        "turnover": 45754984
       },
-      "scrapedAt": "2026-08-10T08:58:52.193Z"
+      "scrapedAt": "2026-08-10T11:58:36.551Z"
     },
     {
       "ticker": "GGRN.CA",
@@ -2706,7 +2886,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/GGRN",
       "fundamentals": {
         "parValue": 0.1,
-        "marketCap": 2044000000,
+        "marketCap": 2030000000,
         "bookValue": 0.24,
         "pb": 9.95,
         "eps": 0.07,
@@ -2717,16 +2897,16 @@
       },
       "summary": {
         "lastPrice": 1.46,
-        "change": 0,
-        "changePercent": 0,
+        "change": -0.01,
+        "changePercent": -0.68,
         "open": 1.46,
         "prevClose": 1.46,
         "high": 1.47,
         "low": 1.45,
-        "volume": 2670745,
-        "turnover": 3894631.75
+        "volume": 7948414,
+        "turnover": 11592879
       },
-      "scrapedAt": "2026-08-10T08:58:52.117Z"
+      "scrapedAt": "2026-08-10T11:58:36.613Z"
     },
     {
       "ticker": "GIHD.CA",
@@ -2736,7 +2916,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/GIHD",
       "fundamentals": {
         "parValue": 4,
-        "marketCap": 340312500,
+        "marketCap": 382781250,
         "bookValue": 9.54,
         "pb": 4.24,
         "eps": 4.12,
@@ -2746,17 +2926,17 @@
         "capital": 22500000
       },
       "summary": {
-        "lastPrice": 60.36,
-        "change": 0.47,
-        "changePercent": 0.78,
+        "lastPrice": 68.05,
+        "change": 8.16,
+        "changePercent": 13.62,
         "open": 59.89,
         "prevClose": 59.89,
-        "high": 61,
+        "high": 71.86,
         "low": 59.53,
-        "volume": 78074,
-        "turnover": 4717619.5
+        "volume": 1786413,
+        "turnover": 122254520
       },
-      "scrapedAt": "2026-08-10T08:58:52.281Z"
+      "scrapedAt": "2026-08-10T11:58:36.534Z"
     },
     {
       "ticker": "GMCI.CA",
@@ -2766,7 +2946,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/GMCI",
       "fundamentals": {
         "parValue": 2,
-        "marketCap": 81568012.68,
+        "marketCap": 83232666,
         "bookValue": 0.06,
         "pb": 18.35,
         "eps": 0,
@@ -2777,16 +2957,16 @@
       },
       "summary": {
         "lastPrice": 0,
-        "change": -0.06,
-        "changePercent": -2.97,
+        "change": 0,
+        "changePercent": 0,
         "open": 2.02,
         "prevClose": 2.02,
         "high": 2.03,
-        "low": 1.96,
-        "volume": 73705,
-        "turnover": 145863.2
+        "low": 1.95,
+        "volume": 147976,
+        "turnover": 291596.84
       },
-      "scrapedAt": "2026-08-10T08:58:52.103Z"
+      "scrapedAt": "2026-08-10T11:58:36.543Z"
     },
     {
       "ticker": "GPIM.CA",
@@ -2796,7 +2976,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/GPIM",
       "fundamentals": {
         "parValue": 0.1,
-        "marketCap": 2045454537.5,
+        "marketCap": 2012727264.9,
         "bookValue": 0.12,
         "pb": 2.14,
         "eps": 0.01,
@@ -2806,17 +2986,17 @@
         "capital": 163636363
       },
       "summary": {
-        "lastPrice": 1.25,
-        "change": 0,
-        "changePercent": 0,
+        "lastPrice": 1.22,
+        "change": -0.02,
+        "changePercent": -1.6,
         "open": 1.25,
         "prevClose": 1.25,
         "high": 1.26,
-        "low": 1.23,
-        "volume": 4334724,
-        "turnover": 5413615.5
+        "low": 1.22,
+        "volume": 14378457,
+        "turnover": 17779906
       },
-      "scrapedAt": "2026-08-10T08:58:53.666Z"
+      "scrapedAt": "2026-08-10T11:58:37.346Z"
     },
     {
       "ticker": "GPPL.CA",
@@ -2846,7 +3026,7 @@
         "volume": 546,
         "turnover": 726.18
       },
-      "scrapedAt": "2026-08-10T08:58:54.017Z"
+      "scrapedAt": "2026-08-10T11:58:37.418Z"
     },
     {
       "ticker": "GRCA.CA",
@@ -2856,7 +3036,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/GRCA",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 463944000,
+        "marketCap": 457704000,
         "bookValue": 6.48,
         "pb": 2.56,
         "eps": -0.29,
@@ -2866,17 +3046,17 @@
         "capital": 39000000
       },
       "summary": {
-        "lastPrice": 59.35,
-        "change": -0.32,
-        "changePercent": -0.54,
+        "lastPrice": 58.68,
+        "change": -0.99,
+        "changePercent": -1.66,
         "open": 59.67,
         "prevClose": 59.67,
         "high": 60,
         "low": 58.51,
-        "volume": 126204,
-        "turnover": 7472342.5
+        "volume": 223417,
+        "turnover": 13201902
       },
-      "scrapedAt": "2026-08-10T08:58:53.837Z"
+      "scrapedAt": "2026-08-10T11:58:37.328Z"
     },
     {
       "ticker": "GSSC.CA",
@@ -2886,7 +3066,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/GSSC",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 4796750000,
+        "marketCap": 4806550000,
         "bookValue": 18.84,
         "pb": 8.01,
         "eps": 8.66,
@@ -2896,17 +3076,17 @@
         "capital": 175000000
       },
       "summary": {
-        "lastPrice": 274.1,
-        "change": -0.9,
-        "changePercent": -0.33,
+        "lastPrice": 274.62,
+        "change": -0.38,
+        "changePercent": -0.14,
         "open": 275,
         "prevClose": 275,
         "high": 276.8,
         "low": 273,
-        "volume": 5460,
-        "turnover": 1495746.5
+        "volume": 13663,
+        "turnover": 3745310.75
       },
-      "scrapedAt": "2026-08-10T08:58:53.677Z"
+      "scrapedAt": "2026-08-10T11:58:37.317Z"
     },
     {
       "ticker": "GTEX.CA",
@@ -2933,10 +3113,10 @@
         "prevClose": 0.04,
         "high": 0.04,
         "low": 0.04,
-        "volume": 259500,
-        "turnover": 10120.5
+        "volume": 323375,
+        "turnover": 12611.62
       },
-      "scrapedAt": "2026-08-10T08:58:53.792Z"
+      "scrapedAt": "2026-08-10T11:58:37.298Z"
     },
     {
       "ticker": "GTWL.CA",
@@ -2946,7 +3126,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/GTWL",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 1983959120.7,
+        "marketCap": 1846838835.9,
         "bookValue": 64.08,
         "pb": 0.46,
         "eps": 9.07,
@@ -2956,17 +3136,17 @@
         "capital": 142833630
       },
       "summary": {
-        "lastPrice": 138.55,
-        "change": 18.88,
-        "changePercent": 15.78,
+        "lastPrice": 128.24,
+        "change": 9.63,
+        "changePercent": 8.05,
         "open": 119.67,
         "prevClose": 119.67,
         "high": 143,
         "low": 125.65,
-        "volume": 1843666,
-        "turnover": 251572160
+        "volume": 2970630,
+        "turnover": 400987968
       },
-      "scrapedAt": "2026-08-10T08:58:53.705Z"
+      "scrapedAt": "2026-08-10T11:58:37.427Z"
     },
     {
       "ticker": "HDBK.CA",
@@ -2976,7 +3156,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/HDBK",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 45744930000,
+        "marketCap": 45266760000,
         "bookValue": 78.54,
         "pb": 2.06,
         "eps": 0.06,
@@ -2986,17 +3166,17 @@
         "capital": 5313000000
       },
       "summary": {
-        "lastPrice": 86,
-        "change": 0.51,
-        "changePercent": 0.6,
+        "lastPrice": 85.02,
+        "change": -0.29,
+        "changePercent": -0.34,
         "open": 85.49,
         "prevClose": 85.49,
         "high": 86.51,
-        "low": 85.57,
-        "volume": 126515,
-        "turnover": 10895545
+        "low": 85,
+        "volume": 257003,
+        "turnover": 22047362
       },
-      "scrapedAt": "2026-08-10T08:58:55.238Z"
+      "scrapedAt": "2026-08-10T11:58:38.158Z"
     },
     {
       "ticker": "HELI.CA",
@@ -3006,7 +3186,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/HELI",
       "fundamentals": {
         "parValue": 0.25,
-        "marketCap": 11067856308,
+        "marketCap": 11281469940,
         "bookValue": 2.64,
         "pb": 1.71,
         "eps": 0.25,
@@ -3016,17 +3196,17 @@
         "capital": 333771300
       },
       "summary": {
-        "lastPrice": 8.29,
-        "change": -0.01,
-        "changePercent": -0.12,
+        "lastPrice": 8.44,
+        "change": 0.15,
+        "changePercent": 1.81,
         "open": 8.3,
         "prevClose": 8.3,
-        "high": 8.4,
-        "low": 8.26,
-        "volume": 3250151,
-        "turnover": 27062618
+        "high": 8.6,
+        "low": 8.21,
+        "volume": 20570377,
+        "turnover": 172978144
       },
-      "scrapedAt": "2026-08-10T08:58:55.344Z"
+      "scrapedAt": "2026-08-10T11:58:38.171Z"
     },
     {
       "ticker": "HRHO.CA",
@@ -3036,7 +3216,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/HRHO",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 39776318640.5,
+        "marketCap": 39936883596.48,
         "bookValue": 26.06,
         "pb": 1.06,
         "eps": 2.88,
@@ -3046,17 +3226,17 @@
         "capital": 7298407090
       },
       "summary": {
-        "lastPrice": 27.26,
-        "change": -0.09,
-        "changePercent": -0.33,
+        "lastPrice": 27.33,
+        "change": 0.01,
+        "changePercent": 0.04,
         "open": 27.35,
         "prevClose": 27.35,
-        "high": 27.45,
-        "low": 27.21,
-        "volume": 1001264,
-        "turnover": 27372940
+        "high": 27.56,
+        "low": 27.11,
+        "volume": 3241331,
+        "turnover": 88568000
       },
-      "scrapedAt": "2026-08-10T08:58:54.968Z"
+      "scrapedAt": "2026-08-10T11:58:38.181Z"
     },
     {
       "ticker": "ICID.CA",
@@ -3066,7 +3246,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ICID",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 870000000,
+        "marketCap": 926000000,
         "bookValue": 1.37,
         "pb": 2.81,
         "eps": 0.11,
@@ -3076,17 +3256,17 @@
         "capital": 100000000
       },
       "summary": {
-        "lastPrice": 8.7,
-        "change": 0.55,
-        "changePercent": 6.75,
+        "lastPrice": 9.01,
+        "change": 1.11,
+        "changePercent": 13.62,
         "open": 8.15,
         "prevClose": 8.15,
-        "high": 8.7,
+        "high": 9.35,
         "low": 8.16,
-        "volume": 723064,
-        "turnover": 6194298
+        "volume": 4877907,
+        "turnover": 43995500
       },
-      "scrapedAt": "2026-08-10T08:58:55.392Z"
+      "scrapedAt": "2026-08-10T11:58:38.226Z"
     },
     {
       "ticker": "ICLE.CA",
@@ -3116,7 +3296,7 @@
         "volume": 0,
         "turnover": 0
       },
-      "scrapedAt": "2026-08-10T08:58:55.381Z"
+      "scrapedAt": "2026-08-10T11:58:38.190Z"
     },
     {
       "ticker": "IDRE.CA",
@@ -3136,17 +3316,17 @@
         "capital": 147353000
       },
       "summary": {
-        "lastPrice": 56.95,
-        "change": 0.58,
-        "changePercent": 1.03,
+        "lastPrice": 56.47,
+        "change": 0.33,
+        "changePercent": 0.59,
         "open": 56.37,
         "prevClose": 56.37,
-        "high": 57.35,
+        "high": 59,
         "low": 55.7,
-        "volume": 299580,
-        "turnover": 16931894
+        "volume": 838147,
+        "turnover": 47804340
       },
-      "scrapedAt": "2026-08-10T08:58:55.149Z"
+      "scrapedAt": "2026-08-10T11:58:38.205Z"
     },
     {
       "ticker": "IFAP.CA",
@@ -3156,7 +3336,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/IFAP",
       "fundamentals": {
         "parValue": 2,
-        "marketCap": 10527594708.22,
+        "marketCap": 10840886378.8,
         "bookValue": 8.84,
         "pb": 2.11,
         "eps": 0.2,
@@ -3166,17 +3346,17 @@
         "capital": 994576732
       },
       "summary": {
-        "lastPrice": 21.1,
-        "change": 0.1,
-        "changePercent": 0.48,
+        "lastPrice": 21.44,
+        "change": 0.8,
+        "changePercent": 3.81,
         "open": 21,
         "prevClose": 21,
-        "high": 21.35,
+        "high": 22,
         "low": 21.01,
-        "volume": 304875,
-        "turnover": 6449263.5
+        "volume": 1761739,
+        "turnover": 37890744
       },
-      "scrapedAt": "2026-08-10T08:58:56.279Z"
+      "scrapedAt": "2026-08-10T11:58:38.999Z"
     },
     {
       "ticker": "INFI.CA",
@@ -3186,7 +3366,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/INFI",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 2742058275,
+        "marketCap": 2596728750,
         "bookValue": 12.72,
         "pb": 5.16,
         "eps": 3.58,
@@ -3196,17 +3376,17 @@
         "capital": 72737500
       },
       "summary": {
-        "lastPrice": 188,
-        "change": 24.82,
-        "changePercent": 15.21,
+        "lastPrice": 174.19,
+        "change": 15.32,
+        "changePercent": 9.39,
         "open": 163.18,
         "prevClose": 163.18,
         "high": 192,
-        "low": 174,
-        "volume": 1189450,
-        "turnover": 218303888
+        "low": 173.1,
+        "volume": 2054639,
+        "turnover": 375247136
       },
-      "scrapedAt": "2026-08-10T08:58:56.323Z"
+      "scrapedAt": "2026-08-10T11:58:38.945Z"
     },
     {
       "ticker": "IRON.CA",
@@ -3216,7 +3396,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/IRON",
       "fundamentals": {
         "parValue": 1.8,
-        "marketCap": 31660430529.98,
+        "marketCap": 31074307163.18,
         "bookValue": -6.93,
         "pb": -1.74,
         "eps": 0,
@@ -3225,17 +3405,17 @@
         "capital": 1758370100.4
       },
       "summary": {
-        "lastPrice": 32.21,
-        "change": 0.04,
-        "changePercent": 0.12,
+        "lastPrice": 31.81,
+        "change": -0.36,
+        "changePercent": -1.12,
         "open": 32.17,
         "prevClose": 32.17,
         "high": 33,
         "low": 31,
-        "volume": 219402,
-        "turnover": 7047986.5
+        "volume": 309949,
+        "turnover": 9956749
       },
-      "scrapedAt": "2026-08-10T08:58:56.187Z"
+      "scrapedAt": "2026-08-10T11:58:38.936Z"
     },
     {
       "ticker": "ISMA.CA",
@@ -3245,7 +3425,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ISMA",
       "fundamentals": {
         "parValue": 4,
-        "marketCap": 2919437652.51,
+        "marketCap": 2992221416.7,
         "bookValue": 2.2,
         "pb": 6.32,
         "eps": 0.47,
@@ -3255,17 +3435,17 @@
         "capital": 359425996
       },
       "summary": {
-        "lastPrice": 32.48,
-        "change": 0.23,
-        "changePercent": 0.71,
+        "lastPrice": 33.08,
+        "change": 1.05,
+        "changePercent": 3.26,
         "open": 32.25,
         "prevClose": 32.25,
-        "high": 32.88,
+        "high": 33.8,
         "low": 32.1,
-        "volume": 659348,
-        "turnover": 21442230
+        "volume": 1999935,
+        "turnover": 65652984
       },
-      "scrapedAt": "2026-08-10T08:58:56.342Z"
+      "scrapedAt": "2026-08-10T11:58:38.953Z"
     },
     {
       "ticker": "ISMQ.CA",
@@ -3275,7 +3455,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ISMQ",
       "fundamentals": {
         "parValue": 0.2,
-        "marketCap": 9202136858.76,
+        "marketCap": 9182599413.2,
         "bookValue": 0.95,
         "pb": 12.75,
         "eps": 2.86,
@@ -3286,16 +3466,16 @@
       },
       "summary": {
         "lastPrice": 9.41,
-        "change": 0.07,
-        "changePercent": 0.75,
+        "change": 0.06,
+        "changePercent": 0.64,
         "open": 9.34,
         "prevClose": 9.34,
         "high": 9.5,
         "low": 9.34,
-        "volume": 3427255,
-        "turnover": 32316864
+        "volume": 5723124,
+        "turnover": 53895940
       },
-      "scrapedAt": "2026-08-10T08:58:56.293Z"
+      "scrapedAt": "2026-08-10T11:58:38.913Z"
     },
     {
       "ticker": "ISPH.CA",
@@ -3305,7 +3485,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ISPH",
       "fundamentals": {
         "parValue": 0.25,
-        "marketCap": 14293440000,
+        "marketCap": 14666400000,
         "bookValue": 2.36,
         "pb": 4.74,
         "eps": 0.82,
@@ -3315,17 +3495,17 @@
         "capital": 252000000
       },
       "summary": {
-        "lastPrice": 14.15,
-        "change": 0.37,
-        "changePercent": 2.69,
+        "lastPrice": 14.52,
+        "change": 0.77,
+        "changePercent": 5.59,
         "open": 13.78,
         "prevClose": 13.78,
-        "high": 14.28,
+        "high": 14.8,
         "low": 13.5,
-        "volume": 10960178,
-        "turnover": 153096256
+        "volume": 28273396,
+        "turnover": 402864832
       },
-      "scrapedAt": "2026-08-10T08:58:56.259Z"
+      "scrapedAt": "2026-08-10T11:58:38.976Z"
     },
     {
       "ticker": "JUFO.CA",
@@ -3335,7 +3515,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/JUFO",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 25135515689.4,
+        "marketCap": 25069617333.66,
         "bookValue": 7.56,
         "pb": 3.56,
         "eps": 2.27,
@@ -3345,17 +3525,17 @@
         "capital": 941405082
       },
       "summary": {
-        "lastPrice": 26.71,
-        "change": -0.39,
-        "changePercent": -1.44,
+        "lastPrice": 26.6,
+        "change": -0.47,
+        "changePercent": -1.73,
         "open": 27.1,
         "prevClose": 27.1,
         "high": 27.15,
-        "low": 26.7,
-        "volume": 421648,
-        "turnover": 11319086
+        "low": 26.54,
+        "volume": 1617314,
+        "turnover": 43196644
       },
-      "scrapedAt": "2026-08-10T08:58:57.426Z"
+      "scrapedAt": "2026-08-10T11:58:39.806Z"
     },
     {
       "ticker": "KABO.CA",
@@ -3365,7 +3545,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/KABO",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 4856367032.6,
+        "marketCap": 4788603771.68,
         "bookValue": 1.2,
         "pb": 7.17,
         "eps": 0.34,
@@ -3375,17 +3555,17 @@
         "capital": 564693841
       },
       "summary": {
-        "lastPrice": 8.6,
-        "change": 0.08,
-        "changePercent": 0.94,
+        "lastPrice": 8.49,
+        "change": -0.04,
+        "changePercent": -0.47,
         "open": 8.52,
         "prevClose": 8.52,
         "high": 8.78,
-        "low": 8.57,
-        "volume": 3265627,
-        "turnover": 28349952
+        "low": 8.46,
+        "volume": 8908870,
+        "turnover": 76556496
       },
-      "scrapedAt": "2026-08-10T08:58:57.519Z"
+      "scrapedAt": "2026-08-10T11:58:39.731Z"
     },
     {
       "ticker": "KORA.CA",
@@ -3395,23 +3575,23 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/KORA",
       "fundamentals": {
         "parValue": 0.2,
-        "marketCap": 7492500000,
+        "marketCap": 7515000000,
         "currency": "جنيه مصري",
         "shares": 2250000000,
         "capital": 450000000
       },
       "summary": {
         "lastPrice": 3.32,
-        "change": -0.03,
-        "changePercent": -0.9,
+        "change": -0.01,
+        "changePercent": -0.3,
         "open": 3.35,
         "prevClose": 3.35,
         "high": 3.35,
         "low": 3.32,
-        "volume": 3249664,
-        "turnover": 10825495
+        "volume": 15190382,
+        "turnover": 50589016
       },
-      "scrapedAt": "2026-08-10T08:58:57.528Z"
+      "scrapedAt": "2026-08-10T11:58:39.854Z"
     },
     {
       "ticker": "KRDI.CA",
@@ -3421,7 +3601,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/KRDI",
       "fundamentals": {
         "parValue": 0.1,
-        "marketCap": 838000000,
+        "marketCap": 828000000,
         "bookValue": 0.2,
         "eps": 0.06,
         "currency": "جنيه مصري",
@@ -3429,17 +3609,17 @@
         "capital": 200000000
       },
       "summary": {
-        "lastPrice": 0.42,
-        "change": 0,
-        "changePercent": -0.47,
+        "lastPrice": 0.41,
+        "change": -0.01,
+        "changePercent": -1.9,
         "open": 0.42,
         "prevClose": 0.42,
         "high": 0.42,
-        "low": 0.42,
-        "volume": 67695603,
-        "turnover": 28492928
+        "low": 0.41,
+        "volume": 168754794,
+        "turnover": 70553112
       },
-      "scrapedAt": "2026-08-10T08:58:57.643Z"
+      "scrapedAt": "2026-08-10T11:58:39.764Z"
     },
     {
       "ticker": "KWIN.CA",
@@ -3449,7 +3629,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/KWIN",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 928935000,
+        "marketCap": 977550000,
         "bookValue": 6.3,
         "pb": 9.27,
         "eps": 0.34,
@@ -3459,17 +3639,17 @@
         "capital": 105000000
       },
       "summary": {
-        "lastPrice": 87.81,
-        "change": 0.42,
-        "changePercent": 0.48,
+        "lastPrice": 91.86,
+        "change": 5.71,
+        "changePercent": 6.53,
         "open": 87.39,
         "prevClose": 87.39,
-        "high": 90,
+        "high": 94.4,
         "low": 87.01,
-        "volume": 110790,
-        "turnover": 9731650
+        "volume": 454987,
+        "turnover": 41435164
       },
-      "scrapedAt": "2026-08-10T08:58:57.501Z"
+      "scrapedAt": "2026-08-10T11:58:39.840Z"
     },
     {
       "ticker": "KZPC.CA",
@@ -3479,7 +3659,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/KZPC",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 2136795660,
+        "marketCap": 2143998342,
         "bookValue": 2.82,
         "pb": 3.46,
         "eps": -0.22,
@@ -3489,17 +3669,17 @@
         "capital": 240089400
       },
       "summary": {
-        "lastPrice": 8.9,
-        "change": -0.02,
-        "changePercent": -0.22,
+        "lastPrice": 8.93,
+        "change": 0.01,
+        "changePercent": 0.11,
         "open": 8.92,
         "prevClose": 8.92,
-        "high": 8.96,
-        "low": 8.87,
-        "volume": 80021,
-        "turnover": 712098
+        "high": 9.06,
+        "low": 8.8,
+        "volume": 774786,
+        "turnover": 6934891.5
       },
-      "scrapedAt": "2026-08-10T08:58:57.441Z"
+      "scrapedAt": "2026-08-10T11:58:39.797Z"
     },
     {
       "ticker": "LCSW.CA",
@@ -3509,7 +3689,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/LCSW",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 2768000000,
+        "marketCap": 2692800000,
         "bookValue": 48.57,
         "pb": 0.97,
         "eps": 2.65,
@@ -3519,17 +3699,17 @@
         "capital": 400000000
       },
       "summary": {
-        "lastPrice": 34.54,
-        "change": -0.88,
-        "changePercent": -2.48,
+        "lastPrice": 33.59,
+        "change": -1.76,
+        "changePercent": -4.97,
         "open": 35.42,
         "prevClose": 35.42,
         "high": 35.49,
-        "low": 34.16,
-        "volume": 224729,
-        "turnover": 7805527.5
+        "low": 33.22,
+        "volume": 1288378,
+        "turnover": 43804008
       },
-      "scrapedAt": "2026-08-10T08:58:58.507Z"
+      "scrapedAt": "2026-08-10T11:58:40.607Z"
     },
     {
       "ticker": "LUTS.CA",
@@ -3539,7 +3719,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/LUTS",
       "fundamentals": {
         "parValue": 0.1,
-        "marketCap": 868350000,
+        "marketCap": 845250000,
         "bookValue": 0.12,
         "pb": 4.1,
         "eps": -0.05,
@@ -3549,17 +3729,17 @@
         "capital": 105000000
       },
       "summary": {
-        "lastPrice": 0.82,
-        "change": 0.01,
-        "changePercent": 0.86,
+        "lastPrice": 0.81,
+        "change": -0.01,
+        "changePercent": -1.11,
         "open": 0.81,
         "prevClose": 0.81,
         "high": 0.85,
         "low": 0.79,
-        "volume": 57107046,
-        "turnover": 46408000
+        "volume": 96532585,
+        "turnover": 78580128
       },
-      "scrapedAt": "2026-08-10T08:58:58.673Z"
+      "scrapedAt": "2026-08-10T11:58:40.590Z"
     },
     {
       "ticker": "MAAL.CA",
@@ -3579,17 +3759,17 @@
         "capital": 103824000
       },
       "summary": {
-        "lastPrice": 8.15,
-        "change": -0.36,
-        "changePercent": -4.23,
+        "lastPrice": 8.17,
+        "change": -0.34,
+        "changePercent": -4,
         "open": 8.51,
         "prevClose": 8.51,
         "high": 8.53,
         "low": 8.1,
-        "volume": 486171,
-        "turnover": 4039593
+        "volume": 754656,
+        "turnover": 6258700
       },
-      "scrapedAt": "2026-08-10T08:58:58.379Z"
+      "scrapedAt": "2026-08-10T11:58:40.547Z"
     },
     {
       "ticker": "MASR.CA",
@@ -3599,7 +3779,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/MASR",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 16695700000,
+        "marketCap": 16567600000,
         "bookValue": 6.15,
         "pb": 1,
         "eps": 1.27,
@@ -3609,17 +3789,17 @@
         "capital": 2135000000
       },
       "summary": {
-        "lastPrice": 7.82,
-        "change": -0.14,
-        "changePercent": -1.76,
+        "lastPrice": 7.77,
+        "change": -0.2,
+        "changePercent": -2.51,
         "open": 7.96,
         "prevClose": 7.96,
         "high": 7.99,
-        "low": 7.78,
-        "volume": 7370126,
-        "turnover": 58025932
+        "low": 7.65,
+        "volume": 22013662,
+        "turnover": 171749136
       },
-      "scrapedAt": "2026-08-10T08:58:58.482Z"
+      "scrapedAt": "2026-08-10T11:58:40.614Z"
     },
     {
       "ticker": "MBSC.CA",
@@ -3629,7 +3809,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/MBSC",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 16018221875.18,
+        "marketCap": 16201629629.18,
         "bookValue": 93.68,
         "pb": 4.47,
         "eps": 42.96,
@@ -3639,17 +3819,17 @@
         "capital": 611359180
       },
       "summary": {
-        "lastPrice": 262.01,
-        "change": 0.95,
-        "changePercent": 0.36,
+        "lastPrice": 265.01,
+        "change": 3.95,
+        "changePercent": 1.51,
         "open": 261.06,
         "prevClose": 261.06,
-        "high": 264.85,
+        "high": 266,
         "low": 260,
-        "volume": 42790,
-        "turnover": 11217732
+        "volume": 104375,
+        "turnover": 27463880
       },
-      "scrapedAt": "2026-08-10T08:58:58.544Z"
+      "scrapedAt": "2026-08-10T11:58:40.627Z"
     },
     {
       "ticker": "MCQE.CA",
@@ -3669,17 +3849,17 @@
         "capital": 960000000
       },
       "summary": {
-        "lastPrice": 203.26,
-        "change": 5.26,
-        "changePercent": 2.66,
+        "lastPrice": 201.67,
+        "change": 5,
+        "changePercent": 2.53,
         "open": 198,
         "prevClose": 198,
         "high": 203.99,
-        "low": 198.5,
-        "volume": 194842,
-        "turnover": 39333560
+        "low": 197.06,
+        "volume": 317589,
+        "turnover": 64060292
       },
-      "scrapedAt": "2026-08-10T08:58:58.424Z"
+      "scrapedAt": "2026-08-10T11:58:40.597Z"
     },
     {
       "ticker": "MCRO.CA",
@@ -3689,7 +3869,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/MCRO",
       "fundamentals": {
         "parValue": 0.2,
-        "marketCap": 900926200.48,
+        "marketCap": 929436523.28,
         "bookValue": 0.18,
         "eps": 0.16,
         "currency": "جنيه مصري",
@@ -3697,17 +3877,17 @@
         "capital": 114041291.2
       },
       "summary": {
-        "lastPrice": 1.58,
-        "change": 0.02,
-        "changePercent": 1.28,
+        "lastPrice": 1.63,
+        "change": 0.07,
+        "changePercent": 4.49,
         "open": 1.56,
         "prevClose": 1.56,
-        "high": 1.62,
+        "high": 1.63,
         "low": 1.56,
-        "volume": 60391842,
-        "turnover": 96248912
+        "volume": 128353657,
+        "turnover": 205139168
       },
-      "scrapedAt": "2026-08-10T08:58:59.574Z"
+      "scrapedAt": "2026-08-10T11:58:41.377Z"
     },
     {
       "ticker": "MEGM.CA",
@@ -3737,7 +3917,7 @@
         "volume": 1404559,
         "turnover": 24849202
       },
-      "scrapedAt": "2026-08-10T08:58:59.776Z"
+      "scrapedAt": "2026-08-10T11:58:41.343Z"
     },
     {
       "ticker": "MENA.CA",
@@ -3747,7 +3927,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/MENA",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 1712805175.8,
+        "marketCap": 1688613012.3,
         "bookValue": 0.43,
         "pb": 12.03,
         "eps": 0.23,
@@ -3757,17 +3937,17 @@
         "capital": 241921635
       },
       "summary": {
-        "lastPrice": 7,
-        "change": -0.05,
-        "changePercent": -0.71,
+        "lastPrice": 7.02,
+        "change": -0.03,
+        "changePercent": -0.43,
         "open": 7.05,
         "prevClose": 7.05,
         "high": 7.1,
         "low": 6.92,
-        "volume": 46103,
-        "turnover": 322854.47
+        "volume": 102628,
+        "turnover": 719284.94
       },
-      "scrapedAt": "2026-08-10T08:58:59.586Z"
+      "scrapedAt": "2026-08-10T11:58:41.370Z"
     },
     {
       "ticker": "MEPA.CA",
@@ -3777,7 +3957,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/MEPA",
       "fundamentals": {
         "parValue": 0.2,
-        "marketCap": 1251050000,
+        "marketCap": 1277250000,
         "bookValue": 0.34,
         "pb": 5.6,
         "eps": 0.15,
@@ -3787,17 +3967,17 @@
         "capital": 131000000
       },
       "summary": {
-        "lastPrice": 1.91,
-        "change": 0.03,
-        "changePercent": 1.6,
+        "lastPrice": 1.94,
+        "change": 0.07,
+        "changePercent": 3.72,
         "open": 1.88,
         "prevClose": 1.88,
-        "high": 1.93,
+        "high": 1.95,
         "low": 1.89,
-        "volume": 5329670,
-        "turnover": 10177656
+        "volume": 22387103,
+        "turnover": 43113324
       },
-      "scrapedAt": "2026-08-10T08:58:59.637Z"
+      "scrapedAt": "2026-08-10T11:58:41.354Z"
     },
     {
       "ticker": "MFPC.CA",
@@ -3807,7 +3987,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/MFPC",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 106006464120.48,
+        "marketCap": 106121189731,
         "bookValue": 26.44,
         "eps": 0,
         "currency": "جنيه مصري",
@@ -3816,16 +3996,16 @@
       },
       "summary": {
         "lastPrice": 36.99,
-        "change": -0.19,
-        "changePercent": -0.51,
+        "change": -0.18,
+        "changePercent": -0.48,
         "open": 37.18,
         "prevClose": 37.18,
         "high": 37.22,
         "low": 36.95,
-        "volume": 458664,
-        "turnover": 16991424
+        "volume": 910734,
+        "turnover": 33715080
       },
-      "scrapedAt": "2026-08-10T08:58:59.678Z"
+      "scrapedAt": "2026-08-10T11:58:41.316Z"
     },
     {
       "ticker": "MFSC.CA",
@@ -3835,7 +4015,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/MFSC",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 4589062500,
+        "marketCap": 4597500000,
         "bookValue": 4.56,
         "pb": 8.48,
         "eps": 5.21,
@@ -3845,17 +4025,17 @@
         "capital": 93750000
       },
       "summary": {
-        "lastPrice": 48.98,
-        "change": -1.31,
-        "changePercent": -2.6,
+        "lastPrice": 49.04,
+        "change": -1.25,
+        "changePercent": -2.49,
         "open": 50.29,
         "prevClose": 50.29,
         "high": 50.6,
-        "low": 48.68,
-        "volume": 164827,
-        "turnover": 8118510
+        "low": 48.5,
+        "volume": 317663,
+        "turnover": 15610979
       },
-      "scrapedAt": "2026-08-10T08:58:59.601Z"
+      "scrapedAt": "2026-08-10T11:58:41.362Z"
     },
     {
       "ticker": "MHOT.CA",
@@ -3865,7 +4045,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/MHOT",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 6767640000,
+        "marketCap": 6834960000,
         "bookValue": 9.42,
         "pb": 3.05,
         "eps": 4.68,
@@ -3875,17 +4055,17 @@
         "capital": 396000000
       },
       "summary": {
-        "lastPrice": 17.01,
-        "change": 0.11,
-        "changePercent": 0.65,
+        "lastPrice": 17.26,
+        "change": 0.36,
+        "changePercent": 2.13,
         "open": 16.9,
         "prevClose": 16.9,
         "high": 17.45,
         "low": 16.91,
-        "volume": 452582,
-        "turnover": 7762777
+        "volume": 741218,
+        "turnover": 12724757
       },
-      "scrapedAt": "2026-08-10T08:59:00.535Z"
+      "scrapedAt": "2026-08-10T11:58:42.170Z"
     },
     {
       "ticker": "MICH.CA",
@@ -3895,7 +4075,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/MICH",
       "fundamentals": {
         "parValue": 4,
-        "marketCap": 5299003125,
+        "marketCap": 5246353125,
         "bookValue": 13.26,
         "pb": 3,
         "eps": 4.17,
@@ -3905,17 +4085,17 @@
         "capital": 438750000
       },
       "summary": {
-        "lastPrice": 48.24,
-        "change": 0.62,
-        "changePercent": 1.3,
+        "lastPrice": 47.99,
+        "change": 0.21,
+        "changePercent": 0.44,
         "open": 47.62,
         "prevClose": 47.62,
-        "high": 48.84,
+        "high": 49.6,
         "low": 47.35,
-        "volume": 124188,
-        "turnover": 5952264.5
+        "volume": 428567,
+        "turnover": 20696674
       },
-      "scrapedAt": "2026-08-10T08:59:00.661Z"
+      "scrapedAt": "2026-08-10T11:58:42.218Z"
     },
     {
       "ticker": "MILS.CA",
@@ -3925,7 +4105,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/MILS",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 2086393000,
+        "marketCap": 2009139000,
         "bookValue": 23.73,
         "pb": 3.71,
         "eps": 12.68,
@@ -3935,17 +4115,17 @@
         "capital": 107000000
       },
       "summary": {
-        "lastPrice": 194.68,
-        "change": -3.42,
-        "changePercent": -1.73,
+        "lastPrice": 187.77,
+        "change": -10.33,
+        "changePercent": -5.21,
         "open": 198.1,
         "prevClose": 198.1,
         "high": 200.1,
-        "low": 194.5,
-        "volume": 32038,
-        "turnover": 6277157.5
+        "low": 187,
+        "volume": 205222,
+        "turnover": 39180572
       },
-      "scrapedAt": "2026-08-10T08:59:00.567Z"
+      "scrapedAt": "2026-08-10T11:58:42.078Z"
     },
     {
       "ticker": "MIPH.CA",
@@ -3955,7 +4135,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/MIPH",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 9687230720,
+        "marketCap": 10019153600,
         "bookValue": 362.87,
         "pb": 0.51,
         "eps": -0.64,
@@ -3965,17 +4145,17 @@
         "capital": 122934400
       },
       "summary": {
-        "lastPrice": 787.96,
-        "change": -8.75,
-        "changePercent": -1.1,
+        "lastPrice": 816.55,
+        "change": 19.84,
+        "changePercent": 2.49,
         "open": 796.71,
         "prevClose": 796.71,
-        "high": 805,
+        "high": 831,
         "low": 780,
-        "volume": 962,
-        "turnover": 759424.56
+        "volume": 10548,
+        "turnover": 8546150
       },
-      "scrapedAt": "2026-08-10T08:59:00.722Z"
+      "scrapedAt": "2026-08-10T11:58:42.127Z"
     },
     {
       "ticker": "MMAT.CA",
@@ -4005,7 +4185,7 @@
         "volume": 4000,
         "turnover": 14800
       },
-      "scrapedAt": "2026-08-10T08:59:00.705Z"
+      "scrapedAt": "2026-08-10T11:58:42.143Z"
     },
     {
       "ticker": "MOED.CA",
@@ -4025,17 +4205,17 @@
         "capital": 100500000
       },
       "summary": {
-        "lastPrice": 0.69,
+        "lastPrice": 0.68,
         "change": 0,
-        "changePercent": -0.29,
+        "changePercent": -0.44,
         "open": 0.69,
         "prevClose": 0.69,
         "high": 0.69,
         "low": 0.68,
-        "volume": 12216826,
-        "turnover": 8411939
+        "volume": 33020303,
+        "turnover": 22625500
       },
-      "scrapedAt": "2026-08-10T08:59:00.454Z"
+      "scrapedAt": "2026-08-10T11:58:42.097Z"
     },
     {
       "ticker": "MOIL.CA",
@@ -4055,17 +4235,17 @@
         "capital": 188102296
       },
       "summary": {
-        "lastPrice": 0.68,
-        "change": 0,
-        "changePercent": -0.59,
+        "lastPrice": 0.67,
+        "change": -0.01,
+        "changePercent": -0.74,
         "open": 0.68,
         "prevClose": 0.68,
         "high": 0.68,
         "low": 0.67,
-        "volume": 144695,
-        "turnover": 97863.77
+        "volume": 358707,
+        "turnover": 241664.42
       },
-      "scrapedAt": "2026-08-10T08:59:02.010Z"
+      "scrapedAt": "2026-08-10T11:58:42.959Z"
     },
     {
       "ticker": "MOIN.CA",
@@ -4075,7 +4255,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/MOIN",
       "fundamentals": {
         "parValue": 2.5,
-        "marketCap": 7302000000,
+        "marketCap": 7224000000,
         "bookValue": 7.49,
         "pb": 2.25,
         "eps": 5.81,
@@ -4085,17 +4265,17 @@
         "capital": 500000000
       },
       "summary": {
-        "lastPrice": 36.48,
-        "change": -0.22,
-        "changePercent": -0.6,
+        "lastPrice": 36.12,
+        "change": -0.58,
+        "changePercent": -1.58,
         "open": 36.7,
         "prevClose": 36.7,
         "high": 38.5,
-        "low": 36.44,
-        "volume": 704629,
-        "turnover": 26298178
+        "low": 36.1,
+        "volume": 1100609,
+        "turnover": 40690816
       },
-      "scrapedAt": "2026-08-10T08:59:02.271Z"
+      "scrapedAt": "2026-08-10T11:58:42.952Z"
     },
     {
       "ticker": "MOSC.CA",
@@ -4105,7 +4285,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/MOSC",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 1773060000,
+        "marketCap": 1836000000,
         "bookValue": 21.83,
         "pb": 8.47,
         "eps": 38.07,
@@ -4115,17 +4295,17 @@
         "capital": 60000000
       },
       "summary": {
-        "lastPrice": 295.58,
-        "change": -1.41,
-        "changePercent": -0.47,
+        "lastPrice": 306,
+        "change": 9.01,
+        "changePercent": 3.03,
         "open": 296.99,
         "prevClose": 296.99,
-        "high": 298,
+        "high": 324.9,
         "low": 295,
-        "volume": 4360,
-        "turnover": 1291045.25
+        "volume": 146038,
+        "turnover": 45419776
       },
-      "scrapedAt": "2026-08-10T08:59:01.930Z"
+      "scrapedAt": "2026-08-10T11:58:42.897Z"
     },
     {
       "ticker": "MPCI.CA",
@@ -4135,7 +4315,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/MPCI",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 7917000000,
+        "marketCap": 8957130000,
         "bookValue": 16.8,
         "pb": 4.41,
         "eps": 22.37,
@@ -4145,17 +4325,17 @@
         "capital": 227500000
       },
       "summary": {
-        "lastPrice": 347.96,
-        "change": 19.86,
-        "changePercent": 6.05,
+        "lastPrice": 393.72,
+        "change": 65.62,
+        "changePercent": 20,
         "open": 328.1,
         "prevClose": 328.1,
-        "high": 349.4,
+        "high": 393.72,
         "low": 328.11,
-        "volume": 278513,
-        "turnover": 94556232
+        "volume": 697413,
+        "turnover": 250900320
       },
-      "scrapedAt": "2026-08-10T08:59:02.113Z"
+      "scrapedAt": "2026-08-10T11:58:42.922Z"
     },
     {
       "ticker": "MPCO.CA",
@@ -4165,7 +4345,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/MPCO",
       "fundamentals": {
         "parValue": 0.2,
-        "marketCap": 2160000000,
+        "marketCap": 2140000000,
         "bookValue": 0.3,
         "pb": 2.85,
         "eps": -0.17,
@@ -4175,17 +4355,17 @@
         "capital": 200000000
       },
       "summary": {
-        "lastPrice": 2.16,
-        "change": 0.05,
-        "changePercent": 2.37,
+        "lastPrice": 2.13,
+        "change": 0.03,
+        "changePercent": 1.42,
         "open": 2.11,
         "prevClose": 2.11,
         "high": 2.19,
-        "low": 2.13,
-        "volume": 77842121,
-        "turnover": 168289984
+        "low": 2.11,
+        "volume": 123634744,
+        "turnover": 266065536
       },
-      "scrapedAt": "2026-08-10T08:59:02.187Z"
+      "scrapedAt": "2026-08-10T11:58:42.943Z"
     },
     {
       "ticker": "MPRC.CA",
@@ -4195,7 +4375,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/MPRC",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 8609202000,
+        "marketCap": 8912610000,
         "bookValue": 23.9,
         "pb": 1.27,
         "eps": 8.22,
@@ -4205,17 +4385,17 @@
         "capital": 1896300000
       },
       "summary": {
-        "lastPrice": 45.7,
-        "change": -0.05,
-        "changePercent": -0.11,
+        "lastPrice": 46.54,
+        "change": 1.25,
+        "changePercent": 2.73,
         "open": 45.75,
         "prevClose": 45.75,
-        "high": 45.89,
+        "high": 47,
         "low": 45.24,
-        "volume": 29135,
-        "turnover": 1327271.88
+        "volume": 242101,
+        "turnover": 11168698
       },
-      "scrapedAt": "2026-08-10T08:59:01.912Z"
+      "scrapedAt": "2026-08-10T11:58:42.913Z"
     },
     {
       "ticker": "MTIE.CA",
@@ -4225,7 +4405,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/MTIE",
       "fundamentals": {
         "parValue": 0.62,
-        "marketCap": 21564102190.16,
+        "marketCap": 21243095415,
         "bookValue": 2.75,
         "pb": 2.75,
         "eps": 0.65,
@@ -4235,17 +4415,17 @@
         "capital": 1170730591.76
       },
       "summary": {
-        "lastPrice": 11.4,
-        "change": 0.06,
-        "changePercent": 0.53,
+        "lastPrice": 11.27,
+        "change": -0.09,
+        "changePercent": -0.79,
         "open": 11.34,
         "prevClose": 11.34,
         "high": 11.52,
-        "low": 11.3,
-        "volume": 2492706,
-        "turnover": 28476088
+        "low": 11,
+        "volume": 5171631,
+        "turnover": 58714004
       },
-      "scrapedAt": "2026-08-10T08:59:02.970Z"
+      "scrapedAt": "2026-08-10T11:58:43.690Z"
     },
     {
       "ticker": "NAHO.CA",
@@ -4255,7 +4435,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/NAHO",
       "fundamentals": {
         "parValue": 0.7,
-        "marketCap": 36092707.71,
+        "marketCap": 36443122.35,
         "bookValue": 0.27,
         "pb": 0.34,
         "eps": -0.13,
@@ -4272,10 +4452,10 @@
         "prevClose": 0.1,
         "high": 0.1,
         "low": 0.1,
-        "volume": 55,
-        "turnover": 5.67
+        "volume": 1144,
+        "turnover": 118.92
       },
-      "scrapedAt": "2026-08-10T08:59:03.201Z"
+      "scrapedAt": "2026-08-10T11:58:43.698Z"
     },
     {
       "ticker": "NAPR.CA",
@@ -4285,7 +4465,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/NAPR",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 6349194296.2,
+        "marketCap": 6315320635.4,
         "bookValue": 10.77,
         "pb": 2.1,
         "eps": 0.84,
@@ -4295,17 +4475,17 @@
         "capital": 211710380
       },
       "summary": {
-        "lastPrice": 29.81,
-        "change": -1.21,
-        "changePercent": -3.9,
+        "lastPrice": 29.83,
+        "change": -1.19,
+        "changePercent": -3.84,
         "open": 31.02,
         "prevClose": 31.02,
         "high": 31.4,
         "low": 29.51,
-        "volume": 143793,
-        "turnover": 4331929
+        "volume": 275840,
+        "turnover": 8288809
       },
-      "scrapedAt": "2026-08-10T08:59:03.036Z"
+      "scrapedAt": "2026-08-10T11:58:43.653Z"
     },
     {
       "ticker": "NARE.CA",
@@ -4315,7 +4495,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/NARE",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 2146116806.4,
+        "marketCap": 2158891311.2,
         "bookValue": 18.11,
         "pb": 0.44,
         "eps": 0.14,
@@ -4325,17 +4505,17 @@
         "capital": 638725240
       },
       "summary": {
-        "lastPrice": 16.81,
-        "change": -0.26,
-        "changePercent": -1.52,
+        "lastPrice": 16.89,
+        "change": -0.17,
+        "changePercent": -1,
         "open": 17.07,
         "prevClose": 17.07,
         "high": 17.4,
         "low": 16.73,
-        "volume": 463589,
-        "turnover": 7929182
+        "volume": 962723,
+        "turnover": 16401346
       },
-      "scrapedAt": "2026-08-10T08:59:03.162Z"
+      "scrapedAt": "2026-08-10T11:58:43.676Z"
     },
     {
       "ticker": "NCCW.CA",
@@ -4345,7 +4525,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/NCCW",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 1260000000,
+        "marketCap": 1255800000,
         "bookValue": 1.61,
         "pb": 3.48,
         "eps": 0.03,
@@ -4356,16 +4536,16 @@
       },
       "summary": {
         "lastPrice": 5.99,
-        "change": -0.09,
-        "changePercent": -1.48,
+        "change": -0.1,
+        "changePercent": -1.64,
         "open": 6.08,
         "prevClose": 6.08,
         "high": 6.14,
         "low": 5.93,
-        "volume": 3010502,
-        "turnover": 18141380
+        "volume": 5540304,
+        "turnover": 33293112
       },
-      "scrapedAt": "2026-08-10T08:59:03.248Z"
+      "scrapedAt": "2026-08-10T11:58:43.713Z"
     },
     {
       "ticker": "NDRL.CA",
@@ -4395,7 +4575,7 @@
         "volume": 0,
         "turnover": 0
       },
-      "scrapedAt": "2026-08-10T08:59:03.054Z"
+      "scrapedAt": "2026-08-10T11:58:43.666Z"
     },
     {
       "ticker": "NEDA.CA",
@@ -4405,7 +4585,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/NEDA",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 172710616,
+        "marketCap": 173345581.5,
         "bookValue": 0.53,
         "pb": 3.94,
         "eps": -0.02,
@@ -4415,17 +4595,17 @@
         "capital": 63496550
       },
       "summary": {
-        "lastPrice": 0,
-        "change": 0.02,
-        "changePercent": 0.74,
+        "lastPrice": 2.73,
+        "change": 0.03,
+        "changePercent": 1.11,
         "open": 2.7,
         "prevClose": 2.7,
         "high": 2.76,
         "low": 2.72,
-        "volume": 65438,
-        "turnover": 178592.95
+        "volume": 167050,
+        "turnover": 456171.56
       },
-      "scrapedAt": "2026-08-10T08:59:04.050Z"
+      "scrapedAt": "2026-08-10T11:58:44.470Z"
     },
     {
       "ticker": "NHPS.CA",
@@ -4435,7 +4615,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/NHPS",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 1456000000,
+        "marketCap": 1552000000,
         "bookValue": 13.35,
         "pb": 3.75,
         "eps": 1.42,
@@ -4445,17 +4625,17 @@
         "capital": 160000000
       },
       "summary": {
-        "lastPrice": 91.08,
-        "change": 3.09,
-        "changePercent": 3.51,
+        "lastPrice": 96.56,
+        "change": 9.01,
+        "changePercent": 10.24,
         "open": 87.99,
         "prevClose": 87.99,
-        "high": 92,
+        "high": 104,
         "low": 88.35,
-        "volume": 412407,
-        "turnover": 37289032
+        "volume": 2512493,
+        "turnover": 241032640
       },
-      "scrapedAt": "2026-08-10T08:59:04.151Z"
+      "scrapedAt": "2026-08-10T11:58:44.422Z"
     },
     {
       "ticker": "NINH.CA",
@@ -4465,7 +4645,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/NINH",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 5778960000,
+        "marketCap": 5602300000,
         "bookValue": 3.1,
         "pb": 4.16,
         "eps": 0.78,
@@ -4475,17 +4655,17 @@
         "capital": 242000000
       },
       "summary": {
-        "lastPrice": 23.86,
-        "change": 0.6,
-        "changePercent": 2.58,
+        "lastPrice": 23.1,
+        "change": -0.11,
+        "changePercent": -0.47,
         "open": 23.26,
         "prevClose": 23.26,
         "high": 23.9,
-        "low": 23.3,
-        "volume": 341589,
-        "turnover": 8058186
+        "low": 22.91,
+        "volume": 1078960,
+        "turnover": 25240292
       },
-      "scrapedAt": "2026-08-10T08:59:04.078Z"
+      "scrapedAt": "2026-08-10T11:58:44.451Z"
     },
     {
       "ticker": "NIPH.CA",
@@ -4495,7 +4675,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/NIPH",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 20700000000,
+        "marketCap": 21540000000,
         "bookValue": 22.07,
         "pb": 4.58,
         "eps": 5.52,
@@ -4505,17 +4685,17 @@
         "capital": 500000000
       },
       "summary": {
-        "lastPrice": 414,
-        "change": 55,
-        "changePercent": 15.32,
+        "lastPrice": 430.8,
+        "change": 71.8,
+        "changePercent": 20,
         "open": 359,
         "prevClose": 359,
-        "high": 418,
+        "high": 430.8,
         "low": 362,
-        "volume": 722780,
-        "turnover": 288815872
+        "volume": 1085489,
+        "turnover": 442661856
       },
-      "scrapedAt": "2026-08-10T08:59:04.186Z"
+      "scrapedAt": "2026-08-10T11:58:44.443Z"
     },
     {
       "ticker": "OBRI.CA",
@@ -4525,7 +4705,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/OBRI",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 1362800000,
+        "marketCap": 1336000000,
         "bookValue": 7.06,
         "pb": 2.81,
         "eps": 2.31,
@@ -4535,17 +4715,17 @@
         "capital": 200000000
       },
       "summary": {
-        "lastPrice": 34.04,
-        "change": 2.14,
-        "changePercent": 6.71,
+        "lastPrice": 33.43,
+        "change": 1.5,
+        "changePercent": 4.7,
         "open": 31.9,
         "prevClose": 31.9,
         "high": 34.45,
         "low": 32.05,
-        "volume": 1835293,
-        "turnover": 61245224
+        "volume": 3249868,
+        "turnover": 108755664
       },
-      "scrapedAt": "2026-08-10T08:59:04.223Z"
+      "scrapedAt": "2026-08-10T11:58:44.414Z"
     },
     {
       "ticker": "OCDI.CA",
@@ -4555,7 +4735,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/OCDI",
       "fundamentals": {
         "parValue": 4,
-        "marketCap": 40251745754.92,
+        "marketCap": 40612747959,
         "bookValue": 35.53,
         "pb": 1.71,
         "eps": 3.9,
@@ -4565,17 +4745,17 @@
         "capital": 5157174344
       },
       "summary": {
-        "lastPrice": 31.36,
-        "change": 0.98,
-        "changePercent": 3.23,
+        "lastPrice": 31.49,
+        "change": 1.12,
+        "changePercent": 3.69,
         "open": 30.38,
         "prevClose": 30.38,
-        "high": 31.45,
+        "high": 31.5,
         "low": 30.4,
-        "volume": 3406800,
-        "turnover": 105717616
+        "volume": 6448773,
+        "turnover": 200571312
       },
-      "scrapedAt": "2026-08-10T08:59:03.945Z"
+      "scrapedAt": "2026-08-10T11:58:44.430Z"
     },
     {
       "ticker": "OCPH.CA",
@@ -4585,7 +4765,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/OCPH",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 2928000000,
+        "marketCap": 3479040000,
         "bookValue": 53.46,
         "pb": 2.37,
         "eps": 11.83,
@@ -4595,17 +4775,17 @@
         "capital": 120000000
       },
       "summary": {
-        "lastPrice": 244.44,
-        "change": 2.84,
-        "changePercent": 1.18,
+        "lastPrice": 289.92,
+        "change": 48.32,
+        "changePercent": 20,
         "open": 241.6,
         "prevClose": 241.6,
-        "high": 247.64,
+        "high": 289.92,
         "low": 241,
-        "volume": 26657,
-        "turnover": 6490381.5
+        "volume": 296852,
+        "turnover": 80451000
       },
-      "scrapedAt": "2026-08-10T08:59:04.991Z"
+      "scrapedAt": "2026-08-10T11:58:45.154Z"
     },
     {
       "ticker": "ODIN.CA",
@@ -4615,7 +4795,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ODIN",
       "fundamentals": {
         "parValue": 0.25,
-        "marketCap": 1716000000,
+        "marketCap": 1962000000,
         "bookValue": 0.65,
         "pb": 3.45,
         "eps": 0.59,
@@ -4625,17 +4805,17 @@
         "capital": 150000000
       },
       "summary": {
-        "lastPrice": 2.86,
-        "change": 0.01,
-        "changePercent": 0.35,
+        "lastPrice": 3.25,
+        "change": 0.42,
+        "changePercent": 14.74,
         "open": 2.85,
         "prevClose": 2.85,
-        "high": 2.87,
+        "high": 3.28,
         "low": 2.82,
-        "volume": 1605053,
-        "turnover": 4561735.5
+        "volume": 17449008,
+        "turnover": 53723904
       },
-      "scrapedAt": "2026-08-10T08:59:05.170Z"
+      "scrapedAt": "2026-08-10T11:58:45.161Z"
     },
     {
       "ticker": "OFH.CA",
@@ -4645,7 +4825,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/OFH",
       "fundamentals": {
         "parValue": 0.31,
-        "marketCap": 4137540762.5,
+        "marketCap": 4147140625.06,
         "bookValue": 0.63,
         "pb": 0.87,
         "eps": 0.51,
@@ -4657,15 +4837,15 @@
       "summary": {
         "lastPrice": 0.86,
         "change": -0.01,
-        "changePercent": -1.15,
+        "changePercent": -0.92,
         "open": 0.87,
         "prevClose": 0.87,
         "high": 0.88,
         "low": 0.86,
-        "volume": 44059494,
-        "turnover": 38089408
+        "volume": 79744456,
+        "turnover": 68815776
       },
-      "scrapedAt": "2026-08-10T08:59:04.915Z"
+      "scrapedAt": "2026-08-10T11:58:45.176Z"
     },
     {
       "ticker": "OIH.CA",
@@ -4685,17 +4865,17 @@
         "capital": 577025968.2
       },
       "summary": {
-        "lastPrice": 1.63,
+        "lastPrice": 1.64,
         "change": -0.01,
         "changePercent": -0.61,
         "open": 1.64,
         "prevClose": 1.64,
         "high": 1.66,
         "low": 1.61,
-        "volume": 23154421,
-        "turnover": 37735516
+        "volume": 50126021,
+        "turnover": 81762584
       },
-      "scrapedAt": "2026-08-10T08:59:05.160Z"
+      "scrapedAt": "2026-08-10T11:58:45.169Z"
     },
     {
       "ticker": "OLFI.CA",
@@ -4705,7 +4885,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/OLFI",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 9996000000,
+        "marketCap": 9816000000,
         "bookValue": 4.2,
         "pb": 7.02,
         "eps": 2.78,
@@ -4715,17 +4895,17 @@
         "capital": 400000000
       },
       "summary": {
-        "lastPrice": 24.88,
-        "change": -0.15,
-        "changePercent": -0.6,
+        "lastPrice": 24.44,
+        "change": -0.49,
+        "changePercent": -1.96,
         "open": 25.03,
         "prevClose": 25.03,
         "high": 25.15,
-        "low": 24.72,
-        "volume": 305192,
-        "turnover": 7628537.5
+        "low": 24.42,
+        "volume": 1283230,
+        "turnover": 31753290
       },
-      "scrapedAt": "2026-08-10T08:59:05.120Z"
+      "scrapedAt": "2026-08-10T11:58:45.182Z"
     },
     {
       "ticker": "ORAS.CA",
@@ -4735,7 +4915,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ORAS",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 79155145330,
+        "marketCap": 79706365005,
         "bookValue": 5.32,
         "eps": 4.04,
         "currency": "جنيه مصري",
@@ -4743,17 +4923,17 @@
         "capital": 110243935
       },
       "summary": {
-        "lastPrice": 719.29,
-        "change": 0.29,
-        "changePercent": 0.04,
+        "lastPrice": 718.3,
+        "change": 4,
+        "changePercent": 0.56,
         "open": 719,
         "prevClose": 719,
         "high": 724.98,
         "low": 716,
-        "volume": 77691,
-        "turnover": 56013116
+        "volume": 235040,
+        "turnover": 169305088
       },
-      "scrapedAt": "2026-08-10T08:59:04.975Z"
+      "scrapedAt": "2026-08-10T11:58:45.214Z"
     },
     {
       "ticker": "ORHD.CA",
@@ -4763,7 +4943,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ORHD",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 48757323046.99,
+        "marketCap": 48169476815.03,
         "bookValue": 16.09,
         "pb": 1.66,
         "eps": 6.1,
@@ -4773,17 +4953,17 @@
         "capital": 1130473523
       },
       "summary": {
-        "lastPrice": 43.16,
-        "change": -0.61,
-        "changePercent": -1.39,
+        "lastPrice": 42.54,
+        "change": -1.16,
+        "changePercent": -2.65,
         "open": 43.77,
         "prevClose": 43.77,
         "high": 43.77,
-        "low": 42.81,
-        "volume": 588486,
-        "turnover": 25475758
+        "low": 42.51,
+        "volume": 2433688,
+        "turnover": 104684080
       },
-      "scrapedAt": "2026-08-10T08:59:06.134Z"
+      "scrapedAt": "2026-08-10T11:58:45.927Z"
     },
     {
       "ticker": "ORWE.CA",
@@ -4793,7 +4973,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ORWE",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 17725108692.2,
+        "marketCap": 17465716857.68,
         "bookValue": 32.69,
         "pb": 0.77,
         "eps": 5.16,
@@ -4803,17 +4983,17 @@
         "capital": 665107268
       },
       "summary": {
-        "lastPrice": 26.7,
-        "change": -0.1,
-        "changePercent": -0.37,
+        "lastPrice": 26.32,
+        "change": -0.54,
+        "changePercent": -2.01,
         "open": 26.8,
         "prevClose": 26.8,
         "high": 27.3,
-        "low": 26.51,
-        "volume": 1021457,
-        "turnover": 27450102
+        "low": 26.15,
+        "volume": 2036925,
+        "turnover": 54178580
       },
-      "scrapedAt": "2026-08-10T08:59:06.294Z"
+      "scrapedAt": "2026-08-10T11:58:46.038Z"
     },
     {
       "ticker": "PHAR.CA",
@@ -4823,7 +5003,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/PHAR",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 25571558797.5,
+        "marketCap": 27031296035,
         "bookValue": 31.38,
         "pb": 2.29,
         "eps": 6.38,
@@ -4833,17 +5013,17 @@
         "capital": 1687557500
       },
       "summary": {
-        "lastPrice": 151.41,
-        "change": 17.92,
-        "changePercent": 13.42,
+        "lastPrice": 160.18,
+        "change": 26.69,
+        "changePercent": 19.99,
         "open": 133.49,
         "prevClose": 133.49,
-        "high": 153,
+        "high": 160.18,
         "low": 133.5,
-        "volume": 5225584,
-        "turnover": 744380800
+        "volume": 10817924,
+        "turnover": 1597483904
       },
-      "scrapedAt": "2026-08-10T08:59:06.314Z"
+      "scrapedAt": "2026-08-10T11:58:45.956Z"
     },
     {
       "ticker": "PHDC.CA",
@@ -4853,7 +5033,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/PHDC",
       "fundamentals": {
         "parValue": 2,
-        "marketCap": 43613691138.25,
+        "marketCap": 44328669681.5,
         "bookValue": 6.63,
         "pb": 1.38,
         "eps": 1.69,
@@ -4863,17 +5043,17 @@
         "capital": 5719828346
       },
       "summary": {
-        "lastPrice": 15.24,
-        "change": -0.31,
-        "changePercent": -1.99,
+        "lastPrice": 15.51,
+        "change": -0.05,
+        "changePercent": -0.32,
         "open": 15.55,
         "prevClose": 15.55,
         "high": 15.6,
         "low": 15.2,
-        "volume": 2253834,
-        "turnover": 34658168
+        "volume": 8589534,
+        "turnover": 132453504
       },
-      "scrapedAt": "2026-08-10T08:59:06.306Z"
+      "scrapedAt": "2026-08-10T11:58:46.077Z"
     },
     {
       "ticker": "PHGC.CA",
@@ -4900,10 +5080,10 @@
         "prevClose": 0.09,
         "high": 0.09,
         "low": 0.09,
-        "volume": 50567151,
-        "turnover": 4482952
+        "volume": 92209299,
+        "turnover": 8181151.5
       },
-      "scrapedAt": "2026-08-10T08:59:06.321Z"
+      "scrapedAt": "2026-08-10T11:58:45.984Z"
     },
     {
       "ticker": "PHTV.CA",
@@ -4913,7 +5093,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/PHTV",
       "fundamentals": {
         "parValue": 20,
-        "marketCap": 9506250000,
+        "marketCap": 9694854000,
         "bookValue": 93.87,
         "pb": 1.91,
         "eps": 44.51,
@@ -4923,17 +5103,17 @@
         "capital": 507000000
       },
       "summary": {
-        "lastPrice": 375.01,
-        "change": 27.09,
-        "changePercent": 7.79,
+        "lastPrice": 382.44,
+        "change": 34.52,
+        "changePercent": 9.92,
         "open": 347.92,
         "prevClose": 347.92,
         "high": 397,
         "low": 348,
-        "volume": 10724,
-        "turnover": 4082720
+        "volume": 14138,
+        "turnover": 5381548
       },
-      "scrapedAt": "2026-08-10T08:59:06.263Z"
+      "scrapedAt": "2026-08-10T11:58:46.026Z"
     },
     {
       "ticker": "POCO.CA",
@@ -4961,7 +5141,7 @@
         "volume": 0,
         "turnover": 0
       },
-      "scrapedAt": "2026-08-10T08:59:07.259Z"
+      "scrapedAt": "2026-08-10T11:58:46.741Z"
     },
     {
       "ticker": "POUL.CA",
@@ -4971,7 +5151,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/POUL",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 18872663040,
+        "marketCap": 19136113920,
         "bookValue": 15.86,
         "pb": 2.07,
         "eps": 5.13,
@@ -4981,17 +5161,17 @@
         "capital": 479001600
       },
       "summary": {
-        "lastPrice": 39.29,
-        "change": 0.19,
-        "changePercent": 0.49,
+        "lastPrice": 39.67,
+        "change": 0.85,
+        "changePercent": 2.17,
         "open": 39.1,
         "prevClose": 39.1,
-        "high": 39.82,
-        "low": 39.12,
-        "volume": 278722,
-        "turnover": 11028775
+        "high": 39.95,
+        "low": 39,
+        "volume": 1474094,
+        "turnover": 57969576
       },
-      "scrapedAt": "2026-08-10T08:59:07.274Z"
+      "scrapedAt": "2026-08-10T11:58:46.772Z"
     },
     {
       "ticker": "PRCL.CA",
@@ -5001,7 +5181,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/PRCL",
       "fundamentals": {
         "parValue": 2,
-        "marketCap": 1756258933,
+        "marketCap": 1772879680,
         "bookValue": -2.4,
         "pb": -4.87,
         "eps": -2.01,
@@ -5011,17 +5191,17 @@
         "capital": 100731800
       },
       "summary": {
-        "lastPrice": 34.86,
-        "change": -0.24,
-        "changePercent": -0.68,
+        "lastPrice": 35.03,
+        "change": 0.1,
+        "changePercent": 0.28,
         "open": 35.1,
         "prevClose": 35.1,
         "high": 35.5,
         "low": 34.8,
-        "volume": 424359,
-        "turnover": 14867166
+        "volume": 993778,
+        "turnover": 34850416
       },
-      "scrapedAt": "2026-08-10T08:59:07.297Z"
+      "scrapedAt": "2026-08-10T11:58:46.762Z"
     },
     {
       "ticker": "PRDC.CA",
@@ -5031,7 +5211,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/PRDC",
       "fundamentals": {
         "parValue": 4.5,
-        "marketCap": 9581423964,
+        "marketCap": 9654724475.2,
         "bookValue": 6.75,
         "pb": 0.43,
         "eps": -0.77,
@@ -5041,17 +5221,17 @@
         "capital": 4712175720
       },
       "summary": {
-        "lastPrice": 9.12,
-        "change": -0.1,
-        "changePercent": -1.08,
+        "lastPrice": 9.24,
+        "change": 0,
+        "changePercent": 0,
         "open": 9.22,
         "prevClose": 9.22,
-        "high": 9.3,
+        "high": 9.45,
         "low": 9.05,
-        "volume": 2041706,
-        "turnover": 18745790
+        "volume": 9458603,
+        "turnover": 87730144
       },
-      "scrapedAt": "2026-08-10T08:59:07.423Z"
+      "scrapedAt": "2026-08-10T11:58:46.819Z"
     },
     {
       "ticker": "PRMH.CA",
@@ -5061,7 +5241,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/PRMH",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 976500000,
+        "marketCap": 969500000,
         "bookValue": 1.39,
         "pb": 1.46,
         "eps": 0.24,
@@ -5071,17 +5251,17 @@
         "capital": 350000000
       },
       "summary": {
-        "lastPrice": 2.79,
-        "change": 0.01,
-        "changePercent": 0.36,
+        "lastPrice": 2.77,
+        "change": -0.01,
+        "changePercent": -0.36,
         "open": 2.78,
         "prevClose": 2.78,
         "high": 2.81,
-        "low": 2.78,
-        "volume": 828019,
-        "turnover": 2314075.5
+        "low": 2.77,
+        "volume": 2064486,
+        "turnover": 5746526.5
       },
-      "scrapedAt": "2026-08-10T08:59:07.244Z"
+      "scrapedAt": "2026-08-10T11:58:46.733Z"
     },
     {
       "ticker": "QNBE.CA",
@@ -5091,7 +5271,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/QNBE",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 121855238727.3,
+        "marketCap": 120993309540.9,
         "bookValue": 50.1,
         "pb": 0.63,
         "eps": 13.2,
@@ -5101,17 +5281,17 @@
         "capital": 10774114830
       },
       "summary": {
-        "lastPrice": 56.33,
-        "change": 0.24,
-        "changePercent": 0.43,
+        "lastPrice": 56.15,
+        "change": 0.06,
+        "changePercent": 0.11,
         "open": 56.09,
         "prevClose": 56.09,
         "high": 56.7,
-        "low": 56,
-        "volume": 45037,
-        "turnover": 2530631
+        "low": 55.6,
+        "volume": 128388,
+        "turnover": 7197338.5
       },
-      "scrapedAt": "2026-08-10T08:59:07.283Z"
+      "scrapedAt": "2026-08-10T11:58:46.779Z"
     },
     {
       "ticker": "RACC.CA",
@@ -5121,7 +5301,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/RACC",
       "fundamentals": {
         "parValue": 0.5,
-        "marketCap": 2088152007.66,
+        "marketCap": 2079947088.18,
         "bookValue": 6.2,
         "pb": 1.55,
         "eps": 1.57,
@@ -5131,17 +5311,17 @@
         "capital": 102561493.5
       },
       "summary": {
-        "lastPrice": 10.15,
-        "change": -0.03,
-        "changePercent": -0.29,
+        "lastPrice": 10.14,
+        "change": -0.04,
+        "changePercent": -0.39,
         "open": 10.18,
         "prevClose": 10.18,
         "high": 10.21,
-        "low": 10.13,
-        "volume": 337311,
-        "turnover": 3434774.25
+        "low": 10.1,
+        "volume": 937703,
+        "turnover": 9521086
       },
-      "scrapedAt": "2026-08-10T08:59:08.323Z"
+      "scrapedAt": "2026-08-10T11:58:47.611Z"
     },
     {
       "ticker": "RAKT.CA",
@@ -5151,7 +5331,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/RAKT",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 672000000,
+        "marketCap": 688800000,
         "bookValue": -32.43,
         "pb": -0.76,
         "eps": 0,
@@ -5161,16 +5341,16 @@
       },
       "summary": {
         "lastPrice": 0,
-        "change": -0.56,
-        "changePercent": -2.44,
+        "change": 0,
+        "changePercent": 0,
         "open": 22.96,
         "prevClose": 22.96,
-        "high": 22.79,
+        "high": 22.96,
         "low": 22.4,
-        "volume": 275,
-        "turnover": 6189.34
+        "volume": 2988,
+        "turnover": 67174.31
       },
-      "scrapedAt": "2026-08-10T08:59:08.450Z"
+      "scrapedAt": "2026-08-10T11:58:47.668Z"
     },
     {
       "ticker": "RAYA.CA",
@@ -5180,7 +5360,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/RAYA",
       "fundamentals": {
         "parValue": 0.25,
-        "marketCap": 31553164550.16,
+        "marketCap": 31510351572.48,
         "bookValue": 1.47,
         "pb": 3.71,
         "eps": 0.36,
@@ -5190,17 +5370,17 @@
         "capital": 1070324442
       },
       "summary": {
-        "lastPrice": 7.38,
-        "change": -0.05,
-        "changePercent": -0.67,
+        "lastPrice": 7.35,
+        "change": -0.07,
+        "changePercent": -0.94,
         "open": 7.43,
         "prevClose": 7.43,
         "high": 7.44,
-        "low": 7.36,
-        "volume": 3069956,
-        "turnover": 22692538
+        "low": 7.33,
+        "volume": 7235193,
+        "turnover": 53377988
       },
-      "scrapedAt": "2026-08-10T08:59:08.246Z"
+      "scrapedAt": "2026-08-10T11:58:47.646Z"
     },
     {
       "ticker": "RMDA.CA",
@@ -5210,7 +5390,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/RMDA",
       "fundamentals": {
         "parValue": 0.25,
-        "marketCap": 9897025712.6,
+        "marketCap": 10486314266.48,
         "bookValue": 1.1,
         "pb": 2.89,
         "eps": 0.21,
@@ -5220,17 +5400,17 @@
         "capital": 377749073
       },
       "summary": {
-        "lastPrice": 6.56,
-        "change": 0.21,
-        "changePercent": 3.31,
+        "lastPrice": 6.85,
+        "change": 0.59,
+        "changePercent": 9.29,
         "open": 6.35,
         "prevClose": 6.35,
-        "high": 6.58,
+        "high": 6.98,
         "low": 6.26,
-        "volume": 7174838,
-        "turnover": 46216324
+        "volume": 29008533,
+        "turnover": 192514960
       },
-      "scrapedAt": "2026-08-10T08:59:08.464Z"
+      "scrapedAt": "2026-08-10T11:58:47.596Z"
     },
     {
       "ticker": "ROTO.CA",
@@ -5240,7 +5420,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ROTO",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 822310500,
+        "marketCap": 841353480,
         "bookValue": 9.76,
         "pb": 5.22,
         "eps": 11.16,
@@ -5250,17 +5430,17 @@
         "capital": 173118000
       },
       "summary": {
-        "lastPrice": 47.36,
-        "change": 0.65,
-        "changePercent": 1.39,
+        "lastPrice": 48.6,
+        "change": 1.89,
+        "changePercent": 4.05,
         "open": 46.71,
         "prevClose": 46.71,
-        "high": 47.5,
+        "high": 49.24,
         "low": 46.86,
-        "volume": 238848,
-        "turnover": 11270553
+        "volume": 986325,
+        "turnover": 47491424
       },
-      "scrapedAt": "2026-08-10T08:59:08.397Z"
+      "scrapedAt": "2026-08-10T11:58:47.538Z"
     },
     {
       "ticker": "RREI.CA",
@@ -5270,7 +5450,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/RREI",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 1182720000,
+        "marketCap": 1190112000,
         "bookValue": 1.53,
         "pb": 1.42,
         "eps": 0.08,
@@ -5280,17 +5460,17 @@
         "capital": 246400000
       },
       "summary": {
-        "lastPrice": 4.8,
-        "change": 0.03,
-        "changePercent": 0.63,
+        "lastPrice": 4.81,
+        "change": 0.06,
+        "changePercent": 1.26,
         "open": 4.77,
         "prevClose": 4.77,
         "high": 4.84,
         "low": 4.76,
-        "volume": 6166470,
-        "turnover": 29610566
+        "volume": 16763245,
+        "turnover": 80616568
       },
-      "scrapedAt": "2026-08-10T08:59:08.261Z"
+      "scrapedAt": "2026-08-10T11:58:47.572Z"
     },
     {
       "ticker": "RTVC.CA",
@@ -5300,7 +5480,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/RTVC",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 945235623.79,
+        "marketCap": 937831689.4,
         "bookValue": 1.18,
         "pb": 0.45,
         "eps": 8.05,
@@ -5310,17 +5490,17 @@
         "capital": 2467978130
       },
       "summary": {
-        "lastPrice": 3.82,
-        "change": 0,
-        "changePercent": 0,
+        "lastPrice": 3.8,
+        "change": -0.02,
+        "changePercent": -0.52,
         "open": 3.82,
         "prevClose": 3.82,
         "high": 3.87,
-        "low": 3.81,
-        "volume": 475563,
-        "turnover": 1821005
+        "low": 3.79,
+        "volume": 1162296,
+        "turnover": 4434457.5
       },
-      "scrapedAt": "2026-08-10T08:59:09.246Z"
+      "scrapedAt": "2026-08-10T11:58:48.397Z"
     },
     {
       "ticker": "RUBX.CA",
@@ -5330,7 +5510,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/RUBX",
       "fundamentals": {
         "parValue": 2.5,
-        "marketCap": 705354338.5,
+        "marketCap": 703626940.12,
         "bookValue": 2.76,
         "pb": 3.24,
         "eps": 0.21,
@@ -5340,17 +5520,17 @@
         "capital": 143949865
       },
       "summary": {
-        "lastPrice": 12.24,
-        "change": -0.06,
-        "changePercent": -0.49,
+        "lastPrice": 12.22,
+        "change": -0.08,
+        "changePercent": -0.65,
         "open": 12.3,
         "prevClose": 12.3,
         "high": 12.52,
         "low": 12.21,
-        "volume": 344625,
-        "turnover": 4241468
+        "volume": 945260,
+        "turnover": 11604307
       },
-      "scrapedAt": "2026-08-10T08:59:09.374Z"
+      "scrapedAt": "2026-08-10T11:58:48.368Z"
     },
     {
       "ticker": "SAIB.CA",
@@ -5380,7 +5560,7 @@
         "volume": 57,
         "turnover": 7057.52
       },
-      "scrapedAt": "2026-08-10T08:59:09.259Z"
+      "scrapedAt": "2026-08-10T11:58:48.408Z"
     },
     {
       "ticker": "SAUD.CA",
@@ -5390,7 +5570,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/SAUD",
       "fundamentals": {
         "parValue": 7,
-        "marketCap": 16273373729.4,
+        "marketCap": 16251559555.5,
         "bookValue": 18.55,
         "pb": 0.77,
         "eps": 5.49,
@@ -5400,17 +5580,17 @@
         "capital": 5089973910
       },
       "summary": {
-        "lastPrice": 22.38,
-        "change": 0,
-        "changePercent": 0,
+        "lastPrice": 22.35,
+        "change": -0.03,
+        "changePercent": -0.13,
         "open": 22.38,
         "prevClose": 22.38,
         "high": 22.44,
-        "low": 22.25,
-        "volume": 128024,
-        "turnover": 2860457.75
+        "low": 22.13,
+        "volume": 400379,
+        "turnover": 8928968
       },
-      "scrapedAt": "2026-08-10T08:59:09.312Z"
+      "scrapedAt": "2026-08-10T11:58:48.353Z"
     },
     {
       "ticker": "SCEM.CA",
@@ -5420,7 +5600,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/SCEM",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 21517029352.5,
+        "marketCap": 21384014989.23,
         "bookValue": 17.16,
         "pb": 2.9,
         "eps": 8.77,
@@ -5430,17 +5610,17 @@
         "capital": 2608124770
       },
       "summary": {
-        "lastPrice": 82.45,
-        "change": 0.95,
-        "changePercent": 1.17,
+        "lastPrice": 81.84,
+        "change": 0.49,
+        "changePercent": 0.6,
         "open": 81.5,
         "prevClose": 81.5,
-        "high": 83,
-        "low": 81.61,
-        "volume": 424264,
-        "turnover": 34968100
+        "high": 84.5,
+        "low": 81,
+        "volume": 1826463,
+        "turnover": 151452528
       },
-      "scrapedAt": "2026-08-10T08:59:09.596Z"
+      "scrapedAt": "2026-08-10T11:58:48.343Z"
     },
     {
       "ticker": "SCFM.CA",
@@ -5450,7 +5630,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/SCFM",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 1685640000,
+        "marketCap": 1671120000,
         "bookValue": -1.23,
         "pb": -15.09,
         "eps": 6.67,
@@ -5460,17 +5640,17 @@
         "capital": 30000000
       },
       "summary": {
-        "lastPrice": 280.03,
-        "change": -0.31,
-        "changePercent": -0.11,
+        "lastPrice": 278.51,
+        "change": -1.83,
+        "changePercent": -0.65,
         "open": 280.34,
         "prevClose": 280.34,
         "high": 282,
-        "low": 279,
-        "volume": 8093,
-        "turnover": 2266942.25
+        "low": 278.51,
+        "volume": 25468,
+        "turnover": 7121269
       },
-      "scrapedAt": "2026-08-10T08:59:09.153Z"
+      "scrapedAt": "2026-08-10T11:58:48.376Z"
     },
     {
       "ticker": "SCTS.CA",
@@ -5480,7 +5660,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/SCTS",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 55994400000,
+        "marketCap": 56176200000,
         "bookValue": 46.67,
         "pb": 9.07,
         "eps": 11.12,
@@ -5490,17 +5670,17 @@
         "capital": 909000000
       },
       "summary": {
-        "lastPrice": 614.45,
-        "change": 2.76,
-        "changePercent": 0.45,
+        "lastPrice": 620.33,
+        "change": 8.64,
+        "changePercent": 1.41,
         "open": 611.69,
         "prevClose": 611.69,
-        "high": 620,
+        "high": 630,
         "low": 613,
-        "volume": 5635,
-        "turnover": 3467376.25
+        "volume": 20567,
+        "turnover": 12738672
       },
-      "scrapedAt": "2026-08-10T08:59:10.609Z"
+      "scrapedAt": "2026-08-10T11:58:49.110Z"
     },
     {
       "ticker": "SDTI.CA",
@@ -5510,7 +5690,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/SDTI",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 6082210000,
+        "marketCap": 5746460000,
         "bookValue": 5.25,
         "pb": 6.44,
         "eps": -14.92,
@@ -5520,17 +5700,17 @@
         "capital": 790000000
       },
       "summary": {
-        "lastPrice": 76.99,
-        "change": 7.02,
-        "changePercent": 10.03,
+        "lastPrice": 72.8,
+        "change": 2.77,
+        "changePercent": 3.96,
         "open": 69.97,
         "prevClose": 69.97,
-        "high": 76.99,
+        "high": 77,
         "low": 69.98,
-        "volume": 403998,
-        "turnover": 29720600
+        "volume": 834046,
+        "turnover": 61243632
       },
-      "scrapedAt": "2026-08-10T08:59:10.698Z"
+      "scrapedAt": "2026-08-10T11:58:49.070Z"
     },
     {
       "ticker": "SEIG.CA",
@@ -5540,7 +5720,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/SEIG",
       "fundamentals": {
         "parValue": 2.68,
-        "marketCap": 675000000,
+        "marketCap": 673750000,
         "bookValue": 139.66,
         "pb": 0.02,
         "eps": 15.29,
@@ -5550,17 +5730,17 @@
         "capital": 6700000
       },
       "summary": {
-        "lastPrice": 270.05,
-        "change": 0.56,
-        "changePercent": 0.21,
+        "lastPrice": 269.5,
+        "change": 0.01,
+        "changePercent": 0,
         "open": 269.49,
         "prevClose": 269.49,
-        "high": 272.03,
+        "high": 272.99,
         "low": 269,
-        "volume": 2750,
-        "turnover": 743640.25
+        "volume": 10804,
+        "turnover": 2920000.25
       },
-      "scrapedAt": "2026-08-10T08:59:10.503Z"
+      "scrapedAt": "2026-08-10T11:58:49.119Z"
     },
     {
       "ticker": "SEIGA.CA",
@@ -5588,7 +5768,7 @@
         "volume": 157,
         "turnover": 3924.09
       },
-      "scrapedAt": "2026-08-10T08:59:10.725Z"
+      "scrapedAt": "2026-08-10T11:58:49.078Z"
     },
     {
       "ticker": "SIPC.CA",
@@ -5598,7 +5778,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/SIPC",
       "fundamentals": {
         "parValue": 0.4,
-        "marketCap": 1262500000,
+        "marketCap": 1277500000,
         "bookValue": 0.4,
         "pb": 6.82,
         "eps": -0.08,
@@ -5608,17 +5788,17 @@
         "capital": 100000000
       },
       "summary": {
-        "lastPrice": 5.05,
-        "change": 0.26,
-        "changePercent": 5.43,
+        "lastPrice": 5.1,
+        "change": 0.32,
+        "changePercent": 6.68,
         "open": 4.79,
         "prevClose": 4.79,
-        "high": 5.06,
+        "high": 5.16,
         "low": 4.72,
-        "volume": 8290990,
-        "turnover": 40907224
+        "volume": 18457763,
+        "turnover": 92186616
       },
-      "scrapedAt": "2026-08-10T08:59:10.794Z"
+      "scrapedAt": "2026-08-10T11:58:49.095Z"
     },
     {
       "ticker": "SKPC.CA",
@@ -5628,7 +5808,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/SKPC",
       "fundamentals": {
         "parValue": 2,
-        "marketCap": 14977872000,
+        "marketCap": 14896224000,
         "bookValue": 8.42,
         "pb": 2.54,
         "eps": 2.1,
@@ -5638,17 +5818,17 @@
         "capital": 1814400000
       },
       "summary": {
-        "lastPrice": 16.51,
-        "change": -0.14,
-        "changePercent": -0.84,
+        "lastPrice": 16.43,
+        "change": -0.23,
+        "changePercent": -1.38,
         "open": 16.65,
         "prevClose": 16.65,
         "high": 16.75,
-        "low": 16.42,
-        "volume": 984049,
-        "turnover": 16281042
+        "low": 16.35,
+        "volume": 2299845,
+        "turnover": 37958428
       },
-      "scrapedAt": "2026-08-10T08:59:10.489Z"
+      "scrapedAt": "2026-08-10T11:58:49.088Z"
     },
     {
       "ticker": "SMFR.CA",
@@ -5658,7 +5838,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/SMFR",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 2529600000,
+        "marketCap": 2503200000,
         "bookValue": 211.92,
         "pb": 0.78,
         "eps": 1.59,
@@ -5668,17 +5848,17 @@
         "capital": 48000000
       },
       "summary": {
-        "lastPrice": 264.55,
-        "change": -0.44,
-        "changePercent": -0.17,
+        "lastPrice": 258.54,
+        "change": -4.24,
+        "changePercent": -1.6,
         "open": 264.99,
         "prevClose": 264.99,
         "high": 280,
-        "low": 260,
-        "volume": 137909,
-        "turnover": 37379304
+        "low": 258.05,
+        "volume": 211015,
+        "turnover": 56569108
       },
-      "scrapedAt": "2026-08-10T08:59:11.636Z"
+      "scrapedAt": "2026-08-10T11:58:49.803Z"
     },
     {
       "ticker": "SNFC.CA",
@@ -5688,7 +5868,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/SNFC",
       "fundamentals": {
         "parValue": 0.5,
-        "marketCap": 1775330709.6,
+        "marketCap": 1778609252,
         "bookValue": 0.4,
         "pb": 30.82,
         "eps": 0.02,
@@ -5698,17 +5878,17 @@
         "capital": 81963560
       },
       "summary": {
-        "lastPrice": 10.87,
-        "change": 0.01,
-        "changePercent": 0.09,
+        "lastPrice": 10.84,
+        "change": -0.02,
+        "changePercent": -0.18,
         "open": 10.86,
         "prevClose": 10.86,
         "high": 10.9,
-        "low": 10.83,
-        "volume": 290679,
-        "turnover": 3157866.25
+        "low": 10.75,
+        "volume": 806382,
+        "turnover": 8733094
       },
-      "scrapedAt": "2026-08-10T08:59:11.691Z"
+      "scrapedAt": "2026-08-10T11:58:49.826Z"
     },
     {
       "ticker": "SPHT.CA",
@@ -5738,7 +5918,7 @@
         "volume": 0,
         "turnover": 0
       },
-      "scrapedAt": "2026-08-10T08:59:11.604Z"
+      "scrapedAt": "2026-08-10T11:58:49.835Z"
     },
     {
       "ticker": "SPIN.CA",
@@ -5748,7 +5928,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/SPIN",
       "fundamentals": {
         "parValue": 2,
-        "marketCap": 5713819230.24,
+        "marketCap": 5666925511.81,
         "bookValue": 2.39,
         "pb": 3.56,
         "eps": -0.28,
@@ -5758,17 +5938,17 @@
         "capital": 721441822
       },
       "summary": {
-        "lastPrice": 15.74,
-        "change": -0.06,
-        "changePercent": -0.38,
+        "lastPrice": 15.71,
+        "change": -0.09,
+        "changePercent": -0.57,
         "open": 15.8,
         "prevClose": 15.8,
         "high": 16,
-        "low": 15.7,
-        "volume": 448588,
-        "turnover": 7127212
+        "low": 15.67,
+        "volume": 875632,
+        "turnover": 13839308
       },
-      "scrapedAt": "2026-08-10T08:59:11.740Z"
+      "scrapedAt": "2026-08-10T11:58:49.856Z"
     },
     {
       "ticker": "SPMD.CA",
@@ -5778,7 +5958,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/SPMD",
       "fundamentals": {
         "parValue": 0.2,
-        "marketCap": 803575173.35,
+        "marketCap": 815221190.35,
         "bookValue": 0.06,
         "eps": -0.22,
         "currency": "جنيه مصري",
@@ -5786,17 +5966,17 @@
         "capital": 332743343
       },
       "summary": {
-        "lastPrice": 0.48,
-        "change": 0,
-        "changePercent": 0.83,
+        "lastPrice": 0.49,
+        "change": 0.01,
+        "changePercent": 2.08,
         "open": 0.48,
         "prevClose": 0.48,
-        "high": 0.48,
+        "high": 0.49,
         "low": 0.48,
-        "volume": 9847622,
-        "turnover": 4753432.5
+        "volume": 47235017,
+        "turnover": 22962710
       },
-      "scrapedAt": "2026-08-10T08:59:11.788Z"
+      "scrapedAt": "2026-08-10T11:58:49.848Z"
     },
     {
       "ticker": "SUGR.CA",
@@ -5806,7 +5986,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/SUGR",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 6883808810.75,
+        "marketCap": 6953485867.5,
         "bookValue": 14.66,
         "pb": 3.27,
         "eps": 2.27,
@@ -5816,17 +5996,17 @@
         "capital": 710990375
       },
       "summary": {
-        "lastPrice": 48.37,
-        "change": 0.13,
-        "changePercent": 0.27,
+        "lastPrice": 48.54,
+        "change": 0.66,
+        "changePercent": 1.37,
         "open": 48.24,
         "prevClose": 48.24,
-        "high": 48.7,
-        "low": 48.3,
-        "volume": 79160,
-        "turnover": 3840834
+        "high": 48.9,
+        "low": 48.25,
+        "volume": 274986,
+        "turnover": 13348391
       },
-      "scrapedAt": "2026-08-10T08:59:11.513Z"
+      "scrapedAt": "2026-08-10T11:58:49.816Z"
     },
     {
       "ticker": "SVCE.CA",
@@ -5836,7 +6016,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/SVCE",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 4542859432.8,
+        "marketCap": 4528391727.6,
         "bookValue": 6.03,
         "pb": 1.07,
         "eps": 1.79,
@@ -5846,17 +6026,17 @@
         "capital": 2411284200
       },
       "summary": {
-        "lastPrice": 9.42,
-        "change": -0.02,
-        "changePercent": -0.21,
+        "lastPrice": 9.39,
+        "change": -0.05,
+        "changePercent": -0.53,
         "open": 9.44,
         "prevClose": 9.44,
         "high": 9.52,
-        "low": 9.4,
-        "volume": 1126369,
-        "turnover": 10654630
+        "low": 9.33,
+        "volume": 2852620,
+        "turnover": 26852132
       },
-      "scrapedAt": "2026-08-10T08:59:12.535Z"
+      "scrapedAt": "2026-08-10T11:58:50.645Z"
     },
     {
       "ticker": "SWDY.CA",
@@ -5866,7 +6046,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/SWDY",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 230775855032.8,
+        "marketCap": 231204010608,
         "bookValue": 33.98,
         "pb": 2.5,
         "eps": 9.05,
@@ -5876,17 +6056,17 @@
         "capital": 2140777876
       },
       "summary": {
-        "lastPrice": 107.66,
-        "change": -2.34,
-        "changePercent": -2.13,
+        "lastPrice": 107.49,
+        "change": -2,
+        "changePercent": -1.82,
         "open": 110,
         "prevClose": 110,
         "high": 110.95,
-        "low": 107.3,
-        "volume": 276464,
-        "turnover": 30085354
+        "low": 107,
+        "volume": 665284,
+        "turnover": 72072720
       },
-      "scrapedAt": "2026-08-10T08:59:12.691Z"
+      "scrapedAt": "2026-08-10T11:58:50.565Z"
     },
     {
       "ticker": "TALM.CA",
@@ -5896,7 +6076,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/TALM",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 13801725000,
+        "marketCap": 13736002500,
         "bookValue": 2.68,
         "eps": 1.84,
         "currency": "جنيه مصري",
@@ -5904,17 +6084,17 @@
         "capital": 730250000
       },
       "summary": {
-        "lastPrice": 18.86,
-        "change": 0.14,
-        "changePercent": 0.75,
+        "lastPrice": 18.81,
+        "change": 0.09,
+        "changePercent": 0.48,
         "open": 18.72,
         "prevClose": 18.72,
         "high": 19.14,
-        "low": 18.73,
-        "volume": 726445,
-        "turnover": 13746328
+        "low": 18.58,
+        "volume": 1667558,
+        "turnover": 31483378
       },
-      "scrapedAt": "2026-08-10T08:59:12.481Z"
+      "scrapedAt": "2026-08-10T11:58:50.579Z"
     },
     {
       "ticker": "TANM.CA",
@@ -5924,7 +6104,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/TANM",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 919560000,
+        "marketCap": 951570000,
         "bookValue": 1.59,
         "pb": 2.2,
         "eps": 0.28,
@@ -5934,17 +6114,17 @@
         "capital": 145500000
       },
       "summary": {
-        "lastPrice": 6.33,
-        "change": -0.05,
-        "changePercent": -0.78,
+        "lastPrice": 6.49,
+        "change": 0.16,
+        "changePercent": 2.51,
         "open": 6.38,
         "prevClose": 6.38,
-        "high": 6.45,
-        "low": 6.31,
-        "volume": 307689,
-        "turnover": 1961461
+        "high": 6.54,
+        "low": 6.3,
+        "volume": 1442380,
+        "turnover": 9252192
       },
-      "scrapedAt": "2026-08-10T08:59:12.669Z"
+      "scrapedAt": "2026-08-10T11:58:50.599Z"
     },
     {
       "ticker": "TAQA.CA",
@@ -5954,7 +6134,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/TAQA",
       "fundamentals": {
         "parValue": 0.5,
-        "marketCap": 20853295596,
+        "marketCap": 20826248520,
         "bookValue": 3.08,
         "pb": 4.51,
         "eps": 0.66,
@@ -5964,17 +6144,17 @@
         "capital": 676176900
       },
       "summary": {
-        "lastPrice": 15.4,
+        "lastPrice": 15.37,
         "change": 0,
         "changePercent": 0,
         "open": 15.4,
         "prevClose": 15.4,
         "high": 15.67,
         "low": 15.25,
-        "volume": 2647485,
-        "turnover": 41042796
+        "volume": 4756321,
+        "turnover": 73488432
       },
-      "scrapedAt": "2026-08-10T08:59:12.681Z"
+      "scrapedAt": "2026-08-10T11:58:50.590Z"
     },
     {
       "ticker": "TMGH.CA",
@@ -5984,7 +6164,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/TMGH",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 204375642495.48,
+        "marketCap": 202665299853.1,
         "bookValue": 46.26,
         "pb": 1.89,
         "eps": 8.07,
@@ -5994,17 +6174,17 @@
         "capital": 20606537860
       },
       "summary": {
-        "lastPrice": 99.18,
-        "change": 0.18,
-        "changePercent": 0.18,
+        "lastPrice": 98.45,
+        "change": -0.65,
+        "changePercent": -0.66,
         "open": 99,
         "prevClose": 99,
         "high": 99.7,
-        "low": 98.9,
-        "volume": 1157530,
-        "turnover": 114964400
+        "low": 98.35,
+        "volume": 3163996,
+        "turnover": 313039744
       },
-      "scrapedAt": "2026-08-10T08:59:12.562Z"
+      "scrapedAt": "2026-08-10T11:58:50.622Z"
     },
     {
       "ticker": "TRTO.CA",
@@ -6026,15 +6206,15 @@
       "summary": {
         "lastPrice": 0,
         "change": 0,
-        "changePercent": 2.94,
+        "changePercent": 0,
         "open": 0.03,
         "prevClose": 0.03,
         "high": 0.04,
         "low": 0.04,
-        "volume": 10000,
-        "turnover": 350
+        "volume": 13217,
+        "turnover": 462.6
       },
-      "scrapedAt": "2026-08-10T08:59:13.387Z"
+      "scrapedAt": "2026-08-10T11:58:51.381Z"
     },
     {
       "ticker": "TYCN.CA",
@@ -6044,7 +6224,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/TYCN",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 76964250,
+        "marketCap": 75187750,
         "bookValue": 1.59,
         "pb": 50.88,
         "eps": -0.75,
@@ -6054,17 +6234,17 @@
         "capital": 26125000
       },
       "summary": {
-        "lastPrice": 14.6,
-        "change": -0.36,
-        "changePercent": -2.41,
+        "lastPrice": 14.39,
+        "change": -0.57,
+        "changePercent": -3.81,
         "open": 14.96,
         "prevClose": 14.96,
         "high": 14.96,
-        "low": 14.4,
-        "volume": 687457,
-        "turnover": 10031077
+        "low": 14.23,
+        "volume": 1251930,
+        "turnover": 18187090
       },
-      "scrapedAt": "2026-08-10T08:59:13.566Z"
+      "scrapedAt": "2026-08-10T11:58:51.397Z"
     },
     {
       "ticker": "UBEE.CA",
@@ -6074,7 +6254,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/UBEE",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 15598000000,
+        "marketCap": 15444000000,
         "bookValue": 15.48,
         "pb": 0.83,
         "eps": 0.01,
@@ -6084,17 +6264,17 @@
         "capital": 5500000000
       },
       "summary": {
-        "lastPrice": 14.13,
-        "change": 0.03,
-        "changePercent": 0.21,
+        "lastPrice": 14.02,
+        "change": -0.08,
+        "changePercent": -0.57,
         "open": 14.1,
         "prevClose": 14.1,
         "high": 14.2,
-        "low": 14.11,
-        "volume": 44612,
-        "turnover": 631071
+        "low": 14,
+        "volume": 184659,
+        "turnover": 2595719.5
       },
-      "scrapedAt": "2026-08-10T08:59:13.417Z"
+      "scrapedAt": "2026-08-10T11:58:51.372Z"
     },
     {
       "ticker": "UEFM.CA",
@@ -6104,7 +6284,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/UEFM",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 3803100000,
+        "marketCap": 3822210000,
         "bookValue": 106.92,
         "pb": 4.18,
         "eps": 54.41,
@@ -6114,17 +6294,17 @@
         "capital": 70000000
       },
       "summary": {
-        "lastPrice": 545.98,
-        "change": -0.27,
-        "changePercent": -0.05,
+        "lastPrice": 546.03,
+        "change": -0.22,
+        "changePercent": -0.04,
         "open": 546.25,
         "prevClose": 546.25,
         "high": 550,
         "low": 542,
-        "volume": 830,
-        "turnover": 453052.09
+        "volume": 1396,
+        "turnover": 762137.75
       },
-      "scrapedAt": "2026-08-10T08:59:13.549Z"
+      "scrapedAt": "2026-08-10T11:58:51.389Z"
     },
     {
       "ticker": "UEGC.CA",
@@ -6134,7 +6314,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/UEGC",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 1987134816.9,
+        "marketCap": 2045153351.7,
         "bookValue": 1.82,
         "pb": 0.55,
         "eps": 0.16,
@@ -6144,17 +6324,17 @@
         "capital": 725231685
       },
       "summary": {
-        "lastPrice": 2.75,
-        "change": 0.01,
-        "changePercent": 0.36,
+        "lastPrice": 2.8,
+        "change": 0.08,
+        "changePercent": 2.92,
         "open": 2.74,
         "prevClose": 2.74,
         "high": 2.82,
         "low": 2.69,
-        "volume": 2871529,
-        "turnover": 7964189.5
+        "volume": 7405585,
+        "turnover": 20552610
       },
-      "scrapedAt": "2026-08-10T08:59:13.530Z"
+      "scrapedAt": "2026-08-10T11:58:51.405Z"
     },
     {
       "ticker": "UNIP.CA",
@@ -6164,7 +6344,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/UNIP",
       "fundamentals": {
         "parValue": 0.1,
-        "marketCap": 315455265.43,
+        "marketCap": 313927637.02,
         "bookValue": 0.63,
         "pb": 1.95,
         "eps": 0.06,
@@ -6181,10 +6361,10 @@
         "prevClose": 0.41,
         "high": 0.42,
         "low": 0.41,
-        "volume": 41014048,
-        "turnover": 16985748
+        "volume": 83407079,
+        "turnover": 34471784
       },
-      "scrapedAt": "2026-08-10T08:59:13.401Z"
+      "scrapedAt": "2026-08-10T11:58:51.359Z"
     },
     {
       "ticker": "UNIT.CA",
@@ -6194,7 +6374,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/UNIT",
       "fundamentals": {
         "parValue": 1.25,
-        "marketCap": 4214082672.7,
+        "marketCap": 4188186075.27,
         "bookValue": 3.84,
         "pb": 2.79,
         "eps": 0.58,
@@ -6204,17 +6384,17 @@
         "capital": 294279516.25
       },
       "summary": {
-        "lastPrice": 17.95,
-        "change": 0.03,
-        "changePercent": 0.17,
+        "lastPrice": 17.79,
+        "change": -0.13,
+        "changePercent": -0.73,
         "open": 17.92,
         "prevClose": 17.92,
         "high": 18.22,
-        "low": 17.72,
-        "volume": 51953,
-        "turnover": 935540.44
+        "low": 17.7,
+        "volume": 173918,
+        "turnover": 3108387.75
       },
-      "scrapedAt": "2026-08-10T08:59:14.262Z"
+      "scrapedAt": "2026-08-10T11:58:52.204Z"
     },
     {
       "ticker": "VALU.CA",
@@ -6224,7 +6404,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/VALU",
       "fundamentals": {
         "parValue": 0.1,
-        "marketCap": 24749689145.25,
+        "marketCap": 24517989927.72,
         "bookValue": 1.2,
         "pb": 9.71,
         "eps": 0.42,
@@ -6234,17 +6414,17 @@
         "capital": 210635652.3
       },
       "summary": {
-        "lastPrice": 11.77,
-        "change": 0.01,
-        "changePercent": 0.09,
+        "lastPrice": 11.63,
+        "change": -0.12,
+        "changePercent": -1.02,
         "open": 11.76,
         "prevClose": 11.76,
         "high": 11.85,
-        "low": 11.69,
-        "volume": 393403,
-        "turnover": 4643356
+        "low": 11.6,
+        "volume": 1586306,
+        "turnover": 18603498
       },
-      "scrapedAt": "2026-08-10T08:59:14.453Z"
+      "scrapedAt": "2026-08-10T11:58:52.234Z"
     },
     {
       "ticker": "VLMR.CA",
@@ -6254,7 +6434,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/VLMR",
       "fundamentals": {
         "parValue": 0.25,
-        "marketCap": 559155529.3,
+        "marketCap": 559986369.61,
         "bookValue": 0.6,
         "pb": 1.14,
         "eps": 0.16,
@@ -6266,15 +6446,15 @@
       "summary": {
         "lastPrice": 0.67,
         "change": 0,
-        "changePercent": 0,
+        "changePercent": -0.15,
         "open": 0.67,
         "prevClose": 0.67,
-        "high": 0.67,
+        "high": 0.68,
         "low": 0.67,
-        "volume": 18150,
-        "turnover": 12227.9
+        "volume": 71590,
+        "turnover": 48195.98
       },
-      "scrapedAt": "2026-08-10T08:59:14.301Z"
+      "scrapedAt": "2026-08-10T11:58:52.268Z"
     },
     {
       "ticker": "VLMRA.CA",
@@ -6284,7 +6464,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/VLMRA",
       "fundamentals": {
         "parValue": 3.93,
-        "marketCap": 10730252358,
+        "marketCap": 10677393972,
         "bookValue": 0.6,
         "pb": 1.03,
         "eps": 0.16,
@@ -6294,17 +6474,17 @@
         "capital": 1384889713.2
       },
       "summary": {
-        "lastPrice": 30.45,
-        "change": -0.24,
-        "changePercent": -0.78,
+        "lastPrice": 30.3,
+        "change": -0.39,
+        "changePercent": -1.27,
         "open": 30.69,
         "prevClose": 30.69,
         "high": 30.7,
-        "low": 30.4,
-        "volume": 370200,
-        "turnover": 11303365
+        "low": 30.22,
+        "volume": 743323,
+        "turnover": 22636888
       },
-      "scrapedAt": "2026-08-10T08:59:14.494Z"
+      "scrapedAt": "2026-08-10T11:58:52.216Z"
     },
     {
       "ticker": "WCDF.CA",
@@ -6314,7 +6494,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/WCDF",
       "fundamentals": {
         "parValue": 10,
-        "marketCap": 4410000000,
+        "marketCap": 4424850000,
         "bookValue": 130.12,
         "pb": 4.21,
         "eps": 62.06,
@@ -6324,17 +6504,17 @@
         "capital": 75000000
       },
       "summary": {
-        "lastPrice": 588.78,
-        "change": 2.37,
-        "changePercent": 0.4,
+        "lastPrice": 587.89,
+        "change": 1.48,
+        "changePercent": 0.25,
         "open": 586.41,
         "prevClose": 586.41,
         "high": 590,
-        "low": 587,
-        "volume": 1333,
-        "turnover": 784017.38
+        "low": 582.92,
+        "volume": 3381,
+        "turnover": 1986034.88
       },
-      "scrapedAt": "2026-08-10T08:59:14.479Z"
+      "scrapedAt": "2026-08-10T11:58:52.260Z"
     },
     {
       "ticker": "WKOL.CA",
@@ -6344,7 +6524,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/WKOL",
       "fundamentals": {
         "parValue": 5,
-        "marketCap": 1836800000,
+        "marketCap": 1800008000,
         "bookValue": 39.02,
         "pb": 6.15,
         "eps": 66.12,
@@ -6354,17 +6534,17 @@
         "capital": 28000000
       },
       "summary": {
-        "lastPrice": 327.98,
-        "change": 9.97,
-        "changePercent": 3.14,
+        "lastPrice": 321.43,
+        "change": 3.42,
+        "changePercent": 1.08,
         "open": 318.01,
         "prevClose": 318.01,
-        "high": 328,
+        "high": 329.9,
         "low": 318.95,
-        "volume": 21378,
-        "turnover": 6912426
+        "volume": 61269,
+        "turnover": 19826542
       },
-      "scrapedAt": "2026-08-10T08:59:14.276Z"
+      "scrapedAt": "2026-08-10T11:58:52.249Z"
     },
     {
       "ticker": "ZEOT.CA",
@@ -6374,7 +6554,7 @@
       "url": "https://www.mubasher.info/markets/EGX/stocks/ZEOT",
       "fundamentals": {
         "parValue": 1,
-        "marketCap": 2532000000,
+        "marketCap": 2614000000,
         "bookValue": 1.49,
         "pb": 6.73,
         "eps": 0.85,
@@ -6384,17 +6564,17 @@
         "capital": 200000000
       },
       "summary": {
-        "lastPrice": 12.57,
-        "change": -0.1,
-        "changePercent": -0.79,
+        "lastPrice": 13.06,
+        "change": 0.4,
+        "changePercent": 3.16,
         "open": 12.67,
         "prevClose": 12.67,
-        "high": 12.7,
+        "high": 13.3,
         "low": 12.51,
-        "volume": 203542,
-        "turnover": 2564086.25
+        "volume": 1940978,
+        "turnover": 25290720
       },
-      "scrapedAt": "2026-08-10T08:59:15.195Z"
+      "scrapedAt": "2026-08-10T11:58:52.961Z"
     },
     {
       "ticker": "ZMID.CA",
@@ -6414,44 +6594,20 @@
         "capital": 1000000000
       },
       "summary": {
-        "lastPrice": 7.62,
-        "change": 0.17,
-        "changePercent": 2.28,
+        "lastPrice": 7.6,
+        "change": 0.16,
+        "changePercent": 2.15,
         "open": 7.45,
         "prevClose": 7.45,
-        "high": 7.65,
+        "high": 7.66,
         "low": 7.49,
-        "volume": 21068264,
-        "turnover": 159567024
+        "volume": 37346582,
+        "turnover": 283339904
       },
-      "scrapedAt": "2026-08-10T08:59:15.368Z"
+      "scrapedAt": "2026-08-10T11:58:52.973Z"
     }
   ],
   "errors": [
-    {
-      "ticker": "AALR.CA",
-      "error": "Mubasher request timed out"
-    },
-    {
-      "ticker": "ABUK.CA",
-      "error": "Mubasher request timed out"
-    },
-    {
-      "ticker": "ACAMD.CA",
-      "error": "Mubasher request timed out"
-    },
-    {
-      "ticker": "ACAP.CA",
-      "error": "Mubasher request timed out"
-    },
-    {
-      "ticker": "ACGC.CA",
-      "error": "Mubasher request timed out"
-    },
-    {
-      "ticker": "ACTF.CA",
-      "error": "Mubasher request timed out"
-    },
     {
       "ticker": "ALRA.CA",
       "error": "Mubasher HTTP 404 for ALRA"
