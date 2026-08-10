@@ -7,6 +7,8 @@ const root = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   root,
+  // GitHub Pages project sites need a subpath, e.g. /EGX/
+  base: process.env.VITE_BASE || "/",
   plugins: [vue()],
   publicDir: path.join(root, "public"),
   server: {

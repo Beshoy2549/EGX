@@ -22,3 +22,13 @@ web/                # Vue dashboard
 ```
 
 الواجهة تعمل poll لـ `latest.json` كل 5 ثواني.
+
+## Deploy (GitHub Pages)
+
+Push to `main` runs `.github/workflows/deploy-pages.yml` and publishes the Vue build.
+
+1. Repo **Settings → Pages → Build and deployment → Source: GitHub Actions**
+2. After the workflow succeeds, open: `https://<user>.github.io/EGX/`
+3. Dev bypass: `https://<user>.github.io/EGX/?devbypass=1`
+
+**Note:** GitHub Pages serves the static frontend only (`latest.json` / `fundamentals.json`). AI `/api/*` needs a separate Node host (`npm run api`).
