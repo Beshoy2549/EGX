@@ -65,10 +65,14 @@ const messages = {
       month: "شهري",
       long: "طويل المدى",
     },
-    aiAssistTitle: "مساعد السوق",
+    aiAssistTitle: "مساعد السوق AI",
     aiAssistLede:
-      "اسأل بالعربي أو اعمل سكان متعدد العوامل: الاتجاه، الحجم، RSI، MACD، EMA20/50، الدعم والمقاومة.",
+      "ذكاء اصطناعي يحلل فني + أساسيات (P/E وربحية…) ويرشح بأسعار دخول/وقف/أهداف. يحتاج مفتاح AI من الإعدادات.",
+    localAssistTitle: "مساعد السوق المحلي",
+    localAssistLede:
+      "قواعد محلية سريعة بدون AI: فهم أسئلة عربية بسيطة من الـ score والإشارات (رشح / RSI / MACD / كسر / تجميع / تحليل سهم / مقارنة).",
     aiPlaceholder: "مثال: رشحلي 5 أسهم النهارده…",
+    localPlaceholder: "مثال: تحليل COMI · قارن COMI وORAS · رشحلي 5…",
     aiSend: "اسأل",
     aiEntry: "دخول",
     aiStop: "وقف خسارة",
@@ -276,10 +280,14 @@ const messages = {
       month: "Monthly",
       long: "Long-term",
     },
-    aiAssistTitle: "Market assistant",
+    aiAssistTitle: "AI market assistant",
     aiAssistLede:
-      "Ask in Arabic/English or run multi-factor scans: trend, EMAs, volume, RSI, MACD, levels, ATR and R:R.",
+      "AI combines technicals + fundamentals (P/E, EPS…) into ranked picks with entry/stop/targets. Needs an AI key in settings.",
+    localAssistTitle: "Local market assistant",
+    localAssistLede:
+      "Fast local rules — no AI. Understands simple score/scan questions (pick / RSI / MACD / breakout / accumulation / ticker analysis / compare).",
     aiPlaceholder: "e.g. Pick 5 stocks to buy today…",
+    localPlaceholder: "e.g. COMI score · compare COMI ORAS · pick 5…",
     aiSend: "Ask",
     aiEntry: "Entry",
     aiStop: "Stop",

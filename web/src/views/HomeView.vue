@@ -56,7 +56,10 @@ function fmtDateTime(iso) {
       </span>
     </div>
 
-    <AiAssistant v-if="fundReady" :locale="locale" />
+    <div v-if="fundReady" class="assist-duo">
+      <AiAssistant mode="local" :locale="locale" />
+      <AiAssistant mode="ai" :locale="locale" />
+    </div>
     <p v-else class="ai-home-wait">{{ t.aiWaitingData }}</p>
 
     <div v-if="results.length" class="stock-search">

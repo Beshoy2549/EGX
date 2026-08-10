@@ -782,6 +782,7 @@ function detectIntent(question) {
   if (/مضارب|جلسة|scalp|day.?trade|سكلب/.test(q + ar)) return { type: "scalp", limit: 8 };
   if (/مقاوم|breakout|كسر/.test(q + ar)) return { type: "breakout", limit: 10 };
   if (/تجميع|accumulation|تجمع/.test(ar + q)) return { type: "accumulation", limit: 10 };
+  if (/بيع\s*قوي|أسوأ|اسوا|weakest|sell.?list/.test(ar + q)) return { type: "weak", limit: 8 };
 
   const countMatch = ar.match(/(?:رشح|رشّح|أفضل|افضل|top)\D{0,12}(\d{1,2})/) ||
     q.match(/(?:recommend|pick|top)\D{0,12}(\d{1,2})/);
@@ -792,11 +793,28 @@ function detectIntent(question) {
   return null;
 }
 
+function pickFromAnalysis(a, { action, confidence, entry, stopLoss, target1, target2, reason } = {}) {
+  return normalizePick({
+    ticker: a.ticker,
+    action:
+      action ||
+      (a.score >= 60 ? "buy" : a.score <= 35 ? "sell" : "hold"),
+    confidence: confidence ?? a.score,
+    entry: entry ?? a.trade?.entry,
+    stopLoss: stopLoss ?? a.trade?.stopLoss,
+    target1: target1 ?? a.trade?.target1,
+    target2: target2 ?? a.trade?.target2,
+    reason: reason ?? (a.reasons || []).join(" · "),
+    signals: a.signals,
+  });
+}
+
 function localAnswerFromScan(question, lang, analyses, screens) {
   const intent = detectIntent(question);
   const mentioned = mentionTickers(question, analyses);
+  const arEn = String(question || "");
 
-  if (mentioned.length === 1 && /بيع|أبيع|ابيع|sell|holding|مسك/.test(question)) {
+  if (mentioned.length === 1 && /بيع|أبيع|ابيع|sell|holding|مسك/.test(arEn)) {
     const a = mentioned[0];
     const action = a.score >= 65 ? "hold" : a.score <= 40 ? "sell" : "hold";
     const answer =
@@ -805,36 +823,27 @@ function localAnswerFromScan(question, lang, analyses, screens) {
         : `${a.ticker.replace(/\.CA$/i, "")}: الإشارة الحالية أقرب لـ${action === "sell" ? "بيع" : "انتظار/متابعة"} بدرجة ${a.score}/100. ${a.reasons.slice(0, 2).join(" · ")}.`;
     return {
       answer,
-      picks: [
-        normalizePick({
-          ticker: a.ticker,
-          action,
-          confidence: a.score,
-          entry: a.trade.entry,
-          stopLoss: a.trade.stopLoss,
-          target1: a.trade.target1,
-          target2: a.trade.target2,
-          reason: a.reasons.join(" · "),
-          signals: a.signals,
-        }),
-      ],
+      picks: [pickFromAnalysis(a, { action, confidence: a.score, reason: a.reasons.join(" · ") })],
+    };
+  }
+
+  // Single-ticker explain: score / buy? / analysis
+  if (mentioned.length === 1) {
+    const a = mentioned[0];
+    const action = a.score >= 60 ? "buy" : a.score <= 35 ? "sell" : "hold";
+    const code = a.ticker.replace(/\.CA$/i, "");
+    const answer =
+      lang === "en"
+        ? `${code}: local multi-factor score ${a.score}/100 → ${action}. Trend ${a.indicators?.trend || "n/a"}, RSI ${a.indicators?.rsi ?? "n/a"}, vol ${a.indicators?.volumeRatio ?? "n/a"}×. ${a.reasons.slice(0, 3).join("; ")}.`
+        : `${code}: التقييم المحلي متعدد العوامل ${a.score}/100 → ${action === "buy" ? "شراء" : action === "sell" ? "بيع" : "انتظار"}. الاتجاه ${a.indicators?.trend || "—"} · RSI ${a.indicators?.rsi ?? "—"} · الحجم ${a.indicators?.volumeRatio ?? "—"}×. ${a.reasons.slice(0, 3).join(" · ")}.`;
+    return {
+      answer,
+      picks: [pickFromAnalysis(a, { action, reason: a.reasons.join(" · ") })],
     };
   }
 
   if (mentioned.length >= 2 && /مقارن|compare|بين/.test(question)) {
-    const picks = mentioned.slice(0, 5).map((a) =>
-      normalizePick({
-        ticker: a.ticker,
-        action: a.score >= 60 ? "buy" : a.score <= 35 ? "sell" : "hold",
-        confidence: a.score,
-        entry: a.trade.entry,
-        stopLoss: a.trade.stopLoss,
-        target1: a.trade.target1,
-        target2: a.trade.target2,
-        reason: a.reasons.join(" · "),
-        signals: a.signals,
-      })
-    );
+    const picks = mentioned.slice(0, 5).map((a) => pickFromAnalysis(a));
     const ranked = [...mentioned].sort((a, b) => b.score - a.score);
     const best = ranked[0].ticker.replace(/\.CA$/i, "");
     const answer =
@@ -845,7 +854,10 @@ function localAnswerFromScan(question, lang, analyses, screens) {
   }
 
   if (intent) {
-    const items = scanAnalyses(analyses, intent.type, intent.limit);
+    const items =
+      intent.type === "weak"
+        ? [...analyses].sort((a, b) => a.score - b.score).slice(0, intent.limit)
+        : scanAnalyses(analyses, intent.type, intent.limit);
     const titles = {
       top: lang === "en" ? "Top multi-factor candidates today" : "أفضل المرشحين اليوم حسب تقييم متعدد العوامل",
       rsi: lang === "en" ? "RSI under 30 (possible bounce)" : "أسهم RSI أقل من 30 (ارتداد محتمل)",
@@ -853,6 +865,7 @@ function localAnswerFromScan(question, lang, analyses, screens) {
       breakout: lang === "en" ? "Resistance breaks with high volume" : "كسر مقاومة مع حجم مرتفع",
       accumulation: lang === "en" ? "Exiting accumulation" : "خروج من مرحلة التجميع",
       scalp: lang === "en" ? "Same-session scalp candidates" : "أسهم مضاربة لنفس الجلسة",
+      weak: lang === "en" ? "Weakest multi-factor scores now" : "أضعف التقييمات متعدد العوامل دلوقتي",
     };
     const list = items
       .map((a, i) => {
@@ -867,26 +880,81 @@ function localAnswerFromScan(question, lang, analyses, screens) {
         ? lang === "en"
           ? "No stocks matched this screen right now."
           : "مفيش أسهم مطابقة للفحص ده دلوقتي."
-        : `${titles[intent.type]}:\n${list}`;
+        : `${titles[intent.type] || titles.top}:\n${list}`;
     return {
       answer,
       picks: items.map((a) =>
-        normalizePick({
-          ticker: a.ticker,
-          action: intent.type === "scalp" || a.score >= 60 ? "buy" : a.score <= 35 ? "sell" : "hold",
+        pickFromAnalysis(a, {
+          action:
+            intent.type === "weak"
+              ? a.score <= 35
+                ? "sell"
+                : "hold"
+              : intent.type === "scalp" || a.score >= 60
+                ? "buy"
+                : a.score <= 35
+                  ? "sell"
+                  : "hold",
           confidence: intent.type === "scalp" ? a.scalp?.score || a.score : a.score,
           entry: intent.type === "scalp" ? a.scalp?.buy : a.trade.entry,
           stopLoss: intent.type === "scalp" ? a.scalp?.stop : a.trade.stopLoss,
           target1: intent.type === "scalp" ? a.scalp?.sell : a.trade.target1,
-          target2: a.trade.target2,
-          reason: (intent.type === "scalp" ? a.scalp?.reasons : a.reasons)?.join(" · ") || a.reasons.join(" · "),
-          signals: a.signals,
+          reason:
+            (intent.type === "scalp" ? a.scalp?.reasons : a.reasons)?.join(" · ") ||
+            a.reasons.join(" · "),
         })
       ),
     };
   }
 
-  return null;
+  // Free-chat fallback for local assistant — never invent; teach usable phrases + show a few tops.
+  const top = (screens?.top?.length ? screens.top : scanAnalyses(analyses, "top", 5)).slice(0, 5);
+  const tip =
+    lang === "en"
+      ? "Local assistant only. Try: “pick 5”, “RSI under 30”, “MACD”, “breakout”, “accumulation”, “scalp”, “compare COMI ORAS”, or “COMI score”."
+      : "المساعد المحلي بيفهم قواعد ثابتة فقط. جرّب: «رشحلي 5»، «RSI أقل من 30»، «MACD»، «كسر مقاومة»، «خروج من تجميع»، «مضاربة»، «قارن COMI وORAS»، أو «تحليل COMI».";
+  const list = top
+    .map((a, i) => `${i + 1}) ${a.ticker.replace(/\.CA$/i, "")} ${a.score}/100`)
+    .join(lang === "en" ? ", " : "، ");
+  return {
+    answer:
+      lang === "en"
+        ? `${tip}\nCurrent top scores: ${list || "n/a"}.`
+        : `${tip}\nأعلى التقييمات الآن: ${list || "—"}.`,
+    picks: top.map((a) => pickFromAnalysis(a)),
+  };
+}
+
+async function answerLocalQuestion(question, lang) {
+  const market = await loadMarket();
+  const analyses = analyzeUniverse(market.results);
+  const screens = {
+    top: scanAnalyses(analyses, "top", 10),
+    rsi: scanAnalyses(analyses, "rsi", 10),
+    macd: scanAnalyses(analyses, "macd", 10),
+    breakout: scanAnalyses(analyses, "breakout", 10),
+    accumulation: scanAnalyses(analyses, "accumulation", 10),
+    scalp: scanAnalyses(analyses, "scalp", 8),
+  };
+  const fundMap = await loadFundamentalsMap();
+  const local = localAnswerFromScan(question, lang, analyses, screens);
+  return {
+    ...local,
+    picks: attachFundamentals(local.picks || [], fundMap),
+    disclaimer:
+      lang === "en"
+        ? "Local rules engine — educational only, not investment advice."
+        : "محرك قواعد محلي — تحليل تعليمي فقط، مش نصيحة استثمارية.",
+    screens: {
+      top: screens.top.length,
+      rsi: screens.rsi.length,
+      macd: screens.macd.length,
+      breakout: screens.breakout.length,
+      accumulation: screens.accumulation.length,
+      scalp: screens.scalp.length,
+    },
+    source: "scanner",
+  };
 }
 
 async function answerQuestion(question, lang, ai = {}) {
@@ -1138,6 +1206,11 @@ const server = http.createServer(async (req, res) => {
       if (!question) return sendJson(res, 400, { error: "question is required" });
       if (question.length > 800) return sendJson(res, 400, { error: "question too long" });
       const lang = body.lang === "en" ? "en" : "ar";
+      const mode = String(body.mode || "").toLowerCase() === "local" ? "local" : "ai";
+      if (mode === "local") {
+        const result = await answerLocalQuestion(question, lang);
+        return sendJson(res, 200, result);
+      }
       const ai = aiConfigFromReq(req, body);
       const result = await answerQuestion(question, lang, ai);
       return sendJson(res, 200, result);
