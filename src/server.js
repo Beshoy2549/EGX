@@ -12,12 +12,18 @@ import {
 } from "./lib/indicators.js";
 import { buildCompanyProfile } from "./lib/companyContext.js";
 import { fetchMubasherStock } from "./lib/mubasher.js";
+import {
+  LATEST_PATH,
+  ensureMarketData,
+  marketStatus,
+  readLatestMeta,
+  startScrape,
+} from "./lib/ensureMarketData.js";
 
 dotenv.config({ path: path.join(path.dirname(fileURLToPath(import.meta.url)), "..", ".env") });
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
-const LATEST_PATH = path.join(ROOT, "web", "public", "latest.json");
 const AGENT_STORE_PATH = path.join(ROOT, ".cursor-agents");
 // Render/Railway set PORT; local/dev uses API_PORT (default 8787).
 const PORT = Number(process.env.PORT || process.env.API_PORT) || 8787;
@@ -137,13 +143,35 @@ function fundamentalsBlock(fundamentals) {
 }
 
 async function loadMarket() {
-  const raw = await fs.readFile(LATEST_PATH, "utf8");
-  const data = JSON.parse(raw);
-  return {
-    results: data.results || [],
-    scrapedAt: data.scrapedAt,
-    range: data.range,
-  };
+  try {
+    const raw = await fs.readFile(LATEST_PATH, "utf8");
+    const data = JSON.parse(raw);
+    const results = data.results || [];
+    if (!results.length) {
+      const err = new Error("Market data is empty — scrape in progress or failed");
+      err.status = 503;
+      err.retryable = true;
+      ensureMarketData().catch(() => {});
+      throw err;
+    }
+    return {
+      results,
+      scrapedAt: data.scrapedAt,
+      range: data.range,
+    };
+  } catch (err) {
+    if (err.status) throw err;
+    if (err.code === "ENOENT") {
+      const missing = new Error(
+        "Market data not ready — scrape has been started; retry in a minute"
+      );
+      missing.status = 503;
+      missing.retryable = true;
+      ensureMarketData().catch(() => {});
+      throw missing;
+    }
+    throw err;
+  }
 }
 
 const FUNDAMENTALS_PATH = path.join(ROOT, "web", "public", "fundamentals.json");
@@ -1156,8 +1184,19 @@ const server = http.createServer(async (req, res) => {
 
   try {
     if (req.method === "GET" && url.pathname === "/api/health") {
+      const meta = await readLatestMeta();
+      const scrape = marketStatus();
       return sendJson(res, 200, {
         ok: true,
+        marketReady: meta.exists && meta.count > 0,
+        market: {
+          exists: meta.exists,
+          quotes: meta.count,
+          scrapedAt: meta.scrapedAt,
+          stale: meta.stale,
+          scraping: scrape.scraping,
+          lastError: scrape.lastError,
+        },
         hasKey: Boolean(process.env.CURSOR_API_KEY?.trim()),
         providers: {
           cursor: { serverKey: Boolean(process.env.CURSOR_API_KEY?.trim()) },
@@ -1165,6 +1204,23 @@ const server = http.createServer(async (req, res) => {
         },
         defaultProvider: normalizeProvider(),
       });
+    }
+
+    if (req.method === "POST" && url.pathname === "/api/refresh") {
+      const secret = process.env.REFRESH_SECRET?.trim();
+      if (secret) {
+        const provided =
+          req.headers["x-refresh-secret"] || url.searchParams.get("secret") || "";
+        if (provided !== secret) {
+          return sendJson(res, 401, { error: "Unauthorized" });
+        }
+      }
+      const scrape = marketStatus();
+      if (scrape.scraping) {
+        return sendJson(res, 202, { ok: true, scraping: true, message: "Scrape already running" });
+      }
+      startScrape("api-refresh").catch(() => {});
+      return sendJson(res, 202, { ok: true, scraping: true, message: "Scrape started" });
     }
 
     if (req.method === "GET" && url.pathname === "/api/analyze") {
@@ -1262,7 +1318,12 @@ const server = http.createServer(async (req, res) => {
     console.error("[api]", err);
     return sendJson(res, status, {
       error: err.message || String(err),
-      retryable: err instanceof CursorAgentError ? Boolean(err.isRetryable) : false,
+      retryable:
+        typeof err.retryable === "boolean"
+          ? err.retryable
+          : err instanceof CursorAgentError
+            ? Boolean(err.isRetryable)
+            : false,
     });
   }
 });
@@ -1270,6 +1331,17 @@ const server = http.createServer(async (req, res) => {
 server.listen(PORT, "0.0.0.0", () => {
   console.log(`EGX API listening on http://0.0.0.0:${PORT}`);
   console.log(`CURSOR_API_KEY ${process.env.CURSOR_API_KEY?.trim() ? "loaded" : "MISSING"}`);
+  ensureMarketData()
+    .then(({ ready, meta, scraping }) => {
+      if (ready) {
+        console.log(`[market] ready — ${meta.count} quotes · scrapedAt ${meta.scrapedAt}`);
+      } else if (scraping) {
+        console.log("[market] latest.json missing/empty — scrape started in background");
+      } else {
+        console.warn("[market] not ready and scrape not started");
+      }
+    })
+    .catch((err) => console.error("[market] ensure failed:", err?.message || err));
 });
 
 server.on("error", (err) => {
