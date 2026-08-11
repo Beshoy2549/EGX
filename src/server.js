@@ -296,41 +296,54 @@ async function runCursorAgent(prompt, ai = {}) {
       { status: 400 }
     );
   }
-  await using agent = await Agent.create({
+  // Avoid `await using` — unsupported on Node 22 (Render free runtime).
+  const agent = await Agent.create({
     apiKey,
     model: { id: ai.model?.trim() || "composer-2.5" },
     local: { cwd: ROOT, store: agentStore },
   });
 
-  const run = await agent.send(prompt);
-  let assistantText = "";
-  let planText = "";
+  try {
+    const run = await agent.send(prompt);
+    let assistantText = "";
+    let planText = "";
 
-  for await (const event of run.stream()) {
-    if (event.type === "assistant") {
-      for (const block of event.message?.content || []) {
-        if (block.type === "text" && block.text) assistantText += block.text;
+    for await (const event of run.stream()) {
+      if (event.type === "assistant") {
+        for (const block of event.message?.content || []) {
+          if (block.type === "text" && block.text) assistantText += block.text;
+        }
+        continue;
       }
-      continue;
+      if (event.type === "tool_call" && event.name === "createPlan") {
+        const plan = event.args?.plan;
+        if (typeof plan === "string" && plan.length > planText.length) planText = plan;
+      }
     }
-    if (event.type === "tool_call" && event.name === "createPlan") {
-      const plan = event.args?.plan;
-      if (typeof plan === "string" && plan.length > planText.length) planText = plan;
+
+    const result = await run.wait();
+    if (result.status !== "finished") {
+      throw Object.assign(
+        new Error(result.error?.message || `Agent status: ${result.status}`),
+        { status: 502 }
+      );
+    }
+
+    // Prefer the chunk that actually contains JSON; plan-mode narrations are useless alone.
+    const candidates = [result.result || "", assistantText, planText].filter(Boolean);
+    const withJson = candidates.find((t) => extractJson(t)?.action);
+    return withJson || candidates.sort((a, b) => b.length - a.length)[0] || "";
+  } finally {
+    try {
+      if (typeof agent[Symbol.asyncDispose] === "function") {
+        await agent[Symbol.asyncDispose]();
+      } else if (typeof agent.close === "function") {
+        await agent.close();
+      }
+    } catch {
+      /* ignore dispose errors */
     }
   }
-
-  const result = await run.wait();
-  if (result.status !== "finished") {
-    throw Object.assign(
-      new Error(result.error?.message || `Agent status: ${result.status}`),
-      { status: 502 }
-    );
-  }
-
-  // Prefer the chunk that actually contains JSON; plan-mode narrations are useless alone.
-  const candidates = [result.result || "", assistantText, planText].filter(Boolean);
-  const withJson = candidates.find((t) => extractJson(t)?.action);
-  return withJson || candidates.sort((a, b) => b.length - a.length)[0] || "";
 }
 
 function normalizePick(p, fallbackConfidence = 50) {
