@@ -30,6 +30,16 @@ jobs:
       - name: Install
         run: npm ci
 
+      # latest.json is gitignored (local watch rewrites it). Pages must build
+      # it here or copy the committed snapshot so /EGX/latest.json exists.
+      - name: Prepare latest.json
+        run: |
+          npm run scrape || echo "scrape failed — using committed snapshot"
+          if [ ! -s web/public/latest.json ]; then
+            cp web/public/market-snapshot.json web/public/latest.json
+          fi
+          ls -lh web/public/latest.json
+
       - name: Build
         env:
           # Project Pages URL is https://<user>.github.io/<repo>/

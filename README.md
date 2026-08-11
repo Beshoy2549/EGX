@@ -45,7 +45,8 @@ Free Render services sleep after idle; the first request can take ~30–60s. The
 ### 2) Frontend on GitHub Pages
 
 1. Repo **Settings → Pages → Source: GitHub Actions**
-2. Repo **Settings → Secrets and variables → Actions → Variables**
+2. The workflow scrapes (or copies `web/public/market-snapshot.json`) so `/EGX/latest.json` is in the build
+3. Repo **Settings → Secrets and variables → Actions → Variables**
    - Add `VITE_API_BASE` = your Render URL (no trailing slash)
 3. Push to `main` (or re-run **Deploy GitHub Pages**)
 4. Site: `https://beshoy2549.github.io/EGX/`
