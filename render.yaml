@@ -1,0 +1,26 @@
+# Render Blueprint — free API for EGX
+# https://dashboard.render.com/blueprints
+#
+# After deploy, copy the service URL (e.g. https://egx-api.onrender.com)
+# into GitHub → Settings → Variables → VITE_API_BASE, then re-run Pages deploy.
+
+services:
+  - type: web
+    name: egx-api
+    runtime: node
+    plan: free
+    region: frankfurt
+    buildCommand: npm install
+    startCommand: node src/server.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: AI_PROVIDER
+        value: openai
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+      - key: CURSOR_API_KEY
+        sync: false

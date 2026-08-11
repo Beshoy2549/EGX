@@ -1,9 +1,11 @@
 import { getConfig } from "./config.js";
-import { fetchQuote } from "./lib/yahoo.js";
+import { fetchQuote as fetchYahooQuote } from "./lib/yahoo.js";
+import { fetchMubasherQuote } from "./lib/mubasherQuote.js";
 import { saveResults } from "./lib/storage.js";
-import { isMain } from "./lib/utils.js";
+import { isMain, sleep } from "./lib/utils.js";
 
-const BATCH_SIZE = Number(process.env.BATCH_SIZE) || 12;
+const BATCH_SIZE = Number(process.env.BATCH_SIZE) || 8;
+const BATCH_DELAY_MS = Number(process.env.BATCH_DELAY_MS) || 250;
 
 async function mapSettledInBatches(items, batchSize, fn) {
   const settled = [];
@@ -11,21 +13,43 @@ async function mapSettledInBatches(items, batchSize, fn) {
     const batch = items.slice(i, i + batchSize);
     const part = await Promise.allSettled(batch.map(fn));
     settled.push(...part);
+    if (i + batchSize < items.length && BATCH_DELAY_MS > 0) {
+      await sleep(BATCH_DELAY_MS);
+    }
   }
   return settled;
 }
 
+async function fetchQuote(symbol, range, source) {
+  if (source === "yahoo") return fetchYahooQuote(symbol, range);
+  if (source === "mubasher") return fetchMubasherQuote(symbol, range);
+
+  // default: mubasher first, yahoo fallback
+  try {
+    return await fetchMubasherQuote(symbol, range);
+  } catch (err) {
+    try {
+      const q = await fetchYahooQuote(symbol, range);
+      q.source = `${q.source || "yahoo"}-fallback`;
+      return q;
+    } catch {
+      throw err;
+    }
+  }
+}
+
 export async function runScrape(options = {}) {
   const cfg = getConfig();
+  const source = options.priceSource || cfg.priceSource || "mubasher";
   const watchIntervalSec = options.watchIntervalSec ?? cfg.intervalSec;
   const started = performance.now();
 
   console.log(
-    `EGX scrape — ${cfg.symbols.length} symbols · range=${cfg.range} · batch=${BATCH_SIZE}`
+    `EGX scrape — ${cfg.symbols.length} symbols · range=${cfg.range} · source=${source} · batch=${BATCH_SIZE}`
   );
 
   const settled = await mapSettledInBatches(cfg.symbols, BATCH_SIZE, (symbol) =>
-    fetchQuote(symbol, cfg.range)
+    fetchQuote(symbol, cfg.range, source)
   );
 
   const results = [];
@@ -48,6 +72,7 @@ export async function runScrape(options = {}) {
   const payload = {
     scrapedAt: new Date().toISOString(),
     range: cfg.range,
+    priceSource: source,
     watchIntervalSec: watchIntervalSec || null,
     results,
     errors,

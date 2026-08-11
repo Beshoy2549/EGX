@@ -3,6 +3,7 @@ import { onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "../composables/useI18n.js";
 import { useAiSettings } from "../composables/useAiSettings.js";
+import { apiUrl } from "../lib/api.js";
 
 const props = defineProps({
   locale: { type: String, default: "ar-EG" },
@@ -32,7 +33,7 @@ async function load() {
   loading.value = true;
   error.value = null;
   try {
-    const res = await fetch("/api/scan?type=scalp&limit=8");
+    const res = await fetch(apiUrl("/api/scan?type=scalp&limit=8"));
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
     items.value = data.items || [];
@@ -60,7 +61,7 @@ async function askScalpAi(item, e) {
   aiLoading[ticker] = true;
   aiError[ticker] = null;
   try {
-    const res = await fetch("/api/suggest-scalp", {
+    const res = await fetch(apiUrl("/api/suggest-scalp"), {
       method: "POST",
       headers: { "Content-Type": "application/json", ...aiHeaders() },
       body: JSON.stringify({ ticker, lang: lang.value }),

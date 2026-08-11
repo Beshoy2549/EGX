@@ -11,6 +11,8 @@ export function getConfig() {
   const range = process.env.RANGE || "3mo";
   const intervalSec = process.env.INTERVAL ? Number(process.env.INTERVAL) : null;
   const keepHistory = process.env.KEEP_HISTORY === "1";
+  // mubasher (default) | yahoo | auto (mubasher then yahoo fallback)
+  const priceSource = (process.env.PRICE_SOURCE || "mubasher").toLowerCase();
 
   const symbols = process.env.SYMBOLS
     ? process.env.SYMBOLS.split(",").map((s) => {
@@ -20,5 +22,5 @@ export function getConfig() {
       })
     : DEFAULT_SYMBOLS;
 
-  return { range, intervalSec, keepHistory, symbols };
+  return { range, intervalSec, keepHistory, symbols, priceSource };
 }

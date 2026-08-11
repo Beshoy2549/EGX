@@ -5,6 +5,7 @@ import CandleChart from "../components/CandleChart.vue";
 import { useI18n } from "../composables/useI18n.js";
 import { useMarketData } from "../composables/useMarketData.js";
 import { useAiSettings } from "../composables/useAiSettings.js";
+import { apiUrl } from "../lib/api.js";
 
 const props = defineProps({
   ticker: { type: String, required: true },
@@ -91,7 +92,7 @@ async function loadCompany(tickerRaw = props.ticker) {
   companyLoading.value = true;
   companyError.value = null;
   try {
-    const res = await fetch(`/api/company?ticker=${encodeURIComponent(ticker)}`);
+    const res = await fetch(apiUrl(`/api/company?ticker=${encodeURIComponent(ticker)}`));
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
     company.value = data;
@@ -112,7 +113,7 @@ async function loadAnalysis(tickerRaw = props.ticker) {
   analysisLoading.value = true;
   analysisError.value = null;
   try {
-    const res = await fetch(`/api/analyze?ticker=${encodeURIComponent(ticker)}`);
+    const res = await fetch(apiUrl(`/api/analyze?ticker=${encodeURIComponent(ticker)}`));
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
     analysis.value = data.analysis;
@@ -152,7 +153,7 @@ async function askAi() {
   suggesting.value = true;
   suggestError.value = null;
   try {
-    const res = await fetch("/api/suggest", {
+    const res = await fetch(apiUrl("/api/suggest"), {
       method: "POST",
       headers: { "Content-Type": "application/json", ...aiHeaders() },
       body: JSON.stringify({ ticker: quote.value.ticker, lang: lang.value }),

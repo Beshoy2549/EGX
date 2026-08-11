@@ -1,11 +1,16 @@
 <script setup>
 import { computed, watch } from "vue";
-import { useRoute, RouterLink, RouterView } from "vue-router";
+import { useRoute, useRouter, RouterLink, RouterView } from "vue-router";
 import { useI18n } from "./composables/useI18n.js";
+import { useAuth } from "./composables/useAuth.js";
 import AiSettings from "./components/AiSettings.vue";
 
 const { lang, t, setLang } = useI18n();
+const { isAuthenticated, email, logout } = useAuth();
 const route = useRoute();
+const router = useRouter();
+
+const isLogin = computed(() => route.name === "login");
 
 watch(
   lang,
@@ -18,10 +23,19 @@ watch(
 );
 
 const brandTo = computed(() => ({ name: "home" }));
+
+function onLogout() {
+  logout();
+  router.replace({ name: "login" });
+}
 </script>
 
 <template>
-  <div class="wrap">
+  <div v-if="isLogin" class="wrap login-wrap">
+    <RouterView />
+  </div>
+
+  <div v-else class="wrap">
     <div class="topbar">
       <header>
         <RouterLink class="brand" :to="brandTo">EGX</RouterLink>
@@ -37,6 +51,15 @@ const brandTo = computed(() => ({ name: "home" }));
           </button>
         </div>
         <AiSettings />
+        <button
+          v-if="isAuthenticated"
+          type="button"
+          class="logout-btn"
+          :title="email"
+          @click="onLogout"
+        >
+          {{ t.logout }}
+        </button>
       </div>
     </div>
 
