@@ -245,6 +245,11 @@ async function runOpenAiChat(prompt, ai = {}) {
   const model = ai.model?.trim() || process.env.OPENAI_MODEL?.trim() || "gpt-4o-mini";
 
   let res;
+
+
+  console.log("Model:", model);
+console.log("API Key starts with:", apiKey.slice(0, 15));
+console.log("API Key length:", apiKey.length);
   try {
     res = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
