@@ -2,11 +2,17 @@
 import { ref } from "vue";
 import { useI18n } from "../composables/useI18n.js";
 import { useAiSettings } from "../composables/useAiSettings.js";
+import { getApiBase, setApiBase } from "../lib/api.js";
 
 const { t } = useI18n();
 const { state, setProvider, clearKeys } = useAiSettings();
 
 const open = ref(false);
+const apiBase = ref(getApiBase());
+
+function onApiBaseInput(e) {
+  apiBase.value = setApiBase(e.target.value);
+}
 
 function close() {
   open.value = false;
@@ -95,6 +101,19 @@ function close() {
             ></textarea>
           </label>
         </template>
+
+        <label class="settings-field">
+          <span class="settings-label">{{ t.settingsApiBase }}</span>
+          <input
+            :value="apiBase"
+            type="url"
+            :placeholder="t.settingsApiBasePh"
+            autocomplete="off"
+            spellcheck="false"
+            @change="onApiBaseInput"
+            @blur="onApiBaseInput"
+          />
+        </label>
 
         <p class="settings-hint">{{ t.settingsHint }}</p>
 

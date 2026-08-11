@@ -144,8 +144,10 @@ const messages = {
     settingsOpenAiKey: "مفتاح OpenAI API",
     settingsModel: "الموديل",
     settingsModelPh: "gpt-4o-mini",
+    settingsApiBase: "رابط الـ API (Render)",
+    settingsApiBasePh: "https://your-service.onrender.com",
     settingsHint:
-      "المفتاح بيتخزن في المتصفح بس (localStorage) وبيتبعت مع كل طلب. اختَر ChatGPT وحط مفتاحك عشان تستخدم OpenAI.",
+      "المفتاح بيتخزن في المتصفح بس (localStorage) وبيتبعت مع كل طلب. اختَر ChatGPT وحط مفتاحك عشان تستخدم OpenAI. رابط الـ API لازم يكون سيرفر Render مش github.io.",
     settingsClear: "مسح المفاتيح",
     settingsDone: "تم",
     settingsActive: "المزوّد الحالي",
@@ -370,8 +372,10 @@ const messages = {
     settingsOpenAiKey: "OpenAI API key",
     settingsModel: "Model",
     settingsModelPh: "gpt-4o-mini",
+    settingsApiBase: "API URL (Render)",
+    settingsApiBasePh: "https://your-service.onrender.com",
     settingsHint:
-      "Keys are stored only in your browser (localStorage) and sent with each request. Pick ChatGPT and add your key to use OpenAI.",
+      "Keys are stored only in your browser (localStorage) and sent with each request. Pick ChatGPT and add your key to use OpenAI. API URL must be your Render service, not github.io.",
     settingsClear: "Clear keys",
     settingsDone: "Done",
     settingsActive: "Current provider",
