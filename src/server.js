@@ -7,6 +7,7 @@ import { Agent, CursorAgentError, JsonlLocalAgentStore } from "@cursor/sdk";
 import {
   analyzeQuote,
   analyzeUniverse,
+  applyFundamentalScalpBoost,
   compactForAi,
   scanAnalyses,
 } from "./lib/indicators.js";
@@ -220,9 +221,12 @@ function attachFundamentals(list, fundMap) {
       .replace(/\.CA$/i, "")
       .toUpperCase();
     const f = fundMap.get(code);
-    return f ? { ...item, fundamentals: f } : item;
+    const withFund = f ? { ...item, fundamentals: f } : item;
+    return applyFundamentalScalpBoost(withFund);
   });
 }
+
+const SCAN_TYPES = ["top", "rsi", "macd", "breakout", "accumulation", "scalp", "week"];
 
 function findQuote(results, ticker) {
   const needle = normalizeTicker(ticker);
@@ -807,6 +811,56 @@ Respond ONLY with valid JSON:
   }
 }
 
+function compactScreenForAi(rows, planKey) {
+  return (rows || []).map((a) => {
+    const plan = a[planKey] || {};
+    return {
+      ticker: a.ticker.replace(/\.CA$/i, ""),
+      nameAr: a.nameAr,
+      nameEn: a.nameEn,
+      price: a.price,
+      buy: plan.buy,
+      sell: plan.sell,
+      stop: plan.stop,
+      rr: plan.rr,
+      score: plan.score,
+      trend: a.indicators?.trend,
+      rsi: a.indicators?.rsi,
+      volX: a.indicators?.volumeRatio,
+      fundamentals: a.fundamentals || undefined,
+    };
+  });
+}
+
+function bindPicksToScreen(picks, screen, planKey) {
+  const byCode = new Map(
+    (screen || []).map((a) => [String(a.ticker || "").replace(/\.CA$/i, "").toUpperCase(), a])
+  );
+  const out = [];
+  const seen = new Set();
+  for (const pick of picks || []) {
+    const code = String(pick.ticker || "")
+      .replace(/\.CA$/i, "")
+      .toUpperCase();
+    if (!code || seen.has(code)) continue;
+    const row = byCode.get(code);
+    if (!row) continue;
+    seen.add(code);
+    const plan = row[planKey] || {};
+    out.push(
+      pickFromAnalysis(row, {
+        action: "buy",
+        confidence: plan.score || pick.confidence,
+        entry: plan.buy,
+        stopLoss: plan.stop,
+        target1: plan.sell,
+        reason: pick.reason || (plan.reasons || []).join(" · "),
+      })
+    );
+  }
+  return out;
+}
+
 function mentionTickers(question, analyses) {
   const upper = String(question || "").toUpperCase();
   return analyses.filter((a) => {
@@ -821,6 +875,7 @@ function detectIntent(question) {
 
   if (/rsi|أقل من 30|اقل من 30|ارتداد/.test(q + ar)) return { type: "rsi", limit: 10 };
   if (/macd/.test(q)) return { type: "macd", limit: 10 };
+  if (/أسبوع|اسبوع|week|weekly/.test(q + ar)) return { type: "week", limit: 8 };
   if (/مضارب|جلسة|scalp|day.?trade|سكلب/.test(q + ar)) return { type: "scalp", limit: 8 };
   if (/مقاوم|breakout|كسر/.test(q + ar)) return { type: "breakout", limit: 10 };
   if (/تجميع|accumulation|تجمع/.test(ar + q)) return { type: "accumulation", limit: 10 };
@@ -907,12 +962,15 @@ function localAnswerFromScan(question, lang, analyses, screens) {
       breakout: lang === "en" ? "Resistance breaks with high volume" : "كسر مقاومة مع حجم مرتفع",
       accumulation: lang === "en" ? "Exiting accumulation" : "خروج من مرحلة التجميع",
       scalp: lang === "en" ? "Same-session scalp candidates" : "أسهم مضاربة لنفس الجلسة",
+      week: lang === "en" ? "Weekly swing candidates" : "ترشيحات أسبوعية",
       weak: lang === "en" ? "Weakest multi-factor scores now" : "أضعف التقييمات متعدد العوامل دلوقتي",
     };
+    const planOf = (a) => (intent.type === "week" ? a.week : intent.type === "scalp" ? a.scalp : null);
     const list = items
       .map((a, i) => {
-        if (intent.type === "scalp") {
-          return `${i + 1}) ${a.ticker.replace(/\.CA$/i, "")} — اشتري ${a.scalp?.buy} · ابيع ${a.scalp?.sell} · وقف ${a.scalp?.stop} (${a.scalp?.score || a.score}/100)`;
+        const plan = planOf(a);
+        if (plan) {
+          return `${i + 1}) ${a.ticker.replace(/\.CA$/i, "")} — اشتري ${plan.buy} · ابيع ${plan.sell} · وقف ${plan.stop} (${plan.score || a.score}/100)`;
         }
         return `${i + 1}) ${a.ticker.replace(/\.CA$/i, "")} — ${a.score}/100 — دخول ${a.trade.entry} · وقف ${a.trade.stopLoss} · هدف1 ${a.trade.target1}`;
       })
@@ -925,27 +983,26 @@ function localAnswerFromScan(question, lang, analyses, screens) {
         : `${titles[intent.type] || titles.top}:\n${list}`;
     return {
       answer,
-      picks: items.map((a) =>
-        pickFromAnalysis(a, {
+      picks: items.map((a) => {
+        const plan = planOf(a);
+        return pickFromAnalysis(a, {
           action:
             intent.type === "weak"
               ? a.score <= 35
                 ? "sell"
                 : "hold"
-              : intent.type === "scalp" || a.score >= 60
+              : plan || a.score >= 60
                 ? "buy"
                 : a.score <= 35
                   ? "sell"
                   : "hold",
-          confidence: intent.type === "scalp" ? a.scalp?.score || a.score : a.score,
-          entry: intent.type === "scalp" ? a.scalp?.buy : a.trade.entry,
-          stopLoss: intent.type === "scalp" ? a.scalp?.stop : a.trade.stopLoss,
-          target1: intent.type === "scalp" ? a.scalp?.sell : a.trade.target1,
-          reason:
-            (intent.type === "scalp" ? a.scalp?.reasons : a.reasons)?.join(" · ") ||
-            a.reasons.join(" · "),
-        })
-      ),
+          confidence: plan?.score || a.score,
+          entry: plan?.buy ?? a.trade.entry,
+          stopLoss: plan?.stop ?? a.trade.stopLoss,
+          target1: plan?.sell ?? a.trade.target1,
+          reason: (plan?.reasons || a.reasons).join(" · "),
+        });
+      }),
     };
   }
 
@@ -977,6 +1034,7 @@ async function answerLocalQuestion(question, lang) {
     breakout: scanAnalyses(analyses, "breakout", 10),
     accumulation: scanAnalyses(analyses, "accumulation", 10),
     scalp: scanAnalyses(analyses, "scalp", 8),
+    week: scanAnalyses(analyses, "week", 8),
   };
   const fundMap = await loadFundamentalsMap();
   const local = localAnswerFromScan(question, lang, analyses, screens);
@@ -994,6 +1052,7 @@ async function answerLocalQuestion(question, lang) {
       breakout: screens.breakout.length,
       accumulation: screens.accumulation.length,
       scalp: screens.scalp.length,
+      week: screens.week.length,
     },
     source: "scanner",
   };
@@ -1011,6 +1070,7 @@ async function answerQuestion(question, lang, ai = {}) {
     breakout: scanAnalyses(analyses, "breakout", 10),
     accumulation: scanAnalyses(analyses, "accumulation", 10),
     scalp: scanAnalyses(analyses, "scalp", 8),
+    week: scanAnalyses(analyses, "week", 8),
   };
 
   // Is a usable AI provider configured (user key via headers, or server .env)?
@@ -1040,13 +1100,19 @@ async function answerQuestion(question, lang, ai = {}) {
         breakout: screens.breakout.length,
         accumulation: screens.accumulation.length,
         scalp: screens.scalp.length,
+      week: screens.week.length,
       },
       source: "scanner",
     };
   }
 
   const mentioned = mentionTickers(question, analyses);
-  const universe = attachFundamentals(compactForAi(analyses, 25), fundMap);
+  const intent = detectIntent(question);
+  const planKey = intent?.type === "week" ? "week" : intent?.type === "scalp" ? "scalp" : null;
+  const screenRows = planKey ? attachFundamentals(screens[planKey], fundMap) : [];
+  const universe = planKey
+    ? compactScreenForAi(screenRows, planKey)
+    : attachFundamentals(compactForAi(analyses, 25), fundMap);
   const focus =
     mentioned.length > 0
       ? attachFundamentals(
@@ -1054,6 +1120,10 @@ async function answerQuestion(question, lang, ai = {}) {
           fundMap
         )
       : [];
+
+  const lockRule = planKey
+    ? `LOCKED SCREEN: You MUST pick ONLY from Snapshot tickers. Copy buy/sell/stop EXACTLY from Snapshot (do not invent prices). You may reorder or drop names, never add new tickers.`
+    : `picks max 8, from data only. Lower confidence when considerations.conflict, thin liquidity, or weak fundamentals.`;
 
   const prompt = `You are an EGX multi-factor assistant. Do NOT modify files.
 Answers and picks must be LOGICAL and combine technicals WITH company fundamentals.
@@ -1070,23 +1140,29 @@ USE these real numbers in your reasoning and cite them:
 - Favor higher market-cap (more liquid) names when signals are otherwise similar.
 Only say a metric is "غير متاح"/"n/a" if it is missing from that item's fundamentals.
 
+${lockRule}
+
 Question: ${question}
 
-Screen counts: top=${screens.top.length}, rsi<30=${screens.rsi.length}, macdBuy=${screens.macd.length}, breakout=${screens.breakout.length}, exitAccum=${screens.accumulation.length}, scalp=${screens.scalp.length}
+Screen counts: top=${screens.top.length}, rsi<30=${screens.rsi.length}, macdBuy=${screens.macd.length}, breakout=${screens.breakout.length}, exitAccum=${screens.accumulation.length}, scalp=${screens.scalp.length}, week=${screens.week.length}
 Top tickers: ${screens.top.slice(0, 8).map((a) => a.ticker.replace(/\.CA$/i, "") + ":" + a.score).join(", ")}
 Focus: ${JSON.stringify(focus)}
 Snapshot: ${JSON.stringify(universe)}
 
 Return ONLY JSON:
 {"answer":"...","picks":[{"ticker":"COMI","action":"buy|sell|hold","confidence":85,"entry":0,"stopLoss":0,"target1":0,"target2":0,"reason":"...tech + fundamentals (cite P/E, EPS) + sector...","signals":["trend_up","high_volume"]}],"disclaimer":"..."}
-picks max 8, from data only. Lower confidence when considerations.conflict, thin liquidity, or weak fundamentals.`;
+${lockRule}`;
 
   try {
     const text = await runAgent(prompt, ai);
     const parsed = extractJson(text);
-    const picks = Array.isArray(parsed?.picks)
+    let picks = Array.isArray(parsed?.picks)
       ? parsed.picks.map((p) => normalizePick(p)).filter(Boolean).slice(0, 10)
       : [];
+    if (planKey) {
+      picks = bindPicksToScreen(picks, screenRows, planKey);
+      if (!picks.length) picks = local?.picks || [];
+    }
 
     if (parsed?.answer || picks.length) {
       return {
@@ -1104,6 +1180,7 @@ picks max 8, from data only. Lower confidence when considerations.conflict, thin
           breakout: screens.breakout.length,
           accumulation: screens.accumulation.length,
           scalp: screens.scalp.length,
+      week: screens.week.length,
         },
         source: "agent",
       };
@@ -1127,6 +1204,7 @@ picks max 8, from data only. Lower confidence when considerations.conflict, thin
         breakout: screens.breakout.length,
         accumulation: screens.accumulation.length,
         scalp: screens.scalp.length,
+      week: screens.week.length,
       },
       source: "scanner-fallback",
     };
@@ -1170,6 +1248,7 @@ picks max 8, from data only. Lower confidence when considerations.conflict, thin
       breakout: screens.breakout.length,
       accumulation: screens.accumulation.length,
       scalp: screens.scalp.length,
+      week: screens.week.length,
     },
     source: "scanner-fallback",
   };
@@ -1255,14 +1334,17 @@ const server = http.createServer(async (req, res) => {
     }
 
     if (req.method === "GET" && url.pathname === "/api/scan") {
-      const type = url.searchParams.get("type") || "top";
+      const rawType = url.searchParams.get("type") || "top";
+      const type = SCAN_TYPES.includes(rawType) ? rawType : "top";
       const limit = Number(url.searchParams.get("limit") || 10);
       const market = await loadMarket();
       const analyses = analyzeUniverse(market.results);
       const fundMap = await loadFundamentalsMap();
-      const items = attachFundamentals(scanAnalyses(analyses, type, limit), fundMap);
+      let items = attachFundamentals(scanAnalyses(analyses, type, limit), fundMap);
+      if (type === "scalp") items = items.filter((i) => i.scalp?.eligible);
+      if (type === "week") items = items.filter((i) => i.week?.eligible);
       return sendJson(res, 200, {
-        type: ["top", "rsi", "macd", "breakout", "accumulation", "scalp"].includes(type) ? type : "top",
+        type,
         scrapedAt: market.scrapedAt,
         range: market.range,
         count: items.length,
