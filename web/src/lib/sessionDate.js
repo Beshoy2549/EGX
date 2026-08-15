@@ -44,7 +44,7 @@ export function getNextEgxSessionDate(from = new Date()) {
   return cursor;
 }
 
-export function formatSessionDay(date, locale = "ar-EG") {
+export function formatSessionDay(date, locale = "ar-EG-u-nu-latn") {
   return date.toLocaleDateString(locale, {
     weekday: "long",
     day: "numeric",

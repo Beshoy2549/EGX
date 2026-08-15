@@ -6,7 +6,7 @@ import { useI18n } from "../composables/useI18n.js";
 const props = defineProps({
   quote: { type: Object, required: true },
   lang: { type: String, default: "ar" },
-  locale: { type: String, default: "ar-EG" },
+  locale: { type: String, default: "ar-EG-u-nu-latn" },
   fundamentals: { type: Object, default: null },
 });
 

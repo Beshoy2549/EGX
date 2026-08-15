@@ -5,7 +5,7 @@ import { buildPriceDepth } from "../../../src/lib/priceDepth.js";
 
 const props = defineProps({
   quote: { type: Object, default: null },
-  locale: { type: String, default: "ar-EG" },
+  locale: { type: String, default: "ar-EG-u-nu-latn" },
 });
 
 const { t } = useI18n();

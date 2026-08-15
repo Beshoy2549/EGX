@@ -7,7 +7,7 @@ import { apiUrl } from "../lib/api.js";
 import { formatSessionDay, getNextEgxSessionDate } from "../lib/sessionDate.js";
 
 const props = defineProps({
-  locale: { type: String, default: "ar-EG" },
+  locale: { type: String, default: "ar-EG-u-nu-latn" },
   mode: { type: String, default: "local" },
   horizon: { type: String, default: "session" },
   limit: { type: Number, default: 8 },

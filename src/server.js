@@ -14,6 +14,9 @@ import {
 import { buildCompanyProfile } from "./lib/companyContext.js";
 import { fetchMubasherStock } from "./lib/mubasher.js";
 import { buildPriceDepth } from "./lib/priceDepth.js";
+import { scoreThndrFunds } from "./lib/thndrFunds.js";
+import { runFundsPhotoExtract } from "./lib/runFundsPhoto.js";
+import { runFundsAdvice } from "./lib/runFundsAdvice.js";
 import {
   LATEST_PATH,
   ensureMarketData,
@@ -46,10 +49,19 @@ function sendJson(res, status, body) {
   res.end(payload);
 }
 
-function readBody(req) {
+function readBody(req, { maxBytes = 8_000_000 } = {}) {
   return new Promise((resolve, reject) => {
     const chunks = [];
-    req.on("data", (c) => chunks.push(c));
+    let size = 0;
+    req.on("data", (c) => {
+      size += c.length;
+      if (size > maxBytes) {
+        reject(Object.assign(new Error("Request too large"), { status: 413 }));
+        req.destroy();
+        return;
+      }
+      chunks.push(c);
+    });
     req.on("end", () => {
       const raw = Buffer.concat(chunks).toString("utf8");
       if (!raw.trim()) return resolve({});
@@ -262,14 +274,14 @@ function extractJson(text) {
  *  - "openai"           → ChatGPT via the OpenAI Chat Completions API
  * Returns the raw text reply (expected to contain a single JSON object).
  */
-async function runAgent(prompt, ai = {}) {
+async function runAgent(prompt, ai = {}, opts = {}) {
   const provider = normalizeProvider(ai.provider);
-  if (provider === "openai") return runOpenAiChat(prompt, ai);
-  return runCursorAgent(prompt, ai);
+  if (provider === "openai") return runOpenAiChat(prompt, ai, opts);
+  return runCursorAgent(prompt, ai, opts);
 }
 
 /** OpenAI ChatGPT completion — asks for a single JSON object back. */
-async function runOpenAiChat(prompt, ai = {}) {
+async function runOpenAiChat(prompt, ai = {}, opts = {}) {
   const apiKey = ai.apiKey?.trim() || process.env.OPENAI_API_KEY?.trim();
   if (!apiKey) {
     throw Object.assign(new Error("OpenAI API key is missing (set it in Settings)"), {
@@ -277,6 +289,12 @@ async function runOpenAiChat(prompt, ai = {}) {
     });
   }
   const model = ai.model?.trim() || process.env.OPENAI_MODEL?.trim() || "gpt-4o-mini";
+  const userContent = opts.imageDataUrl
+    ? [
+        { type: "text", text: prompt },
+        { type: "image_url", image_url: { url: opts.imageDataUrl, detail: "high" } },
+      ]
+    : prompt;
 
   let res;
   try {
@@ -288,7 +306,7 @@ async function runOpenAiChat(prompt, ai = {}) {
       },
       body: JSON.stringify({
         model,
-        temperature: 0.3,
+        temperature: opts.imageDataUrl ? 0.1 : 0.3,
         response_format: { type: "json_object" },
         messages: [
           {
@@ -296,7 +314,7 @@ async function runOpenAiChat(prompt, ai = {}) {
             content:
               "You are a rigorous Egyptian Exchange (EGX) market analyst. Follow the user's instructions exactly and reply with a SINGLE JSON object only — no markdown, no code fences, no preamble.",
           },
-          { role: "user", content: prompt },
+          { role: "user", content: userContent },
         ],
       }),
     });
@@ -321,7 +339,7 @@ async function runOpenAiChat(prompt, ai = {}) {
 }
 
 /** Collect assistant text + any createPlan body (plan mode often parks JSON only in the plan). */
-async function runCursorAgent(prompt, ai = {}) {
+async function runCursorAgent(prompt, ai = {}, opts = {}) {
   const apiKey = ai.apiKey?.trim() || process.env.CURSOR_API_KEY?.trim();
   if (!apiKey) {
     throw Object.assign(
@@ -329,12 +347,21 @@ async function runCursorAgent(prompt, ai = {}) {
       { status: 400 }
     );
   }
-  // Avoid `await using` — unsupported on Node 22 (Render free runtime).
-  const agent = await Agent.create({
-    apiKey,
-    model: { id: ai.model?.trim() || "composer-2.5" },
-    local: { cwd: ROOT, store: agentStore },
-  });
+  const prevKey = process.env.CURSOR_API_KEY;
+  process.env.CURSOR_API_KEY = apiKey;
+  let agent;
+  try {
+    agent = await Agent.create({
+      apiKey,
+      model: { id: ai.model?.trim() || "composer-2.5" },
+      local: { cwd: ROOT, store: agentStore },
+      tools: opts.imagePath ? ["read"] : [],
+    });
+  } catch (err) {
+    if (prevKey === undefined) delete process.env.CURSOR_API_KEY;
+    else process.env.CURSOR_API_KEY = prevKey;
+    throw err;
+  }
 
   try {
     const run = await agent.send(prompt);
@@ -362,15 +389,16 @@ async function runCursorAgent(prompt, ai = {}) {
       );
     }
 
-    // Prefer the chunk that actually contains JSON; plan-mode narrations are useless alone.
     const candidates = [result.result || "", assistantText, planText].filter(Boolean);
-    const withJson = candidates.find((t) => extractJson(t)?.action);
+    const withJson = candidates.find((t) => extractJson(t)?.action || extractJson(t)?.holdings);
     return withJson || candidates.sort((a, b) => b.length - a.length)[0] || "";
   } finally {
+    if (prevKey === undefined) delete process.env.CURSOR_API_KEY;
+    else process.env.CURSOR_API_KEY = prevKey;
     try {
-      if (typeof agent[Symbol.asyncDispose] === "function") {
+      if (agent && typeof agent[Symbol.asyncDispose] === "function") {
         await agent[Symbol.asyncDispose]();
-      } else if (typeof agent.close === "function") {
+      } else if (agent && typeof agent.close === "function") {
         await agent.close();
       }
     } catch {
@@ -1283,6 +1311,7 @@ const server = http.createServer(async (req, res) => {
           openai: { serverKey: Boolean(process.env.OPENAI_API_KEY?.trim()) },
         },
         defaultProvider: normalizeProvider(),
+        fundsPhoto: true,
       });
     }
 
@@ -1371,11 +1400,40 @@ const server = http.createServer(async (req, res) => {
       });
     }
 
+    if (req.method === "GET" && url.pathname === "/api/funds") {
+      const market = await loadMarket();
+      const analyses = analyzeUniverse(market.results);
+      const items = scoreThndrFunds(analyses);
+      return sendJson(res, 200, {
+        scrapedAt: market.scrapedAt,
+        range: market.range,
+        source: "thndr-public-catalog",
+        note: "Stances use EGX tape, not live fund NAVs from Thndr.",
+        count: items.length,
+        items,
+      });
+    }
+
+    if (req.method === "POST" && url.pathname === "/api/funds-photo") {
+      const body = await readBody(req);
+      const image = String(body.image || "");
+      const ai = aiConfigFromReq(req, body);
+      const holdings = await runFundsPhotoExtract(image, ai);
+      return sendJson(res, 200, { holdings, count: holdings.length });
+    }
+
+    if (req.method === "POST" && url.pathname === "/api/funds-advice") {
+      const body = await readBody(req);
+      const ai = aiConfigFromReq(req, body);
+      const advice = await runFundsAdvice(body, ai);
+      return sendJson(res, 200, advice);
+    }
+
     if (req.method === "POST" && url.pathname === "/api/ask") {
       const body = await readBody(req);
       const question = String(body.question || body.q || "").trim();
       if (!question) return sendJson(res, 400, { error: "question is required" });
-      if (question.length > 800) return sendJson(res, 400, { error: "question too long" });
+      if (question.length > 2000) return sendJson(res, 400, { error: "question too long" });
       const lang = body.lang === "en" ? "en" : "ar";
       const mode = String(body.mode || "").toLowerCase() === "local" ? "local" : "ai";
       if (mode === "local") {

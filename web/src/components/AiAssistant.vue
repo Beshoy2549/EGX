@@ -6,7 +6,7 @@ import { useAiSettings } from "../composables/useAiSettings.js";
 import { apiUrl } from "../lib/api.js";
 
 const props = defineProps({
-  locale: { type: String, default: "ar-EG" },
+  locale: { type: String, default: "ar-EG-u-nu-latn" },
   /** `local` = rules engine only · `ai` = Cursor/OpenAI assistant */
   mode: { type: String, default: "ai" },
 });
