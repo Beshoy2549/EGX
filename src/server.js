@@ -13,6 +13,7 @@ import {
 } from "./lib/indicators.js";
 import { buildCompanyProfile } from "./lib/companyContext.js";
 import { fetchMubasherStock } from "./lib/mubasher.js";
+import { buildPriceDepth } from "./lib/priceDepth.js";
 import {
   LATEST_PATH,
   ensureMarketData,
@@ -1331,6 +1332,24 @@ const server = http.createServer(async (req, res) => {
       const data = await fetchMubasherStock(ticker);
       mubasherCache.set(code, { ts: Date.now(), data });
       return sendJson(res, 200, { ...data, cached: false });
+    }
+
+    if (req.method === "GET" && url.pathname === "/api/depth") {
+      const ticker = normalizeTicker(url.searchParams.get("ticker"));
+      if (!ticker) return sendJson(res, 400, { error: "ticker is required" });
+      const market = await loadMarket();
+      const quote = findQuote(market.results, ticker);
+      if (!quote) return sendJson(res, 404, { error: `Stock not found: ${ticker}` });
+      const levels = Number(url.searchParams.get("levels") || 10);
+      const depth = buildPriceDepth(quote, { levels });
+      return sendJson(res, 200, {
+        ticker: quote.ticker,
+        nameAr: quote.nameAr,
+        nameEn: quote.nameEn,
+        scrapedAt: market.scrapedAt,
+        range: market.range,
+        ...depth,
+      });
     }
 
     if (req.method === "GET" && url.pathname === "/api/scan") {
