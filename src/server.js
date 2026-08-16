@@ -413,8 +413,12 @@ function normalizePick(p, fallbackConfidence = 50) {
     .toUpperCase()
     .replace(/\.CA$/i, "");
   if (!ticker) return null;
+  const nameAr = String(p.nameAr || p.name || "").trim();
+  const nameEn = String(p.nameEn || p.name || "").trim();
   return {
     ticker,
+    nameAr: nameAr ? nameAr.slice(0, 120) : undefined,
+    nameEn: nameEn ? nameEn.slice(0, 120) : undefined,
     action: ["buy", "sell", "hold"].includes(p.action) ? p.action : "hold",
     confidence: Math.max(0, Math.min(100, Number(p.confidence) || fallbackConfidence)),
     entry: p.entry ?? null,
@@ -922,6 +926,8 @@ function detectIntent(question) {
 function pickFromAnalysis(a, { action, confidence, entry, stopLoss, target1, target2, reason } = {}) {
   return normalizePick({
     ticker: a.ticker,
+    nameAr: a.nameAr,
+    nameEn: a.nameEn,
     action:
       action ||
       (a.score >= 60 ? "buy" : a.score <= 35 ? "sell" : "hold"),

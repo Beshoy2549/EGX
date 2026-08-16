@@ -4,7 +4,6 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { handleFundsPhotoHttp } from "../src/lib/runFundsPhoto.js";
 import { handleFundsAdviceHttp } from "../src/lib/runFundsAdvice.js";
-import { handleAskHttp } from "../src/lib/runAsk.js";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 
@@ -15,14 +14,13 @@ function fundsAiPlugin() {
       server.middlewares.use((req, res, next) => {
         const url = String(req.url || "").split("?")[0];
         if (req.method !== "POST") return next();
+        // Do NOT hijack /api/ask — local scan needs Node picks for result cards.
         const run =
           url === "/api/funds-photo"
             ? handleFundsPhotoHttp
             : url === "/api/funds-advice"
               ? handleFundsAdviceHttp
-              : url === "/api/ask"
-                ? handleAskHttp
-                : null;
+              : null;
         if (!run) return next();
         run(req, res).catch((err) => {
           const status = err.status || 500;
@@ -53,12 +51,8 @@ export default defineConfig({
         proxyTimeout: 180_000,
         bypass(req) {
           const u = String(req.url || "");
-          if (
-            req.method === "POST" &&
-            (u.startsWith("/api/funds-photo") ||
-              u.startsWith("/api/funds-advice") ||
-              u.startsWith("/api/ask"))
-          ) {
+          if (req.method !== "POST") return;
+          if (u.startsWith("/api/funds-photo") || u.startsWith("/api/funds-advice")) {
             return req.url;
           }
         },

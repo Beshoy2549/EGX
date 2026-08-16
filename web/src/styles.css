@@ -1351,14 +1351,39 @@ canvas { width: 100%; height: 360px; display: block; }
   gap: 10px;
 }
 
+.pick-grid--cards {
+  gap: 12px;
+  margin-top: 4px;
+}
+
 .pick-card {
   border: 1px solid var(--line);
   background: #fff;
   border-radius: 14px;
   padding: 12px 12px 10px;
   cursor: pointer;
-  transition: transform 0.15s ease, border-color 0.15s ease;
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
   text-align: start;
+}
+
+.pick-card--stock {
+  padding: 16px 16px 14px;
+  background: var(--panel);
+  animation: rise 0.45s ease both;
+}
+
+.pick-card--stock:hover {
+  transform: translateY(-2px);
+  border-color: #b9cfd9;
+  box-shadow: 0 10px 24px rgba(20, 32, 28, 0.06);
+}
+
+.pick-sym {
+  font-family: "IBM Plex Sans", "Cairo", sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  color: var(--accent);
 }
 
 .pick-card:hover {
@@ -1371,7 +1396,7 @@ canvas { width: 100%; height: 360px; display: block; }
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-  margin-bottom: 6px;
+  margin: 8px 0 6px;
 }
 
 .pick-top strong {
@@ -1393,6 +1418,13 @@ canvas { width: 100%; height: 360px; display: block; }
 .pick-card.sell .badge { background: #f6e0dd; color: var(--down); }
 .pick-card.hold .badge { background: #e7eef3; color: var(--accent); }
 
+.pick-card.buy {
+  border-color: color-mix(in srgb, var(--up) 28%, var(--line));
+}
+.pick-card.sell {
+  border-color: color-mix(in srgb, var(--down) 28%, var(--line));
+}
+
 .pick-top .conf {
   margin-inline-start: auto;
   font-size: 0.85rem;
@@ -1401,10 +1433,36 @@ canvas { width: 100%; height: 360px; display: block; }
 }
 
 .pick-name {
-  margin: 0 0 4px;
-  font-size: 0.9rem;
+  margin: 6px 0 0;
+  font-size: 1.02rem;
   font-weight: 700;
   color: var(--ink);
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.6em;
+}
+
+.ai-answer--brief {
+  white-space: normal;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.ai-source {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.ai-results-count {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--muted);
 }
 
 .pick-reason {
@@ -1454,11 +1512,6 @@ canvas { width: 100%; height: 360px; display: block; }
   font-size: 0.82rem;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
-}
-
-.ai-source {
-  display: flex;
-  margin: 2px 0 10px;
 }
 
 .ai-badge {
