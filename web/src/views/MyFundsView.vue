@@ -33,6 +33,8 @@ const fundQuery = ref("");
 const fundHi = ref(0);
 const editOpen = ref(false);
 const editForm = ref({ code: "", amount: "", pnlPct: "" });
+const addOpen = ref(false);
+const addTab = ref("manual"); // "manual" | "photo"
 const aiBusy = ref(false);
 const aiError = ref("");
 const aiAdvice = ref(null);
@@ -184,6 +186,20 @@ function onSave() {
   }
   form.value.amount = "";
   form.value.pnlPct = "";
+  closeAdd();
+}
+
+function openAdd(tab = "manual") {
+  formError.value = "";
+  photoError.value = "";
+  addTab.value = tab === "photo" ? "photo" : "manual";
+  addOpen.value = true;
+}
+
+function closeAdd() {
+  addOpen.value = false;
+  fundOpen.value = false;
+  syncFundInput();
 }
 
 function openEdit(row) {
@@ -377,6 +393,7 @@ async function onPhoto(e) {
       throw new Error(apiMissing ? t.value.myFundsPhotoApiMissing : t.value.myFundsPhotoEmpty);
     }
     replaceAll(holdings);
+    closeAdd();
   } catch (err) {
     photoError.value = err.message;
   } finally {
@@ -399,73 +416,120 @@ function fmtDateTime(iso) {
       <p v-if="payload.scrapedAt" class="funds-asof">{{ t.scraped }}: {{ fmtDateTime(payload.scrapedAt) }}</p>
     </header>
 
-    <div class="my-funds-photo">
-      <input
-        ref="fileInput"
-        type="file"
-        accept="image/*"
-        capture="environment"
-        hidden
-        @change="onPhoto"
-      />
-      <button type="button" class="ai-btn" :disabled="photoBusy" @click="fileInput?.click()">
-        {{ photoBusy ? t.myFundsPhotoBusy : t.myFundsPhoto }}
-      </button>
-      <p class="muted">{{ t.myFundsPhotoHint }}</p>
-      <p v-if="photoError" class="ai-error">{{ photoError }}</p>
+    <div class="my-funds-add-bar">
+      <button type="button" class="ai-btn" @click="openAdd('manual')">{{ t.myFundsAdd }}</button>
     </div>
 
-    <form class="my-funds-form" @submit.prevent="onSave">
-      <div ref="fundBox" class="fund-combo settings-field">
-        <span class="settings-label">{{ t.myFundsPick }}</span>
-        <input
-          v-model="fundQuery"
-          type="search"
-          class="fund-combo-input"
-          autocomplete="off"
-          :placeholder="t.myFundsSearchPh"
-          :aria-expanded="fundOpen"
-          aria-autocomplete="list"
-          role="combobox"
-          @focus="openFundList"
-          @input="fundOpen = true; fundHi = 0"
-          @keydown="onFundKey"
-        />
-        <ul v-show="fundOpen" class="fund-combo-menu" role="listbox">
-          <li v-if="!filteredCatalog.length" class="fund-combo-empty">{{ t.searchNoResults }}</li>
-          <li
-            v-for="(f, i) in filteredCatalog"
-            :key="f.code"
-            class="fund-combo-item"
-            :class="{ active: form.code === f.code, hi: i === fundHi }"
-            role="option"
-            @mousedown.prevent="pickFund(f)"
+    <teleport to="body">
+      <div v-if="addOpen" class="settings-overlay" @click.self="closeAdd">
+        <div class="settings-modal my-funds-add-modal" role="dialog" aria-modal="true">
+          <div class="settings-modal-head">
+            <h3>{{ t.myFundsAddTitle }}</h3>
+            <button type="button" class="settings-close" :aria-label="t.settingsDone" @click="closeAdd">
+              ✕
+            </button>
+          </div>
+
+          <div class="my-funds-tabs" role="tablist">
+            <button
+              type="button"
+              role="tab"
+              :class="{ active: addTab === 'manual' }"
+              :aria-selected="addTab === 'manual'"
+              @click="addTab = 'manual'"
+            >
+              {{ t.myFundsTabManual }}
+            </button>
+            <button
+              type="button"
+              role="tab"
+              :class="{ active: addTab === 'photo' }"
+              :aria-selected="addTab === 'photo'"
+              @click="addTab = 'photo'"
+            >
+              {{ t.myFundsTabPhoto }}
+            </button>
+          </div>
+
+          <form
+            v-show="addTab === 'manual'"
+            class="my-funds-form in-modal"
+            @submit.prevent="onSave"
           >
-            <span class="fund-combo-code">{{ f.code }}</span>
-            <span class="fund-combo-name">{{ nameOf(f) }}</span>
-            <span v-if="f.manager" class="fund-combo-mgr">{{ f.manager }}</span>
-          </li>
-        </ul>
+            <div ref="fundBox" class="fund-combo settings-field">
+              <span class="settings-label">{{ t.myFundsPick }}</span>
+              <input
+                v-model="fundQuery"
+                type="search"
+                class="fund-combo-input"
+                autocomplete="off"
+                :placeholder="t.myFundsSearchPh"
+                :aria-expanded="fundOpen"
+                aria-autocomplete="list"
+                role="combobox"
+                @focus="openFundList"
+                @input="fundOpen = true; fundHi = 0"
+                @keydown="onFundKey"
+              />
+              <ul v-show="fundOpen" class="fund-combo-menu" role="listbox">
+                <li v-if="!filteredCatalog.length" class="fund-combo-empty">{{ t.searchNoResults }}</li>
+                <li
+                  v-for="(f, i) in filteredCatalog"
+                  :key="f.code"
+                  class="fund-combo-item"
+                  :class="{ active: form.code === f.code, hi: i === fundHi }"
+                  role="option"
+                  @mousedown.prevent="pickFund(f)"
+                >
+                  <span class="fund-combo-code">{{ f.code }}</span>
+                  <span class="fund-combo-name">{{ nameOf(f) }}</span>
+                  <span v-if="f.manager" class="fund-combo-mgr">{{ f.manager }}</span>
+                </li>
+              </ul>
+            </div>
+            <div class="my-funds-form-nums">
+              <label class="settings-field">
+                <span class="settings-label">{{ t.myFundsAmount }}</span>
+                <input v-model="form.amount" type="text" inputmode="decimal" autocomplete="off" />
+              </label>
+              <label class="settings-field">
+                <span class="settings-label">{{ t.myFundsPnl }}</span>
+                <input
+                  v-model="form.pnlPct"
+                  type="text"
+                  inputmode="decimal"
+                  autocomplete="off"
+                  :placeholder="t.myFundsPnlPh"
+                />
+              </label>
+              <button type="submit" class="ai-btn my-funds-save">{{ t.myFundsSave }}</button>
+            </div>
+          </form>
+          <p v-if="addTab === 'manual' && formError" class="ai-error">{{ formError }}</p>
+
+          <div v-show="addTab === 'photo'" class="my-funds-photo in-modal">
+            <input
+              ref="fileInput"
+              type="file"
+              accept="image/*"
+              capture="environment"
+              hidden
+              @change="onPhoto"
+            />
+            <button
+              type="button"
+              class="ai-btn"
+              :disabled="photoBusy"
+              @click="fileInput?.click()"
+            >
+              {{ photoBusy ? t.myFundsPhotoBusy : t.myFundsPhoto }}
+            </button>
+            <p class="muted">{{ t.myFundsPhotoHint }}</p>
+            <p v-if="photoError" class="ai-error">{{ photoError }}</p>
+          </div>
+        </div>
       </div>
-      <div class="my-funds-form-nums">
-        <label class="settings-field">
-          <span class="settings-label">{{ t.myFundsAmount }}</span>
-          <input v-model="form.amount" type="text" inputmode="decimal" autocomplete="off" />
-        </label>
-        <label class="settings-field">
-          <span class="settings-label">{{ t.myFundsPnl }}</span>
-          <input
-            v-model="form.pnlPct"
-            type="text"
-            inputmode="decimal"
-            autocomplete="off"
-            :placeholder="t.myFundsPnlPh"
-          />
-        </label>
-        <button type="submit" class="ai-btn my-funds-save">{{ t.myFundsSave }}</button>
-      </div>
-    </form>
-    <p v-if="formError" class="ai-error">{{ formError }}</p>
+    </teleport>
 
     <p v-if="loading" class="empty">{{ t.loading }}</p>
     <p v-else-if="error" class="empty">{{ t.loadError }}: {{ error }}</p>
