@@ -252,6 +252,14 @@ const messages = {
     settingsHint:
       "المفتاح بيتخزن في المتصفح بس (localStorage) وبيتبعت مع كل طلب. اختَر ChatGPT وحط مفتاحك عشان تستخدم OpenAI. رابط الـ API لازم يكون سيرفر Render مش github.io.",
     settingsClear: "مسح المفاتيح",
+    settingsTest: "اختبار المفتاح",
+    settingsTestBusy: "جارِ الاختبار…",
+    settingsTestMissing: "حط المفتاح الأول بعدين اختبر.",
+    settingsTestFail: "فشل اختبار المفتاح.",
+    settingsTestOk: (provider, model) =>
+      model
+        ? `المفتاح شغال ✓ (${provider} · ${model})`
+        : `المفتاح شغال ✓ (${provider})`,
     settingsDone: "تم",
     settingsActive: "المزوّد الحالي",
     analysisTitle: "التحليل الفني الكامل",
@@ -597,6 +605,12 @@ const messages = {
     settingsHint:
       "Keys are stored only in your browser (localStorage) and sent with each request. Pick ChatGPT and add your key to use OpenAI. API URL must be your Render service, not github.io.",
     settingsClear: "Clear keys",
+    settingsTest: "Test key",
+    settingsTestBusy: "Testing…",
+    settingsTestMissing: "Enter a key first, then test.",
+    settingsTestFail: "Key test failed.",
+    settingsTestOk: (provider, model) =>
+      model ? `Key works ✓ (${provider} · ${model})` : `Key works ✓ (${provider})`,
     settingsDone: "Done",
     settingsActive: "Current provider",
     analysisTitle: "Full technical analysis",

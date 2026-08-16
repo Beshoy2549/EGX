@@ -17,6 +17,7 @@ import { buildPriceDepth } from "./lib/priceDepth.js";
 import { scoreThndrFunds } from "./lib/thndrFunds.js";
 import { runFundsPhotoExtract } from "./lib/runFundsPhoto.js";
 import { runFundsAdvice } from "./lib/runFundsAdvice.js";
+import { runAiPing } from "./lib/runAiPing.js";
 import {
   LATEST_PATH,
   ensureMarketData,
@@ -1433,6 +1434,13 @@ const server = http.createServer(async (req, res) => {
       const ai = aiConfigFromReq(req, body);
       const advice = await runFundsAdvice(body, ai);
       return sendJson(res, 200, advice);
+    }
+
+    if (req.method === "POST" && url.pathname === "/api/ai-ping") {
+      const body = await readBody(req, { maxBytes: 8_000 });
+      const ai = aiConfigFromReq(req, body);
+      const result = await runAiPing(ai);
+      return sendJson(res, 200, result);
     }
 
     if (req.method === "POST" && url.pathname === "/api/ask") {

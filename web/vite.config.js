@@ -4,6 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { handleFundsPhotoHttp } from "../src/lib/runFundsPhoto.js";
 import { handleFundsAdviceHttp } from "../src/lib/runFundsAdvice.js";
+import { handleAiPingHttp } from "../src/lib/runAiPing.js";
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 
@@ -20,7 +21,9 @@ function fundsAiPlugin() {
             ? handleFundsPhotoHttp
             : url === "/api/funds-advice"
               ? handleFundsAdviceHttp
-              : null;
+              : url === "/api/ai-ping"
+                ? handleAiPingHttp
+                : null;
         if (!run) return next();
         run(req, res).catch((err) => {
           const status = err.status || 500;
@@ -52,7 +55,11 @@ export default defineConfig({
         bypass(req) {
           const u = String(req.url || "");
           if (req.method !== "POST") return;
-          if (u.startsWith("/api/funds-photo") || u.startsWith("/api/funds-advice")) {
+          if (
+            u.startsWith("/api/funds-photo") ||
+            u.startsWith("/api/funds-advice") ||
+            u.startsWith("/api/ai-ping")
+          ) {
             return req.url;
           }
         },
