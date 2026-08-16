@@ -66,6 +66,7 @@ function openDetails() {
         {{ quote.changePercent >= 0 ? "+" : "" }}{{ fmt(quote.changePercent) }}%
       </template>
     </div>
+    <!--
     <div v-if="hasFundamentals" class="fund">
       <span class="fund-item">
         <span class="fund-k">{{ t.fPe }}</span>
@@ -80,5 +81,6 @@ function openDetails() {
         <span class="fund-v">{{ fmtBig(f.marketCap) }}</span>
       </span>
     </div>
+    -->
   </button>
 </template>
