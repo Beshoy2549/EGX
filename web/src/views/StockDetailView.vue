@@ -216,7 +216,7 @@ async function askAi() {
         </div>
       </section>
 
-      <PriceDepthPanel :quote="quote" :locale="locale" />
+      <!-- <PriceDepthPanel :quote="quote" :locale="locale" /> -->
 
       <section class="company-panel">
         <div class="analysis-head">
