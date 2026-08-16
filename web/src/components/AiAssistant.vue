@@ -3,6 +3,7 @@ import { computed, nextTick, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useI18n } from "../composables/useI18n.js";
 import { useAiSettings } from "../composables/useAiSettings.js";
+import { useMarketData } from "../composables/useMarketData.js";
 import { apiUrl } from "../lib/api.js";
 
 const props = defineProps({
@@ -13,6 +14,7 @@ const props = defineProps({
 
 const { lang, t } = useI18n();
 const { aiHeaders } = useAiSettings();
+const { findByTicker } = useMarketData({ poll: false });
 const router = useRouter();
 
 const question = ref("");
@@ -77,8 +79,17 @@ function shortTicker(ticker) {
 }
 
 function pickName(pick) {
-  if (lang.value === "ar") return pick.nameAr || pick.name || pick.nameEn || "";
-  return pick.nameEn || pick.name || pick.nameAr || "";
+  if (!pick) return "";
+  const fromApi =
+    lang.value === "ar"
+      ? pick.nameAr || pick.name || pick.nameEn
+      : pick.nameEn || pick.name || pick.nameAr;
+  if (fromApi) return String(fromApi).trim();
+  const q = findByTicker(pick.ticker);
+  if (!q) return "";
+  return lang.value === "ar"
+    ? q.nameAr || q.name || q.nameEn || ""
+    : q.nameEn || q.name || q.nameAr || "";
 }
 
 async function scrollDown() {

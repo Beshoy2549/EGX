@@ -14,11 +14,14 @@ const { t } = useI18n();
 
 const router = useRouter();
 
-const name = computed(() =>
-  props.lang === "ar"
-    ? props.quote.nameAr || props.quote.name || props.quote.nameEn || ""
-    : props.quote.nameEn || props.quote.name || props.quote.nameAr || ""
-);
+const name = computed(() => {
+  const q = props.quote || {};
+  const ar = String(props.lang || "ar").startsWith("ar");
+  const label = ar
+    ? q.nameAr || q.name || q.nameEn
+    : q.nameEn || q.name || q.nameAr;
+  return String(label || "").trim() || shortTicker.value;
+});
 
 const up = computed(() => (props.quote.changePercent ?? 0) >= 0);
 

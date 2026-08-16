@@ -1,5 +1,5 @@
 {
-  "scrapedAt": "2026-08-16T20:57:38.718Z",
+  "scrapedAt": "2026-08-16T21:18:21.813Z",
   "source": "mubasher.info",
   "count": 221,
   "results": [
@@ -31,7 +31,7 @@
         "volume": 85963,
         "turnover": 26371542
       },
-      "scrapedAt": "2026-08-16T20:57:06.011Z"
+      "scrapedAt": "2026-08-16T21:17:34.304Z"
     },
     {
       "ticker": "ABUK.CA",
@@ -61,7 +61,7 @@
         "volume": 3120922,
         "turnover": 248406752
       },
-      "scrapedAt": "2026-08-16T20:57:06.034Z"
+      "scrapedAt": "2026-08-16T21:17:34.272Z"
     },
     {
       "ticker": "ACAMD.CA",
@@ -91,7 +91,7 @@
         "volume": 23183722,
         "turnover": 52102780
       },
-      "scrapedAt": "2026-08-16T20:57:06.071Z"
+      "scrapedAt": "2026-08-16T21:17:34.250Z"
     },
     {
       "ticker": "ACAP.CA",
@@ -121,7 +121,7 @@
         "volume": 1027542,
         "turnover": 9323480
       },
-      "scrapedAt": "2026-08-16T20:57:05.983Z"
+      "scrapedAt": "2026-08-16T21:17:34.325Z"
     },
     {
       "ticker": "ACGC.CA",
@@ -151,7 +151,7 @@
         "volume": 14211269,
         "turnover": 187092608
       },
-      "scrapedAt": "2026-08-16T20:57:06.061Z"
+      "scrapedAt": "2026-08-16T21:17:34.345Z"
     },
     {
       "ticker": "ACTF.CA",
@@ -181,7 +181,7 @@
         "volume": 8186518,
         "turnover": 22697908
       },
-      "scrapedAt": "2026-08-16T20:57:06.046Z"
+      "scrapedAt": "2026-08-16T21:17:34.292Z"
     },
     {
       "ticker": "ADCI.CA",
@@ -211,7 +211,7 @@
         "volume": 26782,
         "turnover": 8261876.5
       },
-      "scrapedAt": "2026-08-16T20:57:06.836Z"
+      "scrapedAt": "2026-08-16T21:17:36.187Z"
     },
     {
       "ticker": "ADIB.CA",
@@ -241,7 +241,7 @@
         "volume": 1284395,
         "turnover": 70597008
       },
-      "scrapedAt": "2026-08-16T20:57:06.897Z"
+      "scrapedAt": "2026-08-16T21:17:35.572Z"
     },
     {
       "ticker": "ADPC.CA",
@@ -271,7 +271,7 @@
         "volume": 9648208,
         "turnover": 43512744
       },
-      "scrapedAt": "2026-08-16T20:57:06.940Z"
+      "scrapedAt": "2026-08-16T21:17:35.478Z"
     },
     {
       "ticker": "AFDI.CA",
@@ -301,7 +301,7 @@
         "volume": 185395,
         "turnover": 12286080
       },
-      "scrapedAt": "2026-08-16T20:57:06.860Z"
+      "scrapedAt": "2026-08-16T21:17:35.981Z"
     },
     {
       "ticker": "AFMC.CA",
@@ -331,7 +331,7 @@
         "volume": 462745,
         "turnover": 117115696
       },
-      "scrapedAt": "2026-08-16T20:57:06.884Z"
+      "scrapedAt": "2026-08-16T21:17:36.073Z"
     },
     {
       "ticker": "AIDC.CA",
@@ -357,7 +357,7 @@
         "volume": 11321774,
         "turnover": 7914868
       },
-      "scrapedAt": "2026-08-16T20:57:06.921Z"
+      "scrapedAt": "2026-08-16T21:17:36.121Z"
     },
     {
       "ticker": "AIHC.CA",
@@ -387,7 +387,7 @@
         "volume": 28985821,
         "turnover": 14674969
       },
-      "scrapedAt": "2026-08-16T20:57:07.732Z"
+      "scrapedAt": "2026-08-16T21:17:36.979Z"
     },
     {
       "ticker": "AJWA.CA",
@@ -417,7 +417,7 @@
         "volume": 499990,
         "turnover": 99395248
       },
-      "scrapedAt": "2026-08-16T20:57:07.757Z"
+      "scrapedAt": "2026-08-16T21:17:37.287Z"
     },
     {
       "ticker": "ALCN.CA",
@@ -447,7 +447,7 @@
         "volume": 820699,
         "turnover": 26391212
       },
-      "scrapedAt": "2026-08-16T20:57:07.781Z"
+      "scrapedAt": "2026-08-16T21:17:36.995Z"
     },
     {
       "ticker": "ALUM.CA",
@@ -477,7 +477,7 @@
         "volume": 885469,
         "turnover": 25183126
       },
-      "scrapedAt": "2026-08-16T20:57:07.771Z"
+      "scrapedAt": "2026-08-16T21:17:36.935Z"
     },
     {
       "ticker": "AMER.CA",
@@ -507,7 +507,7 @@
         "volume": 13032285,
         "turnover": 88240072
       },
-      "scrapedAt": "2026-08-16T20:57:07.715Z"
+      "scrapedAt": "2026-08-16T21:17:36.988Z"
     },
     {
       "ticker": "AMES.CA",
@@ -537,7 +537,7 @@
         "volume": 63093,
         "turnover": 7667734.5
       },
-      "scrapedAt": "2026-08-16T20:57:08.480Z"
+      "scrapedAt": "2026-08-16T21:17:38.208Z"
     },
     {
       "ticker": "AMIA.CA",
@@ -567,7 +567,7 @@
         "volume": 482808,
         "turnover": 6197192.5
       },
-      "scrapedAt": "2026-08-16T20:57:08.557Z"
+      "scrapedAt": "2026-08-16T21:17:38.279Z"
     },
     {
       "ticker": "AMOC.CA",
@@ -597,7 +597,7 @@
         "volume": 20369565,
         "turnover": 222388336
       },
-      "scrapedAt": "2026-08-16T20:57:08.526Z"
+      "scrapedAt": "2026-08-16T21:17:38.134Z"
     },
     {
       "ticker": "APSW.CA",
@@ -627,7 +627,7 @@
         "volume": 662746,
         "turnover": 6007124.5
       },
-      "scrapedAt": "2026-08-16T20:57:08.493Z"
+      "scrapedAt": "2026-08-16T21:17:38.185Z"
     },
     {
       "ticker": "ARAB.CA",
@@ -657,7 +657,7 @@
         "volume": 248372867,
         "turnover": 60652004
       },
-      "scrapedAt": "2026-08-16T20:57:08.506Z"
+      "scrapedAt": "2026-08-16T21:17:38.298Z"
     },
     {
       "ticker": "ARCC.CA",
@@ -687,7 +687,7 @@
         "volume": 3250489,
         "turnover": 253012496
       },
-      "scrapedAt": "2026-08-16T20:57:08.537Z"
+      "scrapedAt": "2026-08-16T21:17:38.289Z"
     },
     {
       "ticker": "AREH.CA",
@@ -717,7 +717,7 @@
         "volume": 6461097,
         "turnover": 9787410
       },
-      "scrapedAt": "2026-08-16T20:57:09.313Z"
+      "scrapedAt": "2026-08-16T21:17:39.223Z"
     },
     {
       "ticker": "ASCM.CA",
@@ -747,7 +747,7 @@
         "volume": 456691,
         "turnover": 29865766
       },
-      "scrapedAt": "2026-08-16T20:57:09.295Z"
+      "scrapedAt": "2026-08-16T21:17:39.140Z"
     },
     {
       "ticker": "ASPI.CA",
@@ -777,7 +777,7 @@
         "volume": 179383473,
         "turnover": 98782664
       },
-      "scrapedAt": "2026-08-16T20:57:09.258Z"
+      "scrapedAt": "2026-08-16T21:17:39.207Z"
     },
     {
       "ticker": "ATLC.CA",
@@ -807,7 +807,7 @@
         "volume": 2862710,
         "turnover": 15759774
       },
-      "scrapedAt": "2026-08-16T20:57:09.341Z"
+      "scrapedAt": "2026-08-16T21:17:39.192Z"
     },
     {
       "ticker": "ATQA.CA",
@@ -837,7 +837,7 @@
         "volume": 8954790,
         "turnover": 98046488
       },
-      "scrapedAt": "2026-08-16T20:57:09.322Z"
+      "scrapedAt": "2026-08-16T21:17:39.161Z"
     },
     {
       "ticker": "AXPH.CA",
@@ -867,7 +867,7 @@
         "volume": 5824,
         "turnover": 7882787
       },
-      "scrapedAt": "2026-08-16T20:57:10.083Z"
+      "scrapedAt": "2026-08-16T21:17:40.056Z"
     },
     {
       "ticker": "BINV.CA",
@@ -897,7 +897,7 @@
         "volume": 63143,
         "turnover": 3075882.5
       },
-      "scrapedAt": "2026-08-16T20:57:10.051Z"
+      "scrapedAt": "2026-08-16T21:17:40.079Z"
     },
     {
       "ticker": "BIOC.CA",
@@ -927,7 +927,7 @@
         "volume": 206211,
         "turnover": 103224128
       },
-      "scrapedAt": "2026-08-16T20:57:10.063Z"
+      "scrapedAt": "2026-08-16T21:17:40.032Z"
     },
     {
       "ticker": "BONY.CA",
@@ -957,7 +957,7 @@
         "volume": 13736045,
         "turnover": 64972120
       },
-      "scrapedAt": "2026-08-16T20:57:10.103Z"
+      "scrapedAt": "2026-08-16T21:17:40.086Z"
     },
     {
       "ticker": "BTFH.CA",
@@ -987,7 +987,7 @@
         "volume": 37302071,
         "turnover": 115769080
       },
-      "scrapedAt": "2026-08-16T20:57:10.112Z"
+      "scrapedAt": "2026-08-16T21:17:39.981Z"
     },
     {
       "ticker": "CAED.CA",
@@ -1017,7 +1017,7 @@
         "volume": 87791,
         "turnover": 11228670
       },
-      "scrapedAt": "2026-08-16T20:57:10.040Z"
+      "scrapedAt": "2026-08-16T21:17:39.970Z"
     },
     {
       "ticker": "CANA.CA",
@@ -1047,7 +1047,7 @@
         "volume": 745974,
         "turnover": 31553104
       },
-      "scrapedAt": "2026-08-16T20:57:11.050Z"
+      "scrapedAt": "2026-08-16T21:17:40.871Z"
     },
     {
       "ticker": "CCAP.CA",
@@ -1077,7 +1077,7 @@
         "volume": 47305081,
         "turnover": 252060912
       },
-      "scrapedAt": "2026-08-16T20:57:11.099Z"
+      "scrapedAt": "2026-08-16T21:17:40.786Z"
     },
     {
       "ticker": "CCRS.CA",
@@ -1107,7 +1107,7 @@
         "volume": 14289604,
         "turnover": 36610696
       },
-      "scrapedAt": "2026-08-16T20:57:11.117Z"
+      "scrapedAt": "2026-08-16T21:17:40.860Z"
     },
     {
       "ticker": "CEFM.CA",
@@ -1137,7 +1137,7 @@
         "volume": 58460,
         "turnover": 8035831.5
       },
-      "scrapedAt": "2026-08-16T20:57:11.126Z"
+      "scrapedAt": "2026-08-16T21:17:40.904Z"
     },
     {
       "ticker": "CERA.CA",
@@ -1167,7 +1167,7 @@
         "volume": 6499085,
         "turnover": 8659932
       },
-      "scrapedAt": "2026-08-16T20:57:11.206Z"
+      "scrapedAt": "2026-08-16T21:17:40.925Z"
     },
     {
       "ticker": "CFGH.CA",
@@ -1197,7 +1197,7 @@
         "volume": 845428,
         "turnover": 91488.25
       },
-      "scrapedAt": "2026-08-16T20:57:11.035Z"
+      "scrapedAt": "2026-08-16T21:17:40.933Z"
     },
     {
       "ticker": "CICH.CA",
@@ -1227,7 +1227,7 @@
         "volume": 246740,
         "turnover": 3124248.25
       },
-      "scrapedAt": "2026-08-16T20:57:11.876Z"
+      "scrapedAt": "2026-08-16T21:17:42.141Z"
     },
     {
       "ticker": "CIEB.CA",
@@ -1257,7 +1257,7 @@
         "volume": 2116167,
         "turnover": 52240736
       },
-      "scrapedAt": "2026-08-16T20:57:11.889Z"
+      "scrapedAt": "2026-08-16T21:17:42.167Z"
     },
     {
       "ticker": "CIRA.CA",
@@ -1287,7 +1287,7 @@
         "volume": 1560055,
         "turnover": 60674552
       },
-      "scrapedAt": "2026-08-16T20:57:11.919Z"
+      "scrapedAt": "2026-08-16T21:17:41.633Z"
     },
     {
       "ticker": "CLHO.CA",
@@ -1317,7 +1317,7 @@
         "volume": 697058,
         "turnover": 12039060
       },
-      "scrapedAt": "2026-08-16T20:57:11.975Z"
+      "scrapedAt": "2026-08-16T21:17:42.157Z"
     },
     {
       "ticker": "CNFN.CA",
@@ -1347,7 +1347,7 @@
         "volume": 4360649,
         "turnover": 21448194
       },
-      "scrapedAt": "2026-08-16T20:57:11.966Z"
+      "scrapedAt": "2026-08-16T21:17:42.127Z"
     },
     {
       "ticker": "COMI.CA",
@@ -1377,7 +1377,7 @@
         "volume": 1207682,
         "turnover": 167958848
       },
-      "scrapedAt": "2026-08-16T20:57:11.983Z"
+      "scrapedAt": "2026-08-16T21:17:42.211Z"
     },
     {
       "ticker": "COPR.CA",
@@ -1407,7 +1407,7 @@
         "volume": 204822391,
         "turnover": 93644240
       },
-      "scrapedAt": "2026-08-16T20:57:12.738Z"
+      "scrapedAt": "2026-08-16T21:17:43.023Z"
     },
     {
       "ticker": "COSG.CA",
@@ -1437,7 +1437,7 @@
         "volume": 35298124,
         "turnover": 65883372
       },
-      "scrapedAt": "2026-08-16T20:57:12.713Z"
+      "scrapedAt": "2026-08-16T21:17:43.066Z"
     },
     {
       "ticker": "CPCI.CA",
@@ -1467,7 +1467,7 @@
         "volume": 6088,
         "turnover": 3265740.25
       },
-      "scrapedAt": "2026-08-16T20:57:12.723Z"
+      "scrapedAt": "2026-08-16T21:17:43.015Z"
     },
     {
       "ticker": "CPME.CA",
@@ -1497,7 +1497,7 @@
         "volume": 53213,
         "turnover": 1884567.38
       },
-      "scrapedAt": "2026-08-16T20:57:12.696Z"
+      "scrapedAt": "2026-08-16T21:17:43.000Z"
     },
     {
       "ticker": "CRST.CA",
@@ -1527,7 +1527,7 @@
         "volume": 77032447,
         "turnover": 219314400
       },
-      "scrapedAt": "2026-08-16T20:57:12.746Z"
+      "scrapedAt": "2026-08-16T21:17:42.977Z"
     },
     {
       "ticker": "CSAG.CA",
@@ -1557,7 +1557,7 @@
         "volume": 193866,
         "turnover": 8047754
       },
-      "scrapedAt": "2026-08-16T20:57:12.754Z"
+      "scrapedAt": "2026-08-16T21:17:42.990Z"
     },
     {
       "ticker": "DAPH.CA",
@@ -1587,7 +1587,7 @@
         "volume": 295467,
         "turnover": 38685148
       },
-      "scrapedAt": "2026-08-16T20:57:13.505Z"
+      "scrapedAt": "2026-08-16T21:17:43.801Z"
     },
     {
       "ticker": "DCCC.CA",
@@ -1616,7 +1616,7 @@
         "volume": 98,
         "turnover": 916.3
       },
-      "scrapedAt": "2026-08-16T20:57:13.449Z"
+      "scrapedAt": "2026-08-16T21:17:43.869Z"
     },
     {
       "ticker": "DEIN.CA",
@@ -1646,7 +1646,7 @@
         "volume": 3,
         "turnover": 40.95
       },
-      "scrapedAt": "2026-08-16T20:57:13.460Z"
+      "scrapedAt": "2026-08-16T21:17:43.778Z"
     },
     {
       "ticker": "DGTZ.CA",
@@ -1676,7 +1676,7 @@
         "volume": 924201,
         "turnover": 2460164.5
       },
-      "scrapedAt": "2026-08-16T20:57:13.476Z"
+      "scrapedAt": "2026-08-16T21:17:43.769Z"
     },
     {
       "ticker": "DOMT.CA",
@@ -1706,7 +1706,7 @@
         "volume": 461558,
         "turnover": 13614184
       },
-      "scrapedAt": "2026-08-16T20:57:13.435Z"
+      "scrapedAt": "2026-08-16T21:17:43.757Z"
     },
     {
       "ticker": "DSCW.CA",
@@ -1736,7 +1736,7 @@
         "volume": 40129581,
         "turnover": 85018744
       },
-      "scrapedAt": "2026-08-16T20:57:13.485Z"
+      "scrapedAt": "2026-08-16T21:17:43.793Z"
     },
     {
       "ticker": "DTPP.CA",
@@ -1766,7 +1766,7 @@
         "volume": 102487,
         "turnover": 30202184
       },
-      "scrapedAt": "2026-08-16T20:57:14.204Z"
+      "scrapedAt": "2026-08-16T21:17:45.253Z"
     },
     {
       "ticker": "EALR.CA",
@@ -1796,7 +1796,7 @@
         "volume": 44109,
         "turnover": 17313616
       },
-      "scrapedAt": "2026-08-16T20:57:14.189Z"
+      "scrapedAt": "2026-08-16T21:17:44.888Z"
     },
     {
       "ticker": "EASB.CA",
@@ -1826,7 +1826,7 @@
         "volume": 1233603,
         "turnover": 9237332
       },
-      "scrapedAt": "2026-08-16T20:57:14.231Z"
+      "scrapedAt": "2026-08-16T21:17:45.205Z"
     },
     {
       "ticker": "EAST.CA",
@@ -1856,7 +1856,7 @@
         "volume": 532724,
         "turnover": 19467690
       },
-      "scrapedAt": "2026-08-16T20:57:14.239Z"
+      "scrapedAt": "2026-08-16T21:17:45.112Z"
     },
     {
       "ticker": "EBSC.CA",
@@ -1886,7 +1886,7 @@
         "volume": 925566,
         "turnover": 1767508.38
       },
-      "scrapedAt": "2026-08-16T20:57:14.247Z"
+      "scrapedAt": "2026-08-16T21:17:45.126Z"
     },
     {
       "ticker": "ECAP.CA",
@@ -1916,7 +1916,7 @@
         "volume": 212007,
         "turnover": 8180946.5
       },
-      "scrapedAt": "2026-08-16T20:57:14.215Z"
+      "scrapedAt": "2026-08-16T21:17:45.168Z"
     },
     {
       "ticker": "EDFM.CA",
@@ -1946,7 +1946,7 @@
         "volume": 3696,
         "turnover": 1546198.5
       },
-      "scrapedAt": "2026-08-16T20:57:15.028Z"
+      "scrapedAt": "2026-08-16T21:17:46.220Z"
     },
     {
       "ticker": "EEII.CA",
@@ -1976,7 +1976,7 @@
         "volume": 3882685,
         "turnover": 11959789
       },
-      "scrapedAt": "2026-08-16T20:57:15.083Z"
+      "scrapedAt": "2026-08-16T21:17:46.287Z"
     },
     {
       "ticker": "EFIC.CA",
@@ -2006,7 +2006,7 @@
         "volume": 784004,
         "turnover": 181756512
       },
-      "scrapedAt": "2026-08-16T20:57:15.090Z"
+      "scrapedAt": "2026-08-16T21:17:46.080Z"
     },
     {
       "ticker": "EFID.CA",
@@ -2036,7 +2036,7 @@
         "volume": 4813627,
         "turnover": 164187328
       },
-      "scrapedAt": "2026-08-16T20:57:15.063Z"
+      "scrapedAt": "2026-08-16T21:17:46.162Z"
     },
     {
       "ticker": "EFIH.CA",
@@ -2066,7 +2066,7 @@
         "volume": 7464487,
         "turnover": 184717232
       },
-      "scrapedAt": "2026-08-16T20:57:15.038Z"
+      "scrapedAt": "2026-08-16T21:17:46.237Z"
     },
     {
       "ticker": "EGAL.CA",
@@ -2096,7 +2096,7 @@
         "volume": 573121,
         "turnover": 195998288
       },
-      "scrapedAt": "2026-08-16T20:57:15.012Z"
+      "scrapedAt": "2026-08-16T21:17:46.209Z"
     },
     {
       "ticker": "EGAS.CA",
@@ -2126,7 +2126,7 @@
         "volume": 216934,
         "turnover": 13163264
       },
-      "scrapedAt": "2026-08-16T20:57:16.255Z"
+      "scrapedAt": "2026-08-16T21:17:47.358Z"
     },
     {
       "ticker": "EGBE.CA",
@@ -2156,7 +2156,7 @@
         "volume": 445502,
         "turnover": 240684.44
       },
-      "scrapedAt": "2026-08-16T20:57:15.848Z"
+      "scrapedAt": "2026-08-16T21:17:47.404Z"
     },
     {
       "ticker": "EGCH.CA",
@@ -2186,7 +2186,7 @@
         "volume": 16575220,
         "turnover": 244602816
       },
-      "scrapedAt": "2026-08-16T20:57:16.239Z"
+      "scrapedAt": "2026-08-16T21:17:47.442Z"
     },
     {
       "ticker": "EGSA.CA",
@@ -2216,7 +2216,7 @@
         "volume": 134,
         "turnover": 1177.86
       },
-      "scrapedAt": "2026-08-16T20:57:16.041Z"
+      "scrapedAt": "2026-08-16T21:17:47.310Z"
     },
     {
       "ticker": "EGTS.CA",
@@ -2246,7 +2246,7 @@
         "volume": 3044445,
         "turnover": 58464672
       },
-      "scrapedAt": "2026-08-16T20:57:16.182Z"
+      "scrapedAt": "2026-08-16T21:17:47.451Z"
     },
     {
       "ticker": "EHDR.CA",
@@ -2276,7 +2276,7 @@
         "volume": 17247099,
         "turnover": 52798244
       },
-      "scrapedAt": "2026-08-16T20:57:16.205Z"
+      "scrapedAt": "2026-08-16T21:17:47.343Z"
     },
     {
       "ticker": "ELEC.CA",
@@ -2306,7 +2306,7 @@
         "volume": 50897762,
         "turnover": 112137760
       },
-      "scrapedAt": "2026-08-16T20:57:16.988Z"
+      "scrapedAt": "2026-08-16T21:17:48.332Z"
     },
     {
       "ticker": "ELKA.CA",
@@ -2336,7 +2336,7 @@
         "volume": 24046627,
         "turnover": 42492744
       },
-      "scrapedAt": "2026-08-16T20:57:17.015Z"
+      "scrapedAt": "2026-08-16T21:17:48.474Z"
     },
     {
       "ticker": "ELNA.CA",
@@ -2366,7 +2366,7 @@
         "volume": 8231,
         "turnover": 310052.06
       },
-      "scrapedAt": "2026-08-16T20:57:16.965Z"
+      "scrapedAt": "2026-08-16T21:17:48.263Z"
     },
     {
       "ticker": "ELSH.CA",
@@ -2396,7 +2396,7 @@
         "volume": 2608900,
         "turnover": 36332032
       },
-      "scrapedAt": "2026-08-16T20:57:16.978Z"
+      "scrapedAt": "2026-08-16T21:17:48.350Z"
     },
     {
       "ticker": "ELWA.CA",
@@ -2426,7 +2426,7 @@
         "volume": 654361,
         "turnover": 1125196.12
       },
-      "scrapedAt": "2026-08-16T20:57:17.079Z"
+      "scrapedAt": "2026-08-16T21:17:48.360Z"
     },
     {
       "ticker": "EMFD.CA",
@@ -2456,7 +2456,7 @@
         "volume": 5498964,
         "turnover": 64510588
       },
-      "scrapedAt": "2026-08-16T20:57:17.007Z"
+      "scrapedAt": "2026-08-16T21:17:48.321Z"
     },
     {
       "ticker": "ENGC.CA",
@@ -2486,7 +2486,7 @@
         "volume": 199327,
         "turnover": 9929732
       },
-      "scrapedAt": "2026-08-16T20:57:17.799Z"
+      "scrapedAt": "2026-08-16T21:17:49.733Z"
     },
     {
       "ticker": "EOSB.CA",
@@ -2516,7 +2516,7 @@
         "volume": 733,
         "turnover": 1143.54
       },
-      "scrapedAt": "2026-08-16T20:57:17.785Z"
+      "scrapedAt": "2026-08-16T21:17:49.817Z"
     },
     {
       "ticker": "EPCO.CA",
@@ -2546,7 +2546,7 @@
         "volume": 4130728,
         "turnover": 50349932
       },
-      "scrapedAt": "2026-08-16T20:57:17.763Z"
+      "scrapedAt": "2026-08-16T21:17:49.808Z"
     },
     {
       "ticker": "EPPK.CA",
@@ -2576,7 +2576,7 @@
         "volume": 47184,
         "turnover": 622850.69
       },
-      "scrapedAt": "2026-08-16T20:57:17.846Z"
+      "scrapedAt": "2026-08-16T21:17:49.752Z"
     },
     {
       "ticker": "ETEL.CA",
@@ -2606,7 +2606,7 @@
         "volume": 3489467,
         "turnover": 412953120
       },
-      "scrapedAt": "2026-08-16T20:57:17.826Z"
+      "scrapedAt": "2026-08-16T21:17:49.697Z"
     },
     {
       "ticker": "ETRS.CA",
@@ -2636,7 +2636,7 @@
         "volume": 6306817,
         "turnover": 70423736
       },
-      "scrapedAt": "2026-08-16T20:57:17.818Z"
+      "scrapedAt": "2026-08-16T21:17:49.672Z"
     },
     {
       "ticker": "EXPA.CA",
@@ -2666,7 +2666,7 @@
         "volume": 2078108,
         "turnover": 44206168
       },
-      "scrapedAt": "2026-08-16T20:57:18.541Z"
+      "scrapedAt": "2026-08-16T21:17:50.599Z"
     },
     {
       "ticker": "FAIT.CA",
@@ -2696,7 +2696,7 @@
         "volume": 129371,
         "turnover": 5335499
       },
-      "scrapedAt": "2026-08-16T20:57:18.604Z"
+      "scrapedAt": "2026-08-16T21:17:50.654Z"
     },
     {
       "ticker": "FAITA.CA",
@@ -2726,7 +2726,7 @@
         "volume": 62014,
         "turnover": 61362.57
       },
-      "scrapedAt": "2026-08-16T20:57:18.613Z"
+      "scrapedAt": "2026-08-16T21:17:50.580Z"
     },
     {
       "ticker": "FERC.CA",
@@ -2756,7 +2756,7 @@
         "volume": 159844,
         "turnover": 13007271
       },
-      "scrapedAt": "2026-08-16T20:57:18.595Z"
+      "scrapedAt": "2026-08-16T21:17:50.663Z"
     },
     {
       "ticker": "FWRY.CA",
@@ -2786,7 +2786,7 @@
         "volume": 6658492,
         "turnover": 128588928
       },
-      "scrapedAt": "2026-08-16T20:57:18.645Z"
+      "scrapedAt": "2026-08-16T21:17:50.624Z"
     },
     {
       "ticker": "GBCO.CA",
@@ -2816,7 +2816,7 @@
         "volume": 3891302,
         "turnover": 119005304
       },
-      "scrapedAt": "2026-08-16T20:57:18.571Z"
+      "scrapedAt": "2026-08-16T21:17:50.608Z"
     },
     {
       "ticker": "GDWA.CA",
@@ -2846,7 +2846,7 @@
         "volume": 33335833,
         "turnover": 27032460
       },
-      "scrapedAt": "2026-08-16T20:57:19.384Z"
+      "scrapedAt": "2026-08-16T21:17:51.384Z"
     },
     {
       "ticker": "GGCC.CA",
@@ -2876,7 +2876,7 @@
         "volume": 50803542,
         "turnover": 51560712
       },
-      "scrapedAt": "2026-08-16T20:57:19.403Z"
+      "scrapedAt": "2026-08-16T21:17:51.407Z"
     },
     {
       "ticker": "GGRN.CA",
@@ -2906,7 +2906,7 @@
         "volume": 6208593,
         "turnover": 8877204
       },
-      "scrapedAt": "2026-08-16T20:57:19.394Z"
+      "scrapedAt": "2026-08-16T21:17:51.751Z"
     },
     {
       "ticker": "GIHD.CA",
@@ -2936,7 +2936,7 @@
         "volume": 432314,
         "turnover": 28597684
       },
-      "scrapedAt": "2026-08-16T20:57:19.374Z"
+      "scrapedAt": "2026-08-16T21:17:51.374Z"
     },
     {
       "ticker": "GMCI.CA",
@@ -2966,7 +2966,7 @@
         "volume": 453151,
         "turnover": 861146.81
       },
-      "scrapedAt": "2026-08-16T20:57:19.412Z"
+      "scrapedAt": "2026-08-16T21:17:51.339Z"
     },
     {
       "ticker": "GPIM.CA",
@@ -2996,7 +2996,7 @@
         "volume": 16180560,
         "turnover": 20096754
       },
-      "scrapedAt": "2026-08-16T20:57:20.334Z"
+      "scrapedAt": "2026-08-16T21:17:52.536Z"
     },
     {
       "ticker": "GPPL.CA",
@@ -3026,7 +3026,7 @@
         "volume": 546,
         "turnover": 726.18
       },
-      "scrapedAt": "2026-08-16T20:57:20.273Z"
+      "scrapedAt": "2026-08-16T21:17:52.508Z"
     },
     {
       "ticker": "GRCA.CA",
@@ -3056,7 +3056,7 @@
         "volume": 109262,
         "turnover": 6072082.5
       },
-      "scrapedAt": "2026-08-16T20:57:20.308Z"
+      "scrapedAt": "2026-08-16T21:17:52.549Z"
     },
     {
       "ticker": "GSSC.CA",
@@ -3086,7 +3086,7 @@
         "volume": 9524,
         "turnover": 2659758.75
       },
-      "scrapedAt": "2026-08-16T20:57:20.355Z"
+      "scrapedAt": "2026-08-16T21:17:52.498Z"
     },
     {
       "ticker": "GTEX.CA",
@@ -3116,7 +3116,7 @@
         "volume": 1745033,
         "turnover": 71752.05
       },
-      "scrapedAt": "2026-08-16T20:57:20.374Z"
+      "scrapedAt": "2026-08-16T21:17:52.517Z"
     },
     {
       "ticker": "GTWL.CA",
@@ -3146,7 +3146,7 @@
         "volume": 2217377,
         "turnover": 338080384
       },
-      "scrapedAt": "2026-08-16T20:57:20.347Z"
+      "scrapedAt": "2026-08-16T21:17:52.485Z"
     },
     {
       "ticker": "HDBK.CA",
@@ -3176,7 +3176,7 @@
         "volume": 344575,
         "turnover": 30206456
       },
-      "scrapedAt": "2026-08-16T20:57:21.136Z"
+      "scrapedAt": "2026-08-16T21:17:53.450Z"
     },
     {
       "ticker": "HELI.CA",
@@ -3206,7 +3206,7 @@
         "volume": 15496518,
         "turnover": 121032400
       },
-      "scrapedAt": "2026-08-16T20:57:21.236Z"
+      "scrapedAt": "2026-08-16T21:17:53.375Z"
     },
     {
       "ticker": "HRHO.CA",
@@ -3236,7 +3236,7 @@
         "volume": 5834058,
         "turnover": 154338784
       },
-      "scrapedAt": "2026-08-16T20:57:21.181Z"
+      "scrapedAt": "2026-08-16T21:17:53.434Z"
     },
     {
       "ticker": "ICID.CA",
@@ -3266,7 +3266,7 @@
         "volume": 6422743,
         "turnover": 87610856
       },
-      "scrapedAt": "2026-08-16T20:57:21.206Z"
+      "scrapedAt": "2026-08-16T21:17:53.459Z"
     },
     {
       "ticker": "ICLE.CA",
@@ -3296,7 +3296,7 @@
         "volume": 0,
         "turnover": 0
       },
-      "scrapedAt": "2026-08-16T20:57:21.154Z"
+      "scrapedAt": "2026-08-16T21:17:53.305Z"
     },
     {
       "ticker": "IDRE.CA",
@@ -3326,7 +3326,7 @@
         "volume": 216743,
         "turnover": 11858475
       },
-      "scrapedAt": "2026-08-16T20:57:21.305Z"
+      "scrapedAt": "2026-08-16T21:17:53.361Z"
     },
     {
       "ticker": "IFAP.CA",
@@ -3356,7 +3356,7 @@
         "volume": 649660,
         "turnover": 13989924
       },
-      "scrapedAt": "2026-08-16T20:57:22.202Z"
+      "scrapedAt": "2026-08-16T21:17:54.332Z"
     },
     {
       "ticker": "INFI.CA",
@@ -3386,7 +3386,7 @@
         "volume": 194943,
         "turnover": 29854218
       },
-      "scrapedAt": "2026-08-16T20:57:22.367Z"
+      "scrapedAt": "2026-08-16T21:17:54.371Z"
     },
     {
       "ticker": "IRON.CA",
@@ -3415,7 +3415,7 @@
         "volume": 186546,
         "turnover": 5794842.5
       },
-      "scrapedAt": "2026-08-16T20:57:22.272Z"
+      "scrapedAt": "2026-08-16T21:17:54.362Z"
     },
     {
       "ticker": "ISMA.CA",
@@ -3445,7 +3445,7 @@
         "volume": 320329,
         "turnover": 11014822
       },
-      "scrapedAt": "2026-08-16T20:57:22.301Z"
+      "scrapedAt": "2026-08-16T21:17:54.344Z"
     },
     {
       "ticker": "ISMQ.CA",
@@ -3475,7 +3475,7 @@
         "volume": 6077851,
         "turnover": 58272352
       },
-      "scrapedAt": "2026-08-16T20:57:22.218Z"
+      "scrapedAt": "2026-08-16T21:17:54.354Z"
     },
     {
       "ticker": "ISPH.CA",
@@ -3505,7 +3505,7 @@
         "volume": 8719401,
         "turnover": 115946944
       },
-      "scrapedAt": "2026-08-16T20:57:22.341Z"
+      "scrapedAt": "2026-08-16T21:17:54.389Z"
     },
     {
       "ticker": "JUFO.CA",
@@ -3535,7 +3535,7 @@
         "volume": 1149661,
         "turnover": 31541952
       },
-      "scrapedAt": "2026-08-16T20:57:23.200Z"
+      "scrapedAt": "2026-08-16T21:17:55.936Z"
     },
     {
       "ticker": "KABO.CA",
@@ -3565,7 +3565,7 @@
         "volume": 24651336,
         "turnover": 230804608
       },
-      "scrapedAt": "2026-08-16T20:57:23.142Z"
+      "scrapedAt": "2026-08-16T21:17:55.790Z"
     },
     {
       "ticker": "KORA.CA",
@@ -3591,7 +3591,7 @@
         "volume": 15387604,
         "turnover": 51164356
       },
-      "scrapedAt": "2026-08-16T20:57:23.126Z"
+      "scrapedAt": "2026-08-16T21:17:55.926Z"
     },
     {
       "ticker": "KRDI.CA",
@@ -3619,7 +3619,7 @@
         "volume": 246474362,
         "turnover": 112605488
       },
-      "scrapedAt": "2026-08-16T20:57:23.177Z"
+      "scrapedAt": "2026-08-16T21:17:55.945Z"
     },
     {
       "ticker": "KWIN.CA",
@@ -3649,7 +3649,7 @@
         "volume": 97203,
         "turnover": 8394586
       },
-      "scrapedAt": "2026-08-16T20:57:23.152Z"
+      "scrapedAt": "2026-08-16T21:17:55.701Z"
     },
     {
       "ticker": "KZPC.CA",
@@ -3679,7 +3679,7 @@
         "volume": 8274261,
         "turnover": 94246040
       },
-      "scrapedAt": "2026-08-16T20:57:23.168Z"
+      "scrapedAt": "2026-08-16T21:17:55.730Z"
     },
     {
       "ticker": "LCSW.CA",
@@ -3709,7 +3709,7 @@
         "volume": 994658,
         "turnover": 33030096
       },
-      "scrapedAt": "2026-08-16T20:57:24.182Z"
+      "scrapedAt": "2026-08-16T21:17:57.023Z"
     },
     {
       "ticker": "LUTS.CA",
@@ -3739,7 +3739,7 @@
         "volume": 95473514,
         "turnover": 96344360
       },
-      "scrapedAt": "2026-08-16T20:57:24.151Z"
+      "scrapedAt": "2026-08-16T21:17:56.905Z"
     },
     {
       "ticker": "MAAL.CA",
@@ -3769,7 +3769,7 @@
         "volume": 1000192,
         "turnover": 8739229
       },
-      "scrapedAt": "2026-08-16T20:57:24.165Z"
+      "scrapedAt": "2026-08-16T21:17:57.003Z"
     },
     {
       "ticker": "MASR.CA",
@@ -3799,7 +3799,7 @@
         "volume": 6193344,
         "turnover": 47392528
       },
-      "scrapedAt": "2026-08-16T20:57:24.250Z"
+      "scrapedAt": "2026-08-16T21:17:57.136Z"
     },
     {
       "ticker": "MBSC.CA",
@@ -3829,7 +3829,7 @@
         "volume": 521405,
         "turnover": 210659680
       },
-      "scrapedAt": "2026-08-16T20:57:24.330Z"
+      "scrapedAt": "2026-08-16T21:17:57.103Z"
     },
     {
       "ticker": "MCQE.CA",
@@ -3859,7 +3859,7 @@
         "volume": 570878,
         "turnover": 145350976
       },
-      "scrapedAt": "2026-08-16T20:57:23.980Z"
+      "scrapedAt": "2026-08-16T21:17:56.982Z"
     },
     {
       "ticker": "MCRO.CA",
@@ -3887,7 +3887,7 @@
         "volume": 37832774,
         "turnover": 58873468
       },
-      "scrapedAt": "2026-08-16T20:57:25.690Z"
+      "scrapedAt": "2026-08-16T21:17:58.898Z"
     },
     {
       "ticker": "MEGM.CA",
@@ -3917,7 +3917,7 @@
         "volume": 1404559,
         "turnover": 24849202
       },
-      "scrapedAt": "2026-08-16T20:57:25.574Z"
+      "scrapedAt": "2026-08-16T21:17:58.776Z"
     },
     {
       "ticker": "MENA.CA",
@@ -3947,7 +3947,7 @@
         "volume": 1272219,
         "turnover": 8994745
       },
-      "scrapedAt": "2026-08-16T20:57:25.624Z"
+      "scrapedAt": "2026-08-16T21:17:58.805Z"
     },
     {
       "ticker": "MEPA.CA",
@@ -3977,7 +3977,7 @@
         "volume": 4220814,
         "turnover": 7853699
       },
-      "scrapedAt": "2026-08-16T20:57:25.563Z"
+      "scrapedAt": "2026-08-16T21:17:58.745Z"
     },
     {
       "ticker": "MFPC.CA",
@@ -4005,7 +4005,7 @@
         "volume": 4275558,
         "turnover": 175169040
       },
-      "scrapedAt": "2026-08-16T20:57:25.549Z"
+      "scrapedAt": "2026-08-16T21:17:58.947Z"
     },
     {
       "ticker": "MFSC.CA",
@@ -4035,7 +4035,7 @@
         "volume": 102866,
         "turnover": 5187342
       },
-      "scrapedAt": "2026-08-16T20:57:25.602Z"
+      "scrapedAt": "2026-08-16T21:17:58.929Z"
     },
     {
       "ticker": "MHOT.CA",
@@ -4065,7 +4065,7 @@
         "volume": 1205365,
         "turnover": 22989562
       },
-      "scrapedAt": "2026-08-16T20:57:26.406Z"
+      "scrapedAt": "2026-08-16T21:17:59.816Z"
     },
     {
       "ticker": "MICH.CA",
@@ -4095,7 +4095,7 @@
         "volume": 288278,
         "turnover": 13867038
       },
-      "scrapedAt": "2026-08-16T20:57:26.379Z"
+      "scrapedAt": "2026-08-16T21:17:59.800Z"
     },
     {
       "ticker": "MILS.CA",
@@ -4125,7 +4125,7 @@
         "volume": 121336,
         "turnover": 23681068
       },
-      "scrapedAt": "2026-08-16T20:57:26.445Z"
+      "scrapedAt": "2026-08-16T21:17:59.824Z"
     },
     {
       "ticker": "MIPH.CA",
@@ -4155,7 +4155,7 @@
         "volume": 2183,
         "turnover": 1706788.5
       },
-      "scrapedAt": "2026-08-16T20:57:26.536Z"
+      "scrapedAt": "2026-08-16T21:17:59.790Z"
     },
     {
       "ticker": "MMAT.CA",
@@ -4185,7 +4185,7 @@
         "volume": 238,
         "turnover": 880.6
       },
-      "scrapedAt": "2026-08-16T20:57:26.475Z"
+      "scrapedAt": "2026-08-16T21:17:59.770Z"
     },
     {
       "ticker": "MOED.CA",
@@ -4215,7 +4215,7 @@
         "volume": 50712133,
         "turnover": 34930756
       },
-      "scrapedAt": "2026-08-16T20:57:26.453Z"
+      "scrapedAt": "2026-08-16T21:17:59.886Z"
     },
     {
       "ticker": "MOIL.CA",
@@ -4245,7 +4245,7 @@
         "volume": 626694,
         "turnover": 413896.12
       },
-      "scrapedAt": "2026-08-16T20:57:27.270Z"
+      "scrapedAt": "2026-08-16T21:18:02.071Z"
     },
     {
       "ticker": "MOIN.CA",
@@ -4275,7 +4275,7 @@
         "volume": 3038592,
         "turnover": 116497880
       },
-      "scrapedAt": "2026-08-16T20:57:27.335Z"
+      "scrapedAt": "2026-08-16T21:18:02.091Z"
     },
     {
       "ticker": "MOSC.CA",
@@ -4305,7 +4305,7 @@
         "volume": 53922,
         "turnover": 17815498
       },
-      "scrapedAt": "2026-08-16T20:57:27.346Z"
+      "scrapedAt": "2026-08-16T21:18:02.099Z"
     },
     {
       "ticker": "MPCI.CA",
@@ -4335,7 +4335,7 @@
         "volume": 298970,
         "turnover": 114031832
       },
-      "scrapedAt": "2026-08-16T20:57:27.248Z"
+      "scrapedAt": "2026-08-16T21:18:02.036Z"
     },
     {
       "ticker": "MPCO.CA",
@@ -4365,7 +4365,7 @@
         "volume": 30215785,
         "turnover": 66230496
       },
-      "scrapedAt": "2026-08-16T20:57:27.355Z"
+      "scrapedAt": "2026-08-16T21:18:02.120Z"
     },
     {
       "ticker": "MPRC.CA",
@@ -4395,7 +4395,7 @@
         "volume": 842871,
         "turnover": 39365912
       },
-      "scrapedAt": "2026-08-16T20:57:27.315Z"
+      "scrapedAt": "2026-08-16T21:18:02.083Z"
     },
     {
       "ticker": "MTIE.CA",
@@ -4425,7 +4425,7 @@
         "volume": 2702635,
         "turnover": 25888906
       },
-      "scrapedAt": "2026-08-16T20:57:28.100Z"
+      "scrapedAt": "2026-08-16T21:18:02.864Z"
     },
     {
       "ticker": "NAHO.CA",
@@ -4455,7 +4455,7 @@
         "volume": 5516774,
         "turnover": 686880.06
       },
-      "scrapedAt": "2026-08-16T20:57:28.067Z"
+      "scrapedAt": "2026-08-16T21:18:02.846Z"
     },
     {
       "ticker": "NAPR.CA",
@@ -4485,7 +4485,7 @@
         "volume": 68523,
         "turnover": 2056168.13
       },
-      "scrapedAt": "2026-08-16T20:57:28.089Z"
+      "scrapedAt": "2026-08-16T21:18:02.838Z"
     },
     {
       "ticker": "NARE.CA",
@@ -4515,7 +4515,7 @@
         "volume": 459159,
         "turnover": 8029908
       },
-      "scrapedAt": "2026-08-16T20:57:28.038Z"
+      "scrapedAt": "2026-08-16T21:18:02.822Z"
     },
     {
       "ticker": "NCCW.CA",
@@ -4545,7 +4545,7 @@
         "volume": 2058810,
         "turnover": 12433785
       },
-      "scrapedAt": "2026-08-16T20:57:28.122Z"
+      "scrapedAt": "2026-08-16T21:18:02.871Z"
     },
     {
       "ticker": "NDRL.CA",
@@ -4575,7 +4575,7 @@
         "volume": 0,
         "turnover": 0
       },
-      "scrapedAt": "2026-08-16T20:57:28.058Z"
+      "scrapedAt": "2026-08-16T21:18:02.892Z"
     },
     {
       "ticker": "NEDA.CA",
@@ -4605,7 +4605,7 @@
         "volume": 1070386,
         "turnover": 2891249.5
       },
-      "scrapedAt": "2026-08-16T20:57:28.844Z"
+      "scrapedAt": "2026-08-16T21:18:05.068Z"
     },
     {
       "ticker": "NHPS.CA",
@@ -4635,7 +4635,7 @@
         "volume": 350523,
         "turnover": 31735312
       },
-      "scrapedAt": "2026-08-16T20:57:28.866Z"
+      "scrapedAt": "2026-08-16T21:18:05.118Z"
     },
     {
       "ticker": "NINH.CA",
@@ -4665,7 +4665,7 @@
         "volume": 543404,
         "turnover": 11826613
       },
-      "scrapedAt": "2026-08-16T20:57:28.817Z"
+      "scrapedAt": "2026-08-16T21:18:05.215Z"
     },
     {
       "ticker": "NIPH.CA",
@@ -4695,7 +4695,7 @@
         "volume": 623629,
         "turnover": 247456448
       },
-      "scrapedAt": "2026-08-16T20:57:28.858Z"
+      "scrapedAt": "2026-08-16T21:18:05.224Z"
     },
     {
       "ticker": "OBRI.CA",
@@ -4725,7 +4725,7 @@
         "volume": 449904,
         "turnover": 14829243
       },
-      "scrapedAt": "2026-08-16T20:57:28.879Z"
+      "scrapedAt": "2026-08-16T21:18:05.359Z"
     },
     {
       "ticker": "OCDI.CA",
@@ -4755,7 +4755,7 @@
         "volume": 2724153,
         "turnover": 94852456
       },
-      "scrapedAt": "2026-08-16T20:57:28.833Z"
+      "scrapedAt": "2026-08-16T21:18:05.185Z"
     },
     {
       "ticker": "OCPH.CA",
@@ -4785,7 +4785,7 @@
         "volume": 50112,
         "turnover": 14111291
       },
-      "scrapedAt": "2026-08-16T20:57:29.646Z"
+      "scrapedAt": "2026-08-16T21:18:06.191Z"
     },
     {
       "ticker": "ODIN.CA",
@@ -4815,7 +4815,7 @@
         "volume": 6673266,
         "turnover": 22727576
       },
-      "scrapedAt": "2026-08-16T20:57:29.667Z"
+      "scrapedAt": "2026-08-16T21:18:06.181Z"
     },
     {
       "ticker": "OFH.CA",
@@ -4845,7 +4845,7 @@
         "volume": 82749551,
         "turnover": 72109096
       },
-      "scrapedAt": "2026-08-16T20:57:29.691Z"
+      "scrapedAt": "2026-08-16T21:18:06.119Z"
     },
     {
       "ticker": "OIH.CA",
@@ -4875,7 +4875,7 @@
         "volume": 42551418,
         "turnover": 75846400
       },
-      "scrapedAt": "2026-08-16T20:57:29.683Z"
+      "scrapedAt": "2026-08-16T21:18:06.135Z"
     },
     {
       "ticker": "OLFI.CA",
@@ -4905,7 +4905,7 @@
         "volume": 780629,
         "turnover": 19607042
       },
-      "scrapedAt": "2026-08-16T20:57:29.711Z"
+      "scrapedAt": "2026-08-16T21:18:06.162Z"
     },
     {
       "ticker": "ORAS.CA",
@@ -4933,7 +4933,7 @@
         "volume": 449317,
         "turnover": 349165344
       },
-      "scrapedAt": "2026-08-16T20:57:29.622Z"
+      "scrapedAt": "2026-08-16T21:18:06.201Z"
     },
     {
       "ticker": "ORHD.CA",
@@ -4963,7 +4963,7 @@
         "volume": 2498280,
         "turnover": 107262040
       },
-      "scrapedAt": "2026-08-16T20:57:30.430Z"
+      "scrapedAt": "2026-08-16T21:18:08.282Z"
     },
     {
       "ticker": "ORWE.CA",
@@ -4993,7 +4993,7 @@
         "volume": 2842005,
         "turnover": 75572896
       },
-      "scrapedAt": "2026-08-16T20:57:30.750Z"
+      "scrapedAt": "2026-08-16T21:18:08.375Z"
     },
     {
       "ticker": "PHAR.CA",
@@ -5023,7 +5023,7 @@
         "volume": 2326146,
         "turnover": 328503264
       },
-      "scrapedAt": "2026-08-16T20:57:30.441Z"
+      "scrapedAt": "2026-08-16T21:18:08.327Z"
     },
     {
       "ticker": "PHDC.CA",
@@ -5053,7 +5053,7 @@
         "volume": 9062945,
         "turnover": 138599312
       },
-      "scrapedAt": "2026-08-16T20:57:30.738Z"
+      "scrapedAt": "2026-08-16T21:18:08.367Z"
     },
     {
       "ticker": "PHGC.CA",
@@ -5083,7 +5083,7 @@
         "volume": 153556993,
         "turnover": 13338029
       },
-      "scrapedAt": "2026-08-16T20:57:30.765Z"
+      "scrapedAt": "2026-08-16T21:18:08.298Z"
     },
     {
       "ticker": "PHTV.CA",
@@ -5113,7 +5113,7 @@
         "volume": 19059,
         "turnover": 7044965.5
       },
-      "scrapedAt": "2026-08-16T20:57:30.450Z"
+      "scrapedAt": "2026-08-16T21:18:08.315Z"
     },
     {
       "ticker": "POCO.CA",
@@ -5141,7 +5141,7 @@
         "volume": 0,
         "turnover": 0
       },
-      "scrapedAt": "2026-08-16T20:57:31.489Z"
+      "scrapedAt": "2026-08-16T21:18:09.186Z"
     },
     {
       "ticker": "POUL.CA",
@@ -5171,7 +5171,7 @@
         "volume": 312456,
         "turnover": 12165681
       },
-      "scrapedAt": "2026-08-16T20:57:31.569Z"
+      "scrapedAt": "2026-08-16T21:18:09.174Z"
     },
     {
       "ticker": "PRCL.CA",
@@ -5201,7 +5201,7 @@
         "volume": 543550,
         "turnover": 18439086
       },
-      "scrapedAt": "2026-08-16T20:57:31.517Z"
+      "scrapedAt": "2026-08-16T21:18:09.135Z"
     },
     {
       "ticker": "PRDC.CA",
@@ -5231,7 +5231,7 @@
         "volume": 2576172,
         "turnover": 22823908
       },
-      "scrapedAt": "2026-08-16T20:57:31.556Z"
+      "scrapedAt": "2026-08-16T21:18:09.210Z"
     },
     {
       "ticker": "PRMH.CA",
@@ -5261,7 +5261,7 @@
         "volume": 4509048,
         "turnover": 11922699
       },
-      "scrapedAt": "2026-08-16T20:57:31.577Z"
+      "scrapedAt": "2026-08-16T21:18:09.225Z"
     },
     {
       "ticker": "QNBE.CA",
@@ -5291,7 +5291,7 @@
         "volume": 98724,
         "turnover": 5901864
       },
-      "scrapedAt": "2026-08-16T20:57:31.525Z"
+      "scrapedAt": "2026-08-16T21:18:09.202Z"
     },
     {
       "ticker": "RACC.CA",
@@ -5321,7 +5321,7 @@
         "volume": 5060124,
         "turnover": 53609080
       },
-      "scrapedAt": "2026-08-16T20:57:32.249Z"
+      "scrapedAt": "2026-08-16T21:18:10.075Z"
     },
     {
       "ticker": "RAKT.CA",
@@ -5350,7 +5350,7 @@
         "volume": 9373,
         "turnover": 213330.41
       },
-      "scrapedAt": "2026-08-16T20:57:32.273Z"
+      "scrapedAt": "2026-08-16T21:18:10.013Z"
     },
     {
       "ticker": "RAYA.CA",
@@ -5380,7 +5380,7 @@
         "volume": 29251685,
         "turnover": 207399184
       },
-      "scrapedAt": "2026-08-16T20:57:32.338Z"
+      "scrapedAt": "2026-08-16T21:18:10.044Z"
     },
     {
       "ticker": "RMDA.CA",
@@ -5410,7 +5410,7 @@
         "volume": 8350788,
         "turnover": 53687980
       },
-      "scrapedAt": "2026-08-16T20:57:32.330Z"
+      "scrapedAt": "2026-08-16T21:18:10.088Z"
     },
     {
       "ticker": "ROTO.CA",
@@ -5440,7 +5440,7 @@
         "volume": 580118,
         "turnover": 30266564
       },
-      "scrapedAt": "2026-08-16T20:57:32.356Z"
+      "scrapedAt": "2026-08-16T21:18:10.096Z"
     },
     {
       "ticker": "RREI.CA",
@@ -5470,7 +5470,7 @@
         "volume": 8537460,
         "turnover": 38821420
       },
-      "scrapedAt": "2026-08-16T20:57:32.363Z"
+      "scrapedAt": "2026-08-16T21:18:10.104Z"
     },
     {
       "ticker": "RTVC.CA",
@@ -5500,7 +5500,7 @@
         "volume": 825950,
         "turnover": 3140271.5
       },
-      "scrapedAt": "2026-08-16T20:57:33.078Z"
+      "scrapedAt": "2026-08-16T21:18:11.726Z"
     },
     {
       "ticker": "RUBX.CA",
@@ -5530,7 +5530,7 @@
         "volume": 674332,
         "turnover": 8482182
       },
-      "scrapedAt": "2026-08-16T20:57:33.049Z"
+      "scrapedAt": "2026-08-16T21:18:11.855Z"
     },
     {
       "ticker": "SAIB.CA",
@@ -5560,7 +5560,7 @@
         "volume": 57,
         "turnover": 7057.52
       },
-      "scrapedAt": "2026-08-16T20:57:33.139Z"
+      "scrapedAt": "2026-08-16T21:18:11.771Z"
     },
     {
       "ticker": "SAUD.CA",
@@ -5590,7 +5590,7 @@
         "volume": 418607,
         "turnover": 9768795
       },
-      "scrapedAt": "2026-08-16T20:57:33.093Z"
+      "scrapedAt": "2026-08-16T21:18:11.759Z"
     },
     {
       "ticker": "SCEM.CA",
@@ -5620,7 +5620,7 @@
         "volume": 5727201,
         "turnover": 596058752
       },
-      "scrapedAt": "2026-08-16T20:57:33.101Z"
+      "scrapedAt": "2026-08-16T21:18:11.740Z"
     },
     {
       "ticker": "SCFM.CA",
@@ -5650,7 +5650,7 @@
         "volume": 21073,
         "turnover": 6014695.5
       },
-      "scrapedAt": "2026-08-16T20:57:33.069Z"
+      "scrapedAt": "2026-08-16T21:18:11.801Z"
     },
     {
       "ticker": "SCTS.CA",
@@ -5680,7 +5680,7 @@
         "volume": 11401,
         "turnover": 7043335
       },
-      "scrapedAt": "2026-08-16T20:57:34.009Z"
+      "scrapedAt": "2026-08-16T21:18:12.657Z"
     },
     {
       "ticker": "SDTI.CA",
@@ -5710,7 +5710,7 @@
         "volume": 251910,
         "turnover": 17825518
       },
-      "scrapedAt": "2026-08-16T20:57:34.208Z"
+      "scrapedAt": "2026-08-16T21:18:12.678Z"
     },
     {
       "ticker": "SEIG.CA",
@@ -5740,7 +5740,7 @@
         "volume": 8388,
         "turnover": 2361374.25
       },
-      "scrapedAt": "2026-08-16T20:57:34.188Z"
+      "scrapedAt": "2026-08-16T21:18:12.670Z"
     },
     {
       "ticker": "SEIGA.CA",
@@ -5768,7 +5768,7 @@
         "volume": 157,
         "turnover": 3924.09
       },
-      "scrapedAt": "2026-08-16T20:57:34.069Z"
+      "scrapedAt": "2026-08-16T21:18:12.692Z"
     },
     {
       "ticker": "SIPC.CA",
@@ -5798,7 +5798,7 @@
         "volume": 10012527,
         "turnover": 48367264
       },
-      "scrapedAt": "2026-08-16T20:57:34.223Z"
+      "scrapedAt": "2026-08-16T21:18:12.637Z"
     },
     {
       "ticker": "SKPC.CA",
@@ -5828,7 +5828,7 @@
         "volume": 5155687,
         "turnover": 87227056
       },
-      "scrapedAt": "2026-08-16T20:57:34.025Z"
+      "scrapedAt": "2026-08-16T21:18:12.647Z"
     },
     {
       "ticker": "SMFR.CA",
@@ -5858,7 +5858,7 @@
         "volume": 50305,
         "turnover": 13463862
       },
-      "scrapedAt": "2026-08-16T20:57:34.940Z"
+      "scrapedAt": "2026-08-16T21:18:14.991Z"
     },
     {
       "ticker": "SNFC.CA",
@@ -5888,7 +5888,7 @@
         "volume": 782951,
         "turnover": 8680082
       },
-      "scrapedAt": "2026-08-16T20:57:34.993Z"
+      "scrapedAt": "2026-08-16T21:18:15.201Z"
     },
     {
       "ticker": "SPHT.CA",
@@ -5918,7 +5918,7 @@
         "volume": 0,
         "turnover": 0
       },
-      "scrapedAt": "2026-08-16T20:57:35.000Z"
+      "scrapedAt": "2026-08-16T21:18:15.210Z"
     },
     {
       "ticker": "SPIN.CA",
@@ -5948,7 +5948,7 @@
         "volume": 5943618,
         "turnover": 112102552
       },
-      "scrapedAt": "2026-08-16T20:57:34.984Z"
+      "scrapedAt": "2026-08-16T21:18:15.166Z"
     },
     {
       "ticker": "SPMD.CA",
@@ -5976,7 +5976,7 @@
         "volume": 38703155,
         "turnover": 18749590
       },
-      "scrapedAt": "2026-08-16T20:57:34.972Z"
+      "scrapedAt": "2026-08-16T21:18:15.192Z"
     },
     {
       "ticker": "SUGR.CA",
@@ -6006,7 +6006,7 @@
         "volume": 767646,
         "turnover": 39061688
       },
-      "scrapedAt": "2026-08-16T20:57:35.007Z"
+      "scrapedAt": "2026-08-16T21:18:15.024Z"
     },
     {
       "ticker": "SVCE.CA",
@@ -6036,7 +6036,7 @@
         "volume": 21888208,
         "turnover": 246311264
       },
-      "scrapedAt": "2026-08-16T20:57:36.350Z"
+      "scrapedAt": "2026-08-16T21:18:16.284Z"
     },
     {
       "ticker": "SWDY.CA",
@@ -6066,7 +6066,7 @@
         "volume": 4166754,
         "turnover": 499932384
       },
-      "scrapedAt": "2026-08-16T20:57:36.407Z"
+      "scrapedAt": "2026-08-16T21:18:16.267Z"
     },
     {
       "ticker": "TALM.CA",
@@ -6094,7 +6094,7 @@
         "volume": 2496959,
         "turnover": 49533176
       },
-      "scrapedAt": "2026-08-16T20:57:36.329Z"
+      "scrapedAt": "2026-08-16T21:18:16.253Z"
     },
     {
       "ticker": "TANM.CA",
@@ -6124,7 +6124,7 @@
         "volume": 1830151,
         "turnover": 12871504
       },
-      "scrapedAt": "2026-08-16T20:57:36.300Z"
+      "scrapedAt": "2026-08-16T21:18:16.213Z"
     },
     {
       "ticker": "TAQA.CA",
@@ -6154,7 +6154,7 @@
         "volume": 2324325,
         "turnover": 36006468
       },
-      "scrapedAt": "2026-08-16T20:57:36.444Z"
+      "scrapedAt": "2026-08-16T21:18:16.292Z"
     },
     {
       "ticker": "TMGH.CA",
@@ -6184,7 +6184,7 @@
         "volume": 2053059,
         "turnover": 200833264
       },
-      "scrapedAt": "2026-08-16T20:57:36.319Z"
+      "scrapedAt": "2026-08-16T21:18:15.985Z"
     },
     {
       "ticker": "TRTO.CA",
@@ -6214,7 +6214,7 @@
         "volume": 1749804,
         "turnover": 68135.89
       },
-      "scrapedAt": "2026-08-16T20:57:37.133Z"
+      "scrapedAt": "2026-08-16T21:18:18.363Z"
     },
     {
       "ticker": "TYCN.CA",
@@ -6244,7 +6244,7 @@
         "volume": 592719,
         "turnover": 8232054.5
       },
-      "scrapedAt": "2026-08-16T20:57:37.193Z"
+      "scrapedAt": "2026-08-16T21:18:18.353Z"
     },
     {
       "ticker": "UBEE.CA",
@@ -6274,7 +6274,7 @@
         "volume": 348359,
         "turnover": 5198609
       },
-      "scrapedAt": "2026-08-16T20:57:37.207Z"
+      "scrapedAt": "2026-08-16T21:18:18.216Z"
     },
     {
       "ticker": "UEFM.CA",
@@ -6304,7 +6304,7 @@
         "volume": 3972,
         "turnover": 2265389
       },
-      "scrapedAt": "2026-08-16T20:57:37.166Z"
+      "scrapedAt": "2026-08-16T21:18:18.387Z"
     },
     {
       "ticker": "UEGC.CA",
@@ -6334,7 +6334,7 @@
         "volume": 4389400,
         "turnover": 10928574
       },
-      "scrapedAt": "2026-08-16T20:57:37.230Z"
+      "scrapedAt": "2026-08-16T21:18:18.342Z"
     },
     {
       "ticker": "UNIP.CA",
@@ -6364,7 +6364,7 @@
         "volume": 27672250,
         "turnover": 11242185
       },
-      "scrapedAt": "2026-08-16T20:57:37.177Z"
+      "scrapedAt": "2026-08-16T21:18:18.372Z"
     },
     {
       "ticker": "UNIT.CA",
@@ -6394,7 +6394,7 @@
         "volume": 190278,
         "turnover": 3787804.75
       },
-      "scrapedAt": "2026-08-16T20:57:37.973Z"
+      "scrapedAt": "2026-08-16T21:18:19.160Z"
     },
     {
       "ticker": "VALU.CA",
@@ -6424,7 +6424,7 @@
         "volume": 4378503,
         "turnover": 48886124
       },
-      "scrapedAt": "2026-08-16T20:57:37.962Z"
+      "scrapedAt": "2026-08-16T21:18:19.305Z"
     },
     {
       "ticker": "VLMR.CA",
@@ -6454,7 +6454,7 @@
         "volume": 989800,
         "turnover": 691371.44
       },
-      "scrapedAt": "2026-08-16T20:57:37.988Z"
+      "scrapedAt": "2026-08-16T21:18:19.220Z"
     },
     {
       "ticker": "VLMRA.CA",
@@ -6484,7 +6484,7 @@
         "volume": 4155545,
         "turnover": 125519776
       },
-      "scrapedAt": "2026-08-16T20:57:37.996Z"
+      "scrapedAt": "2026-08-16T21:18:19.342Z"
     },
     {
       "ticker": "WCDF.CA",
@@ -6514,7 +6514,7 @@
         "volume": 4031,
         "turnover": 2566012
       },
-      "scrapedAt": "2026-08-16T20:57:37.940Z"
+      "scrapedAt": "2026-08-16T21:18:19.295Z"
     },
     {
       "ticker": "WKOL.CA",
@@ -6544,7 +6544,7 @@
         "volume": 29895,
         "turnover": 9788744
       },
-      "scrapedAt": "2026-08-16T20:57:38.015Z"
+      "scrapedAt": "2026-08-16T21:18:19.370Z"
     },
     {
       "ticker": "ZEOT.CA",
@@ -6574,7 +6574,7 @@
         "volume": 3995326,
         "turnover": 56781176
       },
-      "scrapedAt": "2026-08-16T20:57:38.698Z"
+      "scrapedAt": "2026-08-16T21:18:21.695Z"
     },
     {
       "ticker": "ZMID.CA",
@@ -6604,7 +6604,7 @@
         "volume": 8669036,
         "turnover": 65980376
       },
-      "scrapedAt": "2026-08-16T20:57:38.718Z"
+      "scrapedAt": "2026-08-16T21:18:21.813Z"
     }
   ],
   "errors": [
