@@ -17,6 +17,7 @@ import { buildPriceDepth } from "./lib/priceDepth.js";
 import { scoreThndrFunds } from "./lib/thndrFunds.js";
 import { runFundsPhotoExtract } from "./lib/runFundsPhoto.js";
 import { runFundsAdvice } from "./lib/runFundsAdvice.js";
+import { runAiPing } from "./lib/runAiPing.js";
 import {
   LATEST_PATH,
   ensureMarketData,
@@ -413,8 +414,12 @@ function normalizePick(p, fallbackConfidence = 50) {
     .toUpperCase()
     .replace(/\.CA$/i, "");
   if (!ticker) return null;
+  const nameAr = String(p.nameAr || p.name || "").trim();
+  const nameEn = String(p.nameEn || p.name || "").trim();
   return {
     ticker,
+    nameAr: nameAr ? nameAr.slice(0, 120) : undefined,
+    nameEn: nameEn ? nameEn.slice(0, 120) : undefined,
     action: ["buy", "sell", "hold"].includes(p.action) ? p.action : "hold",
     confidence: Math.max(0, Math.min(100, Number(p.confidence) || fallbackConfidence)),
     entry: p.entry ?? null,
@@ -922,6 +927,8 @@ function detectIntent(question) {
 function pickFromAnalysis(a, { action, confidence, entry, stopLoss, target1, target2, reason } = {}) {
   return normalizePick({
     ticker: a.ticker,
+    nameAr: a.nameAr,
+    nameEn: a.nameEn,
     action:
       action ||
       (a.score >= 60 ? "buy" : a.score <= 35 ? "sell" : "hold"),
@@ -1427,6 +1434,13 @@ const server = http.createServer(async (req, res) => {
       const ai = aiConfigFromReq(req, body);
       const advice = await runFundsAdvice(body, ai);
       return sendJson(res, 200, advice);
+    }
+
+    if (req.method === "POST" && url.pathname === "/api/ai-ping") {
+      const body = await readBody(req, { maxBytes: 8_000 });
+      const ai = aiConfigFromReq(req, body);
+      const result = await runAiPing(ai);
+      return sendJson(res, 200, result);
     }
 
     if (req.method === "POST" && url.pathname === "/api/ask") {
