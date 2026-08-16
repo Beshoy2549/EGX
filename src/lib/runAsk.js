@@ -127,13 +127,6 @@ export async function runAsk(body, ai = {}) {
   if (question.length > 2000) {
     throw Object.assign(new Error("question too long"), { status: 400 });
   }
-  // Local scanner must never hit Cursor/OpenAI — use the Node /api/ask proxy.
-  if (String(body.mode || "").toLowerCase() === "local") {
-    throw Object.assign(
-      new Error("local mode must use the scanner API, not the Vite AI route"),
-      { status: 400 }
-    );
-  }
   const lang = body.lang === "en" ? "en" : "ar";
   const prompt = askPrompt(question, lang);
   const text =

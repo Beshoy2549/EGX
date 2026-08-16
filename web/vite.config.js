@@ -15,17 +15,12 @@ function fundsAiPlugin() {
       server.middlewares.use((req, res, next) => {
         const url = String(req.url || "").split("?")[0];
         if (req.method !== "POST") return next();
-        // /api/ask: only hijack AI calls (Settings key headers). Local scanner
-        // mode sends no AI headers and must proxy to the Node rules engine.
-        const askIsAi =
-          url === "/api/ask" &&
-          Boolean(req.headers["x-ai-key"] || req.headers["x-ai-provider"]);
         const run =
           url === "/api/funds-photo"
             ? handleFundsPhotoHttp
             : url === "/api/funds-advice"
               ? handleFundsAdviceHttp
-              : askIsAi
+              : url === "/api/ask"
                 ? handleAskHttp
                 : null;
         if (!run) return next();
@@ -58,14 +53,11 @@ export default defineConfig({
         proxyTimeout: 180_000,
         bypass(req) {
           const u = String(req.url || "");
-          if (req.method !== "POST") return;
-          if (u.startsWith("/api/funds-photo") || u.startsWith("/api/funds-advice")) {
-            return req.url;
-          }
-          // AI ask (has Settings key) stays on Vite; local ask proxies to Node.
           if (
-            u.startsWith("/api/ask") &&
-            (req.headers["x-ai-key"] || req.headers["x-ai-provider"])
+            req.method === "POST" &&
+            (u.startsWith("/api/funds-photo") ||
+              u.startsWith("/api/funds-advice") ||
+              u.startsWith("/api/ask"))
           ) {
             return req.url;
           }
